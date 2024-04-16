@@ -81,7 +81,7 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
       }}
     >
       <table width={width} contentEditable={editable}>
-        <colgroup>
+        <colgroup contentEditable={false}>
           {firstRowCells.map(cell => {
             const { width = 'auto' } = cell
             return <col width={width}></col>
