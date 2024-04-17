@@ -118,12 +118,14 @@ export const withEventData = <T extends Editor>(editor: T) => {
       return
     }
 
+    const leftLength = DomEditor.getLeftLengthOfMaxLength(e)
     if (text) {
       const lines = text.split(/\r\n|\r|\n/)
       let split = false
 
       for (const line of lines) {
-        if (split) {
+        // 当设置了 maxLength 且剩余 length 为0时，不插入任何字符
+        if (split && leftLength > 0) {
           Transforms.splitNodes(e, { always: true })
         }
 
