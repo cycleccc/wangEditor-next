@@ -10,5 +10,5 @@
 ![](../../docs/images/editor.png)
 
 交流
-- [提交问题和建议](https://github.com/wangeditor-team/wangEditor/issues)
+- [提交问题和建议](https://github.com/cycleccc/wangEditor/issues)
 - 加入 QQ 群（[官网](https://www.wangeditor.com/)有群号）

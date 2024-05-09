@@ -9,4 +9,4 @@ Open source web rich text editor, run right out of the box. Support JS Vue React
 
 ![](../../docs/images/editor-en.png)
 
-You can [commit an issue]((https://github.com/wangeditor-team/wangEditor/issues)) if you have any question.
+You can [commit an issue]((https://github.com/cycleccc/wangEditor/issues)) if you have any question.

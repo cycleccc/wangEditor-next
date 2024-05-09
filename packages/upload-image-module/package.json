@@ -1,10 +1,10 @@
 {
-  "name": "@wangeditor/upload-image-module",
+  "name": "@wangeditor-next/upload-image-module",
   "version": "1.0.2",
   "description": "wangEditor upload-image module",
   "author": "wangfupeng1988 <wangfupeng1988@163.com>",
   "contributors": [],
-  "homepage": "https://github.com/wangeditor-team/wangEditor#readme",
+  "homepage": "https://github.com/cycleccc/wangEditor#readme",
   "license": "MIT",
   "types": "dist/upload-image-module/src/index.d.ts",
   "main": "dist/index.js",
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangeditor-team/wangEditor.git"
+    "url": "git+https://github.com/cycleccc/wangEditor.git"
   },
   "scripts": {
     "test": "jest",
@@ -38,13 +38,13 @@
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },
   "bugs": {
-    "url": "https://github.com/wangeditor-team/wangEditor/issues"
+    "url": "https://github.com/cycleccc/wangEditor/issues"
   },
   "peerDependencies": {
     "@uppy/core": "^2.0.3",
     "@uppy/xhr-upload": "^2.0.3",
-    "@wangeditor/basic-modules": "1.x",
-    "@wangeditor/core": "1.x",
+    "@wangeditor-next/basic-modules": "1.x",
+    "@wangeditor-next/core": "1.x",
     "dom7": "^3.0.0",
     "lodash.foreach": "^4.5.0",
     "slate": "^0.72.0",

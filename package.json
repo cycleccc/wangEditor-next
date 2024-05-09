@@ -1,6 +1,6 @@
 {
-  "name": "@wangeditor-team/wangeditor",
-  "private": true,
+  "name": "@wangeditor-next/wangeditor",
+  "private": false,
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--unhandled-rejections=warn jest --detectOpenHandles --passWithNoTests",
     "test-c": "cross-env NODE_OPTIONS=--unhandled-rejections=warn jest --coverage",
@@ -21,7 +21,7 @@
     "cypress:run": "cypress run",
     "e2e:dev": "concurrently \"yarn example\" \"yarn run cypress:open\"",
     "e2e": "concurrently \"yarn example\" \"yarn run cypress:run\"",
-    "example": "lerna exec --scope @wangeditor/editor -- yarn run example"
+    "example": "lerna exec --scope @wangeditor-next/editor -- yarn run example"
   },
   "workspaces": [
     "packages/*"

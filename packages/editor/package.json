@@ -1,5 +1,5 @@
 {
-  "name": "@wangeditor/editor",
+  "name": "@wangeditor-next/editor",
   "version": "5.1.23",
   "description": "Web rich text editor, Web 富文本编辑器",
   "keywords": [
@@ -9,7 +9,7 @@
     "富文本",
     "编辑器"
   ],
-  "author": "wangfupeng1988 <wangfupeng1988@163.com>",
+  "author": "cycleccc <29912005548@qq.com>",
   "contributors": [],
   "homepage": "https://www.wangeditor.com/",
   "license": "MIT",
@@ -28,12 +28,11 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.com/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangeditor-team/wangEditor.git"
+    "url": "git+https://github.com/cycleccc/wangEditor.git"
   },
   "scripts": {
     "test": "jest",
@@ -46,18 +45,18 @@
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },
   "bugs": {
-    "url": "https://github.com/wangeditor-team/wangEditor/issues"
+    "url": "https://github.com/cycleccc/wangEditor/issues"
   },
   "dependencies": {
     "@uppy/core": "^2.1.1",
     "@uppy/xhr-upload": "^2.0.3",
-    "@wangeditor/basic-modules": "^1.1.7",
-    "@wangeditor/code-highlight": "^1.0.3",
-    "@wangeditor/core": "^1.1.19",
-    "@wangeditor/list-module": "^1.0.5",
-    "@wangeditor/table-module": "^1.1.4",
-    "@wangeditor/upload-image-module": "^1.0.2",
-    "@wangeditor/video-module": "^1.1.4",
+    "@wangeditor-next/basic-modules": "^1.1.7",
+    "@wangeditor-next/code-highlight": "^1.0.3",
+    "@wangeditor-next/core": "^1.1.19",
+    "@wangeditor-next/list-module": "^1.0.5",
+    "@wangeditor-next/table-module": "^1.1.4",
+    "@wangeditor-next/upload-image-module": "^1.0.2",
+    "@wangeditor-next/video-module": "^1.1.4",
     "dom7": "^3.0.0",
     "is-hotkey": "^0.2.0",
     "lodash.camelcase": "^4.3.0",
