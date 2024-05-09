@@ -4,7 +4,7 @@
  */
 
 import Uppy, { UppyFile } from '@uppy/core'
-import { IDomEditor, createUploader } from '@wangeditor/core'
+import { IDomEditor, createUploader } from '@wangeditor-next/core'
 import insertVideo from './insert-video'
 import { IUploadConfigForVideo } from '../menu/config'
 

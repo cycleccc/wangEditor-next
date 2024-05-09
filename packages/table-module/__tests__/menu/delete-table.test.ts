@@ -2,7 +2,7 @@ import DeleteTable from '../../src/module/menu/DeleteTable'
 import createEditor from '../../../../tests/utils/create-editor'
 import locale from '../../src/locale/zh-CN'
 import * as slate from 'slate'
-import * as core from '@wangeditor/core'
+import * as core from '@wangeditor-next/core'
 
 function setEditorSelection(
   editor: core.IDomEditor,

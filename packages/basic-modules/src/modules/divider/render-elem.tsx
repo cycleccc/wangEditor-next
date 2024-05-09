@@ -5,7 +5,7 @@
 
 import { Element as SlateElement } from 'slate'
 import { h, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 function renderDivider(
   elemNode: SlateElement,

@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IModuleConf } from '@wangeditor/core'
+import { IModuleConf } from '@wangeditor-next/core'
 import { fullScreenConf } from './menu/index'
 
 const fullScreen: Partial<IModuleConf> = {

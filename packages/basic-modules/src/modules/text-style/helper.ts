@@ -4,7 +4,7 @@
  */
 
 import { Editor, Node } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 export function isMenuDisabled(editor: IDomEditor, mark?: string): boolean {
   if (editor.selection == null) return true

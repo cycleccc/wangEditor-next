@@ -4,7 +4,7 @@
  */
 
 import { Editor } from 'slate'
-import { IButtonMenu, IDomEditor } from '@wangeditor/core'
+import { IButtonMenu, IDomEditor } from '@wangeditor-next/core'
 import { isMenuDisabled } from '../helper'
 
 abstract class BaseMenu implements IButtonMenu {

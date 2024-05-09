@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IModuleConf } from '@wangeditor/core'
+import { IModuleConf } from '@wangeditor-next/core'
 import withImage from './plugin'
 import { renderImageConf } from './render-elem'
 import { imageToHtmlConf } from './elem-to-html'

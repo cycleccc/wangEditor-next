@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import { IButtonMenu, IDomEditor, t } from '@wangeditor/core'
-import { insertImageNode, isInsertImageMenuDisabled } from '@wangeditor/basic-modules'
+import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+import { insertImageNode, isInsertImageMenuDisabled } from '@wangeditor-next/basic-modules'
 import { UPLOAD_IMAGE_SVG } from '../../constants/svg'
 import $ from '../../utils/dom'
 import { IUploadConfigForImage } from './config'

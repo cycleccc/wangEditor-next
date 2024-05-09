@@ -5,7 +5,7 @@
 
 import createEditor from '../../../tests/utils/create-editor'
 import withTable from '../src/module/plugin'
-import * as core from '@wangeditor/core'
+import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
 
 describe('TableModule module', () => {

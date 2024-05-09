@@ -35,7 +35,7 @@ import {
   IParseElemHtmlConf,
   registerParseElemHtmlConf,
   registerParseStyleHtmlHandler,
-} from '@wangeditor/core'
+} from '@wangeditor-next/core'
 import registerModule from './register-builtin-modules/register'
 
 type PluginType = <T extends IDomEditor>(editor: T) => T

@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IDomEditor } from '@wangeditor/core'
+import { IDomEditor } from '@wangeditor-next/core'
 import createEditor from '../../../tests/utils/create-editor'
 import codeHighLightDecorate from '../src/decorate/index'
 import { content, textNode, textNodePath } from './content'

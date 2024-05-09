@@ -4,7 +4,7 @@
  */
 
 import { Descendant, Text } from 'slate'
-import { IDomEditor } from '@wangeditor/core'
+import { IDomEditor } from '@wangeditor-next/core'
 import { ColorText } from './custom-types'
 import $, { DOMElement, getStyleValue } from '../../utils/dom'
 

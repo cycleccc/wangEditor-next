@@ -3,7 +3,7 @@ import createEditor from '../../../../tests/utils/create-editor'
 import { TABLE_HEADER_SVG } from '../../src/constants/svg'
 import locale from '../../src/locale/zh-CN'
 import * as slate from 'slate'
-import * as core from '@wangeditor/core'
+import * as core from '@wangeditor-next/core'
 
 function setEditorSelection(
   editor: core.IDomEditor,

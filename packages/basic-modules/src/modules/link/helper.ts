@@ -4,7 +4,7 @@
  */
 
 import { Editor, Range, Transforms } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { LinkElement } from './custom-types'
 import { replaceSymbols } from '../../utils/util'
 

@@ -4,7 +4,7 @@
  */
 
 // import { Editor, Path, Operation } from 'slate'
-import { IDomEditor } from '@wangeditor/core'
+import { IDomEditor } from '@wangeditor-next/core'
 
 function withImage<T extends IDomEditor>(editor: T): T {
   const { isInline, isVoid, insertNode } = editor

@@ -4,7 +4,7 @@
  */
 
 import { Descendant } from 'slate'
-import { IDomEditor } from '@wangeditor/core'
+import { IDomEditor } from '@wangeditor-next/core'
 import { VideoElement } from './custom-types'
 import $, { DOMElement } from '../utils/dom'
 

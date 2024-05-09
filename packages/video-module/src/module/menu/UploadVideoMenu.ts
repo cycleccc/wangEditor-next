@@ -4,7 +4,7 @@
  */
 
 import { Range } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor/core'
+import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
 import $ from '../../utils/dom'
 import { UPLOAD_VIDEO_SVG } from '../../constants/svg'
 import { IUploadConfigForVideo } from './config'

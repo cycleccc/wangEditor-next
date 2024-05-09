@@ -5,7 +5,7 @@
 
 import { Element as SlateElement, Transforms } from 'slate'
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { TodoElement } from './custom-types'
 
 /**

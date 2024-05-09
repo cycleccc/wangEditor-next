@@ -4,7 +4,7 @@
  */
 
 import { Transforms, Range, Editor } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { ImageElement, ImageStyle } from './custom-types'
 import { replaceSymbols } from '../../utils/util'
 

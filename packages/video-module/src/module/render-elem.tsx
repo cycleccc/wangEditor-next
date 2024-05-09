@@ -5,7 +5,7 @@
 
 import { Element } from 'slate'
 import { h, jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { VideoElement } from './custom-types'
 import { genSizeStyledIframeHtml } from '../utils/dom'
 

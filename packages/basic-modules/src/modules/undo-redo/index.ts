@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IModuleConf } from '@wangeditor/core'
+import { IModuleConf } from '@wangeditor-next/core'
 import { redoMenuConf, undoMenuConf } from './menu/index'
 
 const undoRedo: Partial<IModuleConf> = {

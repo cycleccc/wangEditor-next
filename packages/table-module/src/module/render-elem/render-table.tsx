@@ -5,7 +5,7 @@
 
 import { Editor, Element as SlateElement, Range, Point, Path } from 'slate'
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { TableElement } from '../custom-types'
 import { getFirstRowCells } from '../helpers'
 

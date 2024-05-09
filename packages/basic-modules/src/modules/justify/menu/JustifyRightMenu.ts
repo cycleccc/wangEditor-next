@@ -4,7 +4,7 @@
  */
 
 import { Transforms, Element } from 'slate'
-import { IDomEditor, t } from '@wangeditor/core'
+import { IDomEditor, t } from '@wangeditor-next/core'
 import BaseMenu from './BaseMenu'
 import { JUSTIFY_RIGHT_SVG } from '../../../constants/icon-svg'
 

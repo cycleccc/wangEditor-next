@@ -5,7 +5,7 @@
 
 import createEditor from '../../../../tests/utils/create-editor'
 import InsertVideoMenu from '../../src/module/menu/InsertVideoMenu'
-import * as core from '@wangeditor/core'
+import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
 
 function setEditorSelection(

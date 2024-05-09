@@ -4,7 +4,7 @@
  */
 
 import { Transforms, Element } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 function withDivider<T extends IDomEditor>(editor: T): T {
   const { isVoid, normalizeNode } = editor

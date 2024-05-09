@@ -4,7 +4,7 @@
  */
 
 import { Transforms } from 'slate'
-import { IDomEditor } from '@wangeditor/core'
+import { IDomEditor } from '@wangeditor-next/core'
 import { replaceSymbols } from '../../utils/util'
 import { VideoElement } from '../custom-types'
 

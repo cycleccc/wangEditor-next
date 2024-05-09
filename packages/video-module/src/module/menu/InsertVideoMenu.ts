@@ -11,7 +11,7 @@ import {
   genModalInputElems,
   genModalButtonElems,
   t,
-} from '@wangeditor/core'
+} from '@wangeditor-next/core'
 import $, { Dom7Array, DOMElement } from '../../utils/dom'
 import { genRandomStr } from '../../utils/util'
 import { VIDEO_SVG } from '../../constants/svg'

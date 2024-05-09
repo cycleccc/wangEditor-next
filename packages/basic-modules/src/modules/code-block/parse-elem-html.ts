@@ -5,7 +5,7 @@
 
 import { Descendant } from 'slate'
 import $, { DOMElement } from '../../utils/dom'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { PreElement, CodeElement } from './custom-types'
 
 function parseCodeHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor): CodeElement {

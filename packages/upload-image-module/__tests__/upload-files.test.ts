@@ -1,6 +1,6 @@
 import uploadImages from '../src/module/upload-images'
 import createEditor from '../../../tests/utils/create-editor'
-import * as core from '@wangeditor/core'
+import * as core from '@wangeditor-next/core'
 
 function mockFile(filename: string) {
   const file = new File(['123'], filename)

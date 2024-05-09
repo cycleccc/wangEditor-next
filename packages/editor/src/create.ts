@@ -13,7 +13,7 @@ import {
   coreCreateEditor,
   coreCreateToolbar,
   Toolbar,
-} from '@wangeditor/core'
+} from '@wangeditor-next/core'
 
 export interface ICreateEditorOption {
   selector: string | DOMElement

@@ -6,7 +6,7 @@
 import throttle from 'lodash.throttle'
 import { Element as SlateElement, Transforms, Location } from 'slate'
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { TableCellElement } from '../custom-types'
 import { isCellInFirstRow } from '../helpers'
 import $ from '../../utils/dom'

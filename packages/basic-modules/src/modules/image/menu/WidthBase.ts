@@ -4,7 +4,7 @@
  */
 
 import { Transforms, Node } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor } from '@wangeditor/core'
+import { IButtonMenu, IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { ImageElement } from '../custom-types'
 
 abstract class ImageWidthBaseClass implements IButtonMenu {

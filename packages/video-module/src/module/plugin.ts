@@ -4,7 +4,7 @@
  */
 
 import { Transforms } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { CustomElement } from '../../../custom-types'
 
 function withVideo<T extends IDomEditor>(editor: T): T {

@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { t } from '@wangeditor/core'
+import { t } from '@wangeditor-next/core'
 import BaseMenu from './BaseMenu'
 import { FONT_COLOR_SVG } from '../../../constants/icon-svg'
 

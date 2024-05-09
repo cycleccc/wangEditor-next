@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IModuleConf } from '@wangeditor/core'
+import { IModuleConf } from '@wangeditor-next/core'
 import withLink from './plugin'
 import { renderLinkConf } from './render-elem'
 import { linkToHtmlConf } from './elem-to-html'

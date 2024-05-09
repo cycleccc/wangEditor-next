@@ -5,7 +5,7 @@
 
 import createEditor from '../../../../tests/utils/create-editor'
 import UploadVideoMenu from '../../src/module/menu/UploadVideoMenu'
-import * as core from '@wangeditor/core'
+import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
 import $ from '../../src/utils/dom'
 

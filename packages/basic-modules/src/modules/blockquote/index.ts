@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IModuleConf } from '@wangeditor/core'
+import { IModuleConf } from '@wangeditor-next/core'
 import { renderBlockQuoteConf } from './render-elem'
 import { quoteToHtmlConf } from './elem-to-html'
 import { parseHtmlConf } from './parse-elem-html'

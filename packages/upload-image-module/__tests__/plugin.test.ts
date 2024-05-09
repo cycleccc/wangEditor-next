@@ -1,5 +1,5 @@
-import { IDomEditor } from '@wangeditor/core'
-import * as basicModule from '@wangeditor/basic-modules'
+import { IDomEditor } from '@wangeditor-next/core'
+import * as basicModule from '@wangeditor-next/basic-modules'
 import createEditor from '../../../tests/utils/create-editor'
 import withUploadImage from '../src/module/plugin'
 import * as uploadImage from '../src/module/upload-images'

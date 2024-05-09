@@ -4,7 +4,7 @@
  */
 
 import { Editor, Transforms, Point } from 'slate'
-import { DomEditor, IDomEditor } from '@wangeditor/core'
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import createEditor from '../../../../tests/utils/create-editor'
 import withParagraph from '../../src/modules/paragraph/plugin'
 

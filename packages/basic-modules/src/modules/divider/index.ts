@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { IModuleConf } from '@wangeditor/core'
+import { IModuleConf } from '@wangeditor-next/core'
 import withDivider from './plugin'
 import { renderDividerConf } from './render-elem'
 import { dividerToHtmlConf } from './elem-to-html'

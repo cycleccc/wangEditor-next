@@ -4,7 +4,7 @@
  */
 
 import { Editor } from 'slate'
-import { IDropPanelMenu, IDomEditor, DomEditor, t } from '@wangeditor/core'
+import { IDropPanelMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
 import $, { Dom7Array, DOMElement } from '../../../utils/dom'
 import { EMOTION_SVG } from '../../../constants/icon-svg'
 

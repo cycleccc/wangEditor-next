@@ -4,7 +4,7 @@
  */
 
 import { Editor, Transforms, Node as SlateNode, Element as SlateElement } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 function getLastTextLineBeforeSelection(codeNode: SlateNode, editor: IDomEditor): string {
   const selection = editor.selection

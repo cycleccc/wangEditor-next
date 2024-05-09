@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { t } from '@wangeditor/core'
+import { t } from '@wangeditor-next/core'
 import {
   INDENT_RIGHT_SVG,
   JUSTIFY_LEFT_SVG,

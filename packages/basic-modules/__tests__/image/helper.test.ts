@@ -4,7 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
-import { DomEditor } from '@wangeditor/core'
+import { DomEditor } from '@wangeditor-next/core'
 import createEditor from '../../../../tests/utils/create-editor'
 import {
   insertImageNode,

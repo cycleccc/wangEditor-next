@@ -4,7 +4,7 @@
  */
 
 import { Descendant, Element } from 'slate'
-import { IDomEditor } from '@wangeditor/core'
+import { IDomEditor } from '@wangeditor-next/core'
 import { LineHeightElement } from './custom-types'
 import $, { DOMElement, getStyleValue } from '../../utils/dom'
 
