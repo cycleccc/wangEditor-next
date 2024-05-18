@@ -9,8 +9,7 @@
     "publish": {
       "ignoreChanges": ["ignored-file", "*.md"],
       "message": "chore(release): publish",
-      "conventionalCommits": true,
-      "registry": "https://npm.pkg.github.com" 
+      "conventionalCommits": true
     },
     "version": {
       "message": "chore(release): publish",
