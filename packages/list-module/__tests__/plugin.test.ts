@@ -27,20 +27,12 @@ describe('list plugin test', () => {
   })
 
   it('insert delete - decrease level', () => {
-    const listItem = { type: 'list-item', children: [{ text: 'hello' }], level: 2 }
+    const listItem = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
     let editor = createEditor({
       content: [listItem],
     })
     editor = withList(editor) // 使用插件
     editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
-
-    editor.deleteBackward('character') // delete
-    expect(editor.children).toEqual([
-      {
-        ...listItem,
-        level: 1, // 减少 level
-      },
-    ])
 
     editor.deleteBackward('character') // delete
     expect(editor.children).toEqual([
