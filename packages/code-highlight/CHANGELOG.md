@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/code-highlight@1.1.0...@wangeditor-next/code-highlight@1.2.0) (2024-05-30)
+
+
+### Features
+
+* ** issue 5872 :** 文本高亮添加 abap 支持 ([cbb0524](https://github.com/cycleccc/wangEditor/commit/cbb05248968b3a9994979c595c23dbdc7c378b7e))
+
+
+
+
+
 # 1.1.0 (2024-05-19)
 
 
