@@ -29,5 +29,6 @@ export function genCodeLangs() {
     { text: 'Lua', value: 'lua' },
     { text: 'Groovy', value: 'groovy' },
     { text: 'Markdown', value: 'markdown' },
+    { text: 'ABAP', value: 'abap' },
   ]
 }
