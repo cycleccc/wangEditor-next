@@ -4,11 +4,10 @@
 
 ## 介绍
 
-开源 Web 富文本编辑器**新维护版本**，开箱即用，配置简单。支持 JS Vue React 。
+原项目 [wangEditor](https://github.com/wangeditor-team/wangEditor) 因作者[个人原因](https://juejin.cn/post/7272735633458413602)短期不再维护，本项目为fork版本,将在尽量不 Breaking change 的前提下继续维护。
 
-## ToDO
+开源 Web 富文本编辑器，开箱即用，配置简单。支持 JS Vue React 。
 
-- [ ] 拟 headless 模式,拆分所有功能与组件
 
 - [文档](https://www.wangeditor.com/)
 - [demo](https://www.wangeditor.com/demo/)
