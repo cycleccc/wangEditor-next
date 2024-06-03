@@ -9,7 +9,7 @@ import { genSizeStyledIframeHtml } from '../utils/dom'
 
 function videoToHtml(elemNode: Element, childrenHtml?: string): string {
   const { src = '', poster = '', width = 'auto', height = 'auto' } = elemNode as VideoElement
-  let res = '<div data-w-e-type="video" data-w-e-is-void>\n'
+  let res = '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n'
 
   if (src.trim().indexOf('<iframe ') === 0) {
     // iframe 形式
