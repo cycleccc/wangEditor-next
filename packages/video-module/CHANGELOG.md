@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.2.0...@wangeditor-next/video-module@1.2.1) (2024-06-04)
+
+
+### Performance Improvements
+
+* **issue 5259:** video element default center ([9c01d40](https://github.com/cycleccc/wangEditor/commit/9c01d4029dd5a63869e737e579f4a0af50650e1e))
+
+
+
+
+
 # 1.2.0 (2024-05-19)
 
 

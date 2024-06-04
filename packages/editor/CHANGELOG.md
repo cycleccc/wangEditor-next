@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.1...@wangeditor-next/editor@5.2.2) (2024-06-04)
+
+
+### Performance Improvements
+
+* **issue 5259:** video element default center ([9c01d40](https://github.com/cycleccc/wangEditor/commit/9c01d4029dd5a63869e737e579f4a0af50650e1e))
+
+
+
+
+
 ## [5.2.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.0...@wangeditor-next/editor@5.2.1) (2024-05-30)
 
 **Note:** Version bump only for package @wangeditor-next/editor
