@@ -18,6 +18,12 @@
 
 - [讨论问题和建议](https://github.com/cycleccc/wangEditor/pulls)
 
+## 贡献
+
+暂时没有 contribute guide ，如果有小伙伴有兴趣一起维护的话欢迎提 issue、pr，一个人哪怕是只修复 bug，都不够用😂。
+也欢迎点 star，提 issue、pr，更多的反馈，更多的动力😆。
+
 ## 捐赠
 
+对原项目捐赠即可(~~虽然也没人捐赠~~)
 支持 wangEditor 开源工作 https://opencollective.com/wangeditor
