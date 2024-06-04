@@ -14,6 +14,18 @@
 
 ![](./docs/images/editor.png)
 
+## 使用
+
+vue或react
+~~~shell
+npm i wangeditor-next/editor
+~~~
+
+html使用cdn资源
+~~~
+https://unpkg.com/@wangeditor-next/editor@latest/dist/index.js
+~~~
+
 ## 交流
 
 - [讨论问题和建议](https://github.com/cycleccc/wangEditor/pulls)
