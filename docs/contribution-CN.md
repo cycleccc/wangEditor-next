@@ -10,7 +10,7 @@
 
 ### 2. 报告问题
 
-如果您发现bug或有新功能的想法，请在[问题跟踪器](https://github.com/cycleccc/wangEditor/issues)中创建一个新的问题。在提交之前，请检查是否已经存在类似的问题。
+如果您发现bug或有新功能的想法，请在[问题跟踪器](https://github.com/cycleccc/wangEditor-next/issues)中创建一个新的问题。在提交之前，请检查是否已经存在类似的问题。
 
 ### 3. 提交 Pull Request
 
