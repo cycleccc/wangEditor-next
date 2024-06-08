@@ -32,8 +32,8 @@ https://unpkg.com/@wangeditor-next/editor@latest/dist/index.js
 
 ## 贡献
 
-暂时没有 contribute guide ，如果有小伙伴有兴趣一起维护的话欢迎提 issue、pr，一个人哪怕是只修复 bug，都不够用😂。
-也欢迎点 star，提 issue、pr，更多的反馈，更多的动力😆。
+请阅读 [contribution.md](https://github.com/cycleccc/wangEditor-next/blob/master/docs/contribution-CN.md) 及 [docs](https://github.com/cycleccc/wangEditor-next/tree/master/docs) 文件夹内的开发指南。
+
 
 ## 捐赠
 
