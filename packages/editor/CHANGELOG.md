@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.2...@wangeditor-next/editor@5.2.3) (2024-06-08)
+
+
+### Performance Improvements
+
+* **issue 13:** add replace icon svg by menu config ([a897f58](https://github.com/cycleccc/wangEditor/commit/a897f58fd85a7f8f4bd1e6ad1cd114457eebaf13))
+
+
+
+
+
 ## [5.2.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.1...@wangeditor-next/editor@5.2.2) (2024-06-04)
 
 
