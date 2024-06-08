@@ -168,6 +168,12 @@ class HoverBar {
       menus[key] = menu
     }
 
+    //替换 icon svg
+    const menuConf = editor.getMenuConfig(key)
+    if (menuConf && menuConf.iconSvg !== undefined) {
+      menu.iconSvg = menuConf.iconSvg
+    }
+
     const barItem = createBarItem(key, menu)
     this.hoverbarItems.push(barItem)
 

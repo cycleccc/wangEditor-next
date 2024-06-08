@@ -170,6 +170,12 @@ class Toolbar {
       console.warn(`Duplicated toolbar menu key '${key}'\n重复注册了菜单栏 menu '${key}'`)
     }
 
+    // 替换 icon svg
+    const menuConf = editor.getMenuConfig(key)
+    if (menuConf && menuConf.iconSvg !== undefined) {
+      menu.iconSvg = menuConf.iconSvg
+    }
+
     const toolbarItem = createBarItem(key, menu, inGroup)
     this.toolbarItems.push(toolbarItem)
 

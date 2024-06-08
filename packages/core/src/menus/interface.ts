@@ -30,7 +30,7 @@ export interface IOption {
 
 interface IBaseMenu {
   readonly title: string
-  readonly iconSvg?: string
+  iconSvg?: string
   readonly hotkey?: string // 快捷键，使用 https://www.npmjs.com/package/is-hotkey
   readonly alwaysEnable?: boolean // 永远不 disabled ，如“全屏”
 
