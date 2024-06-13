@@ -9,11 +9,17 @@ type EmptyText = {
   text: ''
 }
 
+export type videoStyle = {
+  width?: string
+  height?: string
+}
+
 export type VideoElement = {
   type: 'video'
   src: string
   poster?: string
   width?: string
   height?: string
+  style?: videoStyle
   children: EmptyText[]
 }

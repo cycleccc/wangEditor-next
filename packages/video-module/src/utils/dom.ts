@@ -4,6 +4,7 @@
  */
 
 import $, { append, on, focus, attr, val, html, parent, hasClass, Dom7Array, empty } from 'dom7'
+import { videoStyle } from '../module/custom-types'
 export { Dom7Array } from 'dom7'
 
 if (append) $.fn.append = append
@@ -37,11 +38,17 @@ export function getTagName($elem: Dom7Array): string {
 export function genSizeStyledIframeHtml(
   iframeHtml: string,
   width: string = 'auto',
-  height: string = 'auto'
+  height: string = 'auto',
+  style: videoStyle = {}
 ): string {
   const $iframe = $(iframeHtml)
+  const { width: styleWidth = '', height: styleHeight = '' } = style
+  let styleStr = ''
+  if (styleWidth) styleStr += `width: ${styleWidth};`
+  if (styleHeight) styleStr += `height: ${styleHeight};`
   $iframe.attr('width', width)
   $iframe.attr('height', height)
+  $iframe.attr('style', styleStr)
   return $iframe[0].outerHTML
 }
 

@@ -8,16 +8,26 @@ import { VideoElement } from './custom-types'
 import { genSizeStyledIframeHtml } from '../utils/dom'
 
 function videoToHtml(elemNode: Element, childrenHtml?: string): string {
-  const { src = '', poster = '', width = 'auto', height = 'auto' } = elemNode as VideoElement
+  const {
+    src = '',
+    poster = '',
+    width = 'auto',
+    height = 'auto',
+    style = {},
+  } = elemNode as VideoElement
   let res = '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n'
 
   if (src.trim().indexOf('<iframe ') === 0) {
     // iframe 形式
-    const iframeHtml = genSizeStyledIframeHtml(src, width, height)
+    const iframeHtml = genSizeStyledIframeHtml(src, width, height, style)
     res += iframeHtml
   } else {
     // 其他，mp4 等 url 格式
-    res += `<video poster="${poster}" controls="true" width="${width}" height="${height}"><source src="${src}" type="video/mp4"/></video>`
+    const { width: styleWidth = '', height: styleHeight = '' } = style
+    let styleStr = ''
+    if (styleWidth) styleStr += `width: ${styleWidth};`
+    if (styleHeight) styleStr += `height: ${styleHeight};`
+    res += `<video poster="${poster}" controls="true" width="${width}" height="${height}" style="${styleStr}"><source src="${src}" type="video/mp4"/></video>`
   }
   res += '\n</div>'
 

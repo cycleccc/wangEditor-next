@@ -71,6 +71,7 @@ describe('video - parse html', () => {
       poster: '',
       width: '500',
       height: '300',
+      style: {},
       children: [{ text: '' }], // void 元素有一个空 text
     })
   })
@@ -93,6 +94,7 @@ describe('video - parse html', () => {
       poster,
       width: 'auto',
       height: 'auto',
+      style: {},
       children: [{ text: '' }], // void 元素有一个空 text
     })
   })

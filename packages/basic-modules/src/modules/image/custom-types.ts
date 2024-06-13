@@ -19,6 +19,8 @@ export type ImageElement = {
   src: string
   alt?: string
   href?: string
+  width?: string
+  height?: string
   style?: ImageStyle
   children: EmptyText[]
 }

@@ -5,14 +5,15 @@
 
 import { Descendant } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { VideoElement } from './custom-types'
+import { VideoElement, videoStyle } from './custom-types'
 import $, { DOMElement } from '../utils/dom'
 
 function genVideoElem(
   src: string,
   poster: string = '',
   width = 'auto',
-  height = 'auto'
+  height = 'auto',
+  style: videoStyle = {}
 ): VideoElement {
   return {
     type: 'video',
@@ -20,6 +21,7 @@ function genVideoElem(
     poster,
     width,
     height,
+    style,
     children: [{ text: '' }], // void 元素有一个空 text
   }
 }
@@ -30,14 +32,16 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
   let poster = ''
   let width = 'auto'
   let height = 'auto'
+  let style = {}
 
   // <iframe> 形式
   const $iframe = $elem.find('iframe')
   if ($iframe.length > 0) {
     width = $iframe.attr('width') || 'auto'
     height = $iframe.attr('height') || 'auto'
+    style = $iframe.attr('style') || {}
     src = $iframe[0].outerHTML
-    return genVideoElem(src, poster, width, height)
+    return genVideoElem(src, poster, width, height, style)
   }
 
   // <video> 形式
@@ -52,7 +56,8 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
   width = $video.attr('width') || 'auto'
   height = $video.attr('height') || 'auto'
   poster = $video.attr('poster') || ''
-  return genVideoElem(src, poster, width, height)
+  style = $iframe.attr('style') || {}
+  return genVideoElem(src, poster, width, height, style)
 }
 
 export const parseHtmlConf = {

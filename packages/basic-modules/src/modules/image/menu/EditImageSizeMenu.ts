@@ -1,5 +1,5 @@
 /**
- * @description 修改视频尺寸
+ * @description 修改图片尺寸
  * @author wangfupeng
  */
 
@@ -12,19 +12,20 @@ import {
   genModalButtonElems,
   t,
 } from '@wangeditor-next/core'
-import $, { Dom7Array, DOMElement } from '../../utils/dom'
-import { genRandomStr } from '../../utils/util'
-import { VideoElement } from '../custom-types'
+import $, { Dom7Array, DOMElement } from '../../../utils/dom'
+import { genRandomStr } from '../../../utils/util'
+import { updateImageNode } from '../helper'
+import { ImageElement, ImageStyle } from '../custom-types'
 
 /**
  * 生成唯一的 DOM ID
  */
 function genDomID(): string {
-  return genRandomStr('w-e-insert-video')
+  return genRandomStr('w-e-insert-image')
 }
 
-class EditorVideoSizeMenu implements IModalMenu {
-  readonly title = t('videoModule.editSize')
+class EditorImageSizeMenu implements IModalMenu {
+  readonly title = t('image.editSize')
   readonly tag = 'button'
   readonly showModal = true // 点击 button 时显示 modal
   readonly modalWidth = 320
@@ -33,8 +34,8 @@ class EditorVideoSizeMenu implements IModalMenu {
   private readonly heightInputId = genDomID()
   private readonly buttonId = genDomID()
 
-  private getSelectedVideoNode(editor: IDomEditor): SlateNode | null {
-    return DomEditor.getSelectedNodeByType(editor, 'video')
+  private getSelectedImageNode(editor: IDomEditor): SlateNode | null {
+    return DomEditor.getSelectedNodeByType(editor, 'image')
   }
 
   getValue(editor: IDomEditor): string | boolean {
@@ -55,16 +56,16 @@ class EditorVideoSizeMenu implements IModalMenu {
   isDisabled(editor: IDomEditor): boolean {
     if (editor.selection == null) return true
 
-    const videoNode = this.getSelectedVideoNode(editor)
-    if (videoNode == null) {
-      // 选区未处于 video node ，则禁用
+    const imageNode = this.getSelectedImageNode(editor)
+    if (imageNode == null) {
+      // 选区未处于 image node ，则禁用
       return true
     }
     return false
   }
 
   getModalPositionNode(editor: IDomEditor): SlateNode | null {
-    return this.getSelectedVideoNode(editor)
+    return this.getSelectedImageNode(editor)
   }
 
   getModalContentElem(editor: IDomEditor): DOMElement {
@@ -73,18 +74,18 @@ class EditorVideoSizeMenu implements IModalMenu {
     const { widthInputId, heightInputId, buttonId } = this
 
     const [widthContainerElem, inputWidthElem] = genModalInputElems(
-      t('videoModule.width'),
+      t('image.width'),
       widthInputId,
       'auto'
     )
     const $inputWidth = $(inputWidthElem)
     const [heightContainerElem, inputHeightElem] = genModalInputElems(
-      t('videoModule.height'),
+      t('image.height'),
       heightInputId,
       'auto'
     )
     const $inputHeight = $(inputHeightElem)
-    const [buttonContainerElem] = genModalButtonElems(buttonId, t('videoModule.ok'))
+    const [buttonContainerElem] = genModalButtonElems(buttonId, t('image.ok'))
 
     if (this.$content == null) {
       // 第一次渲染
@@ -115,21 +116,21 @@ class EditorVideoSizeMenu implements IModalMenu {
           height = parseInt(rawHeight) + 'px'
         }
 
-        const { style = {} } = videoNode as VideoElement
+        const { style = {} } = imageNode as ImageElement
 
         editor.restoreSelection()
-        const props: Partial<VideoElement> = {
+        const props: Partial<ImageElement> = {
           ...style,
           style: {
             width: width,
             height: height,
           },
         }
+
         // 修改尺寸
         Transforms.setNodes(editor, props, {
-          match: n => DomEditor.checkNodeType(n, 'video'),
+          match: n => DomEditor.checkNodeType(n, 'image'),
         })
-
         editor.hidePanelOrModal() // 隐藏 modal
       })
 
@@ -144,11 +145,11 @@ class EditorVideoSizeMenu implements IModalMenu {
     $content.append(heightContainerElem)
     $content.append(buttonContainerElem)
 
-    const videoNode = this.getSelectedVideoNode(editor) as VideoElement
-    if (videoNode == null) return $content[0]
+    const imageNode = this.getSelectedImageNode(editor) as ImageElement
+    if (imageNode == null) return $content[0]
 
     // 初始化 input 值
-    const { width = 'auto', height = 'auto' } = videoNode
+    const { width = 'auto', height = 'auto' } = imageNode
     $inputWidth.val(width)
     $inputHeight.val(height)
     setTimeout(() => {
@@ -159,4 +160,4 @@ class EditorVideoSizeMenu implements IModalMenu {
   }
 }
 
-export default EditorVideoSizeMenu
+export default EditorImageSizeMenu

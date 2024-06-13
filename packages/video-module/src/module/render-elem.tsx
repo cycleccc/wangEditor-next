@@ -10,7 +10,13 @@ import { VideoElement } from './custom-types'
 import { genSizeStyledIframeHtml } from '../utils/dom'
 
 function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEditor): VNode {
-  const { src = '', poster = '', width = 'auto', height = 'auto' } = elemNode as VideoElement
+  const {
+    src = '',
+    poster = '',
+    width = 'auto',
+    height = 'auto',
+    style = {},
+  } = elemNode as VideoElement
 
   // 是否选中
   const selected = DomEditor.isNodeSelected(editor, elemNode)
@@ -18,7 +24,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
   let vnode: VNode
   if (src.trim().indexOf('<iframe ') === 0) {
     // 增加尺寸样式
-    const iframeHtml = genSizeStyledIframeHtml(src, width, height)
+    const iframeHtml = genSizeStyledIframeHtml(src, width, height, style)
 
     // iframe 形式，第三方视频
     vnode = (
@@ -31,7 +37,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
   } else {
     // 其他，mp4 格式
     const videoVnode = (
-      <video poster={poster} controls>
+      <video poster={poster} controls style={style}>
         <source src={src} type="video/mp4" />
         {`Sorry, your browser doesn't support embedded videos.\n 抱歉，浏览器不支持 video 视频`}
       </video>

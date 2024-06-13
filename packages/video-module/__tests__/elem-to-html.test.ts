@@ -24,7 +24,7 @@ describe('videoModule module', () => {
       const res = videoToHtmlConf.elemToHtml(element, '')
 
       expect(res).toEqual(
-        '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n<video poster="xxx.png" controls="true" width="auto" height="auto"><source src="test.mp4" type="video/mp4"/></video>\n</div>'
+        '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n<video poster="xxx.png" controls="true" width="auto" height="auto" style=""><source src="test.mp4" type="video/mp4"/></video>\n</div>'
       )
     })
 
@@ -40,7 +40,7 @@ describe('videoModule module', () => {
       const res = videoToHtmlConf.elemToHtml(element, '')
 
       expect(res).toEqual(
-        '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n<iframe src="test.mp4" width="500" height="300"></iframe>\n</div>'
+        '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n<iframe src="test.mp4" width="500" height="300" style=""></iframe>\n</div>'
       )
     })
   })
