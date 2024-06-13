@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.3...@wangeditor-next/editor@5.2.4) (2024-06-13)
+
+
+### Performance Improvements
+
+* add edit image and video width height menu ([f0a9ce6](https://github.com/cycleccc/wangEditor/commit/f0a9ce6a24107e6e4865f38dd8cd1c7f048551f2))
+
+
+
+
+
 ## [5.2.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.2...@wangeditor-next/editor@5.2.3) (2024-06-08)
 
 
