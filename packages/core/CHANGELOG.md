@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.2.1...@wangeditor-next/core@1.2.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* **parse-elem-html issue 5881:** span内部分内容加粗，则整个span都会被加粗 ([ded2f91](https://github.com/cycleccc/wangEditor/commit/ded2f917d4c3b7b2ac87122ecb71ae6d384f96c3))
+
+
+
+
+
 ## [1.2.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.2.0...@wangeditor-next/core@1.2.1) (2024-06-08)
 
 
