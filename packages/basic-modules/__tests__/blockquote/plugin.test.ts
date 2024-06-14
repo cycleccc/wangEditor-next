@@ -20,13 +20,13 @@ describe('blockquote plugin', () => {
     expect(1).toBeTruthy()
 
     // TODO 该测试一直报错（找不到 blockquote path），待定处理
-    // editor.select(startLocation)
+    editor.select(startLocation)
 
-    // // @ts-ignore
-    // Transforms.setNodes(editor, { type: 'blockquote' }) // 设置 blockquote
+    // @ts-ignore
+    Transforms.setNodes(editor, { type: 'blockquote' }) // 设置 blockquote
 
-    // const pList1 = editor.getElemsByType('paragraph')
-    // expect(pList1.length).toBe(0)
+    const pList1 = editor.getElemsByType('paragraph')
+    expect(pList1.length).toBe(0)
 
     // editor.insertText('hello')
     // console.log(11, JSON.stringify(editor.children))
