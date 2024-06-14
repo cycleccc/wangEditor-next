@@ -14,8 +14,7 @@ import {
 } from '@wangeditor-next/core'
 import $, { Dom7Array, DOMElement } from '../../../utils/dom'
 import { genRandomStr } from '../../../utils/util'
-import { updateImageNode } from '../helper'
-import { ImageElement, ImageStyle } from '../custom-types'
+import { ImageElement } from '../custom-types'
 
 /**
  * 生成唯一的 DOM ID
