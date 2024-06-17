@@ -1,4 +1,6 @@
-# wangEditor 5
+# wangEditor-next 5
+
+[![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/branch/master/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
 
 [English](./README-en.md)
 
