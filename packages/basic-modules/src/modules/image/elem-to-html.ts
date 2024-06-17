@@ -7,13 +7,13 @@ import { Element } from 'slate'
 import { ImageElement } from './custom-types'
 
 function imageToHtml(elemNode: Element, childrenHtml: string): string {
-  const { src, alt = '', href = '', style = {} } = elemNode as ImageElement
-  const { width = '', height = '' } = style
+  const { src, alt = '', href = '', width = '', height = '', style = {} } = elemNode as ImageElement
+  const { width: styleWidth = '', height: styleHeight = '' } = style
 
   let styleStr = ''
-  if (width) styleStr += `width: ${width};`
-  if (height) styleStr += `height: ${height};`
-  return `<img src="${src}" alt="${alt}" data-href="${href}" style="${styleStr}"/>`
+  if (styleWidth) styleStr += `width: ${styleWidth};`
+  if (styleHeight) styleStr += `height: ${styleHeight};`
+  return `<img src="${src}" alt="${alt}" data-href="${href}" width="${width}" height="${height}" style="${styleStr}"/>`
 }
 
 export const imageToHtmlConf = {
