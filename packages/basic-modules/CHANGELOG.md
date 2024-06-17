@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.2...@wangeditor-next/basic-modules@1.2.3) (2024-06-17)
+
+
+### Performance Improvements
+
+* add width and height attr ([353036a](https://github.com/cycleccc/wangEditor/commit/353036a5b0697472a92e93bcf2a166d1bf9e214a))
+
+
+
+
+
 ## [1.2.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.1...@wangeditor-next/basic-modules@1.2.2) (2024-06-14)
 
 
