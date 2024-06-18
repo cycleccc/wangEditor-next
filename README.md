@@ -36,6 +36,9 @@ https://unpkg.com/@wangeditor-next/editor@latest/dist/index.js
 
 请阅读 [contribution.md](https://github.com/cycleccc/wangEditor-next/blob/master/docs/contribution-CN.md) 及 [docs](https://github.com/cycleccc/wangEditor-next/tree/master/docs) 文件夹内的开发指南。
 
+## 🌟 支持与鼓励
+
+如果你觉得这个项目对你有帮助，请不要忘记给它一个 ⭐️！你的支持是我持续维护和改进这个项目的动力。感谢你的支持！
 
 ## 捐赠
 
