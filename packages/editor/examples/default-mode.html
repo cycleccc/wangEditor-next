@@ -18,20 +18,24 @@
       <button id="btn-toggle-enable">disable/enable</button>
       <button id="btn-destroy">destroy editor</button>
     </p>
-  
+
     <!-- 编辑器 -->
     <div>
       <div id="editor-toolbar" class="editor-toolbar"></div>
       <div id="editor-text-area" class="editor-text-area"></div>
     </div>
-  
+
     <!-- 内容状态 -->
     <p style="background-color: #f1f1f1;">
       当前文字数量：<span id="total-length"></span>；
+      当前选区：<span id="selection-text"></span>；
       选中文字数量：<span id="selected-length"></span>；
       选中文字："<span id="selected-text"></span>"
     </p>
-  
+
+    <!-- 显示HTML字符串 -->
+    HTML字符:
+    <div id="editor-html-view" class="editor-html-view"></div>
     <!-- 显示内容 -->
     <div id="editor-content-view" class="editor-content-view"></div>
   </div>
@@ -41,7 +45,7 @@
   <script>
     const E = window.wangEditor
 
-    const editorConfig = { MENU_CONF: {} }
+    const editorConfig = {MENU_CONF: {}}
     // editorConfig.autoFocus = false
     // editorConfig.readOnly = true
     // editorConfig.scroll = false
@@ -58,6 +62,7 @@
       // console.log(editor.children)
 
       const html = editor.getHtml()
+      document.getElementById('editor-html-view').innerText = `${ html }`
       document.getElementById('editor-content-view').innerHTML = html
 
       // 选中文字
@@ -66,6 +71,9 @@
       document.getElementById('selected-length').innerHTML = selectionText.length
       // 全部文字
       document.getElementById('total-length').innerHTML = editor.getText().length
+
+      // 当前选区
+      document.getElementById('selection-text').innerText = JSON.stringify(editor.selection);
 
       // // isSelectedAll
       // console.log('isSelectedAll', editor.isSelectedAll())
