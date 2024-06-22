@@ -16,6 +16,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
     width = 'auto',
     height = 'auto',
     style = {},
+    textAlign = 'center',
   } = elemNode as VideoElement
 
   // 是否选中
@@ -31,6 +32,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
       <div
         className="w-e-textarea-video-container"
         data-selected={selected ? 'true' : ''} // 标记为 选中
+        style={{ textAlign }}
         innerHTML={iframeHtml} // 内嵌第三方 iframe 视频
       ></div>
     )
@@ -51,6 +53,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
       <div
         className="w-e-textarea-video-container"
         data-selected={selected ? 'true' : ''} // 标记为 选中
+        style={{ textAlign }}
       >
         {videoVnode}
       </div>

@@ -14,8 +14,9 @@ function videoToHtml(elemNode: Element, childrenHtml?: string): string {
     width = 'auto',
     height = 'auto',
     style = {},
+    textAlign = 'center',
   } = elemNode as VideoElement
-  let res = '<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">\n'
+  let res = `<div data-w-e-type="video" data-w-e-is-void style="text-align: ${textAlign};">\n`
 
   if (src.trim().indexOf('<iframe ') === 0) {
     // iframe 形式

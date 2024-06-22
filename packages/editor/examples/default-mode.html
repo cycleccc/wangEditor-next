@@ -109,7 +109,15 @@
       editor = E.createEditor({
         selector: '#editor-text-area',
         // selector: document.getElementById('editor-text-area'),
-        content: window.content1,
+        // content: window.content1,
+        html: `<p><br></p>
+<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">
+  <video poster="https://www.w3schools.com/html/mov_bbb.jpg" controls="true" width="auto" height="auto" style="">
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/>
+  </video>
+</div>
+<p><br></p>
+`,
         config: editorConfig
       })
 

@@ -18,6 +18,7 @@ export type VideoElement = {
   type: 'video'
   src: string
   poster?: string
+  textAlign?: string
   width?: string
   height?: string
   style?: videoStyle
