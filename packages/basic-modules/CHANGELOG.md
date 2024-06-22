@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.5](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.4...@wangeditor-next/basic-modules@1.2.5) (2024-06-22)
+
+**Note:** Version bump only for package @wangeditor-next/basic-modules
+
+
+
+
+
 ## [1.2.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.3...@wangeditor-next/basic-modules@1.2.4) (2024-06-22)
 
 
