@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.6...@wangeditor-next/editor@5.2.7) (2024-06-22)
+
+
+### Performance Improvements
+
+* **video:** modify video position by toolbar ([b0c5f0a](https://github.com/cycleccc/wangEditor/commit/b0c5f0a0fe8e0b0db4456f8777430a1610f700b7))
+* show more config ([055cffc](https://github.com/cycleccc/wangEditor/commit/055cffc6bdeb74636e54e35f31725feb798b8449))
+
+
+### Reverts
+
+* **example:** revert content config ([ecfc3e9](https://github.com/cycleccc/wangEditor/commit/ecfc3e93539a52ec3d9c00559ffba527605e29f0))
+
+
+
+
+
 ## [5.2.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.5...@wangeditor-next/editor@5.2.6) (2024-06-17)
 
 **Note:** Version bump only for package @wangeditor-next/editor

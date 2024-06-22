@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.2.2...@wangeditor-next/video-module@1.2.3) (2024-06-22)
+
+
+### Performance Improvements
+
+* **video:** modify video position by toolbar ([b0c5f0a](https://github.com/cycleccc/wangEditor/commit/b0c5f0a0fe8e0b0db4456f8777430a1610f700b7))
+
+
+
+
+
 ## [1.2.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.2.1...@wangeditor-next/video-module@1.2.2) (2024-06-13)
 
 
