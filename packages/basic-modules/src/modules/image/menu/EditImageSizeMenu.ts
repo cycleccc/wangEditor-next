@@ -148,7 +148,8 @@ class EditorImageSizeMenu implements IModalMenu {
     if (imageNode == null) return $content[0]
 
     // 初始化 input 值
-    const { width = 'auto', height = 'auto' } = imageNode
+    const { style = {} } = imageNode
+    const { width = 'auto', height = 'auto' } = style
     $inputWidth.val(width)
     $inputHeight.val(height)
     setTimeout(() => {

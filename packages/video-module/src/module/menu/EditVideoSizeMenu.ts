@@ -68,8 +68,6 @@ class EditorVideoSizeMenu implements IModalMenu {
   }
 
   getModalContentElem(editor: IDomEditor): DOMElement {
-    // return $('<div><p>修改尺寸</p><p>修改尺寸</p><p>修改尺寸</p><p>修改尺寸</p></div>')[0]
-
     const { widthInputId, heightInputId, buttonId } = this
 
     const [widthContainerElem, inputWidthElem] = genModalInputElems(
@@ -148,7 +146,8 @@ class EditorVideoSizeMenu implements IModalMenu {
     if (videoNode == null) return $content[0]
 
     // 初始化 input 值
-    const { width = 'auto', height = 'auto' } = videoNode
+    const { style = {} } = videoNode
+    const { width = '', height = '' } = style
     $inputWidth.val(width)
     $inputHeight.val(height)
     setTimeout(() => {
