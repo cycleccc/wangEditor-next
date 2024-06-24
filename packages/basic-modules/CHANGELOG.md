@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.5...@wangeditor-next/basic-modules@1.2.6) (2024-06-24)
+
+
+### Bug Fixes
+
+* **edit size:** input content show default value ([6418903](https://github.com/cycleccc/wangEditor/commit/641890329a06cade7ad70abb9093719afce1811d))
+
+
+
+
+
 ## [1.2.5](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.4...@wangeditor-next/basic-modules@1.2.5) (2024-06-22)
 
 **Note:** Version bump only for package @wangeditor-next/basic-modules

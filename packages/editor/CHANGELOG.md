@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.8...@wangeditor-next/editor@5.3.0) (2024-06-24)
+
+
+### Features
+
+* **video:** add edit video src menu ([77b6d13](https://github.com/cycleccc/wangEditor/commit/77b6d13a5bbbebbf56aee7b6113029b90f7d6686))
+
+
+
+
+
 ## [5.2.8](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.2.7...@wangeditor-next/editor@5.2.8) (2024-06-22)
 
 **Note:** Version bump only for package @wangeditor-next/editor

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.2.4...@wangeditor-next/video-module@1.3.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* **edit size:** input content show default value ([1521e40](https://github.com/cycleccc/wangEditor/commit/1521e404969aca90a3bc600bfbb3ea30bb6eb3f3))
+* **edit size:** input content show default value ([6418903](https://github.com/cycleccc/wangEditor/commit/641890329a06cade7ad70abb9093719afce1811d))
+
+
+### Features
+
+* **video:** add edit video src menu ([77b6d13](https://github.com/cycleccc/wangEditor/commit/77b6d13a5bbbebbf56aee7b6113029b90f7d6686))
+
+
+
+
+
 ## [1.2.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.2.3...@wangeditor-next/video-module@1.2.4) (2024-06-22)
 
 **Note:** Version bump only for package @wangeditor-next/video-module
