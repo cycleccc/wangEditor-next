@@ -7,6 +7,7 @@ import InsertVideoMenu from './InsertVideoMenu'
 // import DeleteVideoMenu from './DeleteVideoMenu'
 import UploadVideoMenu from './UploadVideoMenu'
 import EditorVideoSizeMenu from './EditVideoSizeMenu'
+import EditorVideoSrcMenu from './EditVideoSrcMenu'
 import { genInsertVideoMenuConfig, genUploadVideoMenuConfig } from './config'
 
 export const insertVideoMenuConf = {
@@ -35,6 +36,13 @@ export const editorVideSizeMenuConf = {
   key: 'editVideoSize',
   factory() {
     return new EditorVideoSizeMenu()
+  },
+}
+
+export const editorVideoSrcMenuConf = {
+  key: 'editVideoSrc',
+  factory() {
+    return new EditorVideoSrcMenu()
   },
 }
 

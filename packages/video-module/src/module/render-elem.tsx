@@ -13,6 +13,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
   const {
     src = '',
     poster = '',
+    key = '',
     width = 'auto',
     height = 'auto',
     style = {},
@@ -39,7 +40,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
   } else {
     // 其他，mp4 格式
     const videoVnode = (
-      <video poster={poster} controls style={style}>
+      <video key={key} poster={poster} controls style={style}>
         <source src={src} type="video/mp4" />
         {`Sorry, your browser doesn't support embedded videos.\n 抱歉，浏览器不支持 video 视频`}
       </video>

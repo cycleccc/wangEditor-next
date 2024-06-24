@@ -14,6 +14,7 @@ export default {
     videoPosterPlaceHolder: 'Poster image url',
     ok: 'Ok',
     editSize: 'Edit size',
+    edit: 'Edit video',
     width: 'Width',
     height: 'Height',
   },

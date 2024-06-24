@@ -16,6 +16,7 @@ export type videoStyle = {
 
 export type VideoElement = {
   type: 'video'
+  key?: string
   src: string
   poster?: string
   textAlign?: string
