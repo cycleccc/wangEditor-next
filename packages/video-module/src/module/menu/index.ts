@@ -32,7 +32,7 @@ export const uploadVideoMenuConf = {
   config: genUploadVideoMenuConfig(),
 }
 
-export const editorVideSizeMenuConf = {
+export const editorVideoSizeMenuConf = {
   key: 'editVideoSize',
   factory() {
     return new EditorVideoSizeMenu()

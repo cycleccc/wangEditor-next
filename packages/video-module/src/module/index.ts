@@ -12,7 +12,7 @@ import { parseHtmlConf } from './parse-elem-html'
 import {
   insertVideoMenuConf,
   uploadVideoMenuConf,
-  editorVideSizeMenuConf,
+  editorVideoSizeMenuConf,
   editorVideoSrcMenuConf,
 } from './menu/index'
 
@@ -21,7 +21,12 @@ const video: Partial<IModuleConf> = {
   elemsToHtml: [videoToHtmlConf],
   preParseHtml: [preParseHtmlConf],
   parseElemsHtml: [parseHtmlConf],
-  menus: [insertVideoMenuConf, uploadVideoMenuConf, editorVideSizeMenuConf, editorVideoSrcMenuConf],
+  menus: [
+    insertVideoMenuConf,
+    uploadVideoMenuConf,
+    editorVideoSizeMenuConf,
+    editorVideoSrcMenuConf,
+  ],
   editorPlugin: withVideo,
 }
 
