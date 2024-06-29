@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.6...@wangeditor-next/basic-modules@1.2.7) (2024-06-29)
+
+
+### Performance Improvements
+
+* **insert link:** add length restriction when maxlength is set ([b857dfb](https://github.com/cycleccc/wangEditor/commit/b857dfb9f99532cb13c29218fc6a8cd7de956f14))
+
+
+
+
+
 ## [1.2.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.5...@wangeditor-next/basic-modules@1.2.6) (2024-06-24)
 
 
