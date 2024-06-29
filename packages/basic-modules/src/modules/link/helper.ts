@@ -110,8 +110,19 @@ export async function insertLink(editor: IDomEditor, text: string, url: string) 
 
   // 执行：插入链接
   if (isCollapsed) {
+    const leftLength = DomEditor.getLeftLengthOfMaxLength(editor)
+    if (leftLength <= 0) {
+      // 已经触发 maxLength ，不再输入文字
+      return
+    }
+
     // 链接前后插入空格，方便操作
     editor.insertText(' ')
+
+    if (leftLength < text.length + 1) {
+      // 剩余长度小于 text 长度，则截取 text
+      text = text.slice(0, leftLength - 1)
+    }
 
     const linkNode = genLinkNode(parsedUrl, text)
     Transforms.insertNodes(editor, linkNode)
@@ -123,6 +134,17 @@ export async function insertLink(editor: IDomEditor, text: string, url: string) 
     const selectedText = Editor.string(editor, selection) // 选中的文字
     if (selectedText !== text) {
       // 选中的文字和输入的文字不一样，则删掉文字，插入链接
+
+      const leftLength = DomEditor.getLeftLengthOfMaxLength(editor)
+      if (leftLength <= 0) {
+        // 已经触发 maxLength ，不再输入文字
+        return
+      }
+      if (leftLength < selectedText.length - text.length) {
+        // 剩余长度小于 text 长度，则截取 text
+        text = text.slice(0, leftLength)
+      }
+
       editor.deleteFragment()
       const linkNode = genLinkNode(parsedUrl, text)
       Transforms.insertNodes(editor, linkNode)
