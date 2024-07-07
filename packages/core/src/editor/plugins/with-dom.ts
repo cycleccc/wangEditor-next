@@ -71,7 +71,7 @@ export const withDOM = <T extends Editor>(editor: T) => {
     IS_FOCUSED.set(e, false)
   }
 
-  // 手动更新试图
+  // 手动更新视图
   e.updateView = () => {
     const textarea = DomEditor.getTextarea(e)
     textarea.changeViewState()

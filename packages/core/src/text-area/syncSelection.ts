@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { Range, Transforms } from 'slate'
+import { Range, Transforms, Editor, Text } from 'slate'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { IDomEditor } from '../editor/interface'
@@ -80,6 +80,12 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
 
       // 其他情况，就此结束
       if (canReturn) return
+    } else if (slateRange && areTextAdjacentNodes(editor, selection)) {
+      // 选区方向不一致时，需要重置光标
+      editor.selection = DomEditor.toSlateRange(editor, domSelection, {
+        exactMatch: false,
+        suppressThrow: false,
+      })
     }
   }
 
@@ -146,6 +152,30 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
 
     textarea.isUpdatingSelection = false
   })
+}
+
+function areTextAdjacentNodes(editor, selection) {
+  if (Range.isCollapsed(selection)) {
+    const { anchor, focus } = selection
+    if (
+      anchor.path.length === 2 &&
+      focus.path.length === 2 &&
+      (anchor.offset === 0 || focus.path.offset === 0)
+    ) {
+      const nowEntry = Editor.node(editor, anchor.path)
+      const [elem] = nowEntry
+      const nowPath = anchor.offset === 0 ? anchor.path : focus.path
+      const prePath = [nowPath[0], nowPath[1] - 1]
+      const preEntry = Editor.node(editor, prePath)
+      const preType = DomEditor.getNodeType(preEntry[0])
+      const _preType = DomEditor.getNodeType(preEntry[0])
+
+      const nowType = DomEditor.getNodeType(nowEntry[0])
+      if (Text.isText(preEntry[0]) && Text.isText(nowEntry[0])) {
+        return true
+      }
+    }
+  }
 }
 
 /**

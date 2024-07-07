@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { Editor, Range, Element } from 'slate'
+import { Editor, Range, Element, Text } from 'slate'
 import { IDomEditor } from '../../editor/interface'
 import { DomEditor } from '../../editor/dom-editor'
 import TextArea from '../TextArea'
@@ -41,6 +41,16 @@ export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDo
   }
 
   if (selection && Range.isCollapsed(selection)) {
+    // 记录下 dom text ，以便触发 maxLength 时使用
+    const domRange = DomEditor.toDOMRange(editor, selection)
+    const startContainer = domRange.startContainer
+    const curText = startContainer.textContent || ''
+    EDITOR_TO_TEXT.set(editor, curText)
+
+    // 记录下 dom range startContainer
+    EDITOR_TO_START_CONTAINER.set(editor, startContainer)
+  }
+  if (selection && Range.isExpanded(selection)) {
     // 记录下 dom text ，以便触发 maxLength 时使用
     const domRange = DomEditor.toDOMRange(editor, selection)
     const startContainer = domRange.startContainer
@@ -125,6 +135,15 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
       Editor.insertText(editor, data)
     }
   } else {
+    const root = DomEditor.findDocumentOrShadowRoot(editor)
+    const domSelection = root.getSelection()
+    if (domSelection && areTextAdjacentNodes(editor, selection)) {
+      // 选区方向不一致时，需要重置光标
+      editor.selection = DomEditor.toSlateRange(editor, domSelection, {
+        exactMatch: false,
+        suppressThrow: false,
+      })
+    }
     Editor.insertText(editor, data)
   }
 
@@ -143,5 +162,31 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
       // 否则，拼音输入的开始和结束，不是同一个 text node ，则将第一个 text node 重新设置 text
       oldStartContainer.textContent = EDITOR_TO_TEXT.get(editor) || ''
     })
+  }
+}
+function areTextAdjacentNodes(editor, selection) {
+  if (Range.isCollapsed(selection)) {
+    const { anchor, focus } = selection
+    if (
+      anchor.path.length === 2 &&
+      focus.path.length === 2 &&
+      (anchor.offset === 0 || focus.path.offset === 0)
+    ) {
+      const nowEntry = Editor.node(editor, anchor.path)
+      const [elem] = nowEntry
+      const nowPath = anchor.offset === 0 ? anchor.path : focus.path
+      const prePath = [nowPath[0], nowPath[1] - 1]
+      if (nowPath[1] === 0) {
+        return false
+      }
+      const preEntry = Editor.node(editor, prePath)
+      const preType = DomEditor.getNodeType(preEntry[0])
+      const _preType = DomEditor.getNodeType(preEntry[0])
+
+      const nowType = DomEditor.getNodeType(nowEntry[0])
+      if (Text.isText(preEntry[0]) && Text.isText(nowEntry[0])) {
+        return true
+      }
+    }
   }
 }
