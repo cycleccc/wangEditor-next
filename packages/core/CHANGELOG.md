@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.4.1...@wangeditor-next/core@1.4.2) (2024-07-08)
+
+
+### Bug Fixes
+
+* **composition:** fix ime repeat input text ([6e2ac59](https://github.com/cycleccc/wangEditor/commit/6e2ac59cdc871ee6eab0a6e60c71b8ed9aa50510))
+* **composition:** repeat input by selecting across rows ([2aeabc8](https://github.com/cycleccc/wangEditor/commit/2aeabc8436d7b4f2ef6d9fb569418abdd3d28c81))
+* **typo:** correct spelling errors ([541f256](https://github.com/cycleccc/wangEditor/commit/541f25653ea2d75f063a6f130e53b31df367e8c6))
+
+
+
+
+
 ## [1.4.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.2.2...@wangeditor-next/core@1.4.1) (2024-06-22)
 
 **Note:** Version bump only for package @wangeditor-next/core
