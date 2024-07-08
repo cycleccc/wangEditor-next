@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { Editor, Range, Element } from 'slate'
+import { Editor, Range, Element, Text } from 'slate'
 import { IDomEditor } from '../../editor/interface'
 import { DomEditor } from '../../editor/dom-editor'
 import TextArea from '../TextArea'
@@ -40,7 +40,7 @@ export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDo
     })
   }
 
-  if (selection && Range.isCollapsed(selection)) {
+  if (selection && (Range.isExpanded(selection) || Range.isCollapsed(selection))) {
     // 记录下 dom text ，以便触发 maxLength 时使用
     const domRange = DomEditor.toDOMRange(editor, selection)
     const startContainer = domRange.startContainer
