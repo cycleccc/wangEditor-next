@@ -125,6 +125,15 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
       Editor.insertText(editor, data)
     }
   } else {
+    // 拼音输入，当选区的边缘在两个 text node 之间时 需要重置为 domselction 的 选区
+    const root = DomEditor.findDocumentOrShadowRoot(editor)
+    const domSelection = root.getSelection()
+    if (domSelection && areBothTextNodes(editor, selection)) {
+      editor.selection = DomEditor.toSlateRange(editor, domSelection, {
+        exactMatch: false,
+        suppressThrow: false,
+      })
+    }
     Editor.insertText(editor, data)
   }
 
@@ -143,5 +152,27 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
       // 否则，拼音输入的开始和结束，不是同一个 text node ，则将第一个 text node 重新设置 text
       oldStartContainer.textContent = EDITOR_TO_TEXT.get(editor) || ''
     })
+  }
+}
+function areBothTextNodes(editor, selection) {
+  if (Range.isCollapsed(selection)) {
+    const { anchor, focus } = selection
+    if (
+      anchor.path.length === 2 &&
+      focus.path.length === 2 &&
+      (anchor.offset === 0 || focus.path.offset === 0)
+    ) {
+      const nowEntry = Editor.node(editor, anchor.path)
+      const nowPath = anchor.offset === 0 ? anchor.path : focus.path
+      const prePath = [nowPath[0], nowPath[1] - 1]
+      if (nowPath[1] === 0) {
+        return false
+      }
+      const preEntry = Editor.node(editor, prePath)
+
+      if (Text.isText(preEntry[0]) && Text.isText(nowEntry[0])) {
+        return true
+      }
+    }
   }
 }
