@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
-import isEqual from 'lodash.isequal'
-import { Editor, Element, Transforms, Range, Node } from 'slate'
+import { Editor, Transforms, Range, Node, Path } from 'slate'
 import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
 import { DEL_COL_SVG } from '../../constants/svg'
+import { filledMatrix } from '../../utils'
+import { TableCellElement, TableElement } from '../custom-types'
 
 class DeleteCol implements IButtonMenu {
   readonly title = t('tableModule.deleteCol')
@@ -58,25 +59,79 @@ class DeleteCol implements IButtonMenu {
     const tableNode = DomEditor.getParentNode(editor, rowNode)
     if (tableNode == null) return
 
-    // 遍历所有 rows ，挨个删除 cell
-    const rows = tableNode.children || []
-    rows.forEach(row => {
-      if (!Element.isElement(row)) return
+    const matrix = filledMatrix(editor)
+    let tdIndex = 0
+    out: for (let x = 0; x < matrix.length; x++) {
+      for (let y = 0; y < matrix[x].length; y++) {
+        const [[, path]] = matrix[x][y]
 
-      const cells = row.children || []
-      // 遍历一个 row 的所有 cells
-      cells.forEach((cell: Node) => {
-        const path = DomEditor.findPath(editor, cell)
-        if (
-          path.length === selectedCellPath.length &&
-          isEqual(path.slice(-1), selectedCellPath.slice(-1)) // 俩数组，最后一位相同
-        ) {
-          // 如果当前 td 的 path 和选中 td 的 path ，最后一位相同，说明是同一列
-          // 删除当前的 cell
-          Transforms.removeNodes(editor, { at: path })
+        if (Path.equals(selectedCellPath, path)) {
+          tdIndex = y
+          break out
         }
+      }
+    }
+
+    Editor.withoutNormalizing(editor, () => {
+      for (let x = 0; x < matrix.length; x++) {
+        const [[{ hidden }], { rtl, ltr }] = matrix[x][tdIndex]
+
+        if (rtl > 1 || ltr > 1) {
+          // 找到显示中 colSpan 节点
+          const [[{ rowSpan = 1, colSpan = 1 }, path]] = matrix[x][tdIndex - (rtl - 1)]
+
+          if (hidden) {
+            Transforms.setNodes<TableCellElement>(
+              editor,
+              {
+                rowSpan,
+                colSpan: Math.max(colSpan - 1, 1),
+              },
+              { at: path }
+            )
+          } else {
+            const [[, rightPath]] = matrix[x][tdIndex + 1]
+            Transforms.setNodes<TableCellElement>(
+              editor,
+              {
+                rowSpan,
+                colSpan: colSpan - 1,
+                hidden: false,
+              },
+              { at: rightPath }
+            )
+            // 移动单元格 文本、图片等元素
+            for (const [, childPath] of Node.children(editor, path, { reverse: true })) {
+              Transforms.moveNodes(editor, {
+                to: [...rightPath, 0],
+                at: childPath,
+              })
+            }
+          }
+        }
+      }
+
+      // 挨个删除 cell
+      for (let x = 0; x < matrix.length; x++) {
+        const [[, path]] = matrix[x][tdIndex]
+        Transforms.removeNodes(editor, { at: path })
+      }
+
+      // 需要调整 columnWidths
+      const [tableEntry] = Editor.nodes(editor, {
+        match: n => DomEditor.checkNodeType(n, 'table'),
+        universal: true,
+      })
+      const [elemNode, tablePath] = tableEntry
+      const { columnWidths = [] } = elemNode as TableElement
+      const adjustColumnWidths = [...columnWidths]
+      adjustColumnWidths.splice(tdIndex, 1)
+
+      Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
+        at: tablePath,
       })
     })
+
   }
 }
 

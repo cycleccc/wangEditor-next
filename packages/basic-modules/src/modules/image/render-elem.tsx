@@ -33,7 +33,8 @@ function renderContainer(
 
   const style: any = {}
   if (width) style.width = width
-  if (height) style.height = height
+  /** 不强制设置高度 */
+  // if (height) style.height = height
 
   const containerId = genContainerId(editor, elemNode)
 
@@ -60,6 +61,7 @@ function renderResizeContainer(
   let originalX = 0
   let originalWith = 0
   let originalHeight = 0
+  let maxWidth = 0 // 最大宽度
   let revers = false // 是否反转。如向右拖拽 right-top 需增加宽度（非反转），但向右拖拽 left-top 则需要减少宽度（反转）
   let $container: Dom7Array | null = null
 
@@ -72,11 +74,12 @@ function renderResizeContainer(
   /**
    * 初始化。监听事件，记录原始数据
    */
-  function init(clientX: number) {
+  function init(clientX: number, parentNodeWidth: number) {
     $container = getContainerElem()
 
     // 记录当前 x 坐标值
     originalX = clientX
+    maxWidth = parentNodeWidth
 
     // 记录 img 原始宽高
     const $img = $container.find('img')
@@ -104,12 +107,17 @@ function renderResizeContainer(
     const newWidth = originalWith + gap
     const newHeight = originalHeight * (newWidth / originalWith) // 根据 width ，按比例计算 height
 
+    /**
+     * 图片有左右3px margin
+     */
+    if (newWidth > maxWidth - 6) return // 超过最大宽度，不处理
+
     // 实时修改 img 宽高 -【注意】这里只修改 DOM ，mouseup 时再统一不修改 node
     if ($container == null) return
     if (newWidth <= 15 || newHeight <= 15) return // 最小就是 15px
 
     $container.css('width', `${newWidth}px`)
-    $container.css('height', `${newHeight}px`)
+    // $container.css('height', `${newHeight}px`)
   }, 100)
 
   function onMouseup(e: Event) {
@@ -118,14 +126,14 @@ function renderResizeContainer(
 
     if ($container == null) return
     const newWidth = $container.width().toFixed(2)
-    const newHeight = $container.height().toFixed(2)
+    // const newHeight = $container.height().toFixed(2)
 
     // 修改 node
     const props: Partial<ImageElement> = {
       style: {
         ...(elemNode as ImageElement).style,
         width: `${newWidth}px`,
-        height: `${newHeight}px`,
+        // height: `${newHeight}px`,
       },
     }
     Transforms.setNodes(editor, props, { at: DomEditor.findPath(editor, elemNode) })
@@ -136,7 +144,7 @@ function renderResizeContainer(
 
   const style: any = {}
   if (width) style.width = width
-  if (height) style.height = height
+  // if (height) style.height = height
   // style.boxShadow = '0 0 0 1px #B4D5FF' // 自定义 selected 样式，因为有拖拽触手
 
   return (
@@ -157,7 +165,21 @@ function renderResizeContainer(
           if ($target.hasClass('left-top') || $target.hasClass('left-bottom')) {
             revers = true // 反转。向右拖拽，减少宽度
           }
-          init(e.clientX) // 初始化
+
+          // 获取 image 父容器宽度
+          const parentNode = DomEditor.getParentNode(editor, elemNode)
+          if (parentNode == null) return
+          const parentNodeDom = DomEditor.toDOMNode(editor, parentNode)
+          const rect = parentNodeDom.getBoundingClientRect()
+          // 获取元素的计算样式
+          const style = window.getComputedStyle(parentNodeDom)
+          // 获取左右 padding 和 border 的宽度
+          const paddingLeft = parseFloat(style.paddingLeft)
+          const paddingRight = parseFloat(style.paddingRight)
+          const borderLeft = parseFloat(style.borderLeftWidth)
+          const borderRight = parseFloat(style.borderRightWidth)
+
+          init(e.clientX, rect.width - paddingLeft - paddingRight - borderLeft - borderRight) // 初始化
         },
       }}
     >
@@ -177,7 +199,7 @@ function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: I
   const { width = '', height = '' } = style
   const selected = DomEditor.isNodeSelected(editor, elemNode) // 图片是否选中
 
-  const imageStyle: any = {}
+  const imageStyle: any = { maxWidth: '100%' }
   if (width) imageStyle.width = '100%'
   if (height) imageStyle.height = '100%'
 

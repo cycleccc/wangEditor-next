@@ -3,11 +3,20 @@
  * @author wangfupeng
  */
 
+import debounce from 'lodash.debounce'
 import { Editor, Element as SlateElement, Range, Point, Path } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, jsx, VNode } from 'snabbdom'
 import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { TableElement } from '../custom-types'
-import { getFirstRowCells } from '../helpers'
+import { TableCursor } from '../table-cursor'
+import {
+  observerTableResize,
+  unObserveTableResize,
+  handleCellBorderVisible,
+  handleCellBorderHighlight,
+  handleCellBorderMouseDown,
+  getColumnWidthRatios,
+} from '../column-resize'
 
 /**
  * 计算 table 是否可编辑。如果选区跨域 table 和外部内容，删除，会导致 table 结构打乱。所以，有时要让 table 不可编辑
@@ -46,13 +55,23 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
   const editable = getContentEditable(editor, elemNode)
 
   // 宽度
-  const { width = 'auto' } = elemNode as TableElement
+  const {
+    width: tableWidth = 'auto',
+    height,
+    columnWidths = [],
+    scrollWidth = 0,
+    isHoverCellBorder,
+    resizingIndex,
+    isResizing,
+  } = elemNode as TableElement
 
-  // 是否选中
+  // 光标是否选中
   const selected = DomEditor.isNodeSelected(editor, elemNode)
+  // 光标是否有选区
+  const [isSelecting] = TableCursor.selection(editor)
+  // 列宽之间比值
+  const columnWidthRatios = getColumnWidthRatios(columnWidths)
 
-  // 第一行的 cells ，以计算列宽
-  const firstRowCells = getFirstRowCells(elemNode as TableElement)
 
   const vnode = (
     <div
@@ -64,6 +83,11 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
           if (e.target.tagName === 'DIV') e.preventDefault()
 
           if (editor.isDisabled()) return
+
+          // @ts-ignore 如果用户行为是获取焦点输入文本时，需释放选区
+          if (e.target.closest('[data-block-type="table-cell"]')) {
+            TableCursor.unselect(editor)
+          }
 
           // 是否需要定位到 table 内部
           const tablePath = DomEditor.findPath(editor, elemNode)
@@ -80,18 +104,87 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
         },
       }}
     >
-      <table width={width} contentEditable={editable}>
+      <table width={tableWidth} contentEditable={editable}
+        /**
+         * 1. 当表格处于选区状态，屏蔽 Chrome 自带的样式
+         * 2. table 宽度为 auto 时，宽度为 列宽之和
+         * 3. 鼠标移动到 单元格 边缘，设置 visible className
+         */
+        className={'table ' + (isSelecting ? 'table-selection-none' : '')}
+        style={{ width: tableWidth == '100%' ? '' : (columnWidths.reduce((a, b) => a + b, 0) + 'px') }}
+        on={{
+          mousemove: debounce((e: MouseEvent) => handleCellBorderVisible(editor, elemNode, e), 25),
+        }}
+      >
         <colgroup contentEditable={false}>
-          {firstRowCells.map(cell => {
-            const { width = 'auto' } = cell
-            return <col width={width}></col>
-          })}
+          {
+            /**
+             * 剔除 firstRowCells，因单元格合并 表头 th，会计算错误。
+             * 使用 columnWidth 数组长度代表列数
+             * 拖动行为及变量设置均参考 飞书
+             */
+            columnWidths.map(width => {
+              return <col width={width}></col>
+            })}
         </colgroup>
         <tbody>{children}</tbody>
       </table>
+
+      <div className="column-resizer" contenteditable="false">
+        {columnWidths.map((width, index) => {
+          let minWidth = width
+          /**
+           * table width 为 100% 模式时
+           * columnWidths 表示的是比例
+           * 1. 需要计算出真实的宽度
+           */
+          if (tableWidth == '100%') {
+            minWidth = columnWidthRatios[index] * scrollWidth
+          }
+
+          return (
+            <div className="column-resizer-item" style={{ minWidth: `${minWidth}px` }}>
+              <div
+                className={
+                  'resizer-line-hotzone ' +
+                  (isHoverCellBorder && index == resizingIndex ? 'visible ' : '') +
+                  (isResizing && index == resizingIndex ? 'highlight' : '')
+                }
+                style={{ height: height + 'px' }}
+                on={{
+                  mouseenter: (e: MouseEvent) => handleCellBorderHighlight(editor, e),
+                  mouseleave: (e: MouseEvent) => handleCellBorderHighlight(editor, e),
+                  mousedown: (e: MouseEvent) => handleCellBorderMouseDown(editor, elemNode),
+                }}
+              >
+                <div className="resizer-line"></div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
     </div>
   )
-  return vnode
+
+  /**
+   * 移出直接返回 vnode
+   * 添加 ObserverResize 监听行为
+   * 监听 table 内部变化，更新 table resize-bar 高度
+   */
+  const containerVnode = h(
+    'div',
+    {
+      hook: {
+        insert: ({ elm }: VNode) => observerTableResize(editor, elm),
+        destroy: () => {
+          unObserveTableResize()
+        },
+      },
+    },
+    vnode
+  )
+  return containerVnode
 }
 
 export default renderTable

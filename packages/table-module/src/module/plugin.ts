@@ -16,6 +16,7 @@ import {
   Path,
 } from 'slate'
 import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+import { withSelection } from './with-selection'
 
 // table cell 内部的删除处理
 function deleteHandler(newEditor: IDomEditor): boolean {
@@ -220,6 +221,12 @@ function withTable<T extends IDomEditor>(editor: T): T {
     }
     newEditor.select(newSelection) // 选中 table-cell 内部的全部文字
   }
+
+
+  /**
+   * 光标选区行为新增
+   */
+  withSelection(newEditor)
 
   // 可继续修改其他 newEditor API ...
 
