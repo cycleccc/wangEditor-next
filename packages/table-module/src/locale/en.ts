@@ -14,6 +14,6 @@ export default {
     insertTable: 'Insert table',
     header: 'Header',
     mergeCell: 'merge cell',
-    splitCell: 'solit cell',
+    splitCell: 'split cell',
   },
 }
