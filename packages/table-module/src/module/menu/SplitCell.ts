@@ -1,5 +1,5 @@
 import { Editor, Path, Transforms } from 'slate'
-import { IButtonMenu, IDomEditor, t } from '@wangeditor/core'
+import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
 import { SPLIT_CELL_SVG } from '../../constants/svg'
 import { EDITOR_TO_SELECTION } from '../weak-maps'
 import { filledMatrix, isOfType, CellElement } from '../../utils'

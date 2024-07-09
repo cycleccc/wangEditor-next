@@ -9,7 +9,7 @@ import { TableCellElement, TableRowElement, TableElement } from './custom-types'
 function tableToHtml(elemNode: Element, childrenHtml: string): string {
   const { width = 'auto' } = elemNode as TableElement
 
-  return `<table style="width: ${width};"><tbody>${childrenHtml}</tbody></table>`
+  return `<table style="width: ${width};table-layout: fixed;"><tbody>${childrenHtml}</tbody></table>`
 }
 
 function tableRowToHtml(elem: Element, childrenHtml: string): string {
@@ -22,9 +22,11 @@ function tableCellToHtml(cellNode: Element, childrenHtml: string): string {
     rowSpan = 1,
     isHeader = false,
     width = 'auto',
+    hidden = false
   } = cellNode as TableCellElement
   const tag = isHeader ? 'th' : 'td'
-  return `<${tag} colSpan="${colSpan}" rowSpan="${rowSpan}" width="${width}">${childrenHtml}</${tag}>`
+  const style = hidden ? 'display:none' : ''
+  return `<${tag} colSpan="${colSpan}" rowSpan="${rowSpan}" width="${width}" style="${style}">${childrenHtml}</${tag}>`
 }
 
 export const tableToHtmlConf = {

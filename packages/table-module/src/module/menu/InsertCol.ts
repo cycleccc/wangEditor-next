@@ -8,7 +8,6 @@ import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
 import { ADD_COL_SVG } from '../../constants/svg'
 import { TableCellElement, TableElement } from '../custom-types'
 import { isTableWithHeader } from '../helpers'
-import { isTableWithHeader } from '../helpers'
 import { filledMatrix } from '../../utils'
 
 class InsertCol implements IButtonMenu {

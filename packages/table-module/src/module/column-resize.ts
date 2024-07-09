@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle'
 import { Element as SlateElement, Transforms, Editor } from 'slate'
-import { DomEditor, IDomEditor } from '@wangeditor/core'
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { TableElement } from './custom-types'
 import { isOfType } from '../utils'
 import $ from '../utils/dom'

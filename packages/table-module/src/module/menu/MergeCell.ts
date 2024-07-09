@@ -1,5 +1,5 @@
 import { Editor, Path, Transforms, Node } from 'slate'
-import { IButtonMenu, IDomEditor, t } from '@wangeditor/core'
+import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
 import { MERGE_CELL_SVG } from '../../constants/svg'
 import { EDITOR_TO_SELECTION } from '../weak-maps'
 import { TableCursor } from '../table-cursor'
