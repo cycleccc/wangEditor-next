@@ -72,7 +72,6 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
   // 列宽之间比值
   const columnWidthRatios = getColumnWidthRatios(columnWidths)
 
-
   const vnode = (
     <div
       className="table-container"
@@ -104,14 +103,18 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
         },
       }}
     >
-      <table width={tableWidth} contentEditable={editable}
+      <table
+        width={tableWidth}
+        contentEditable={editable}
         /**
          * 1. 当表格处于选区状态，屏蔽 Chrome 自带的样式
          * 2. table 宽度为 auto 时，宽度为 列宽之和
          * 3. 鼠标移动到 单元格 边缘，设置 visible className
          */
         className={'table ' + (isSelecting ? 'table-selection-none' : '')}
-        style={{ width: tableWidth == '100%' ? '' : (columnWidths.reduce((a, b) => a + b, 0) + 'px') }}
+        style={{
+          width: tableWidth == '100%' ? '' : columnWidths.reduce((a, b) => a + b, 0) + 'px',
+        }}
         on={{
           mousemove: debounce((e: MouseEvent) => handleCellBorderVisible(editor, elemNode, e), 25),
         }}
@@ -125,7 +128,8 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
              */
             columnWidths.map(width => {
               return <col width={width}></col>
-            })}
+            })
+          }
         </colgroup>
         <tbody>{children}</tbody>
       </table>
@@ -163,7 +167,6 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
           )
         })}
       </div>
-
     </div>
   )
 

@@ -129,7 +129,6 @@ class SplitCell implements IButtonMenu {
               }
               continue out
             }
-
           }
 
           for (let c = 1; c < colSpan; c++) {

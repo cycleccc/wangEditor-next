@@ -119,8 +119,6 @@ class InsertCol implements IButtonMenu {
         at: tablePath,
       })
     })
-
-
   }
 }
 

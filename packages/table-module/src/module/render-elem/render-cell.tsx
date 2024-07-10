@@ -3,7 +3,6 @@
  * @author wangfupeng
  */
 
-
 import { Element as SlateElement } from 'slate'
 import { jsx, VNode } from 'snabbdom'
 import { IDomEditor } from '@wangeditor-next/core'
@@ -17,14 +16,20 @@ function renderTableCell(
   editor: IDomEditor
 ): VNode {
   const isFirstRow = isCellInFirstRow(editor, cellNode as TableCellElement)
-  const { colSpan = 1, rowSpan = 1, isHeader = false, hidden = false, } = cellNode as TableCellElement
+  const {
+    colSpan = 1,
+    rowSpan = 1,
+    isHeader = false,
+    hidden = false,
+  } = cellNode as TableCellElement
   const selected = TableCursor.isSelected(editor, cellNode)
-
 
   // ------------------ 不是第一行，直接渲染 <td> ------------------
   if (!isFirstRow) {
     return (
-      <td colSpan={colSpan} rowSpan={rowSpan}
+      <td
+        colSpan={colSpan}
+        rowSpan={rowSpan}
         /**
          * 1. 添加一个方便寻址的 block-type
          * 2. 选区颜色
@@ -46,7 +51,6 @@ function renderTableCell(
     <Tag
       colSpan={colSpan}
       rowSpan={rowSpan}
-
       /**
        * 1. 添加一个方便寻址的 block-type
        * 2. 选区颜色

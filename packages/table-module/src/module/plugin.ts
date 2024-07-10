@@ -222,7 +222,6 @@ function withTable<T extends IDomEditor>(editor: T): T {
     newEditor.select(newSelection) // 选中 table-cell 内部的全部文字
   }
 
-
   /**
    * 光标选区行为新增
    */

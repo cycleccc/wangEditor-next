@@ -22,7 +22,7 @@ function tableCellToHtml(cellNode: Element, childrenHtml: string): string {
     rowSpan = 1,
     isHeader = false,
     width = 'auto',
-    hidden = false
+    hidden = false,
   } = cellNode as TableCellElement
   const tag = isHeader ? 'th' : 'td'
   const style = hidden ? 'display:none' : ''

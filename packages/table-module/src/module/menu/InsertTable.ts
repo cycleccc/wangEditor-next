@@ -39,7 +39,7 @@ function genTableNode(rowNum: number, colNum: number): TableElement {
     type: 'table',
     width: 'auto',
     children: rows,
-    columnWidths
+    columnWidths,
   }
 }
 

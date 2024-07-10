@@ -131,7 +131,6 @@ class DeleteCol implements IButtonMenu {
         at: tablePath,
       })
     })
-
   }
 }
 
