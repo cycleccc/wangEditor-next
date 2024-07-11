@@ -110,14 +110,16 @@ class InsertCol implements IButtonMenu {
         match: n => DomEditor.checkNodeType(n, 'table'),
         universal: true,
       })
-      const [elemNode, tablePath] = tableEntry
-      const { columnWidths = [] } = elemNode as TableElement
-      const adjustColumnWidths = [...columnWidths]
-      adjustColumnWidths.splice(tdIndex, 0, 60)
+      if (tableEntry) {
+        const [elemNode, tablePath] = tableEntry
+        const { columnWidths = [] } = elemNode as TableElement
+        const adjustColumnWidths = [...columnWidths]
+        adjustColumnWidths.splice(tdIndex, 0, 60)
 
-      Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
-        at: tablePath,
-      })
+        Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
+          at: tablePath,
+        })
+      }
     })
   }
 }

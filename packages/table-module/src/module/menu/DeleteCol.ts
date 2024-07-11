@@ -122,14 +122,16 @@ class DeleteCol implements IButtonMenu {
         match: n => DomEditor.checkNodeType(n, 'table'),
         universal: true,
       })
-      const [elemNode, tablePath] = tableEntry
-      const { columnWidths = [] } = elemNode as TableElement
-      const adjustColumnWidths = [...columnWidths]
-      adjustColumnWidths.splice(tdIndex, 1)
+      if (tableEntry) {
+        const [elemNode, tablePath] = tableEntry
+        const { columnWidths = [] } = elemNode as TableElement
+        const adjustColumnWidths = [...columnWidths]
+        adjustColumnWidths.splice(tdIndex, 1)
 
-      Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
-        at: tablePath,
-      })
+        Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
+          at: tablePath,
+        })
+      }
     })
   }
 }
