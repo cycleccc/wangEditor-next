@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.2.1...@wangeditor-next/table-module@1.3.0) (2024-07-11)
+
+
+### Bug Fixes
+
+* Correct the typo in the 'split cell' localization string. ([451a481](https://github.com/cycleccc/wangEditor/commit/451a481373cdd6465ddce28ed2e15a74fe1b944a))
+* lint —fix & test tuning ([26c254b](https://github.com/cycleccc/wangEditor/commit/26c254bbc5b1736bb636766f2fbf1c67e5815a38))
+* pass the test: table ([4cd9917](https://github.com/cycleccc/wangEditor/commit/4cd9917d4ae46ca0c5bfde7a453985ffa30ff909))
+
+
+### Features
+
+* add Table Props[columnWidths] & toHTML add display:none ([4956621](https://github.com/cycleccc/wangEditor/commit/4956621ba777dfd9f6cfae568a280813361161b3))
+* Table add merge / split cell ([26250fa](https://github.com/cycleccc/wangEditor/commit/26250faaa6fbbbdd39a4d5c28364df9d944596bd))
+
+
+
+
+
 ## [1.2.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.2.0...@wangeditor-next/table-module@1.2.1) (2024-06-22)
 
 **Note:** Version bump only for package @wangeditor-next/table-module

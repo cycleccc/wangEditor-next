@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.2...@wangeditor-next/editor@5.4.0) (2024-07-11)
+
+
+### Features
+
+* Table add merge / split cell ([26250fa](https://github.com/cycleccc/wangEditor/commit/26250faaa6fbbbdd39a4d5c28364df9d944596bd))
+
+
+
+
+
 ## [5.3.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.1...@wangeditor-next/editor@5.3.2) (2024-07-08)
 
 **Note:** Version bump only for package @wangeditor-next/editor
