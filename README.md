@@ -69,3 +69,9 @@ npm i wangeditor-next/editor
 ## 许可证
 
 [MIT License](https://opensource.org/licenses/MIT)
+
+## 贡献者
+
+<a href="https://github.com/cycleccc/wangEditor-next/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cycleccc/wangEditor-next" />
+</a>
