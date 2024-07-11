@@ -34,7 +34,13 @@ describe('table module - render elem', () => {
     expect(renderTableConf.type).toBe('table')
 
     const elem = { type: 'table', children: [] }
-    const containerVnode = renderTableConf.renderElem(elem, null, editor) as any
+
+    /**
+     * 改变了结构，新增外层 DIV
+     */
+    const observerVnode = renderTableConf.renderElem(elem, null, editor) as any
+    expect(observerVnode.sel).toBe('div')
+    const containerVnode = observerVnode.children[0] as any
     expect(containerVnode.sel).toBe('div')
     const tableVnode = containerVnode.children[0] as any
     expect(tableVnode.sel).toBe('table')
@@ -42,7 +48,9 @@ describe('table module - render elem', () => {
 
   it('render table elem with full with', () => {
     const elem = { type: 'table', children: [], width: '100%' }
-    const containerVnode = renderTableConf.renderElem(elem, null, editor) as any
+
+    const observerVnode = renderTableConf.renderElem(elem, null, editor) as any
+    const containerVnode = observerVnode.children[0] as any
     const tableVnode = containerVnode.children[0] as any
     expect(tableVnode.data.width).toBe('100%')
   })

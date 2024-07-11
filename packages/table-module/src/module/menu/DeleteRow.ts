@@ -3,9 +3,11 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Range } from 'slate'
+import { Editor, Transforms, Range, Path, Node } from 'slate'
 import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
 import { DEL_ROW_SVG } from '../../constants/svg'
+import { filledMatrix } from '../../utils'
+import { TableCellElement } from '../custom-types'
 
 class DeleteRow implements IButtonMenu {
   readonly title = t('tableModule.deleteRow')
@@ -53,7 +55,67 @@ class DeleteRow implements IButtonMenu {
     }
 
     // row > 1 行，则删掉这一行
-    Transforms.removeNodes(editor, { at: rowPath })
+    const [cellEntry] = Editor.nodes(editor, {
+      match: n => DomEditor.checkNodeType(n, 'table-cell'),
+      universal: true,
+    })
+    const [, cellPath] = cellEntry
+    const matrix = filledMatrix(editor)
+    let trIndex = 0
+    outer: for (let x = 0; x < matrix.length; x++) {
+      for (let y = 0; y < matrix[x].length; y++) {
+        const [[, path]] = matrix[x][y]
+        if (!Path.equals(cellPath, path)) {
+          continue
+        }
+        trIndex = x
+        break outer
+      }
+    }
+
+    Editor.withoutNormalizing(editor, () => {
+      for (let y = 0; y < matrix[trIndex].length; y++) {
+        const [[{ hidden }], { ttb, btt }] = matrix[trIndex][y]
+
+        // 寻找跨行行为
+        if (ttb > 1 || btt > 1) {
+          // 找到显示中 rowSpan 节点
+          const [[{ rowSpan = 1, colSpan = 1 }, path]] = matrix[trIndex - (ttb - 1)][y]
+          // 如果当前选中节点为隐藏节点，则向上寻找处理 rowSpan 逻辑
+          if (hidden) {
+            Transforms.setNodes<TableCellElement>(
+              editor,
+              {
+                rowSpan: Math.max(rowSpan - 1, 1),
+                colSpan,
+              },
+              { at: path }
+            )
+          } else {
+            const [[, belowPath]] = matrix[trIndex + 1][y]
+            Transforms.setNodes<TableCellElement>(
+              editor,
+              {
+                rowSpan: rowSpan - 1,
+                colSpan,
+                hidden: false,
+              },
+              { at: belowPath }
+            )
+
+            // 移动单元格 文本、图片等元素
+            for (const [, childPath] of Node.children(editor, path, { reverse: true })) {
+              Transforms.moveNodes(editor, {
+                to: [...belowPath, 0],
+                at: childPath,
+              })
+            }
+          }
+        }
+      }
+
+      Transforms.removeNodes(editor, { at: rowPath })
+    })
   }
 }
 
