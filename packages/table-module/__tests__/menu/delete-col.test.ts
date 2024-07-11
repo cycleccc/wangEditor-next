@@ -1,9 +1,15 @@
 import DeleteCol from '../../src/module/menu/DeleteCol'
 import createEditor from '../../../../tests/utils/create-editor'
 import { DEL_COL_SVG } from '../../src/constants/svg'
+import * as utils from '../../src/utils'
 import locale from '../../src/locale/zh-CN'
 import * as slate from 'slate'
 import * as core from '@wangeditor-next/core'
+
+jest.mock('../../src/utils', () => ({
+  filledMatrix: jest.fn(),
+}))
+const mockedUtils = utils as jest.Mocked<typeof utils>
 
 function setEditorSelection(
   editor: core.IDomEditor,
@@ -139,6 +145,31 @@ describe('Table Module Delete Col Menu', () => {
     }
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     jest.spyOn(core.DomEditor, 'findPath').mockImplementation(() => [0, 1] as slate.Path)
+
+    mockedUtils.filledMatrix.mockImplementation(() => {
+      return [
+        [
+          [
+            [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 0]],
+            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+          ],
+          [
+            [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 1]],
+            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+          ],
+        ],
+        [
+          [
+            [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 0]],
+            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+          ],
+          [
+            [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 1]],
+            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+          ],
+        ],
+      ]
+    })
     const removeNodesFn = jest.fn()
     jest.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
 

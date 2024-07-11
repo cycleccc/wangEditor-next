@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.7...@wangeditor-next/basic-modules@1.3.0) (2024-07-11)
+
+
+### Bug Fixes
+
+* lint —fix & test tuning ([26c254b](https://github.com/cycleccc/wangEditor/commit/26c254bbc5b1736bb636766f2fbf1c67e5815a38))
+
+
+### Features
+
+* Table add merge / split cell ([26250fa](https://github.com/cycleccc/wangEditor/commit/26250faaa6fbbbdd39a4d5c28364df9d944596bd))
+
+
+
+
+
 ## [1.2.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.2.6...@wangeditor-next/basic-modules@1.2.7) (2024-06-29)
 
 

@@ -13,6 +13,7 @@ import { TableElement, TableCellElement, TableRowElement } from '../custom-types
 function genTableNode(rowNum: number, colNum: number): TableElement {
   // 拼接 rows
   const rows: TableRowElement[] = []
+  const columnWidths: number[] = Array(colNum).fill(60)
   for (let i = 0; i < rowNum; i++) {
     // 拼接 cells
     const cells: TableCellElement[] = []
@@ -38,6 +39,7 @@ function genTableNode(rowNum: number, colNum: number): TableElement {
     type: 'table',
     width: 'auto',
     children: rows,
+    columnWidths,
   }
 }
 

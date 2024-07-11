@@ -3,12 +3,12 @@
  * @author wangfupeng
  */
 
-import isEqual from 'lodash.isequal'
-import { Editor, Element, Transforms, Range, Node } from 'slate'
+import { Editor, Transforms, Range, Node, Path } from 'slate'
 import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
 import { ADD_COL_SVG } from '../../constants/svg'
 import { TableCellElement, TableElement } from '../custom-types'
 import { isTableWithHeader } from '../helpers'
+import { filledMatrix } from '../../utils'
 
 class InsertCol implements IButtonMenu {
   readonly title = t('tableModule.insertCol')
@@ -52,28 +52,74 @@ class InsertCol implements IButtonMenu {
     const tableNode = DomEditor.getParentNode(editor, rowNode) as TableElement
     if (tableNode == null) return
 
-    // 遍历所有 rows ，挨个添加 cell
-    const rows = tableNode.children || []
-    rows.forEach((row, rowIndex) => {
-      if (!Element.isElement(row)) return
+    const matrix = filledMatrix(editor)
+    let tdIndex = 0
+    out: for (let x = 0; x < matrix.length; x++) {
+      for (let y = 0; y < matrix[x].length; y++) {
+        const [[, path]] = matrix[x][y]
 
-      const cells = row.children || []
-      // 遍历一个 row 的所有 cells
-      cells.forEach((cell: Node) => {
-        const path = DomEditor.findPath(editor, cell)
-        if (
-          path.length === selectedCellPath.length &&
-          isEqual(path.slice(-1), selectedCellPath.slice(-1)) // 俩数组，最后一位相同
-        ) {
-          // 如果当前 td 的 path 和选中 td 的 path ，最后一位相同，说明是同一列
-          // 则在其后插入一个 cell
-          const newCell: TableCellElement = { type: 'table-cell', children: [{ text: '' }] }
-          if (rowIndex === 0 && isTableWithHeader(tableNode)) {
-            newCell.isHeader = true
-          }
-          Transforms.insertNodes(editor, newCell, { at: path })
+        if (Path.equals(selectedCellPath, path)) {
+          tdIndex = y
+          break out
         }
+      }
+    }
+
+    Editor.withoutNormalizing(editor, () => {
+      const exitMerge: number[] = []
+
+      for (let x = 0; x < matrix.length; x++) {
+        const [, { ltr, rtl }] = matrix[x][tdIndex]
+
+        // 向左找到 1 元素为止
+        if (ltr > 1 || rtl > 1) {
+          if (rtl == 1) continue
+
+          const [[element, path]] = matrix[x][tdIndex - (rtl - 1)]
+          const colSpan = element.colSpan || 1
+
+          exitMerge.push(x)
+          if (!element.hidden) {
+            Transforms.setNodes<TableCellElement>(
+              editor,
+              {
+                colSpan: colSpan + 1,
+              },
+              { at: path }
+            )
+          }
+        }
+      }
+
+      // 遍历所有 rows ，挨个添加 cell
+      for (let x = 0; x < matrix.length; x++) {
+        const newCell: TableCellElement = {
+          type: 'table-cell',
+          hidden: exitMerge.includes(x),
+          children: [{ text: '' }],
+        }
+        if (x === 0 && isTableWithHeader(tableNode)) {
+          newCell.isHeader = true
+        }
+        const [[, insertPath]] = matrix[x][tdIndex]
+        Transforms.insertNodes(editor, newCell, { at: insertPath })
+      }
+
+      // 需要调整 columnWidths
+      const [tableEntry] = Editor.nodes(editor, {
+        match: n => DomEditor.checkNodeType(n, 'table'),
+        universal: true,
       })
+      if (tableEntry) {
+        const [elemNode, tablePath] = tableEntry
+        const { columnWidths = [] } = elemNode as TableElement
+        const adjustColumnWidths = [...columnWidths]
+        adjustColumnWidths.splice(tdIndex, 0, 60)
+
+        Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
+          at: tablePath,
+        })
+      }
     })
   }
 }
