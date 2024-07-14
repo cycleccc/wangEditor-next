@@ -20,8 +20,27 @@ function getTopSelectedElemsBySelection(editor: IDomEditor) {
 }
 
 function withList<T extends IDomEditor>(editor: T): T {
-  const { deleteBackward, handleTab, normalizeNode } = editor
+  const { deleteBackward, handleTab, normalizeNode, insertBreak } = editor
   const newEditor = editor
+
+  // 重写 insertBreak - 空 list 点击回车时删除该空 list
+  newEditor.insertBreak = () => {
+    const [nodeEntry] = Editor.nodes(editor, {
+      match: n => DomEditor.checkNodeType(n, 'list-item'),
+      universal: true,
+    })
+    if (!nodeEntry) return insertBreak()
+    const listElem = nodeEntry[0] as ListItemElement
+    if (listElem.children[0].text === '') {
+      Transforms.setNodes(newEditor, {
+        type: 'paragraph',
+        ordered: undefined,
+        level: undefined,
+      })
+      return
+    }
+    return insertBreak()
+  }
 
   // 重写 deleteBackward - 降低 level 或者转换为 p 元素
   newEditor.deleteBackward = unit => {
