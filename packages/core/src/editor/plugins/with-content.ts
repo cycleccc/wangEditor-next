@@ -292,7 +292,7 @@ export const withContent = <T extends Editor>(editor: T) => {
     document.body.appendChild(div)
 
     let insertedElemNum = 0 // 记录插入 elem 的数量 ( textNode 不算 )
-    domNodes.forEach(n => {
+    domNodes.forEach((n, index) => {
       const { nodeType, nodeName, textContent = '' } = n
 
       // ------ Text node ------
@@ -351,7 +351,16 @@ export const withContent = <T extends Editor>(editor: T) => {
       const display = window.getComputedStyle(el).display
       if (!DomEditor.isSelectedEmptyParagraph(e)) {
         // 当前不是空行，且 非 inline - 则换行
-        if (display.indexOf('inline') < 0) e.insertBreak()
+        if (display.indexOf('inline') < 0) {
+          if (index >= 0) {
+            const prevEl = domNodes[index - 1] as DOMElement
+            // 如果是 list 列表需要多插入一个回车,模拟双回车删除空 list
+            if (prevEl.matches('ul:not([data-w-e-type]),ol:not([data-w-e-type])')) {
+              e.insertBreak()
+            }
+          }
+          e.insertBreak()
+        }
       }
       e.dangerouslyInsertHtml(el.innerHTML, true) // 继续插入子内容
     })
