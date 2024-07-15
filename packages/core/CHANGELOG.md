@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.0...@wangeditor-next/core@1.5.2) (2024-07-15)
+
+
+### Bug Fixes
+
+* remove extra lists when pasting Feishu doc lists ([bd2d905](https://github.com/cycleccc/wangEditor/commit/bd2d90556404e3b5b82ff114931d7a1be1126556))
+
+
+
+
+
 ## [1.5.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.0...@wangeditor-next/core@1.5.1) (2024-07-14)
 
 

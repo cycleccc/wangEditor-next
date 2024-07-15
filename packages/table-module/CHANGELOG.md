@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.0...@wangeditor-next/table-module@1.3.2) (2024-07-15)
+
+**Note:** Version bump only for package @wangeditor-next/table-module
+
+
+
+
+
 ## [1.3.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.0...@wangeditor-next/table-module@1.3.1) (2024-07-14)
 
 **Note:** Version bump only for package @wangeditor-next/table-module

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.1...@wangeditor-next/list-module@1.1.3) (2024-07-15)
+
+
+### Performance Improvements
+
+* **list module:** rewrite list module insertBreak ([cdf2154](https://github.com/cycleccc/wangEditor/commit/cdf2154dba4e92669f6211e6ac375f2a026fd58d))
+
+
+
+
+
 ## [1.1.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.1...@wangeditor-next/list-module@1.1.2) (2024-07-14)
 
 
