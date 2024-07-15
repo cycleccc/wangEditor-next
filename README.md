@@ -27,7 +27,7 @@
 
 ### 对于 Vue 或 React
 ```shell
-npm i wangeditor-next/editor
+npm i @wangeditor-next/editor
 ```
 
 ### 对于 HTML 使用 CDN 资源
