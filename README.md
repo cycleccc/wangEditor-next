@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/branch/master/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
 [![GitHub stars](https://img.shields.io/github/stars/cycleccc/wangEditor-next)](https://github.com/cycleccc/wangEditor-next/stargazers)
 
-[English](./README-en.md)
+[English](./README-en.md) | 中文
 
 ## 介绍
 
@@ -11,7 +11,7 @@
 
 开源 Web 富文本编辑器，开箱即用，配置简单。支持 JS Vue React 。
 
-- [文档](https://www.wangeditor.com/)
+- [文档](https://cycleccc.github.io/docs/)
 - [Demo](https://www.wangeditor.com/demo/)
 
 ![](./docs/images/editor.png)
@@ -27,7 +27,13 @@
 
 ### 对于 Vue 或 React
 ```shell
-npm i @wangeditor-next/editor
+npm install @wangeditor-next/editor --save
+// vue3 需要额外下载
+npm install @wangeditor-next/editor-for-vue --save
+// vue2 需要额外下载
+npm install @wangeditor-next/editor-for-vue2 --save
+// react 需要额外下载
+npm install @wangeditor-next/editor-for-react --save
 ```
 
 ### 对于 HTML 使用 CDN 资源
