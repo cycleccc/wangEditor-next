@@ -74,16 +74,19 @@ function parseTableHtml(
   let width = 'auto'
   if (getStyleValue($elem, 'width') === '100%') width = '100%'
   if ($elem.attr('width') === '100%') width = '100%' // 兼容 v4 格式
-  let cellLength = $elem.find('tr')[0].children.length
 
-  return {
+  const tableELement: TableElement = {
     type: 'table',
     width,
     // @ts-ignore
     children: children.filter(child => DomEditor.getNodeType(child) === 'table-row'),
-
-    columnWidths: Array(cellLength).fill(180)
   }
+  let cellLength: number | undefined = $elem.find('tr')[0]?.children.length
+  if (cellLength > 0) {
+    tableELement.columnWidths = Array(cellLength).fill(180)
+  }
+
+  return tableELement
 }
 
 export const parseTableHtmlConf = {
