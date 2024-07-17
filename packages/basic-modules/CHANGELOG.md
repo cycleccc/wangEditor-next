@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.2...@wangeditor-next/basic-modules@1.3.3) (2024-07-17)
+
+
+### Bug Fixes
+
+* **blockquote:** handle missing path on paste causing findPath error ([af2d3a4](https://github.com/cycleccc/wangEditor/commit/af2d3a4d15d8a1129c68f73e7ca38fb9c3d84f71))
+
+
+
+
+
 ## [1.3.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.0...@wangeditor-next/basic-modules@1.3.2) (2024-07-15)
 
 **Note:** Version bump only for package @wangeditor-next/basic-modules
