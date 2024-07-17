@@ -7,7 +7,7 @@
 
 ## 介绍
 
-原项目 [wangeditor-next](https://github.com/cycleccc/wangEditor) 因作者[个人原因](https://juejin.cn/post/7272735633458413602)短期不再维护，本项目为fork版本,将在尽量不 Breaking change 的前提下继续维护。
+原项目 [wangeditor](https://github.com/wangeditor-team/wangEditor) 因作者[个人原因](https://juejin.cn/post/7272735633458413602)短期不再维护，本项目为fork版本,将在尽量不 Breaking change 的前提下继续维护。
 
 开源 Web 富文本编辑器，开箱即用，配置简单。支持 JS Vue React 。
 
