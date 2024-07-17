@@ -1,3 +1,3 @@
 # wangEditor table-module
 
-Table module built in [wangEditor](https://www.wangeditor.com/) by default.
+Table module built in [wangeditor-next](https://cycleccc.github.io/docs/) by default.

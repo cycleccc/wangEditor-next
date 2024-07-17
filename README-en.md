@@ -7,12 +7,12 @@
 
 ## Introduction
 
-The original project [wangEditor](https://github.com/wangeditor-team/wangEditor) is temporarily not maintained due to the author's [personal reasons](https://juejin.cn/post/7272735633458413602). This project is a forked version that will continue to be maintained with minimal breaking changes.
+The original project [wangeditor-next](https://github.com/cycleccc/wangEditor) is temporarily not maintained due to the author's [personal reasons](https://juejin.cn/post/7272735633458413602). This project is a forked version that will continue to be maintained with minimal breaking changes.
 
 An open-source web rich text editor that is ready to use out of the box with simple configuration. It supports JS, Vue, and React.
 
-- [Documentation](https://www.wangeditor.com/)
-- [Demo](https://www.wangeditor.com/demo/)
+- [Documentation](https://cycleccc.github.io/docs/)
+- [Demo](https://cycleccc.github.io/demo/)
 
 ![](./docs/images/editor.png)
 
