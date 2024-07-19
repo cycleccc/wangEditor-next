@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.2...@wangeditor-next/table-module@1.3.4) (2024-07-19)
+
+
+### Bug Fixes
+
+* ** table :** unable to delete when the first child is a table ([a219456](https://github.com/cycleccc/wangEditor/commit/a21945638f74abc64220e81d31932809de3a745d))
+* Bug-issues 40, paste table html ([a404ed2](https://github.com/cycleccc/wangEditor/commit/a404ed259bf2426d9a88cd6c879d8ab52b5101c7))
+* remove console ([4f64cb3](https://github.com/cycleccc/wangEditor/commit/4f64cb37cabe51f338893a2622ff6b29eb2ca6d7))
+
+
+### Performance Improvements
+
+* **parse table:** add null value checks ([92d2865](https://github.com/cycleccc/wangEditor/commit/92d2865164ad91bb6124219289189142b63112d8))
+
+
+
+
+
 ## [1.3.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.2...@wangeditor-next/table-module@1.3.3) (2024-07-16)
 
 
