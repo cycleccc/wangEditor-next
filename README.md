@@ -1,7 +1,12 @@
 # wangEditor-next 5
 
 [![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/branch/master/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
-[![GitHub stars](https://img.shields.io/github/stars/cycleccc/wangEditor-next)](https://github.com/cycleccc/wangEditor-next/stargazers)
+
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![JSDocs][jsdocs-src]][jsdocs-href]
+<!-- [![License][license-src]][license-href] -->
 
 [English](./README-en.md) | 中文
 
@@ -81,3 +86,16 @@ npm install @wangeditor-next/editor-for-react --save
 <a href="https://github.com/cycleccc/wangEditor-next/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=cycleccc/wangEditor-next" />
 </a>
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://npmjs.com/package/@wangeditor-next/editor
+[npm-downloads-src]: https://img.shields.io/npm/dm/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://npmjs.com/package/@wangeditor-next/editor
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669&label=minzip
+[bundle-href]: https://bundlephobia.com/result?p=@wangeditor-next/editor
+[license-src]: https://img.shields.io/github/license/antfu/@wangeditor-next/editor.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/antfu/@wangeditor-next/editor/blob/main/LICENSE
+[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
+[jsdocs-href]: https://www.jsdocs.io/package/@wangeditor-next/editor
