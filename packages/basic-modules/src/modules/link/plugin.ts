@@ -31,6 +31,11 @@ function withLink<T extends IDomEditor>(editor: T): T {
       insertData(data)
       return
     }
+    // 单图拖拽插入
+    if (/<img[^>]+>/.test(data.getData('text/html'))) {
+      insertData(data)
+      return
+    }
 
     // 插入链接
     if (isMenuDisabled(newEditor)) return // disabled
