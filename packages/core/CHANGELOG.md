@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.5](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.3...@wangeditor-next/core@1.5.5) (2024-07-21)
+
+
+### Bug Fixes
+
+* hoverbar misalignment when scroll is set to false ([7761c86](https://github.com/cycleccc/wangEditor/commit/7761c8689ad0124bbf3cc5d864a97c3903c21e49))
+* some Android browsers identified as Safari ([b37cabd](https://github.com/cycleccc/wangEditor/commit/b37cabdae056fdee0cee5585edace55b6cce02f2))
+* support micro-frontend iframe ([659faf3](https://github.com/cycleccc/wangEditor/commit/659faf39c74998218667a229651505b74a70db78))
+
+
+
+
+
 ## [1.5.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.3...@wangeditor-next/core@1.5.4) (2024-07-21)
 
 

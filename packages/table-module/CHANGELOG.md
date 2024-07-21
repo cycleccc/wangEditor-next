@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.4...@wangeditor-next/table-module@1.3.6) (2024-07-21)
+
+
+### Bug Fixes
+
+* **table module:** unable to delete list after table ([fcfce4b](https://github.com/cycleccc/wangEditor/commit/fcfce4b9cecb16919929ab635d66b020eea14308))
+
+
+
+
+
 ## [1.3.5](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.4...@wangeditor-next/table-module@1.3.5) (2024-07-21)
 
 
