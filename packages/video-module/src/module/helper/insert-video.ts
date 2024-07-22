@@ -4,7 +4,7 @@
  */
 
 import { Transforms } from 'slate'
-import { IDomEditor } from '@wangeditor-next/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { replaceSymbols } from '../../utils/util'
 import { VideoElement } from '../custom-types'
 
@@ -57,7 +57,9 @@ export default async function (
       height,
     },
   }
-
+  if (DomEditor.isSelectedEmptyParagraph(editor)) {
+    Transforms.removeNodes(editor, { mode: 'highest' })
+  }
   // 插入视频
   // 不使用此方式会比正常的选区选取先执行
   Promise.resolve().then(() => {
