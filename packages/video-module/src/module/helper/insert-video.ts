@@ -4,7 +4,7 @@
  */
 
 import { Transforms } from 'slate'
-import { IDomEditor } from '@wangeditor-next/core'
+import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { replaceSymbols } from '../../utils/util'
 import { VideoElement } from '../custom-types'
 
@@ -44,6 +44,9 @@ export default async function (
 
   if (parsedSrc.trim().indexOf('<iframe ') !== 0) {
     parsedSrc = replaceSymbols(parsedSrc)
+  }
+  if (DomEditor.isSelectedEmptyParagraph(editor)) {
+    Transforms.removeNodes(editor, { mode: 'highest' })
   }
 
   // 新建一个 video node
