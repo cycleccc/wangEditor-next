@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.0...@wangeditor-next/video-module@1.3.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **video:** remove empty line ([9f5f0ba](https://github.com/cycleccc/wangEditor/commit/9f5f0bae4e290e99651bf3dda4af2b6332baf875))
+
+
+
+
+
 # [1.3.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.2.4...@wangeditor-next/video-module@1.3.0) (2024-06-24)
 
 
