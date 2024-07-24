@@ -7,6 +7,7 @@ import { Descendant } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
 import { VideoElement, videoStyle } from './custom-types'
 import $, { DOMElement } from '../utils/dom'
+import { styleStringToObject } from '../utils/util'
 
 function genVideoElem(
   src: string,
@@ -39,7 +40,8 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
   if ($iframe.length > 0) {
     width = $iframe.attr('width') || 'auto'
     height = $iframe.attr('height') || 'auto'
-    style = $iframe.attr('style') || {}
+    style = $iframe.attr('style') || ''
+    style = styleStringToObject(style)
     src = $iframe[0].outerHTML
     return genVideoElem(src, poster, width, height, style)
   }
@@ -56,7 +58,8 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
   width = $video.attr('width') || 'auto'
   height = $video.attr('height') || 'auto'
   poster = $video.attr('poster') || ''
-  style = $iframe.attr('style') || {}
+  style = $video.attr('style') || ''
+  style = styleStringToObject(style)
   return genVideoElem(src, poster, width, height, style)
 }
 

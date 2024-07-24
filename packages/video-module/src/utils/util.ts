@@ -17,3 +17,24 @@ export function genRandomStr(prefix: string = 'r'): string {
 export function replaceSymbols(str: string) {
   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
+
+export function styleStringToObject(styleString) {
+  const styleObject = {}
+
+  // 去掉字符串两端的空格，然后按分号分割
+  const styles = styleString.trim().split(';')
+
+  // 迭代每一个样式属性对
+  styles.forEach(style => {
+    if (style) {
+      // 忽略空字符串
+      const [property, value] = style.split(':')
+      if (property && value) {
+        // 去掉两端的空格并将结果存储在对象中
+        styleObject[property.trim()] = value.trim()
+      }
+    }
+  })
+
+  return styleObject
+}

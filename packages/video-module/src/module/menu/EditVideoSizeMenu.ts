@@ -117,8 +117,8 @@ class EditorVideoSizeMenu implements IModalMenu {
 
         editor.restoreSelection()
         const props: Partial<VideoElement> = {
-          ...style,
           style: {
+            ...style,
             width: width,
             height: height,
           },
