@@ -38,9 +38,6 @@ function genPreSymbol(level = 0): string {
  */
 function getOrderedItemNumber(editor: IDomEditor, elem: SlateElement): number {
   const { type, level = 0, ordered = false } = elem as ListItemElement
-  if (!ordered) {
-    return -1 // 不是有序列表
-  }
 
   let num = 1 // 默认值 1
   let curElem = elem
