@@ -192,7 +192,6 @@ export function DOMSelectionToEditor(textarea: TextArea, editor: IDomEditor) {
     })
     Transforms.select(editor, range)
   } else {
-    // 禁用此行，让光标选区继续生效
-    // Transforms.deselect(editor)
+    Transforms.deselect(editor)
   }
 }
