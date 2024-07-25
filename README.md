@@ -1,18 +1,23 @@
 # wangEditor-next 5
 
 [![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/branch/master/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
-[![GitHub stars](https://img.shields.io/github/stars/cycleccc/wangEditor-next)](https://github.com/cycleccc/wangEditor-next/stargazers)
 
-[English](./README-en.md)
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![JSDocs][jsdocs-src]][jsdocs-href]
+[![License][license-src]][license-href]
+
+[English](./README-en.md) | 中文
 
 ## 介绍
 
-原项目 [wangEditor](https://github.com/wangeditor-team/wangEditor) 因作者[个人原因](https://juejin.cn/post/7272735633458413602)短期不再维护，本项目为fork版本,将在尽量不 Breaking change 的前提下继续维护。
+原项目 [wangeditor](https://github.com/wangeditor-team/wangEditor) 因作者[个人原因](https://juejin.cn/post/7272735633458413602)短期不再维护，本项目为fork版本,将在尽量不 Breaking change 的前提下继续维护。
 
 开源 Web 富文本编辑器，开箱即用，配置简单。支持 JS Vue React 。
 
-- [文档](https://www.wangeditor.com/)
-- [Demo](https://www.wangeditor.com/demo/)
+- [文档](https://cycleccc.github.io/docs/)
+- [Demo](https://cycleccc.github.io/demo/)
 
 ![](./docs/images/editor.png)
 
@@ -27,7 +32,13 @@
 
 ### 对于 Vue 或 React
 ```shell
-npm i @wangeditor-next/editor
+npm install @wangeditor-next/editor --save
+// vue3 需要额外下载
+npm install @wangeditor-next/editor-for-vue --save
+// vue2 需要额外下载
+npm install @wangeditor-next/editor-for-vue2 --save
+// react 需要额外下载
+npm install @wangeditor-next/editor-for-react --save
 ```
 
 ### 对于 HTML 使用 CDN 资源
@@ -65,13 +76,25 @@ npm i @wangeditor-next/editor
 
 对原项目捐赠即可，支持 wangEditor 开源工作：https://opencollective.com/wangeditor (~~虽然也没人捐赠~~)。
 
-
-## 许可证
-
-[MIT License](https://opensource.org/licenses/MIT)
-
 ## 贡献者
 
 <a href="https://github.com/cycleccc/wangEditor-next/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=cycleccc/wangEditor-next" />
 </a>
+
+## License
+
+[MIT](./LICENSE) License © 2024-PRESENT [cycleccc](https://github.com/cycleccc)
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://npmjs.com/package/@wangeditor-next/editor
+[npm-downloads-src]: https://img.shields.io/npm/dm/@wangeditor-next/core?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://npmjs.com/package/@wangeditor-next/editor
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669&label=minzip
+[bundle-href]: https://bundlephobia.com/result?p=@wangeditor-next/editor
+[license-src]: https://img.shields.io/github/license/cycleccc/wangeditor-next.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/cycleccc/wangeditor-next/blob/main/LICENSE
+[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
+[jsdocs-href]: https://www.jsdocs.io/package/@wangeditor-next/editor

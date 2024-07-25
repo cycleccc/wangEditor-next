@@ -1,3 +1,3 @@
 # wangEditor list-module
 
-List module built in [wangEditor](https://www.wangeditor.com/) by default.
+List module built in [wangeditor-next](https://cycleccc.github.io/docs/) by default.

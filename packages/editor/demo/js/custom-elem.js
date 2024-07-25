@@ -107,13 +107,13 @@
         rightContainer.innerHTML = `
         <a href="https://www.wangeditor.com/en/">Document</a>
         &nbsp;
-        <a href="https://github.com/wangeditor-team/wangEditor/tree/master/packages/editor/demo">Source</a>
+        <a href="https://github.com/cycleccc/wangEditor/tree/master/packages/editor/demo">Source</a>
       `
       } else {
         rightContainer.innerHTML = `
         <a href="https://www.wangeditor.com/">文档</a>
         &nbsp;
-        <a href="https://github.com/wangeditor-team/wangEditor/tree/master/packages/editor/demo">源码</a>
+        <a href="https://github.com/cycleccc/wangEditor/tree/master/packages/editor/demo">源码</a>
       `
       }
 
@@ -201,11 +201,11 @@ const MENU_CONF = [
   {
     'zh-CN': {
       text: 'Shadow DOM',
-      link: 'https://github.com/wangeditor-team/wangEditor/blob/master/packages/editor/examples/shadow-dom.html',
+      link: 'https://github.com/cycleccc/wangEditor/blob/master/packages/editor/examples/shadow-dom.html',
     },
     en: {
       text: 'Shadow DOM',
-      link: 'https://github.com/wangeditor-team/wangEditor/blob/master/packages/editor/examples/shadow-dom.html',
+      link: 'https://github.com/cycleccc/wangEditor/blob/master/packages/editor/examples/shadow-dom.html',
     },
   },
   {

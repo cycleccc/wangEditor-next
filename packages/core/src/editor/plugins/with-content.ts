@@ -382,7 +382,7 @@ export const withContent = <T extends Editor>(editor: T) => {
    * 重置 HTML 内容
    * @param html html string
    */
-  e.setHtml = (html: string = '') => {
+  e.setHtml = (html: string | null = '') => {
     // 记录编辑器当前状态
     const isEditorDisabled = e.isDisabled()
     const isEditorFocused = e.isFocused()
@@ -393,10 +393,10 @@ export const withContent = <T extends Editor>(editor: T) => {
     e.focus()
     // 需要标准的{anchor:xxx, focus: xxxx} 否则无法通过slate history的检查
     // 使用 e.select([]) e.selectAll() 生成的location不是标准的{anchor: xxxx, focus: xxx}形式
-    // https://github.com/wangeditor-team/wangEditor/issues/4754
+    // https://github.com/cycleccc/wangEditor/issues/4754
     e.clear()
     // 设置新内容
-    const newContent = htmlToContent(e, html)
+    const newContent = htmlToContent(e, html == null ? '' : html)
     Transforms.insertFragment(e, newContent)
 
     // 恢复编辑器状态和选区

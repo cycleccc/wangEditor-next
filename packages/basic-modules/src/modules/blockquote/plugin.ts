@@ -22,6 +22,12 @@ function withBlockquote<T extends IDomEditor>(editor: T): T {
     if (!nodeEntry) return insertBreak()
 
     const quoteElem = nodeEntry[0]
+    // 如果正在粘贴中，没有 path 可用，则直接换行退出 blockquote
+    // TODO: 粘贴未处理其它富文本一个 block 中套两个 div 用作换行的情况
+    if (!DomEditor.getParentNode(editor, quoteElem)) {
+      insertParagraphBeforeNewline(newEditor)
+      return
+    }
     const quotePath = DomEditor.findPath(editor, quoteElem)
     const quoteEndLocation = Editor.end(editor, quotePath)
 
@@ -29,12 +35,7 @@ function withBlockquote<T extends IDomEditor>(editor: T): T {
       // 光标位于 blockquote 最后
       const str = Node.string(quoteElem)
       if (str && str.slice(-1) === '\n') {
-        // blockquote 文本最后一个是 \n
-        editor.deleteBackward('character') // 删除最后一个 \n
-
-        // 则插入一个 paragraph
-        const p = { type: 'paragraph', children: [{ text: '' }] }
-        Transforms.insertNodes(newEditor, p, { mode: 'highest' })
+        insertParagraphBeforeNewline(newEditor)
         return
       }
     }
@@ -45,6 +46,14 @@ function withBlockquote<T extends IDomEditor>(editor: T): T {
 
   // 返回 editor ，重要！
   return newEditor
+}
+
+function insertParagraphBeforeNewline(editor: any) {
+  editor.deleteBackward('character') // 删除最后一个 \n
+
+  // 插入一个 paragraph
+  const p = { type: 'paragraph', children: [{ text: '' }] }
+  Transforms.insertNodes(editor, p, { mode: 'highest' })
 }
 
 export default withBlockquote
