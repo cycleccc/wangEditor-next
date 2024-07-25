@@ -32,9 +32,6 @@ const COMMON_HOVERBAR_KEYS = {
       'insertTableCol',
       'deleteTableCol',
       'deleteTable',
-      /** 注册单元格合并 拆分 */
-      'mergeTableCell',
-      'splitTableCell',
     ],
   },
   divider: {
