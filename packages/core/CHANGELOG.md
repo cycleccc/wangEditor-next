@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.6-alpha.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.5...@wangeditor-next/core@1.5.6-alpha.0) (2024-07-25)
+
+
+### Reverts
+
+* **core:** core selection judge ([e87ee63](https://github.com/cycleccc/wangEditor/commit/e87ee63d5ade4001e6c2509bfda374b8a5ff82ff))
+
+
+
+
+
 ## [1.5.5](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.3...@wangeditor-next/core@1.5.5) (2024-07-21)
 
 
