@@ -1,5 +1,0 @@
-export * from './has-common'
-export * from './is-of-type'
-export * from './matrices'
-export * from './point'
-export * from './types'
