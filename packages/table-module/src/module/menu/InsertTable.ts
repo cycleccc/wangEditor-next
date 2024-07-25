@@ -13,7 +13,6 @@ import { TableElement, TableCellElement, TableRowElement } from '../custom-types
 function genTableNode(rowNum: number, colNum: number): TableElement {
   // 拼接 rows
   const rows: TableRowElement[] = []
-  const columnWidths: number[] = Array(colNum).fill(60)
   for (let i = 0; i < rowNum; i++) {
     // 拼接 cells
     const cells: TableCellElement[] = []
@@ -39,7 +38,6 @@ function genTableNode(rowNum: number, colNum: number): TableElement {
     type: 'table',
     width: 'auto',
     children: rows,
-    columnWidths,
   }
 }
 
@@ -170,12 +168,6 @@ class InsertTable implements IDropPanelMenu {
       Transforms.removeNodes(editor, { mode: 'highest' })
     }
 
-    if (editor.children.length === 0) {
-      // table 作为第一个 children 时会导致无法正常删除
-      // 在当前位置插入空行，当前元素下移
-      const newElem = { type: 'paragraph', children: [{ text: '' }] }
-      Transforms.insertNodes(editor, newElem, { mode: 'highest' })
-    }
     // 插入表格
     const tableNode = genTableNode(rowNum, colNum)
     Transforms.insertNodes(editor, tableNode, { mode: 'highest' })

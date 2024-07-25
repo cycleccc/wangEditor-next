@@ -1,15 +1,9 @@
 import InsertCol from '../../src/module/menu/InsertCol'
 import createEditor from '../../../../tests/utils/create-editor'
 import { ADD_COL_SVG } from '../../src/constants/svg'
-import * as utils from '../../src/utils'
 import locale from '../../src/locale/zh-CN'
 import * as slate from 'slate'
 import * as core from '@wangeditor-next/core'
-
-jest.mock('../../src/utils', () => ({
-  filledMatrix: jest.fn(),
-}))
-const mockedUtils = utils as jest.Mocked<typeof utils>
 
 function setEditorSelection(
   editor: core.IDomEditor,
@@ -187,37 +181,13 @@ describe('Table Module Insert Col Menu', () => {
     jest.spyOn(core.DomEditor, 'findPath').mockReturnValue([0, 1])
     const insertNodesFn = jest.fn()
     jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
-    mockedUtils.filledMatrix.mockImplementation(() => {
-      return [
-        [
-          [
-            [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 0]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
-          ],
-          [
-            [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 1]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
-          ],
-        ],
-        [
-          [
-            [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 0]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
-          ],
-          [
-            [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 1]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
-          ],
-        ],
-      ]
-    })
 
     insertColMenu.exec(editor, '')
 
     expect(insertNodesFn).toBeCalledWith(
       editor,
-      { type: 'table-cell', children: [{ text: '' }], hidden: false },
-      { at: [0, 0, 0] }
+      { type: 'table-cell', children: [{ text: '' }] },
+      { at: [0, 1] }
     )
   })
 })

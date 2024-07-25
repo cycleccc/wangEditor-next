@@ -59,7 +59,7 @@ describe('TableModule module', () => {
         .mockReturnValueOnce({ type: 'table', children: [{ text: '' }] } as Ancestor)
 
       const res = tableCellToHtmlConf.elemToHtml(element, '<span>123</span>')
-      expect(res).toBe('<td colSpan="1" rowSpan="1" width="auto" style=""><span>123</span></td>')
+      expect(res).toBe('<td colSpan="1" rowSpan="1" width="auto"><span>123</span></td>')
     })
 
     test('tableRowToHtmlConf should return object that include "type" and "elemToHtml" property', () => {
@@ -87,9 +87,7 @@ describe('TableModule module', () => {
         children: [],
       }
       const res = tableToHtmlConf.elemToHtml(element, '<tr><td>123</td></tr>')
-      expect(res).toBe(
-        '<table style="width: auto;table-layout: fixed;"><tbody><tr><td>123</td></tr></tbody></table>'
-      )
+      expect(res).toBe('<table style="width: auto;"><tbody><tr><td>123</td></tr></tbody></table>')
     })
 
     test('tableToHtmlConf should return html table string with full width style if element is set fullWith value true', () => {
@@ -99,9 +97,7 @@ describe('TableModule module', () => {
         children: [],
       }
       const res = tableToHtmlConf.elemToHtml(element, '<tr><td>123</td></tr>')
-      expect(res).toBe(
-        '<table style="width: 100%;table-layout: fixed;"><tbody><tr><td>123</td></tr></tbody></table>'
-      )
+      expect(res).toBe('<table style="width: 100%;"><tbody><tr><td>123</td></tr></tbody></table>')
     })
   })
 })

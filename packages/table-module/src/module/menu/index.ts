@@ -11,8 +11,6 @@ import InsertCol from './InsertCol'
 import DeleteCol from './DeleteCol'
 import TableHander from './TableHeader'
 import FullWidth from './FullWidth'
-import MergeCell from './MergeCell'
-import SplitCell from './SplitCell'
 
 export const insertTableMenuConf = {
   key: 'insertTable',
@@ -67,20 +65,5 @@ export const tableFullWidthMenuConf = {
   key: 'tableFullWidth',
   factory() {
     return new FullWidth()
-  },
-}
-
-/** Meger / Split conf */
-export const mergeTableCellConf = {
-  key: 'mergeTableCell',
-  factory() {
-    return new MergeCell()
-  },
-}
-
-export const splitTableCellConf = {
-  key: 'splitTableCell',
-  factory() {
-    return new SplitCell()
   },
 }

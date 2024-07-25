@@ -8,84 +8,23 @@
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
-    position: relative;
   }
 
   table {
     border-collapse: collapse;
-    table-layout: fixed;
 
-    td,
-    th {
+    td,th {
       border: 1px solid @textarea-border-color;
       padding: 3px 5px;
       min-width: 30px;
       text-align: left;
       line-height: 1.5;
-      /* 强制换行，table column 宽度必须拖动增大 */
-      overflow: hidden;
-      overflow-wrap: break-word;
-      word-break: break-all;
-      white-space: pre-wrap;
     }
-
     th {
       background-color: @textarea-slight-bg-color;
       text-align: center;
       font-weight: bold;
     }
-
-    /* 选区拖影 */
-    td.w-e-selected,
-    th.w-e-selected {
-      background-color: rgba(20, 86, 240, 0.18);
-    }
-  }
-
-  /* 干掉 Chrome 默认选区样式*/
-  table.table-selection-none *::selection {
-    background: none;
-  }
-
-  /* 拖动 Style */
-  .column-resizer {
-    position: absolute;
-    display: flex;
-    top: 10px;
-    left: 11px;
-    width: 0;
-    height: 0;
-    z-index: 1;
-
-    .column-resizer-item {
-      position: relative;
-    }
-  }
-
-  .resizer-line-hotzone {
-    cursor: col-resize;
-    position: absolute;
-    width: 10px;
-    right: -3px;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .2s ease, visibility .2s ease;
-
-    .resizer-line {
-      height: 100%;
-      width: 2px;
-      margin-left: 5px;
-      background: rgba(20, 86, 240, 0.8);
-      user-select: none;
-    }
-  }
-
-  .resizer-line-hotzone.visible {
-    visibility: visible;
-  }
-
-  .resizer-line-hotzone.highlight {
-    opacity: 1;
   }
 }
 
@@ -96,15 +35,6 @@
 
   table {
     border-collapse: collapse;
-    table-layout: fixed;
-  }
-
-  th,
-  td {
-    overflow: hidden;
-    overflow-wrap: break-word;
-    word-break: break-all;
-    white-space: pre-wrap;
   }
 
   td {
@@ -114,7 +44,6 @@
     height: 15px;
     cursor: pointer;
   }
-
   td.active {
     background-color: @toolbar-active-bg-color;
   }
