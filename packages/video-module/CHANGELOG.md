@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2-alpha.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.1...@wangeditor-next/video-module@1.3.2-alpha.0) (2024-07-25)
+
+
+### Bug Fixes
+
+* **video module:** edit size style ([a543684](https://github.com/cycleccc/wangEditor/commit/a5436842b6f84ca02788f6f4f754d07c492b3f49))
+
+
+
+
+
 ## [1.3.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.0...@wangeditor-next/video-module@1.3.1) (2024-07-23)
 
 

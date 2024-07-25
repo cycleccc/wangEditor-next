@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7-alpha.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.6...@wangeditor-next/table-module@1.3.7-alpha.0) (2024-07-25)
+
+
+### Reverts
+
+* delete table merge ([6fb35be](https://github.com/cycleccc/wangEditor/commit/6fb35be5b48f3fbe9bcd52cb3e401b36d3bef52d))
+
+
+
+
+
 ## [1.2.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.2.0...@wangeditor-next/table-module@1.2.1) (2024-06-22)
 
 **Note:** Version bump only for package @wangeditor-next/table-module
