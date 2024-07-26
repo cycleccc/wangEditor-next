@@ -3,14 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.1.4-alpha.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.3...@wangeditor-next/list-module@1.1.4-alpha.0) (2024-07-25)
-
-**Note:** Version bump only for package @wangeditor-next/list-module
-
-
-
-
-
 ## [1.1.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.1...@wangeditor-next/list-module@1.1.3) (2024-07-15)
 
 
