@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.4-alpha.0...@wangeditor-next/list-module@1.1.4) (2024-07-27)
+
+
+### Reverts
+
+* Revert "chore(release): publish" ([64b047f](https://github.com/cycleccc/wangEditor/commit/64b047f9ec1ff499d5ca6c6063f410f49fd779ba))
+
+
+
+
+
 ## [1.1.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.1...@wangeditor-next/list-module@1.1.3) (2024-07-15)
 
 

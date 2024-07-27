@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.12](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.12-alpha.0...@wangeditor-next/editor@5.3.12) (2024-07-27)
+
+
+### Reverts
+
+* Revert "chore(release): publish" ([64b047f](https://github.com/cycleccc/wangEditor/commit/64b047f9ec1ff499d5ca6c6063f410f49fd779ba))
+
+
+
+
+
 ## [5.3.12-alpha.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.12-alpha.0...@wangeditor-next/editor@5.3.12-alpha.1) (2024-07-25)
 
 **Note:** Version bump only for package @wangeditor-next/editor

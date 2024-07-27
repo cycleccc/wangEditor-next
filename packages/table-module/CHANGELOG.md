@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.6...@wangeditor-next/table-module@1.3.7) (2024-07-27)
+
+
+### Bug Fixes
+
+* sethtml error ([cf3f066](https://github.com/cycleccc/wangEditor/commit/cf3f066aed15a72db2051fb832fd0f68811cd3c9))
+
+
+
+
+
 ## [1.3.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.4...@wangeditor-next/table-module@1.3.6) (2024-07-21)
 
 
