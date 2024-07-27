@@ -45,9 +45,6 @@ export default async function (
   if (parsedSrc.trim().indexOf('<iframe ') !== 0) {
     parsedSrc = replaceSymbols(parsedSrc)
   }
-  if (DomEditor.isSelectedEmptyParagraph(editor)) {
-    Transforms.removeNodes(editor, { mode: 'highest' })
-  }
 
   // 新建一个 video node
   const video: VideoElement = {
@@ -64,6 +61,9 @@ export default async function (
   // 插入视频
   // 不使用此方式会比正常的选区选取先执行
   Promise.resolve().then(() => {
+    if (DomEditor.isSelectedEmptyParagraph(editor)) {
+      Transforms.removeNodes(editor, { mode: 'highest' })
+    }
     Transforms.insertNodes(editor, video)
   })
 
