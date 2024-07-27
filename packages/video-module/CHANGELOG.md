@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.2...@wangeditor-next/video-module@1.3.3) (2024-07-27)
+
+
+### Bug Fixes
+
+* **video module:** sethtml error ([3a0dfde](https://github.com/cycleccc/wangEditor/commit/3a0dfde56645d773117bb67c6068948b148c7b82))
+
+
+
+
+
 ## [1.3.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.2-alpha.0...@wangeditor-next/video-module@1.3.2) (2024-07-27)
 
 

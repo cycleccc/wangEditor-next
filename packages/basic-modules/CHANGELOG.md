@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.5...@wangeditor-next/basic-modules@1.3.6) (2024-07-27)
+
+
+### Bug Fixes
+
+* **divider table:** delete empty paragraph ([0df585e](https://github.com/cycleccc/wangEditor/commit/0df585ef4fdf19f4b4f3207c281e53d7cd7af6bb))
+
+
+
+
+
 ## [1.3.5](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.3...@wangeditor-next/basic-modules@1.3.5) (2024-07-21)
 
 
