@@ -44,6 +44,10 @@ class InsertDividerMenu implements IButtonMenu {
       children: [{ text: '' }], // 【注意】void node 需要一个空 text 作为 children
     }
 
+    // 如果当前是空 p ，则删除该 p
+    if (DomEditor.isSelectedEmptyParagraph(editor)) {
+      Transforms.removeNodes(editor, { mode: 'highest' })
+    }
     Transforms.insertNodes(editor, node, { mode: 'highest' })
   }
 }
