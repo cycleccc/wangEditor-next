@@ -27,6 +27,17 @@ describe('list plugin test', () => {
   })
 
   it('insert delete - decrease level', () => {
+    // 没有选区
+    let emptyEditor = createEditor()
+    emptyEditor = withList(emptyEditor) // 使用插件
+    expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
+
+    //没有 list
+    emptyEditor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+    emptyEditor.deleteBackward('character')
+    expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
+
+    //单个 list
     const listItem = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
     let editor = createEditor({
       content: [listItem],
@@ -41,6 +52,21 @@ describe('list plugin test', () => {
         level: 0, // 减少 level
       },
     ])
+
+    // 选区为 expanded
+    editor.select([]) // 全选
+    editor.deleteForward('character') // delete
+    expect(editor.children).toEqual([
+      {
+        ...listItem,
+        level: 0,
+      },
+    ])
+
+    // 删除list变为空行
+    editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+    editor.deleteBackward('character')
+    expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
   })
 
   it('兼容之前的 JSON 格式', () => {
