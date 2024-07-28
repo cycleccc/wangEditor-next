@@ -69,6 +69,26 @@ describe('list plugin test', () => {
     expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
   })
 
+  it('insert enter - increase level', () => {
+    //没有 list
+    let emptyEditor = createEditor()
+    emptyEditor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+    emptyEditor.insertBreak()
+    expect(emptyEditor.children).toEqual([
+      { type: 'paragraph', children: [{ text: '' }] },
+      { type: 'paragraph', children: [{ text: '' }] },
+    ])
+    const listItem = { type: 'list-item', children: [{ text: '' }] }
+    let editor = createEditor({
+      content: [listItem],
+    })
+    editor = withList(editor) // 使用插件
+    editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+
+    editor.insertBreak()
+    expect(editor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
+  })
+
   it('兼容之前的 JSON 格式', () => {
     const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
     let editor = createEditor({
