@@ -69,7 +69,7 @@ describe('list plugin test', () => {
     expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
   })
 
-  it('insert enter - increase level', () => {
+  it('insert enter - empty', () => {
     //没有 list
     let emptyEditor = createEditor()
     emptyEditor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
@@ -78,6 +78,36 @@ describe('list plugin test', () => {
       { type: 'paragraph', children: [{ text: '' }] },
       { type: 'paragraph', children: [{ text: '' }] },
     ])
+  })
+
+  it('insert enter - delete empty list', () => {
+    const listItem = { type: 'list-item', children: [{ text: '' }] }
+    let editor = createEditor({
+      content: [listItem],
+    })
+    editor = withList(editor) // 使用插件
+    editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+
+    editor.insertBreak()
+    expect(editor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
+  })
+
+  it('insert enter - wraps around', () => {
+    const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
+    let editor = createEditor({
+      content: [listItem],
+    })
+    editor = withList(editor) // 使用插件
+    editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+
+    editor.insertBreak()
+    expect(editor.children).toEqual([
+      { type: 'list-item', children: [{ text: '' }] },
+      { type: 'list-item', children: [{ text: 'hello' }] },
+    ])
+  })
+
+  it('insert enter - delete empty list', () => {
     const listItem = { type: 'list-item', children: [{ text: '' }] }
     let editor = createEditor({
       content: [listItem],
