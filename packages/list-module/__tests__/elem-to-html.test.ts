@@ -119,30 +119,29 @@ describe('module elem-to-html complex list', () => {
   ELEM_TO_EDITOR.set(lastTextHtml, editor)
 
   test('get container tag mumber', () => {
-    const html = editor.getHtml()
-    const childrenHtml = ''
+    const childrenHtml = '<span>hello</span>'
     const { elemToHtml } = listItemToHtmlConf
     const unOrderedHtml1 = elemToHtml(unOrderedElem1, childrenHtml)
     expect(unOrderedHtml1).toEqual({
-      html: '<li></li>',
+      html: '<li><span>hello</span></li>',
       prefix: '<ul>',
       suffix: '',
     })
     const unOrderedHtml2 = elemToHtml(unOrderedElem2, childrenHtml)
     expect(unOrderedHtml2).toEqual({
-      html: '<li></li>',
+      html: '<li><span>hello</span></li>',
       prefix: '<ul>',
       suffix: '</ul>',
     })
     const orderedHtml1 = elemToHtml(orderedElem1, childrenHtml)
     expect(orderedHtml1).toEqual({
-      html: '<li></li>',
+      html: '<li><span>hello</span></li>',
       prefix: '<ol>',
       suffix: '</ol></ul>',
     })
     const orderedHtml2 = elemToHtml(orderedElem2, childrenHtml)
     expect(orderedHtml2).toEqual({
-      html: '<li></li>',
+      html: '<li><span>hello</span></li>',
       prefix: '<ol>',
       suffix: '</ol>',
     })
