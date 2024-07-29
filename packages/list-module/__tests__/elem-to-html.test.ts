@@ -111,12 +111,40 @@ describe('module elem-to-html complex list', () => {
   })
 
   // elem 绑定 editor
+  ELEM_TO_EDITOR.set(firstTextHtml, editor)
   ELEM_TO_EDITOR.set(unOrderedElem1, editor)
+  ELEM_TO_EDITOR.set(unOrderedElem2, editor)
+  ELEM_TO_EDITOR.set(orderedElem1, editor)
+  ELEM_TO_EDITOR.set(orderedElem2, editor)
+  ELEM_TO_EDITOR.set(lastTextHtml, editor)
 
-  test('complex list', () => {
+  test('get container tag mumber', () => {
     const html = editor.getHtml()
-    expect(html).toEqual(
-      '<p>hello</p><ul><li></li><ul><li></li></ul><li></li><ol><li></li></ol></ul><ol><li></li></ol><p>world</p>'
-    )
+    const childrenHtml = ''
+    const { elemToHtml } = listItemToHtmlConf
+    const unOrderedHtml1 = elemToHtml(unOrderedElem1, childrenHtml)
+    expect(unOrderedHtml1).toEqual({
+      html: '<li></li>',
+      prefix: '<ul>',
+      suffix: '',
+    })
+    const unOrderedHtml2 = elemToHtml(unOrderedElem2, childrenHtml)
+    expect(unOrderedHtml2).toEqual({
+      html: '<li></li>',
+      prefix: '<ul>',
+      suffix: '</ul>',
+    })
+    const orderedHtml1 = elemToHtml(orderedElem1, childrenHtml)
+    expect(orderedHtml1).toEqual({
+      html: '<li></li>',
+      prefix: '<ol>',
+      suffix: '</ol></ul>',
+    })
+    const orderedHtml2 = elemToHtml(orderedElem2, childrenHtml)
+    expect(orderedHtml2).toEqual({
+      html: '<li></li>',
+      prefix: '<ol>',
+      suffix: '</ol>',
+    })
   })
 })
