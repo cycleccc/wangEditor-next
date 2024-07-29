@@ -9,20 +9,59 @@ import createEditor from '../../../tests/utils/create-editor'
 describe('list plugin test', () => {
   it('insert tab - increase level', () => {
     const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
+    const listItem1 = { type: 'list-item', children: [{ text: 'world' }] }
+    const textItem = { type: 'paragraph', children: [{ text: '' }] }
     let editor = createEditor({
-      content: [listItem],
+      content: [listItem, listItem],
+    })
+    let textEditor = createEditor({
+      content: [textItem],
     })
     editor = withList(editor) // 使用插件
-    editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+    textEditor = withList(textEditor) // 使用插件
+
+    // 测试没有选区
+    textEditor.handleTab() // tab
+
+    // 测试选区没有 list-item
+    textEditor.select({ path: [0, 0], offset: 0 })
+    textEditor.handleTab() // tab
+    const textChildren = textEditor.children
+    expect(textChildren).toEqual([{ type: 'paragraph', children: [{ text: '    ' }] }])
+
+    editor.select({ path: [1, 0], offset: 0 }) // 选中 list-item 开头
 
     editor.handleTab() // tab
 
-    const children = editor.children
+    let children = editor.children
+    expect(children[1]).toEqual({
+      ...listItem,
+      level: 1, // 增加 level
+    })
+
+    // 测试全选且只有一个 list-item
+    editor = createEditor({
+      content: [listItem],
+    })
+    editor = withList(editor) // 使用插件
+
+    editor.select([]) // 全选
+    editor.handleTab() // tab
+    children = editor.children
+    expect(children).toEqual([{ children: [{ text: '    ' }], type: 'list-item' }])
+
+    // 测试全选且有多个 list-item
+    editor = createEditor({
+      content: [listItem, listItem1],
+    })
+    editor = withList(editor) // 使用插件
+
+    editor.select([]) // 全选
+    editor.handleTab() // tab
+    children = editor.children
     expect(children).toEqual([
-      {
-        ...listItem,
-        level: 1, // 增加 level
-      },
+      { children: [{ text: 'hello' }], level: 1, type: 'list-item' },
+      { children: [{ text: 'world' }], level: 1, type: 'list-item' },
     ])
   })
 
