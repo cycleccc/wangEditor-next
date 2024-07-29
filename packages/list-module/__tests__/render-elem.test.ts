@@ -63,4 +63,16 @@ describe('list module - render elem', () => {
     const prefixVnode = vnode.children[0] || {}
     expect(prefixVnode.text).toBe('▪') // unOrdered list-item 点号
   })
+
+  it('render two same leveled orderd list item elem', () => {
+    const orderedItem = { type: 'list-item', ordered: true, children: [{ text: '' }] }
+    const editor = createEditor({
+      content: [orderedItem, orderedItem],
+    })
+    const vnode: any = renderListItemConf.renderElem(orderedItem, null, editor)
+    expect(vnode.sel).toBe('div') // render-elem 使用 <div> 模拟 <li>
+
+    const prefixVnode = vnode.children[0] || {}
+    expect(prefixVnode.text).toBe('2.') // ordered list-item 有序号
+  })
 })
