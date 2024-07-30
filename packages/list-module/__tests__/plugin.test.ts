@@ -222,7 +222,9 @@ describe('list plugin test', () => {
         },
       ],
     })
+    const bulletedList = { type: 'bulleted-list', children: [listItem] }
     editor = withList(editor) // 使用插件
+    editor.insertNode(bulletedList)
 
     expect(editor.children).toEqual([listItem])
   })
