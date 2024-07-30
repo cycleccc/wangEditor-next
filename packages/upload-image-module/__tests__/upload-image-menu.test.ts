@@ -6,6 +6,8 @@ import uploadImages from '../src/module/upload-images'
 let editor: IDomEditor
 let menu: UploadImageMenu
 
+jest.mock('../src/module/upload-images', () => jest.fn())
+
 describe('Upload image menu', () => {
   beforeEach(() => {
     editor = createEditor()
@@ -43,10 +45,6 @@ describe('Upload image menu', () => {
     expect(jestFn).toBeCalled()
   })
 
-  jest.mock('../src/module/upload-images', () => ({
-    uploadImages: jest.fn(),
-  }))
-
   test('UploadImageMenu invoke exec should insert hidden input element to body', () => {
     const editor = createEditor({
       config: {
@@ -77,7 +75,6 @@ describe('Upload image menu', () => {
     inputFile.dispatchEvent(fileInputEvent)
 
     // 检查 uploadImages 是否被调用
-
-    // expect(uploadImages).toHaveBeenCalledWith(editor, files)
+    expect(uploadImages).toHaveBeenCalled()
   })
 })
