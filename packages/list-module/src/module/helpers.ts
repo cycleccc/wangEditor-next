@@ -33,7 +33,7 @@ export function getBrotherListNodeByLevel(
     const brotherEntry = Editor.node(editor, brotherPath)
 
     if (!brotherEntry) {
-      return null // 没有找到有效的前一个 list 节点
+      return null // 没有找到有效的前一个节点
     }
 
     const [brotherElem] = brotherEntry
