@@ -68,9 +68,10 @@ describe('list plugin test', () => {
   })
 
   it('insert delete - decrease level', () => {
-    // 没有选区
+    // 测试没有选区
     let emptyEditor = createEditor()
     emptyEditor = withList(emptyEditor) // 使用插件
+    emptyEditor.deleteBackward('character')
     expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
 
     //没有 list
@@ -85,7 +86,6 @@ describe('list plugin test', () => {
     })
     editor = withList(editor) // 使用插件
     editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
-
     editor.deleteBackward('character') // delete
     expect(editor.children).toEqual([
       {
@@ -96,7 +96,7 @@ describe('list plugin test', () => {
 
     // 选区为 expanded
     editor.select([]) // 全选
-    editor.deleteForward('character') // delete
+    editor.deleteBackward('character') // delete
     expect(editor.children).toEqual([
       {
         ...listItem,
@@ -119,6 +119,43 @@ describe('list plugin test', () => {
       { type: 'paragraph', children: [{ text: '' }] },
       { type: 'paragraph', children: [{ text: '' }] },
     ])
+  })
+
+  it('insert delete - decrease level multi list', () => {
+    //测试没有同级 list
+    const textItem = { type: 'paragraph', children: [{ text: '' }] }
+    const listItem = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
+    const listItem1 = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
+    let editor = createEditor({
+      content: [textItem, listItem, listItem1],
+    })
+    editor = withList(editor) // 使用插件
+    editor.select({ path: [2, 0], offset: 0 }) // 选中 list-item 开头
+    editor.deleteBackward('character') // delete
+    expect(editor.children[2]).toEqual({
+      ...listItem,
+      level: 0, // 减少 level
+    })
+
+    //测试有同级 list
+    const listOrderedItem = { type: 'list-item', ordered: true, children: [{ text: '' }] }
+    const listUnOrderedItem = {
+      type: 'list-item',
+      children: [{ text: 'hello' }],
+      ordered: false,
+      level: 1,
+    }
+    editor = createEditor({
+      content: [listOrderedItem, listUnOrderedItem],
+    })
+    editor = withList(editor) // 使用插件
+    editor.select({ path: [1, 0], offset: 0 }) // 选中 list-item 开头
+    editor.deleteBackward('character') // delete
+    expect(editor.children[1]).toEqual({
+      ...listUnOrderedItem,
+      ordered: true, // 更改 ordered
+      level: 0, // 减少 level
+    })
   })
 
   it('insert enter - delete empty list', () => {
