@@ -88,4 +88,53 @@ describe('list - parse html', () => {
     const listElems = parseListHtmlConf.parseElemHtml($ol[0], children, editor)
     expect(listElems.length).toBe(4) // parse list 时，会把输出的结果（数组）flatten ，把嵌套的平铺开
   })
+
+  it('parse isBlock chidren', () => {
+    const $ul = $('<ul></ul>')
+    const $ol = $('<ol></ol>')
+    const $li = $('<li></li>')
+    $ul.append($ol)
+    $ol.append($li)
+    const children = [
+      {
+        type: 'image',
+        src: 'https://www.wangeditor.com/imgs/logo.png',
+        children: [{ text: '' }],
+      },
+    ]
+
+    const elem = parseItemHtmlConf.parseElemHtml($li[0], children, editor)
+    expect(elem).toEqual({
+      type: 'list-item',
+      ordered: true,
+      level: 1,
+      children,
+    })
+  })
+
+  it('parse invalid chidren', () => {
+    const $ul = $('<ul></ul>')
+    const $ol = $('<ol></ol>')
+    const $li = $('<li></li>')
+    $ul.append($ol)
+    $ol.append($li)
+    const children = [
+      {
+        type: 'div',
+        children: [{ text: '' }],
+      },
+    ]
+
+    const elem = parseItemHtmlConf.parseElemHtml($li[0], children, editor)
+    expect(elem).toEqual({
+      type: 'list-item',
+      ordered: true,
+      level: 1,
+      children: [
+        {
+          text: '',
+        },
+      ],
+    })
+  })
 })
