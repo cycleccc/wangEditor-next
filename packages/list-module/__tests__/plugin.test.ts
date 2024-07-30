@@ -9,7 +9,6 @@ import createEditor from '../../../tests/utils/create-editor'
 describe('list plugin test', () => {
   it('insert tab - increase level', () => {
     const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
-    const listItem1 = { type: 'list-item', children: [{ text: 'world' }] }
     const textItem = { type: 'paragraph', children: [{ text: '' }] }
     let editor = createEditor({
       content: [listItem, listItem],
@@ -38,27 +37,30 @@ describe('list plugin test', () => {
       ...listItem,
       level: 1, // 增加 level
     })
+  })
 
-    // 测试全选且只有一个 list-item
-    editor = createEditor({
+  it('insert tab - select all and one list', () => {
+    const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
+    let editor = createEditor({
       content: [listItem],
     })
     editor = withList(editor) // 使用插件
-
     editor.select([]) // 全选
     editor.handleTab() // tab
-    children = editor.children
+    const children = editor.children
     expect(children).toEqual([{ children: [{ text: '    ' }], type: 'list-item' }])
+  })
 
-    // 测试全选且有多个 list-item
-    editor = createEditor({
+  it('insert tab - select all and multi list', () => {
+    const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
+    const listItem1 = { type: 'list-item', children: [{ text: 'world' }] }
+    let editor = createEditor({
       content: [listItem, listItem1],
     })
     editor = withList(editor) // 使用插件
-
     editor.select([]) // 全选
     editor.handleTab() // tab
-    children = editor.children
+    const children = editor.children
     expect(children).toEqual([
       { children: [{ text: 'hello' }], level: 1, type: 'list-item' },
       { children: [{ text: 'world' }], level: 1, type: 'list-item' },
