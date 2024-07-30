@@ -40,9 +40,23 @@ describe('list plugin test', () => {
   })
 
   it('insert tab - select all and one list', () => {
+    // 全选单个 list-item
     const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
     let editor = createEditor({
       content: [listItem],
+    })
+    editor = withList(editor) // 使用插件
+    editor.select([]) // 全选
+    editor.handleTab() // tab
+    const children = editor.children
+    expect(children).toEqual([{ children: [{ text: '    ' }], type: 'list-item' }])
+  })
+  it('insert tab - select all and other item', () => {
+    // 全选 包含其它元素
+    const textItem = { type: 'paragraph', children: [{ text: '' }] }
+    const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
+    let editor = createEditor({
+      content: [textItem, listItem],
     })
     editor = withList(editor) // 使用插件
     editor.select([]) // 全选
