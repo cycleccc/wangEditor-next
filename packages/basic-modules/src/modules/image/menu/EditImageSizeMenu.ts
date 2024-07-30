@@ -99,6 +99,7 @@ class EditorImageSizeMenu implements IModalMenu {
 
         const isPercentage = (value: string) => /^\d+(\.\d+)?%$/.test(value) // 检查是否为合法的百分比字符串
         const isNumeric = (value: string) => /^\d+(\.\d+)?$/.test(value) // 检查是否为合法的数字
+        const isPixelValue = (value: string) => /^\d+(\.\d+)?px$/.test(value) // 检查是否为合法的 px 值
 
         let width = 'auto'
         let height = 'auto'
@@ -107,12 +108,16 @@ class EditorImageSizeMenu implements IModalMenu {
           width = rawWidth
         } else if (isNumeric(rawWidth)) {
           width = parseInt(rawWidth) + 'px'
+        } else if (isPixelValue(rawWidth)) {
+          width = rawWidth
         }
 
         if (isPercentage(rawHeight)) {
           height = rawHeight
         } else if (isNumeric(rawHeight)) {
           height = parseInt(rawHeight) + 'px'
+        } else if (isPixelValue(rawHeight)) {
+          height = rawHeight
         }
 
         const { style = {} } = imageNode as ImageElement
