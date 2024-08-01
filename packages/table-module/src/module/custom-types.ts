@@ -6,6 +6,14 @@
 import { Text } from 'slate'
 
 //【注意】需要把自定义的 Element 引入到最外层的 custom-types.d.ts
+export type TableCellProperty = {
+  /** 用于设置单元格属性 */
+  backgroundColor?: string // 背景色
+  borderWidth?: string // 边框宽度
+  borderStyle?: string // 边框样式
+  borderColor?: string // 边框颜色
+  textAlign?: string // 对齐方式
+}
 
 export type TableCellElement = {
   type: 'table-cell'
@@ -17,7 +25,7 @@ export type TableCellElement = {
 
   /** 用于设置单元格的 display 属性 */
   hidden?: boolean
-}
+} & TableCellProperty
 
 export type TableRowElement = {
   type: 'table-row'
