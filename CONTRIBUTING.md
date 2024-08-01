@@ -17,9 +17,29 @@
 我们非常欢迎Pull Request！
 
 - **克隆仓库**：Fork并克隆项目到本地。
-- **创建分支**：基于开发分支`dev`创建一个新的分支。
-- **编写代码**：确保您的代码遵循项目中的编码规范。
+- **创建分支**：基于主分支`master`创建一个新的分支。
+- **编写代码**：确保您的代码遵循项目中的编码规范(清晰的注释、空行、lint 校验)。
 - **提交更改**：提交您的更改，并确保提交信息清晰明了。
+  
+   commit 格式
+  
+   type [WIP, feat, fix, refactor, release, docs, test, perf, chore, workflow, style, revert]
+
+   commit 模版如下
+
+   ```
+   type(xx module): 简要标题
+   (此处为空行)
+   详细描述
+   相关 issue 链接
+   ```
+   样例
+   ```
+   fix(img link): image incorrectly converted to link
+   
+   dragging img elements from the page into the editor converts them to links
+   https://github.com/cycleccc/wangEditor-next/issues/52
+   ```
 - **Pull Request**：将您的分支推送到远程仓库，并在GitHub上发起Pull Request。
 
 ### 4. 代码审查
