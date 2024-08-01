@@ -28,6 +28,7 @@ function parseCellHtml(
 
   const colSpan = parseInt($elem.attr('colSpan') || '1')
   const rowSpan = parseInt($elem.attr('rowSpan') || '1')
+  const hidden = getStyleValue($elem, 'display') === 'none'
   const width = $elem.attr('width') || 'auto'
 
   return {
@@ -38,6 +39,7 @@ function parseCellHtml(
     width,
     // @ts-ignore
     children,
+    hidden,
   }
 }
 

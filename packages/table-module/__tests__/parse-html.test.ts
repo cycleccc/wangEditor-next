@@ -54,9 +54,10 @@ describe('table - parse html', () => {
       rowSpan: 1,
       width: 'auto',
       children: [{ text: 'hello world' }],
+      hidden: false,
     })
 
-    const $cell2 = $('<th></th>')
+    const $cell2 = $('<th style="display:none"></th>')
     const children = [{ text: 'hello ' }, { text: 'world', bold: true }]
     expect($cell2[0].matches(parseCellHtmlConf.selector)).toBeTruthy()
     expect(parseCellHtmlConf.parseElemHtml($cell2[0], children, editor)).toEqual({
@@ -66,6 +67,7 @@ describe('table - parse html', () => {
       rowSpan: 1,
       width: 'auto',
       children,
+      hidden: true,
     })
   })
 
