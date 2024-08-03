@@ -34,7 +34,7 @@ export function withSelection<T extends Editor>(editor: T) {
     })
 
     if (!fromEntry || !toEntry) {
-      // TableCursor.unselect(editor)
+      TableCursor.unselect(editor)
       return apply(op)
     }
 

@@ -172,6 +172,8 @@ export function DOMSelectionToEditor(textarea: TextArea, editor: IDomEditor) {
     IS_FOCUSED.set(editor, true)
   } else {
     IS_FOCUSED.delete(editor)
+    Transforms.deselect(editor)
+    return
   }
 
   if (!domSelection) {
