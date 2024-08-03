@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.3...@wangeditor-next/video-module@1.3.4) (2024-08-03)
+
+**Note:** Version bump only for package @wangeditor-next/video-module
+
+
+
+
+
 ## [1.3.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.2...@wangeditor-next/video-module@1.3.3) (2024-07-27)
 
 

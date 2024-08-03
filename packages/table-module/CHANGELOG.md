@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.8](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.7...@wangeditor-next/table-module@1.3.8) (2024-08-03)
+
+
+### Bug Fixes
+
+* **multi editor:** clear selection ([b7b2fe7](https://github.com/cycleccc/wangEditor/commit/b7b2fe76de7e4afd1f3370eafdf1a0d4175f22bf))
+* issues48  setHtml table error ([475fa1b](https://github.com/cycleccc/wangEditor/commit/475fa1bc9369d11810edfd5f2cbad7717b188ce3))
+
+
+
+
+
 ## [1.3.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.6...@wangeditor-next/table-module@1.3.7) (2024-07-27)
 
 

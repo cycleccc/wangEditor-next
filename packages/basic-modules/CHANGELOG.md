@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.6...@wangeditor-next/basic-modules@1.3.7) (2024-08-03)
+
+
+### Bug Fixes
+
+* **image module:** incorrect conversion ([00bdd92](https://github.com/cycleccc/wangEditor/commit/00bdd921600a0ec8b7f7c71000f6859e8378fb56))
+
+
+
+
+
 ## [1.3.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.5...@wangeditor-next/basic-modules@1.3.6) (2024-07-27)
 
 

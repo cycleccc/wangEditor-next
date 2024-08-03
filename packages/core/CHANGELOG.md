@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.5...@wangeditor-next/core@1.5.6) (2024-08-03)
+
+
+### Bug Fixes
+
+* **multi editor:** clear selection ([b7b2fe7](https://github.com/cycleccc/wangEditor/commit/b7b2fe76de7e4afd1f3370eafdf1a0d4175f22bf))
+* **UI:** delete no scroll absolute ([4a522a1](https://github.com/cycleccc/wangEditor/commit/4a522a18663e7b6da7b172f6eb3b0a98686cd0fe)), closes [/github.com/cycleccc/wangEditor-next/issues/55#issuecomment-2254190838](https://github.com//github.com/cycleccc/wangEditor-next/issues/55/issues/issuecomment-2254190838)
+
+
+### Reverts
+
+* revert core version ([48cdf16](https://github.com/cycleccc/wangEditor/commit/48cdf16efda69b553b53d10f94234d366b8ff2e9))
+
+
+
+
+
 ## [1.5.6-alpha.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.5...@wangeditor-next/core@1.5.6-alpha.0) (2024-07-25)
 
 
