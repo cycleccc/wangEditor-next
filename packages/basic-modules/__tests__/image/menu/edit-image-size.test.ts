@@ -115,6 +115,18 @@ describe('edit image size menu', () => {
 
     editor.select(startLocation)
     fireEvent.click(button)
+    // 模拟用户输入
+    widthInputId.value = '100%'
+    heightInputId.value = '30%'
+
+    editor.select(startLocation)
+    fireEvent.click(button)
+    // 模拟用户输入
+    widthInputId.value = '100px'
+    heightInputId.value = '30px'
+
+    editor.select(startLocation)
+    fireEvent.click(button)
     expect(spy).toHaveBeenCalled()
   })
 
