@@ -1,15 +1,15 @@
 /**
  * @description edit image menu test
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import { Editor } from 'slate'
 import createEditor from '../../../../../tests/utils/create-editor'
-import EditImage from '../../../src/modules/image/menu/EditImage'
+import EditImageSize from '../../../src/modules/image/menu/EditImageSizeMenu'
 import { fireEvent, waitFor } from '@testing-library/dom'
 
-describe('edit image menu', () => {
-  const menu = new EditImage()
+describe('edit image size menu', () => {
+  const menu = new EditImageSize()
   let editor: any
   let startLocation: any
 
@@ -33,6 +33,10 @@ describe('edit image menu', () => {
 
   it('is active', () => {
     expect(menu.isActive(editor)).toBeFalsy()
+  })
+
+  it('exec', async () => {
+    expect(menu.exec(editor, '')).toBeUndefined()
   })
 
   it('is disabled', () => {
@@ -79,29 +83,6 @@ describe('edit image menu', () => {
     expect((imageNode as any).src).toBe(src)
   })
 
-  it('get modal content elem', () => {
-    const imageElem = {
-      type: 'image',
-      src,
-      alt,
-      href,
-      style: { width: '100', height: '80' },
-      children: [{ text: '' }], // void node 必须包含一个空 text
-    }
-    expect(() => menu.getModalContentElem(editor)).toThrow('Not found selected image node')
-    editor.select(startLocation)
-    editor.insertNode(imageElem) // 插入图片
-    editor.select({
-      path: [0, 1, 0], // 选中图片
-      offset: 0,
-    })
-
-    const elem = menu.getModalContentElem(editor)
-    expect(elem.tagName).toBe('DIV')
-
-    // updateImage 在 helper.test.ts 中测试
-  })
-
   it('should handle button click and update image', () => {
     const imageElem = {
       type: 'image',
@@ -119,37 +100,22 @@ describe('edit image menu', () => {
       offset: 0,
     })
 
+    const spy = jest.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
     document.body.appendChild(elem)
 
     // 使用类型断言访问私有属性
-    const inputSrc = document.getElementById((menu as any).srcInputId) as HTMLInputElement
-    const inputAlt = document.getElementById((menu as any).altInputId) as HTMLInputElement
-    const inputHref = document.getElementById((menu as any).hrefInputId) as HTMLInputElement
+    const widthInputId = document.getElementById((menu as any).widthInputId) as HTMLInputElement
+    const heightInputId = document.getElementById((menu as any).heightInputId) as HTMLInputElement
     const button = document.getElementById((menu as any).buttonId) as HTMLButtonElement
 
     // 模拟用户输入
-    inputSrc.value = 'https://example.com/new-image.jpg'
-    inputAlt.value = 'new alt text'
-    inputHref.value = 'https://example.com/new-link'
-
-    // 设置 spy 监听 updateImage 方法
-    const spy = jest.spyOn(menu as any, 'updateImage')
-
-    // 模拟点击事件
-    editor.deselect()
-    fireEvent.click(button)
-
-    // 检查 updateImage 方法是否被调用
-    expect(spy).toHaveBeenCalledWith(
-      expect.any(Object), // editor 对象
-      'https://example.com/new-image.jpg',
-      'new alt text',
-      'https://example.com/new-link'
-    )
+    widthInputId.value = '100'
+    heightInputId.value = '30'
 
     editor.select(startLocation)
     fireEvent.click(button)
+    expect(spy).toHaveBeenCalled()
   })
 
   it('focus input asynchronously', async () => {
@@ -169,7 +135,7 @@ describe('edit image menu', () => {
     })
 
     menu.getModalContentElem(editor)
-    const inputSrc = document.getElementById((menu as any).srcInputId) as HTMLInputElement
+    const inputSrc = document.getElementById((menu as any).widthInputId) as HTMLInputElement
     jest.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {

@@ -42,7 +42,6 @@ class ViewImageLink implements IButtonMenu {
 
     if (!value || typeof value !== 'string') {
       throw new Error(`View image link failed, image.href is '${value}'`)
-      return
     }
 
     // 查看链接
