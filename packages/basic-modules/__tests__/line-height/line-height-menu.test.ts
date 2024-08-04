@@ -33,7 +33,9 @@ describe('line-height menu', () => {
     expect(selectedEmptyOne).toBe(true)
   })
 
-  // isActive 返回 false ，不用测试
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   it('get value', () => {
     editor.select(startLocation)
