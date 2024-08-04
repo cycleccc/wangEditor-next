@@ -28,9 +28,19 @@ about: 请大家一定要按照该模板填写，以方便我们更快复现，�
 
 ## 在线 demo
 
-<!-- 请尽量提供在线 demo （推荐以下网站,wangeditor-next 现在统一使用的 stackblitz ），帮助我们最低成本复现 bug -->
+<!-- 如官网demo无法复现可使用线上沙盒复现 （推荐以下网站,wangeditor-next 现在统一使用的 stackblitz ），帮助我们最低成本复现 bug -->
+<!-- 进入以下对应链接并fork修改，将修改后可复现的沙盒链接粘贴在此处 -->
 
-- https://stackblitz.com/
+<!--
+| HTML | [在 StackBlitz 上复现](https://stackblitz.com/edit/stackblitz-starters-xxqmwl) |
+| Vue 2 | [在 StackBlitz 上复现](https://stackblitz.com/edit/vue2-vite-starter-hkmsif) |
+| Vue 3 | [在 StackBlitz 上复现](https://stackblitz.com/edit/vue3-wangeditor-demo-8emmc7) |
+| React | [在 StackBlitz 上复现](https://stackblitz.com/edit/react-4osjqn) |
+ -->
+
+<!-- 粘贴替换为你 fork 修改后的沙盒链接 -->
+- 沙盒链接: https://stackblitz.com/@cycleccc/collections/wangeditor
+
 
 ## 最小成本的复现步骤
 
