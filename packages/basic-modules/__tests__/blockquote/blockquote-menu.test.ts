@@ -22,7 +22,9 @@ describe('blockquote menu', () => {
     startLocation = null
   })
 
-  // getValue 无逻辑，不用测试
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   it('is disabled', () => {
     editor.select(startLocation)

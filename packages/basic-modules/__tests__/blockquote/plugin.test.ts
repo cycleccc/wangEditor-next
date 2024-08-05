@@ -17,27 +17,33 @@ describe('blockquote plugin', () => {
   })
 
   it('insert break', () => {
-    expect(1).toBeTruthy()
+    // 无选区换行
+    editor.deselect()
+    editor.insertBreak()
+    let pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(1)
 
-    // TODO 该测试一直报错（找不到 blockquote path），待定处理
+    // 有选区无 blockquote 换行
     editor.select(startLocation)
-
+    editor.insertBreak()
+    pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(2)
+    editor.deleteBackward('character')
     // @ts-ignore
     Transforms.setNodes(editor, { type: 'blockquote' }) // 设置 blockquote
+    pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(0)
+    editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
+    editor.insertText('hello')
+    pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(0)
 
-    const pList1 = editor.getElemsByType('paragraph')
-    expect(pList1.length).toBe(0)
+    editor.insertBreak() // 再一次换行，生成 p
+    pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(1)
 
-    // editor.insertText('hello')
-    // console.log(11, JSON.stringify(editor.children))
-    // console.log(22, JSON.stringify(editor.selection))
-    // editor.insertBreak() // 第一次换行，内部插入 \n
-
-    // const pList2 = editor.getElemsByType('paragraph')
-    // expect(pList2.length).toBe(0)
-
-    // editor.insertBreak() // 再一次换行，生成 p
-    // const pList3 = editor.getElemsByType('paragraph')
-    // expect(pList3.length).toBe(1)
+    editor.insertBreak() // 再一次换行，无 set 记录 path , 退出 bloackquote 换行
+    pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(2)
   })
 })
