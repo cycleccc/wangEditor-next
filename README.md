@@ -8,7 +8,7 @@
 [![License][license-src]][license-href]
 [![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
 
-[English](./README-en.md) | 中文
+🌍 [English](./README-en.md) | 中文
 
 ## 介绍
 
