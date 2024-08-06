@@ -22,6 +22,10 @@ describe('blockquote menu', () => {
     startLocation = null
   })
 
+  it('get value', () => {
+    expect(menu.getValue(editor)).toBe('')
+  })
+
   it('is active', () => {
     expect(menu.isActive(editor)).toBeFalsy()
   })
