@@ -68,6 +68,35 @@ describe('code-block plugin', () => {
     expect(pList2.length).toBe(2)
   })
 
+  it('insert break - norm insertText', () => {
+    // 无 codeNode 换行
+    editor.deselect()
+    editor.insertBreak()
+    const codeElem = {
+      type: 'code',
+      children: [{ text: 'var' }],
+    }
+    const preElem = {
+      type: 'pre',
+      children: [codeElem],
+    }
+    editor.select(startLocation)
+    editor.insertNode(preElem) // 插入 code-block
+
+    // code-block 前后会自动生成两个 p
+    const pList1 = editor.getElemsByTypePrefix('paragraph')
+    expect(pList1.length).toBe(2)
+
+    editor.select({
+      path: [1, 0, 0], // 选中 code-block
+      offset: 3,
+    })
+
+    // 换行都在 code-block 内部
+    editor.insertBreak()
+    expect(editor.getText()).toBe('\nvar\n\n')
+  })
+
   it('insert data', () => {
     const data = new MyDataTransfer()
     data.setData('text/plain', ' hello')
