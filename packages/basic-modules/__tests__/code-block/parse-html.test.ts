@@ -56,7 +56,7 @@ describe('code block - parse html', () => {
     expect($pre[0].matches(parsePreHtmlConf.selector)).toBeTruthy()
 
     // parse
-    const res = parsePreHtmlConf.parseElemHtml($pre[0], children, editor)
+    let res = parsePreHtmlConf.parseElemHtml($pre[0], children, editor)
     expect(res).toEqual({
       type: 'pre',
       children: [
@@ -64,6 +64,18 @@ describe('code block - parse html', () => {
           type: 'code',
           language: '',
           children: [{ text: 'var a = 100;' }],
+        },
+      ],
+    })
+
+    res = parsePreHtmlConf.parseElemHtml($pre[0], [], editor)
+    expect(res).toEqual({
+      type: 'pre',
+      children: [
+        {
+          type: 'code',
+          language: '',
+          children: [{ text: '' }],
         },
       ],
     })

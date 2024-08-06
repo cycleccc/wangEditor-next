@@ -24,7 +24,7 @@ describe('code-block plugin', () => {
 
   const codeElem = {
     type: 'code',
-    children: [{ text: 'var' }],
+    children: [{ text: ' var' }],
   }
   const preElem = {
     type: 'pre',
@@ -42,6 +42,10 @@ describe('code-block plugin', () => {
   })
 
   it('insert break', () => {
+    // 无 codeNode 换行
+    editor.deselect()
+    editor.insertBreak()
+
     editor.select(startLocation)
     editor.insertNode(preElem) // 插入 code-block
 
@@ -57,8 +61,7 @@ describe('code-block plugin', () => {
     // 换行都在 code-block 内部
     editor.insertBreak()
     editor.insertBreak()
-    editor.insertBreak()
-    expect(editor.getText()).toBe('\nvar\n\n\n\n')
+    expect(editor.getText()).toBe('\n va\n \n r\n')
 
     // 不会再生成新的 p
     const pList2 = editor.getElemsByTypePrefix('paragraph')
@@ -66,6 +69,13 @@ describe('code-block plugin', () => {
   })
 
   it('insert data', () => {
+    const data = new MyDataTransfer()
+    data.setData('text/plain', ' hello')
+
+    // 无 codeNode 换行
+    editor.deselect()
+    editor.insertData(data)
+
     editor.select(startLocation)
     editor.insertNode(preElem) // 插入 code node
     editor.select({
@@ -73,11 +83,8 @@ describe('code-block plugin', () => {
       offset: 3,
     })
 
-    const data = new MyDataTransfer()
-    data.setData('text/plain', ' hello')
-
     editor.insertData(data)
-    expect(editor.getText()).toBe('\nvar hello\n')
+    expect(editor.getText()).toBe('\n va hellor\n')
   })
 
   it('normalizeNode - code node 不能是顶级元素，否则替换为 p', () => {
@@ -97,5 +104,16 @@ describe('code-block plugin', () => {
 
     const preList = editor.getElemsByTypePrefix('pre')
     expect(preList.length).toBe(1)
+  })
+
+  it('normalizeNode - pre 下面必须是 code', () => {
+    editor.select(startLocation)
+    editor.insertNode({ type: 'pre', children: [{ type: 'text', children: [{ text: 'var' }] }] })
+
+    const pList = editor.getElemsByTypePrefix('paragraph')
+    expect(pList.length).toBe(2)
+
+    const preList = editor.getElemsByTypePrefix('pre')
+    expect(preList.length).toBe(0)
   })
 })
