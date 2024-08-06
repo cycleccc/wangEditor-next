@@ -11,7 +11,17 @@ describe('color - text style to html', () => {
     const bgColor = 'rgb(204, 204, 204)'
     const textNode = { text: '', color, bgColor }
 
-    const html = styleToHtml(textNode, '<span>hello</span>')
+    let html = styleToHtml(textNode, '<span>hello</span>')
     expect(html).toBe(`<span style="color: ${color}; background-color: ${bgColor};">hello</span>`)
+
+    // 测试纯文本
+    html = styleToHtml(textNode, 'hello')
+    expect(html).toBe(`<span style="color: ${color}; background-color: ${bgColor};">hello</span>`)
+
+    // 测试 非 span 标签
+    html = styleToHtml(textNode, '<p>hello</p>')
+    expect(html).toBe(
+      `<span style="color: ${color}; background-color: ${bgColor};"><p>hello</p></span>`
+    )
   })
 })
