@@ -91,8 +91,11 @@ describe('color menus', () => {
   it('should handle click event and remove mark from editor', () => {
     const menu = new ColorMenu()
     const textEditor = createEditor({
-      content: [{ type: 'paragraph', children: [{ text: 'hello', color: '#000' }] }],
+      content: [{ type: 'paragraph', children: [{ text: 'hello', color: 'rgb(120, 6, 80)' }] }],
     })
+
+    textEditor.select([])
+    editor.addMark('color', 'rgb(120, 6, 80)')
     const panelContent = menu.getPanelContentElem(textEditor)
     document.body.appendChild(panelContent)
 
