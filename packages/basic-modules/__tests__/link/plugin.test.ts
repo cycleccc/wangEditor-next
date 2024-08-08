@@ -45,4 +45,39 @@ describe('link plugin', () => {
       done()
     })
   })
+  // it('should insert an image correctly when dragging and dropping an image', done => {
+  //   const imgHtml = '<img src="https://www.wangeditor.com/img.jpg" />'
+
+  //   const data = new MyDataTransfer()
+  //   data.setData('text/html', imgHtml)
+
+  //   editor.select(startLocation)
+  //   // @ts-ignore
+  //   editor.insertData(data)
+
+  //   setTimeout(() => {
+  //     const images = editor.getElemsByTypePrefix('image')
+  //     expect(images.length).toBe(1)
+  //     const imgElem = images[0] as any
+  //     expect(imgElem.src).toBe('https://www.wangeditor.com/img.jpg')
+  //     done()
+  //   })
+  // })
+
+  it('should insert non-link data correctly', done => {
+    const text = 'This is a test text.'
+
+    const data = new MyDataTransfer()
+    data.setData('text/plain', text)
+
+    editor.select(startLocation)
+    // @ts-ignore
+    editor.insertData(data)
+
+    setTimeout(() => {
+      const content = Editor.string(editor, [])
+      expect(content).toContain(text)
+      done()
+    })
+  })
 })
