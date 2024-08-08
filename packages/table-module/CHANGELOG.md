@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.9](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.8...@wangeditor-next/table-module@1.3.9) (2024-08-08)
+
+
+### Bug Fixes
+
+* delete enrty table unselect logic in withselection ([ef5afee](https://github.com/cycleccc/wangEditor/commit/ef5afeeda57fd6535d7a186fa55eb8d8043a427d))
+
+
+
+
+
 ## [1.3.8](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.7...@wangeditor-next/table-module@1.3.8) (2024-08-03)
 
 

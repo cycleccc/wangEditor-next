@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.15](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.14...@wangeditor-next/editor@5.3.15) (2024-08-08)
+
+**Note:** Version bump only for package @wangeditor-next/editor
+
+
+
+
+
 ## [5.3.14](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.13...@wangeditor-next/editor@5.3.14) (2024-08-03)
 
 **Note:** Version bump only for package @wangeditor-next/editor
