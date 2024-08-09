@@ -11,8 +11,35 @@ describe('link module helper', () => {
   let editor: any
   let startLocation: any
 
+  // 自定义校验链接
+  function customCheckLinkFn(text: string, url: string): string | boolean | undefined {
+    if (text === 'test null') {
+      return
+    }
+    if (url.indexOf('http') !== 0) {
+      return '链接必须以 http/https 开头'
+    }
+    return true
+  }
+
+  // 自定义转换链接 url
+  function customParseLinkUrl(url: string): string {
+    if (url.indexOf('http') !== 0) {
+      return `http://${url}`
+    }
+    return url
+  }
+
+  const editorConfig = { MENU_CONF: {}, maxLength: 20 }
+  editorConfig.MENU_CONF['insertLink'] = {
+    checkLink: customCheckLinkFn,
+    parseLinkUrl: customParseLinkUrl,
+  }
+
   beforeEach(() => {
-    editor = createEditor()
+    editor = createEditor({
+      config: editorConfig,
+    })
     startLocation = Editor.start(editor, [])
   })
 
@@ -51,7 +78,24 @@ describe('link module helper', () => {
   it('insert link with collapsed selection', async () => {
     editor.select(startLocation)
 
-    const url = 'https://www.wangeditor.com/'
+    const url = 'https://cycleccc.github.io/docs/'
+    const inValidUrl = 'cycleccc.github.io/docs'
+
+    await insertLink(editor, 'hello', url)
+    await insertLink(editor, 'test null', url)
+    await insertLink(editor, 'hello', inValidUrl)
+
+    const links = editor.getElemsByTypePrefix('link')
+    expect(links.length).toBe(1)
+    const linkElem = links[0]
+    expect(linkElem.url).toBe(url)
+  })
+
+  it('insert link with max length', async () => {
+    editor.select(startLocation)
+
+    const url = 'https://cycleccc.github.io/docs/'
+
     await insertLink(editor, 'hello', url)
 
     const links = editor.getElemsByTypePrefix('link')
@@ -69,7 +113,7 @@ describe('link module helper', () => {
     })
     editor.select([]) // 全选
 
-    const url = 'https://www.wangeditor.com/'
+    const url = 'https://cycleccc.github.io/docs/'
     await insertLink(editor, 'hello', url)
 
     const links = editor.getElemsByTypePrefix('link')
@@ -78,10 +122,25 @@ describe('link module helper', () => {
     expect(linkElem.url).toBe(url)
   })
 
+  it('parse link', async () => {
+    const url = 'https://cycleccc.github.io/docs/'
+    const editorConfig = { MENU_CONF: {} }
+    editorConfig.MENU_CONF['insertLink'] = {
+      parseLinkUrl: false,
+    }
+    const editor = createEditor({
+      config: editorConfig,
+    })
+    editor.select(startLocation)
+    await insertLink(editor, 'hello', url)
+    const images = editor.getElemsByTypePrefix('image')
+    expect(images.length).toBe(0)
+  })
+
   it('update link', async () => {
     editor.select(startLocation)
 
-    const url = 'https://www.wangeditor.com/'
+    const url = 'https://cycleccc.github.io/docs/'
     await insertLink(editor, 'hello', url)
 
     // 选区移动到 link 内部
@@ -91,7 +150,7 @@ describe('link module helper', () => {
     })
 
     // 更新链接
-    const newUrl = 'https://www.wangeditor.com/123'
+    const newUrl = 'https://cycleccc.github.io/docs/index.html'
     await updateLink(editor, '', newUrl)
 
     const links = editor.getElemsByTypePrefix('link')

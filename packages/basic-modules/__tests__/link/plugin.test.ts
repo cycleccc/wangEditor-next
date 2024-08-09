@@ -28,7 +28,7 @@ describe('link plugin', () => {
   })
 
   it('link insert data', done => {
-    const url = 'https://www.wangeditor.com/'
+    const url = 'https://cycleccc.github.io/docs/'
 
     const data = new MyDataTransfer()
     data.setData('text/plain', url)
@@ -45,24 +45,26 @@ describe('link plugin', () => {
       done()
     })
   })
-  // it('should insert an image correctly when dragging and dropping an image', done => {
-  //   const imgHtml = '<img src="https://www.wangeditor.com/img.jpg" />'
+  it('should insert an image correctly when dragging and dropping an image', done => {
+    const imgHtml = '<img src="https://www.wangeditor.com/img.jpg" />'
+    const imgUrl = 'https://cycleccc.github.io/docs/image/logo.png'
 
-  //   const data = new MyDataTransfer()
-  //   data.setData('text/html', imgHtml)
+    const data = new MyDataTransfer()
+    data.setData('text/html', imgHtml)
+    data.setData('text/plain', imgUrl)
 
-  //   editor.select(startLocation)
-  //   // @ts-ignore
-  //   editor.insertData(data)
+    editor.select(startLocation)
+    // @ts-ignore
+    editor.insertData(data)
 
-  //   setTimeout(() => {
-  //     const images = editor.getElemsByTypePrefix('image')
-  //     expect(images.length).toBe(1)
-  //     const imgElem = images[0] as any
-  //     expect(imgElem.src).toBe('https://www.wangeditor.com/img.jpg')
-  //     done()
-  //   })
-  // })
+    setTimeout(() => {
+      const images = editor.getElemsByTypePrefix('image')
+      expect(images.length).toBe(1)
+      const imgElem = images[0] as any
+      expect(imgElem.src).toBe('https://www.wangeditor.com/img.jpg')
+      done()
+    })
+  })
 
   it('should insert non-link data correctly', done => {
     const text = 'This is a test text.'
