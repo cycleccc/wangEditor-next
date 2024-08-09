@@ -6,38 +6,54 @@
 import { Editor, Transforms } from 'slate'
 import createEditor from '../../../../tests/utils/create-editor'
 import withBlockquote from '../../src/modules/blockquote/plugin'
+import { BlockQuoteElement } from '../../src/modules/blockquote/custom-types'
 
 describe('blockquote plugin', () => {
-  let editor = withBlockquote(createEditor())
-  let startLocation = Editor.start(editor, [])
+  let editor: any = withBlockquote(createEditor())
+  let startLocation: any = Editor.start(editor, [])
 
   beforeEach(() => {
-    editor = withBlockquote(createEditor())
+    editor = withBlockquote(
+      createEditor({
+        content: [{ type: 'blockquote', children: [{ text: 'hello\n' }] }],
+      })
+    )
     startLocation = Editor.start(editor, [])
+  })
+  afterEach(() => {
+    editor = null
+    startLocation = null
   })
 
   it('insert break', () => {
-    expect(1).toBeTruthy()
+    // 无选区换行
+    editor.deselect()
+    editor.insertBreak()
+    let pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(0)
 
-    // TODO 该测试一直报错（找不到 blockquote path），待定处理
-    editor.select(startLocation)
+    editor.select({ path: [0, 0], offset: 5 })
+    editor.insertBreak()
+    let bqList = editor.getElemsByType('blockquote') as unknown as BlockQuoteElement[]
+    let text = bqList[0].children[0].text
+    expect(text).toBe('hello\n\n')
 
-    // @ts-ignore
-    Transforms.setNodes(editor, { type: 'blockquote' }) // 设置 blockquote
+    editor.select({ path: [0, 0], offset: 6 })
+    editor.insertBreak()
+    bqList = editor.getElemsByType('blockquote') as unknown as BlockQuoteElement[]
+    text = bqList[0].children[0].text
+    expect(text).toBe('hello')
 
-    const pList1 = editor.getElemsByType('paragraph')
-    expect(pList1.length).toBe(0)
+    editor.insertBreak()
+    pList = editor.getElemsByType('paragraph')
+    expect(pList.length).toBe(2)
+  })
 
-    // editor.insertText('hello')
-    // console.log(11, JSON.stringify(editor.children))
-    // console.log(22, JSON.stringify(editor.selection))
-    // editor.insertBreak() // 第一次换行，内部插入 \n
-
-    // const pList2 = editor.getElemsByType('paragraph')
-    // expect(pList2.length).toBe(0)
-
-    // editor.insertBreak() // 再一次换行，生成 p
-    // const pList3 = editor.getElemsByType('paragraph')
-    // expect(pList3.length).toBe(1)
+  it('insert break new line', () => {
+    editor.select({ path: [0, 0], offset: 6 })
+    editor.insertBreak()
+    let bqList = editor.getElemsByType('blockquote') as unknown as BlockQuoteElement[]
+    let text = bqList[0].children[0].text
+    expect(text).toBe('hello')
   })
 })

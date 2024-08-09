@@ -16,12 +16,32 @@ describe('image helper', () => {
   let editor: any
   let startLocation: any
 
-  const src = 'https://www.wangeditor.com/imgs/logo.png'
+  const src = 'https://github.com/cycleccc/wangEditor-next'
+  const emptySrc = ''
+  const inValidSrc = 'cycleccc/github.io/docs/'
   const alt = 'logo'
   const href = 'https://www.wangeditor.com/'
 
+  // 自定义校验图片
+  function customCheckImageFn(src: string, alt: string, url: string): boolean | undefined | string {
+    if (!src) {
+      return
+    }
+    if (src.indexOf('http') !== 0) {
+      return '图片网址必须以 http/https 开头'
+    }
+    return true
+  }
+
+  const editorConfig = { MENU_CONF: {} }
+  editorConfig.MENU_CONF['insertImage'] = {
+    checkImage: customCheckImageFn,
+  }
+
   beforeEach(() => {
-    editor = createEditor()
+    editor = createEditor({
+      config: editorConfig,
+    })
     startLocation = Editor.start(editor, [])
   })
 
@@ -31,6 +51,23 @@ describe('image helper', () => {
   })
 
   it('insert image node', async () => {
+    editor.select(startLocation)
+    await insertImageNode(editor, src, alt, href)
+    await insertImageNode(editor, src, alt, href)
+    await insertImageNode(editor, emptySrc, alt, href)
+    await insertImageNode(editor, inValidSrc, alt, href)
+    const images = editor.getElemsByTypePrefix('image')
+    expect(images.length).toBe(2)
+  })
+
+  it('parse image src', async () => {
+    const editorConfig = { MENU_CONF: {} }
+    editorConfig.MENU_CONF['insertImage'] = {
+      parseImageSrc: false,
+    }
+    const editor = createEditor({
+      config: editorConfig,
+    })
     editor.select(startLocation)
     await insertImageNode(editor, src, alt, href)
     const images = editor.getElemsByTypePrefix('image')

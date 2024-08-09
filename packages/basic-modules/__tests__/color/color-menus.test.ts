@@ -71,4 +71,41 @@ describe('color menus', () => {
       expect(elem instanceof HTMLElement).toBeTruthy()
     })
   })
+  it('should handle click event and add mark to editor', () => {
+    const menu = new ColorMenu()
+    const textEditor = createEditor({
+      content: [{ type: 'paragraph', children: [{ text: 'hello', color: '#000' }] }],
+    })
+    const panelContent = menu.getPanelContentElem(textEditor)
+    document.body.appendChild(panelContent)
+
+    const li = panelContent.querySelector('li[data-value="rgb(120, 6, 80)"]') as HTMLLIElement
+    textEditor.select([])
+    li.click()
+
+    const text: any = textEditor.children[0]
+    var color = text.children[0].color
+    expect(color).toBe('rgb(120, 6, 80)')
+  })
+
+  it('should handle click event and remove mark from editor', () => {
+    const menu = new ColorMenu()
+    const textEditor = createEditor({
+      content: [{ type: 'paragraph', children: [{ text: 'hello', color: 'rgb(120, 6, 80)' }] }],
+    })
+
+    textEditor.select([])
+    editor.addMark('color', 'rgb(120, 6, 80)')
+    const panelContent = menu.getPanelContentElem(textEditor)
+    document.body.appendChild(panelContent)
+
+    const li = panelContent.querySelector('li[data-value="0"]') as HTMLLIElement
+
+    textEditor.select([])
+    li.click()
+
+    const text: any = textEditor.children[0]
+    var color = text.children[0].color
+    expect(color).toBeUndefined()
+  })
 })

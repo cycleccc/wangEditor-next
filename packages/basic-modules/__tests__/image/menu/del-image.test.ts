@@ -26,7 +26,13 @@ describe('delete image menu', () => {
     startLocation = null
   })
 
-  // getValue isActive 无逻辑，不用测试
+  it('get value', () => {
+    expect(menu.getValue(editor)).toBe('')
+  })
+
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   it('is disabled', () => {
     editor.deselect()

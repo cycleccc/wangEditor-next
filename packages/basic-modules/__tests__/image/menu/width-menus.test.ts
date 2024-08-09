@@ -31,7 +31,13 @@ describe('image width menus', () => {
     startLocation = null
   })
 
-  // getValue isActive 无逻辑，不用测试
+  it('get value', () => {
+    expect(width30Menu.getValue(editor)).toBe('')
+  })
+
+  it('is active', () => {
+    expect(width30Menu.isActive(editor)).toBeFalsy()
+  })
 
   it('is disabled', () => {
     editor.deselect()

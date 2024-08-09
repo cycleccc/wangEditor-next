@@ -1,42 +1,50 @@
 ---
-name: Submit Bug Report
-about: Please make sure to fill out this template to help us reproduce the issue faster; otherwise, the issue will not be accepted!
-
+name: Submit Bug
+about: Please fill out this template to help us reproduce the issue faster. Otherwise, the issue will not be processed!
 ---
 
 ## Bug Description
 
-*Enter details here…*
+*Please enter the details...*
 
-## What did you expect to see?
+## What did you expect to happen?
 
-*Enter details here…*
+*Please enter the details...*
 
-## System and Browser Version
+## System, Browser, and Version
 
-- Operating System:
-- Browser and Version:
+- Operating System
+- Browser and Version
 
 ## wangEditor-next Version
 
-*Enter details here…*
+*Please enter the details...*
 
-## Can the bug be reproduced in the demo?
+## Can the demo reproduce the bug?
 
 Yes/No
 
-- Demo URL: https://cycleccc.github.io/demo/?lang=en
+- Demo: https://cycleccc.github.io/demo/
 
 ## Online Demo
 
-<!-- Please provide an online demo (recommended websites are stackblitz, as wangEditor-next now uses it). This helps us reproduce the bug with minimal effort. -->
+<!-- If the official demo cannot reproduce the issue, please use an online sandbox to help us reproduce the bug at the lowest cost. -->
+<!-- Please fork and modify the following corresponding links and paste the modified sandbox link here -->
 
-- https://stackblitz.com/
+<!--
+| HTML | [Reproduce on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-xxqmwl) |
+| Vue 2 | [Reproduce on StackBlitz](https://stackblitz.com/edit/vue2-vite-starter-hkmsif) |
+| Vue 3 | [Reproduce on StackBlitz](https://stackblitz.com/edit/vue3-wangeditor-demo-8emmc7) |
+| React | [Reproduce on StackBlitz](https://stackblitz.com/edit/react-4osjqn) |
+ -->
 
-## Minimal Reproduction Steps
+<!-- paste and replace your sandbox url -->
+ - SandBox url: https://stackblitz.com/@cycleccc/collections/wangeditor
 
-<!-- Please tell us how to reproduce the bug as quickly as possible. -->
-<!-- It is helpful to include a video; the more detailed the reproduction information, the easier it is to track the bug. -->
+## Steps to Reproduce at Minimum Cost
+
+<!-- Please let us know the quickest way to reproduce the bug -->
+<!-- It's best to attach a video. The more detailed the reproduction information, the easier it is to track the bug -->
 
 - Step 1
 - Step 2
