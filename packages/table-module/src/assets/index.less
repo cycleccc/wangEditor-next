@@ -119,3 +119,92 @@
     background-color: @toolbar-active-bg-color;
   }
 }
+
+.w-e-modal {
+  .babel-container {
+    span.babel-container-border {
+      display: flex;
+
+      &> * {
+        height: 28px;
+        border: 1px solid var(--w-e-modal-button-border-color);
+        border-radius: 2px;
+      }
+
+      select {
+        width: 114px;
+      }
+
+      > :nth-child(n+2) {
+        margin-left: 8px;
+      }
+
+      input:nth-child(3) {
+        width: 100px;
+      }
+    }
+
+    span.babel-container-background input {
+      height: 28px;
+      border: 1px solid var(--w-e-modal-button-border-color);
+      border-radius: 2px;
+      width: 60px;
+    }
+
+    .color-group {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--w-e-modal-button-border-color);
+      border-radius: 2px;
+      cursor: pointer;
+
+      .w-e-drop-panel {
+        margin-top: 28px;
+      }
+    }
+
+    .color-group-block {
+      display: block;
+      width: 80%;
+      height: 80%;
+      margin: 10%;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        margin: 1px 0px;
+      }
+    }
+
+    .radio-group {
+      display: inline-block;
+      border: 1px solid var(--w-e-modal-button-border-color);
+      border-radius: 2px;
+      height: 28px;
+      font-size: 0;
+    }
+
+    .radio-item {
+      display: inline-block;
+      margin: 0;
+      font-size: 14px;
+      padding: 5px 10px;
+      height: 26px;
+      cursor: pointer;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+      
+      &.is-active {
+        background-color: rgba(0, 166, 255, 0.1);
+
+        svg {
+          fill: rgba(0, 166, 255, 1);
+        }
+      }
+    }
+  }
+}

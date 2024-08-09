@@ -16,6 +16,9 @@ import $, {
   children,
   each,
   find,
+  data,
+  hide,
+  show,
   Dom7Array,
 } from 'dom7'
 export { Dom7Array } from 'dom7'
@@ -32,6 +35,9 @@ if (removeClass) $.fn.removeClass = removeClass
 if (children) $.fn.children = children
 if (each) $.fn.each = each
 if (find) $.fn.find = find
+if (data) $.fn.data = data
+if (hide) $.fn.hide = hide
+if (show) $.fn.show = show
 
 export default $
 
@@ -66,6 +72,15 @@ export function getStyleValue($elem: Dom7Array, styleKey: string): string {
   }
 
   return res
+}
+
+/**
+ * 获取 outerHTML
+ * @param $elem dom7 elem
+ */
+export function getOuterHTML($elem: Dom7Array) {
+  if ($elem.length === 0) return ''
+  return $elem[0].outerHTML
 }
 
 // COMPAT: This is required to prevent TypeScript aliases from doing some very

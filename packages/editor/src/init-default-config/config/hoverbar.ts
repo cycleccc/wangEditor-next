@@ -35,6 +35,9 @@ const COMMON_HOVERBAR_KEYS = {
       /** 注册单元格合并 拆分 */
       'mergeTableCell',
       'splitTableCell',
+      /** 注册表格/单元格属性设置 */
+      'setTableProperty',
+      'setTableCellProperty',
     ],
   },
   divider: {

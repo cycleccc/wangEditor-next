@@ -13,6 +13,8 @@ import TableHander from './TableHeader'
 import FullWidth from './FullWidth'
 import MergeCell from './MergeCell'
 import SplitCell from './SplitCell'
+import TableProperty from './TableProperty'
+import CellProperty from './CellProperty'
 
 export const insertTableMenuConf = {
   key: 'insertTable',
@@ -82,5 +84,20 @@ export const splitTableCellConf = {
   key: 'splitTableCell',
   factory() {
     return new SplitCell()
+  },
+}
+
+/** set property conf */
+export const setTablePropertyConf = {
+  key: 'setTableProperty',
+  factory() {
+    return new TableProperty()
+  },
+}
+
+export const setTableCellPropertyConf = {
+  key: 'setTableCellProperty',
+  factory() {
+    return new CellProperty()
   },
 }
