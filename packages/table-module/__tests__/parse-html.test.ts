@@ -98,6 +98,7 @@ describe('table - parse html', () => {
       type: 'table',
       width: '100%',
       children,
+      height: 0,
     })
   })
 })
