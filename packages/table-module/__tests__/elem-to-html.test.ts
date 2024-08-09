@@ -88,7 +88,7 @@ describe('TableModule module', () => {
       }
       const res = tableToHtmlConf.elemToHtml(element, '<tr><td>123</td></tr>')
       expect(res).toBe(
-        '<table style="width: auto;table-layout: fixed;"><tbody><tr><td>123</td></tr></tbody></table>'
+        '<table style="width: auto;table-layout: fixed;height:auto"><tbody><tr><td>123</td></tr></tbody></table>'
       )
     })
 
@@ -96,11 +96,12 @@ describe('TableModule module', () => {
       const element = {
         type: 'table',
         width: '100%',
+        height: '60px',
         children: [],
       }
       const res = tableToHtmlConf.elemToHtml(element, '<tr><td>123</td></tr>')
       expect(res).toBe(
-        '<table style="width: 100%;table-layout: fixed;"><tbody><tr><td>123</td></tr></tbody></table>'
+        '<table style="width: 100%;table-layout: fixed;height:60px"><tbody><tr><td>123</td></tr></tbody></table>'
       )
     })
   })

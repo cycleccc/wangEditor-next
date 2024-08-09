@@ -77,17 +77,25 @@ function parseTableHtml(
   if (getStyleValue($elem, 'width') === '100%') width = '100%'
   if ($elem.attr('width') === '100%') width = '100%' // 兼容 v4 格式
 
+  // 计算高度
+  let height = parseInt(getStyleValue($elem, 'height') || '0')
+
   const tableELement: TableElement = {
     type: 'table',
     width,
+    height,
     // @ts-ignore
     children: children.filter(child => DomEditor.getNodeType(child) === 'table-row'),
   }
   let cellLength: number | undefined = $elem.find('tr')[0]?.children.length
-  if (cellLength > 0) {
+  let colgroupElments: HTMLCollection = $elem.find('colgroup')[0]?.children || null
+  if (colgroupElments) {
+    tableELement.columnWidths = Array.from(colgroupElments).map((col: any) => {
+      return parseInt(col.getAttribute('width'))
+    })
+  } else if (cellLength > 0) {
     tableELement.columnWidths = Array(cellLength).fill(180)
   }
-
   return tableELement
 }
 

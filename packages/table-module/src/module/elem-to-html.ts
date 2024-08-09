@@ -7,9 +7,16 @@ import { Element } from 'slate'
 import { TableCellElement, TableRowElement, TableElement } from './custom-types'
 
 function tableToHtml(elemNode: Element, childrenHtml: string): string {
-  const { width = 'auto' } = elemNode as TableElement
+  const { width = 'auto', columnWidths, height = 'auto' } = elemNode as TableElement
+  let cols = columnWidths
+    ?.map(width => {
+      return `<col width=${width}></col>`
+    })
+    .join('')
 
-  return `<table style="width: ${width};table-layout: fixed;"><tbody>${childrenHtml}</tbody></table>`
+  const colgroupStr = cols ? '<colgroup contentEditable="false">' + cols + '</colgroup>' : ''
+
+  return `<table style="width: ${width};table-layout: fixed;height:${height}">${colgroupStr}<tbody>${childrenHtml}</tbody></table>`
 }
 
 function tableRowToHtml(elem: Element, childrenHtml: string): string {
