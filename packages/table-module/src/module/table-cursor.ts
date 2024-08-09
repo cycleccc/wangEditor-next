@@ -72,7 +72,7 @@ export const TableCursor = {
     EDITOR_TO_SELECTION_SET.delete(editor)
     EDITOR_TO_SELECTION.delete(editor)
     // 清除选区
-    document.getSelection()?.removeAllRanges()
+    // document.getSelection()?.removeAllRanges()
   },
   /**
    * Checks whether a given cell is part of the current table selection.
