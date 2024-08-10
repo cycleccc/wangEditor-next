@@ -2633,14 +2633,14 @@
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
 "@types/event-emitter@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.npmmirror.com/@types/event-emitter/download/@types/event-emitter-0.3.3.tgz#727032a9fc67565f96bbd78b2e2809275c97d7e7"
-  integrity sha1-cnAyqfxnVl+Wu9eLLigJJ1yX1+c=
+  version "0.3.5"
+  resolved "https://registry.npmmirror.com/@types/event-emitter/-/event-emitter-0.3.5.tgz#ce9b513f72c50dcf0443a12165a93a79ba7a7092"
+  integrity sha512-zx2/Gg0Eg7gwEiOIIh5w9TrhKKTeQh7CPCOPNc0el4pLSwzebA8SmnHwZs2dWlLONvyulykSwGSQxQHLhjGLvQ==
 
 "@types/fs-extra@^8.0.1":
-  version "8.1.2"
-  resolved "https://registry.npmmirror.com/@types/fs-extra/download/@types/fs-extra-8.1.2.tgz?cache=0&sync_timestamp=1637265615958&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Ffs-extra%2Fdownload%2F%40types%2Ffs-extra-8.1.2.tgz#7125cc2e4bdd9bd2fc83005ffdb1d0ba00cca61f"
-  integrity sha1-cSXMLkvdm9L8gwBf/bHQugDMph8=
+  version "8.1.5"
+  resolved "https://registry.npmmirror.com/@types/fs-extra/-/fs-extra-8.1.5.tgz#33aae2962d3b3ec9219b5aca2555ee00274f5927"
+  integrity sha512-0dzKcwO+S8s2kuF5Z9oUWatQJj5Uq/iqphEtE3GQJVRRYm/tD1LglU2UnXi2A8jLq5umkGouOXOR9y0n613ZwQ==
   dependencies:
     "@types/node" "*"
 
