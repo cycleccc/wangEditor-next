@@ -8527,15 +8527,15 @@ mime-types@2.1.34, mime-types@^2.1.12, mime-types@~2.1.19:
   dependencies:
     mime-db "1.51.0"
 
-mime@>=2.4.6:
-  version "3.0.0"
-  resolved "https://registry.npmmirror.com/mime/download/mime-3.0.0.tgz#b374550dca3a0c18443b0c950a6a58f1931cf7a7"
-  integrity sha1-s3RVDco6DBhEOwyVCmpY8ZMc96c=
-
 mime@^1.4.1, mime@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npmmirror.com/mime/download/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=
+
+mime@^2:
+  version "2.6.0"
+  resolved "https://registry.npmmirror.com/mime/-/mime-2.6.0.tgz#a2a682a95cd4d0cb1d6257e28f83da7e35800367"
+  integrity sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==
 
 mimic-fn@^1.0.0:
   version "1.2.0"
@@ -10747,11 +10747,11 @@ rollup-plugin-postcss@^4.0.0:
     style-inject "^0.3.0"
 
 rollup-plugin-serve@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/rollup-plugin-serve/download/rollup-plugin-serve-1.1.0.tgz#0654a57021a21b903340c69940f7463706e8288d"
-  integrity sha1-BlSlcCGiG5AzQMaZQPdGNwboKI0=
+  version "1.1.1"
+  resolved "https://registry.npmmirror.com/rollup-plugin-serve/-/rollup-plugin-serve-1.1.1.tgz#bc06363a23d0a207f61f9b2bed8100a539481cbd"
+  integrity sha512-H0VarZRtFR0lfiiC9/P8jzCDvtFf1liOX4oSdIeeYqUCKrmFA7vNiQ0rg2D+TuoP7leaa/LBR8XBts5viF6lnw==
   dependencies:
-    mime ">=2.4.6"
+    mime "^2"
     opener "1"
 
 rollup-plugin-terser@^7.0.2:
