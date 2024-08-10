@@ -33,18 +33,21 @@ class TableProperty implements IButtonMenu {
     { value: 'inset', label: t('tableModule.borderStyle.inset') },
     { value: 'outset', label: t('tableModule.borderStyle.outset') },
   ]
+  readonly textAlignOptions = [
+    { value: 'left', label: t('justify.left'), svg: JUSTIFY_LEFT_SVG },
+    { value: 'center', label: t('justify.center'), svg: JUSTIFY_CENTER_SVG },
+    { value: 'right', label: t('justify.right'), svg: JUSTIFY_RIGHT_SVG },
+    { value: 'justify', label: t('justify.justify'), svg: JUSTIFY_JUSTIFY_SVG },
+  ]
 
   getValue(editor: IDomEditor): string | boolean {
-    // 无需获取 val
     return ''
   }
 
   isActive(editor: IDomEditor): boolean {
-    // 无需 active
     return false
   }
 
-  // 菜单是否需要禁用（如选中 H1 ，“引用”菜单被禁用），用不到则返回 false
   isDisabled(editor: IDomEditor): boolean {
     const { selection } = editor
     if (selection == null) return true
@@ -52,15 +55,12 @@ class TableProperty implements IButtonMenu {
 
     const tableNode = DomEditor.getSelectedNodeByType(editor, 'table')
     if (tableNode == null) {
-      // 选区未处于 table cell node ，则禁用
       return true
     }
     return false
   }
 
-  // 点击菜单时触发的函数1
   exec(editor: IDomEditor, value: string | boolean) {
-    // 点击菜单时，弹出 modal 之前，不需要执行其他代码
     // 此处空着即可
   }
 
@@ -71,13 +71,10 @@ class TableProperty implements IButtonMenu {
     return node
   }
 
-  // 弹出框 modal 的定位：1. 返回某一个 SlateNode； 2. 返回 null （根据当前选区自动定位）
   getModalPositionNode(editor: IDomEditor) {
-    // JS 语法
-    return null // modal 依据选区定位
+    return null
   }
 
-  // 定义 modal 内部的 DOM Element
   getModalContentElem(editor: IDomEditor) {
     const node = this.getModalContentNode(editor)
     if (!node) return null
@@ -112,12 +109,12 @@ class TableProperty implements IButtonMenu {
       </div>
       <label class="babel-container">
         <span>${t('tableModule.modal.align')}</span>
-        <span class="radio-group">
-          <input name="textAlign" type="hidden">
-          <span class="radio-item" value="left">${JUSTIFY_LEFT_SVG}</span>
-          <span class="radio-item" value="center">${JUSTIFY_CENTER_SVG}</span>
-          <span class="radio-item" value="right">${JUSTIFY_RIGHT_SVG}</span>
-          <span class="radio-item" value="justify">${JUSTIFY_JUSTIFY_SVG}</span>
+        <span class="babel-container-align">
+          <select name="textAlign">
+            ${this.textAlignOptions
+              .map(item => `<option value="${item.value}">${item.label}</option>`)
+              .join('')}
+          </select>
         </span>
       </label>
       <div class="button-container">
@@ -128,18 +125,6 @@ class TableProperty implements IButtonMenu {
     // 初始化所有表单的值
     $content.find('[name]').each(elem => {
       $(elem).val(data[$(elem).attr('name')])
-    })
-
-    $content.find('.radio-group').each(elem => {
-      const val = $('[type="hidden"]', elem).val() || 'left'
-      $(`.radio-item[value=${val}]`, elem).addClass('is-active')
-      $('.radio-item', elem).on('click', evt => {
-        const $elemItem = $(evt.currentTarget as EventTarget)
-        $elemItem.addClass('is-active').siblings('.radio-item').removeClass('is-active')
-
-        const newVal = $elemItem.attr('value')
-        $('[type="hidden"]', elem).val(newVal)
-      })
     })
 
     const setSelectedColor = (elem, color) => {
@@ -181,25 +166,19 @@ class TableProperty implements IButtonMenu {
         obj[$(elem).attr('name')] = $(elem).val()
         return obj
       }, {})
-      Transforms.setNodes(
-        editor,
-        props,
-        { at: path } // inline 元素设置text-align 是没作用的
-      )
+      Transforms.setNodes(editor, props, { at: path })
 
       setTimeout(() => {
         editor.focus()
       })
     })
 
-    return $content[0] // 返回 DOM Element 类型
+    return $content[0]
   }
 
   getPanelContentElem(editor, { mark, selectedColor, callback }) {
-    // 第一次渲染
     const $colorPanel = $('<ul class="w-e-panel-content-color"></ul>')
 
-    // 绑定事件（只在第一次绑定，不要重复绑定）
     $colorPanel.on('click', 'li', e => {
       const { target } = e
       if (!target) return
@@ -211,10 +190,9 @@ class TableProperty implements IButtonMenu {
       callback(val)
     })
 
-    // 获取菜单配置
     const colorConf = editor.getMenuConfig(mark)
     const { colors = [] } = colorConf
-    // 根据菜单配置生成 panel content
+
     colors.forEach(color => {
       const $block = $(`<div class="color-block" data-value="${color}"></div>`)
       $block.css('background-color', color)
@@ -228,7 +206,6 @@ class TableProperty implements IButtonMenu {
       $colorPanel.append($li)
     })
 
-    // 清除颜色
     let clearText = ''
     if (mark === 'color') clearText = t('tableModule.color.default')
     if (mark === 'bgColor') clearText = t('tableModule.color.clear')
