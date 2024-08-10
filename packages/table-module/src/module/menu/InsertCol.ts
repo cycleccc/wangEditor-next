@@ -114,7 +114,9 @@ class InsertCol implements IButtonMenu {
         const [elemNode, tablePath] = tableEntry
         const { columnWidths = [] } = elemNode as TableElement
         const adjustColumnWidths = [...columnWidths]
-        adjustColumnWidths.splice(tdIndex, 0, 60)
+
+        const { minWidth = 60 } = editor.getMenuConfig('insertTable')
+        adjustColumnWidths.splice(tdIndex, 0, parseInt(minWidth) || 60)
 
         Transforms.setNodes(editor, { columnWidths: adjustColumnWidths } as TableElement, {
           at: tablePath,

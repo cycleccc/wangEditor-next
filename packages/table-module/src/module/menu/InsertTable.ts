@@ -10,10 +10,11 @@ import { genRandomStr } from '../../utils/util'
 import { TABLE_SVG } from '../../constants/svg'
 import { TableElement, TableCellElement, TableRowElement } from '../custom-types'
 
-function genTableNode(rowNum: number, colNum: number): TableElement {
+function genTableNode(editor: IDomEditor, rowNum: number, colNum: number): TableElement {
   // 拼接 rows
   const rows: TableRowElement[] = []
-  const columnWidths: number[] = Array(colNum).fill(60)
+  const { minWidth = 60 } = editor.getMenuConfig('insertTable')
+  const columnWidths: number[] = Array(colNum).fill(parseInt(minWidth) || 60)
   for (let i = 0; i < rowNum; i++) {
     // 拼接 cells
     const cells: TableCellElement[] = []
@@ -177,7 +178,7 @@ class InsertTable implements IDropPanelMenu {
       Transforms.insertNodes(editor, newElem, { mode: 'highest' })
     }
     // 插入表格
-    const tableNode = genTableNode(rowNum, colNum)
+    const tableNode = genTableNode(editor, rowNum, colNum)
     Transforms.insertNodes(editor, tableNode, { mode: 'highest' })
   }
 }
