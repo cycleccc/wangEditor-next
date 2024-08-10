@@ -2665,9 +2665,9 @@
   integrity sha1-Dqe2FJaQK5WJDcTDoRa2DLja6BI=
 
 "@types/is-hotkey@^0.1.2":
-  version "0.1.5"
-  resolved "https://registry.npmmirror.com/@types/is-hotkey/download/@types/is-hotkey-0.1.5.tgz#f3123ba21228c0408c10594abf378caddbb802f8"
-  integrity sha1-8xI7ohIowECMEFlKvzeMrdu4Avg=
+  version "0.1.10"
+  resolved "https://registry.npmmirror.com/@types/is-hotkey/-/is-hotkey-0.1.10.tgz#cf440fab9bf75ffba4e1a16e8df28938de0778c9"
+  integrity sha512-RvC8KMw5BCac1NvRRyaHgMMEtBaZ6wh0pyPTBu7izn4Sj/AX9Y4aXU5c7rX8PnM/knsuUpC1IeoBkANtxBypsQ==
 
 "@types/is-url@^1.2.29":
   version "1.2.32"
