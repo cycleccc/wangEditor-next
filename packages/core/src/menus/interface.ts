@@ -38,6 +38,8 @@ interface IBaseMenu {
   readonly width?: number // 设置 button 宽度
 
   getValue: (editor: IDomEditor) => string | boolean // 获取菜单相关的 val 。如是否加粗、颜色值、h1/h2/h3 等
+  getIcon?: (editor: IDomEditor) => string // 获取当前 svg，如加粗时，获取加粗的 svg
+  getTitle?: (editor: IDomEditor) => string // 获取当前 title，如取消全屏时，获取取消全屏的 title
   isActive: (editor: IDomEditor) => boolean // 是否激活菜单，如选区处于加粗文本时，激活 bold
   isDisabled: (editor: IDomEditor) => boolean // 是否禁用菜单，如选区处于 code-block 时，禁用 bold 等样式操作
 

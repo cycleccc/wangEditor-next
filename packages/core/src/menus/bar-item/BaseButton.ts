@@ -76,6 +76,8 @@ abstract class BaseButton implements IBarItem {
     const editor = getEditorInstance(this)
     const menu = this.menu
     const value = menu.getValue(editor)
+    this.setIcon()
+    this.setTooltip()
     menu.exec(editor, value)
   }
 
@@ -118,8 +120,31 @@ abstract class BaseButton implements IBarItem {
       // 取消 disabled
       $button.removeClass(className)
     }
+  }
 
-    this.disabled = disabled // 记录下来
+  private setIcon() {
+    const editor = getEditorInstance(this)
+    const { $button } = this
+    if (!this.menu.getIcon) return
+    const iconSvg = this.menu.getIcon(editor)
+
+    if (iconSvg) {
+      $button.find('svg').remove()
+      const $svg = $(iconSvg)
+      clearSvgStyle($svg)
+      $button.append($svg)
+    }
+  }
+
+  private setTooltip() {
+    const editor = getEditorInstance(this)
+    const { $button } = this
+    if (!this.menu.getTitle) return
+    const title = this.menu.getTitle(editor)
+    const iconSvg = this.menu.iconSvg
+    if (title && iconSvg) {
+      addTooltip($button, iconSvg, title)
+    }
   }
 
   changeMenuState() {

@@ -39,6 +39,7 @@ export default {
   },
   fullScreen: {
     title: 'Full screen',
+    cancelTitle: 'Cancel full screen',
   },
   header: {
     title: 'Header',

@@ -10,7 +10,7 @@ export function addTooltip(
   $button: Dom7Array,
   iconSvg: string,
   title: string,
-  hotkey: string,
+  hotkey: string = '',
   inGroup = false
 ) {
   if (!iconSvg) {

@@ -39,6 +39,7 @@ export default {
   },
   fullScreen: {
     title: '全屏',
+    cancelTitle: '取消全屏',
   },
   header: {
     title: '标题',

@@ -4,7 +4,7 @@
  */
 
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
-import { FULL_SCREEN_SVG } from '../../../constants/icon-svg'
+import { CANCEL_FULL_SCREEN_SVG, FULL_SCREEN_SVG } from '../../../constants/icon-svg'
 
 class FullScreen implements IButtonMenu {
   title = t('fullScreen.title')
@@ -22,6 +22,22 @@ class FullScreen implements IButtonMenu {
 
   isDisabled(editor: IDomEditor): boolean {
     return false
+  }
+
+  getIcon(editor: IDomEditor): string {
+    if (editor.isFullScreen) {
+      return FULL_SCREEN_SVG
+    } else {
+      return CANCEL_FULL_SCREEN_SVG
+    }
+  }
+
+  getTitle(editor: IDomEditor): string {
+    if (editor.isFullScreen) {
+      return t('fullScreen.title')
+    } else {
+      return t('fullScreen.cancelTitle')
+    }
   }
 
   exec(editor: IDomEditor, value: string | boolean) {
