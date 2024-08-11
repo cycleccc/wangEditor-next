@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.14...@wangeditor-next/editor@5.4.0) (2024-08-11)
+
+
+### Features
+
+* **table module:** add table property setting ([48d0f3b](https://github.com/cycleccc/wangEditor/commit/48d0f3b3a84b304c7f0aad613fc8cbaffb1f1914))
+
+
+
+
+
 ## [5.3.15](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.3.14...@wangeditor-next/editor@5.3.15) (2024-08-08)
 
 **Note:** Version bump only for package @wangeditor-next/editor

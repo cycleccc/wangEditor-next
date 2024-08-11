@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.7...@wangeditor-next/basic-modules@1.4.0) (2024-08-11)
+
+
+### Features
+
+* add cancel full screen ([1efee3f](https://github.com/cycleccc/wangEditor/commit/1efee3fa01664cf730718949db6a3cbce830b8f0))
+
+
+
+
+
 ## [1.3.8](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.7...@wangeditor-next/basic-modules@1.3.8) (2024-08-08)
 
 **Note:** Version bump only for package @wangeditor-next/basic-modules

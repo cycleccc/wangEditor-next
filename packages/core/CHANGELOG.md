@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.6...@wangeditor-next/core@1.6.0) (2024-08-11)
+
+
+### Features
+
+* add cancel full screen ([1efee3f](https://github.com/cycleccc/wangEditor/commit/1efee3fa01664cf730718949db6a3cbce830b8f0))
+
+
+
+
+
 ## [1.5.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.5...@wangeditor-next/core@1.5.6) (2024-08-03)
 
 
