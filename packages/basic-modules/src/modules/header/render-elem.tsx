@@ -49,10 +49,16 @@ const renderHeader5Conf = {
   renderElem: genRenderElem(5),
 }
 
+const renderHeader6Conf = {
+  type: 'header6',
+  renderElem: genRenderElem(6),
+}
+
 export {
   renderHeader1Conf,
   renderHeader2Conf,
   renderHeader3Conf,
   renderHeader4Conf,
   renderHeader5Conf,
+  renderHeader6Conf,
 }

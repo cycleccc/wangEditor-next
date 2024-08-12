@@ -36,3 +36,8 @@ export const header5ToHtmlConf = {
   type: 'header5',
   elemToHtml: genToHtmlFn(5),
 }
+
+export const header6ToHtmlConf = {
+  type: 'header6',
+  elemToHtml: genToHtmlFn(6),
+}

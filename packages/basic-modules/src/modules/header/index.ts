@@ -10,6 +10,7 @@ import {
   renderHeader3Conf,
   renderHeader4Conf,
   renderHeader5Conf,
+  renderHeader6Conf,
 } from './render-elem'
 import {
   HeaderSelectMenuConf,
@@ -18,6 +19,7 @@ import {
   Header3ButtonMenuConf,
   Header4ButtonMenuConf,
   Header5ButtonMenuConf,
+  Header6ButtonMenuConf,
 } from './menu/index'
 import {
   header1ToHtmlConf,
@@ -25,6 +27,7 @@ import {
   header3ToHtmlConf,
   header4ToHtmlConf,
   header5ToHtmlConf,
+  header6ToHtmlConf,
 } from './elem-to-html'
 import {
   parseHeader1HtmlConf,
@@ -32,6 +35,7 @@ import {
   parseHeader3HtmlConf,
   parseHeader4HtmlConf,
   parseHeader5HtmlConf,
+  parseHeader6HtmlConf,
 } from './parse-elem-html'
 import withHeader from './plugin'
 
@@ -42,6 +46,7 @@ const header: Partial<IModuleConf> = {
     renderHeader3Conf,
     renderHeader4Conf,
     renderHeader5Conf,
+    renderHeader6Conf,
   ],
   elemsToHtml: [
     header1ToHtmlConf,
@@ -49,6 +54,7 @@ const header: Partial<IModuleConf> = {
     header3ToHtmlConf,
     header4ToHtmlConf,
     header5ToHtmlConf,
+    header6ToHtmlConf,
   ],
   parseElemsHtml: [
     parseHeader1HtmlConf,
@@ -56,6 +62,7 @@ const header: Partial<IModuleConf> = {
     parseHeader3HtmlConf,
     parseHeader4HtmlConf,
     parseHeader5HtmlConf,
+    parseHeader6HtmlConf,
   ],
   menus: [
     HeaderSelectMenuConf,
@@ -64,6 +71,7 @@ const header: Partial<IModuleConf> = {
     Header3ButtonMenuConf,
     Header4ButtonMenuConf,
     Header5ButtonMenuConf,
+    Header6ButtonMenuConf,
   ],
   editorPlugin: withHeader,
 }

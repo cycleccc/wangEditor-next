@@ -31,3 +31,8 @@ export type Header5Element = {
   type: 'header5'
   children: Text[]
 }
+
+export type Header6Element = {
+  type: 'header6'
+  children: Text[]
+}

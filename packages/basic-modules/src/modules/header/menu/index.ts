@@ -9,6 +9,7 @@ import Header2ButtonMenu from './Header2ButtonMenu'
 import Header3ButtonMenu from './Header3ButtonMenu'
 import Header4ButtonMenu from './Header4ButtonMenu'
 import Header5ButtonMenu from './Header5ButtonMenu'
+import Header6ButtonMenu from './Header6ButtonMenu'
 
 export const HeaderSelectMenuConf = {
   key: 'headerSelect',
@@ -49,5 +50,12 @@ export const Header5ButtonMenuConf = {
   key: 'header5',
   factory() {
     return new Header5ButtonMenu()
+  },
+}
+
+export const Header6ButtonMenuConf = {
+  key: 'header6',
+  factory() {
+    return new Header6ButtonMenu()
   },
 }
