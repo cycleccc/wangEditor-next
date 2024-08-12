@@ -7,6 +7,11 @@ import { IDomEditor } from '@wangeditor-next/core'
 import $, { DOMElement, getStyleValue } from '../utils/dom'
 import { TableCellElement } from './custom-types'
 
+// 获取 var(--w-e-textarea-border-color) 变量的实际样式值
+const DEFAULT_BORDER_COLOR = window
+  ?.getComputedStyle(document.documentElement)
+  ?.getPropertyValue('--w-e-textarea-border-color')
+
 export function parseStyleHtml(elem: DOMElement, node: Descendant, editor: IDomEditor): Descendant {
   if (elem.tagName !== 'TABLE' && elem.tagName !== 'TD') return node
 
@@ -19,8 +24,14 @@ export function parseStyleHtml(elem: DOMElement, node: Descendant, editor: IDomE
     tableNode.backgroundColor = backgroundColor
   }
 
-  // eslint-disable-next-line no-unsafe-optional-chaining
-  let [borderWidth, borderStyle, borderColor] = getStyleValue($elem, 'border')?.split(' ')
+  let border = getStyleValue($elem, 'border')
+  if (!border && elem.tagName === 'TD') {
+    // https://github.com/cycleccc/wangEditor-next/blob/master/packages/table-module/src/assets/index.less#L20
+    // TD存在默认的css样式，尝试用getComputedStyle获取不到，只能写死
+    border = `1px solid ${DEFAULT_BORDER_COLOR}`
+  }
+
+  let [borderWidth, borderStyle, borderColor] = border?.split(' ') || []
   borderWidth = getStyleValue($elem, 'border-width') || borderWidth // border 宽度
   if (borderWidth) {
     tableNode.borderWidth = borderWidth.replace(/[^\d]/g, '')
