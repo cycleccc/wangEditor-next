@@ -11854,9 +11854,9 @@ smob@^1.0.0:
   integrity sha512-g6T+p7QO8npa+/hNx9ohv1E5pVCmWrVCUzUXJyLdMmftX6ER0oiWY/w9knEonLpnOp6b6FenKnMfR8gqwWdwig==
 
 snabbdom@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmmirror.com/snabbdom/download/snabbdom-3.1.0.tgz?cache=0&sync_timestamp=1630676271215&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsnabbdom%2Fdownload%2Fsnabbdom-3.1.0.tgz#8ca931f562d3421de71c8b44e70c285cfa5f2dc9"
-  integrity sha1-jKkx9WLTQh3nHItE5wwoXPpfLck=
+  version "3.6.2"
+  resolved "https://registry.npmmirror.com/snabbdom/-/snabbdom-3.6.2.tgz#57dd66878f6320497fa7f67941df356a045c75a1"
+  integrity sha512-ig5qOnCDbugFntKi6c7Xlib8bA6xiJVk8O+WdFrV3wxbMqeHO0hXFQC4nAhPVWfZfi8255lcZkNhtIBINCc4+Q==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
