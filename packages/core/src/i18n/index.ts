@@ -40,6 +40,16 @@ export function i18nGetResources(lng: string) {
 }
 
 /**
+ * 监听语言变更
+ * @param callback
+ * @returns
+ */
+export function i18nListenLanguage(callback: (lng: string) => void) {
+  i18next.on('languageChanged', callback)
+  return () => i18next.off('languageChanged', callback)
+}
+
+/**
  * 翻译
  */
 export const t = i18next.t.bind(i18next)

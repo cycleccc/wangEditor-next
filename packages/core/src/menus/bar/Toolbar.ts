@@ -15,6 +15,7 @@ import { gen$barItemDivider } from '../helpers/helpers'
 import { IMenuGroup, IButtonMenu, ISelectMenu, IDropPanelMenu, IModalMenu } from '../interface'
 import GroupButton from '../bar-item/GroupButton'
 import { IToolbarConfig } from '../../config/interface'
+import { i18nListenLanguage } from '../../i18n'
 
 type MenuType = IButtonMenu | ISelectMenu | IDropPanelMenu | IModalMenu
 
@@ -24,6 +25,7 @@ class Toolbar {
   private menus: { [key: string]: MenuType } = {}
   private toolbarItems: IBarItem[] = []
   private config: Partial<IToolbarConfig> = {}
+  private lngListen: () => void = () => {}
 
   constructor(boxSelector: string | DOMElement, config: Partial<IToolbarConfig>) {
     this.config = config
@@ -41,11 +43,11 @@ class Toolbar {
 
     // 异步，否则拿不到 editor 实例
     promiseResolveThen(() => {
-      // 注册 items
-      this.registerItems()
+      // 首次初始化
+      this.initToolbar()
 
-      // 创建完，先模拟一次 onchange
-      this.changeToolbarState()
+      // 监听语言变更
+      this.lngListen = i18nListenLanguage(() => this.initToolbar())
 
       // 监听 editor onchange
       const editor = this.getEditorInstance()
@@ -59,6 +61,21 @@ class Toolbar {
 
   getConfig() {
     return this.config
+  }
+
+  // 初始化工具栏
+  private initToolbar() {
+    // 清空menu缓存
+    this.menus = {}
+    // 清空elem
+    const $toolbar = this.$toolbar
+    $toolbar?.empty()
+
+    // 注册 items
+    this.registerItems()
+
+    // 创建完，先模拟一次 onchange
+    this.changeToolbarState()
   }
 
   // 注册 toolbarItems
@@ -215,6 +232,9 @@ class Toolbar {
   destroy() {
     // 销毁 DOM
     this.$toolbar.remove()
+
+    // 销毁语言监听
+    this.lngListen?.()
 
     // 清空属性
     this.menus = {}

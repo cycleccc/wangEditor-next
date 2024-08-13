@@ -16,6 +16,7 @@ import { gen$barItemDivider } from '../helpers/helpers'
 import { getPositionBySelection, getPositionByNode, correctPosition } from '../helpers/position'
 import { IButtonMenu, ISelectMenu, IDropPanelMenu, IModalMenu } from '../interface'
 import { CustomElement } from '../../../../custom-types'
+import { i18nListenLanguage } from '../../i18n'
 
 type MenuType = IButtonMenu | ISelectMenu | IDropPanelMenu | IModalMenu
 
@@ -48,6 +49,7 @@ class HoverBar {
   private hoverbarItems: IBarItem[] = []
   private prevSelectedNode: Node | null = null // 上一次选中的 node
   private isShow = false
+  private lngListen: () => void = () => {}
 
   constructor() {
     // 异步，否则获取不到 DOM 和 editor
@@ -71,6 +73,17 @@ class HoverBar {
       // fullScreen 时隐藏
       editor.on('fullScreen', hideAndClean)
       editor.on('unFullScreen', hideAndClean)
+    })
+
+    // 监听语言变更
+    this.lngListen = i18nListenLanguage(() => {
+      // 清空menu缓存
+      this.menus = {}
+      // 切换语言直接关闭
+      this.hideAndClean()
+      // xxx
+      const editor = this.getEditorInstance()
+      editor.deselect()
     })
   }
 
@@ -335,6 +348,9 @@ class HoverBar {
     this.changeHoverbarState.cancel()
     // 销毁 DOM
     this.$elem.remove()
+
+    // 销毁语言监听
+    this.lngListen?.()
 
     // 清空属性
     this.menus = {}
