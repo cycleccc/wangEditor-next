@@ -12,8 +12,7 @@
 ### 打包
 
 - 下载代码到本地，进入 `wangEditor` 目录
-- 安装所有依赖 `yarn bootstrap`
-- 打包所有模块 `yarn dev` 或者 `yarn build`
+- 打包所有模块 `yarn dev` 或者 `yarn build`（调试使用 yarn dev 即可）
 
 ### 运行 demo
 
