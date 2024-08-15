@@ -68,7 +68,7 @@ describe('insert link menu', () => {
   it('focus input asynchronously', async () => {
     editor.select(startLocation)
     editor.insertNode(linkNode)
-    editor.select(startLocation)
+    editor.select([])
 
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).textInputId) as HTMLInputElement
