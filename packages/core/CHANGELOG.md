@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.6...@wangeditor-next/core@1.7.0) (2024-08-15)
+
+
+### Features
+
+* add bar language change listen ([f0c89be](https://github.com/cycleccc/wangEditor/commit/f0c89bee8020bd8c453d9dd06909cc63dc574803))
+* add cancel full screen ([1efee3f](https://github.com/cycleccc/wangEditor/commit/1efee3fa01664cf730718949db6a3cbce830b8f0))
+
+
+
+
+
 # [1.6.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.6...@wangeditor-next/core@1.6.0) (2024-08-11)
 
 

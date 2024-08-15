@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.4.1...@wangeditor-next/basic-modules@1.4.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* **header:** add h6 header ([30ced5f](https://github.com/cycleccc/wangEditor/commit/30ced5f5f82a2fac80e014673ace925622cc9ff6))
+
+
+### Reverts
+
+* **image:** set image height ([1eb29f3](https://github.com/cycleccc/wangEditor/commit/1eb29f3447d67c8bfc536569ebbe8e6ec2e84b1b))
+
+
+
+
+
 # [1.4.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.3.7...@wangeditor-next/basic-modules@1.4.0) (2024-08-11)
 
 

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.8...@wangeditor-next/table-module@1.5.0) (2024-08-15)
+
+
+### Bug Fixes
+
+* add table cell border default property ([f6a26d8](https://github.com/cycleccc/wangEditor/commit/f6a26d8bdf2f7aaa5b43276f7124a9bac1c5dcdc))
+* change table proerty align style ([fde2a69](https://github.com/cycleccc/wangEditor/commit/fde2a69e34abde08a209211c2643f6c5071ee233))
+* **table module:** deselect selection causes setHtml error ([d2d1f1b](https://github.com/cycleccc/wangEditor/commit/d2d1f1b0328b8dbe3f111ba3fbc0b48d4fe53e7d))
+* delete enrty table unselect logic in withselection ([ef5afee](https://github.com/cycleccc/wangEditor/commit/ef5afeeda57fd6535d7a186fa55eb8d8043a427d))
+
+
+### Features
+
+* add table minWidth config ([b89eb98](https://github.com/cycleccc/wangEditor/commit/b89eb9876cafb40993e31d8bd441088351ad52fe))
+* table echo width adaptation ([fcefce4](https://github.com/cycleccc/wangEditor/commit/fcefce46173e857f7d76e7820b39dcaae394b231))
+* **table module:** add table property setting ([48d0f3b](https://github.com/cycleccc/wangEditor/commit/48d0f3b3a84b304c7f0aad613fc8cbaffb1f1914))
+
+
+
+
+
 # [1.4.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.8...@wangeditor-next/table-module@1.4.0) (2024-08-11)
 
 
