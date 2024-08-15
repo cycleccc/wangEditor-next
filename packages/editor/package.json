@@ -11,7 +11,7 @@
   ],
   "author": "cycleccc <29912005548@qq.com>",
   "contributors": [],
-  "homepage": "https://www.wangeditor.com/",
+  "homepage": "https://github.com/cycleccc/wangEditor#readme",
   "license": "MIT",
   "types": "dist/editor/src/index.d.ts",
   "main": "dist/index.js",
