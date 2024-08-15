@@ -14,7 +14,7 @@ describe('unlink menu test', () => {
 
   const linkNode = {
     type: 'link',
-    url: 'https://www.wangeditor.com/',
+    url: 'https://cycleccc.github.io/docs/',
     children: [{ text: 'xxx' }],
   }
 

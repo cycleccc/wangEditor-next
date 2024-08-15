@@ -6,16 +6,26 @@
 import { Editor } from 'slate'
 import createEditor from '../../../../../tests/utils/create-editor'
 import InsertLinkMenu from '../../../src/modules/link/menu/InsertLink'
+import { waitFor } from '@testing-library/dom'
 
 describe('insert link menu', () => {
-  const editor = createEditor()
+  let editor: any
+  let startLocation: any
   const menu = new InsertLinkMenu()
-  const startLocation = Editor.start(editor, [])
 
+  const linkNode = {
+    type: 'link',
+    url: 'https://cycleccc.github.io/docs/',
+    children: [{ text: 'xxx' }],
+  }
+
+  beforeEach(() => {
+    editor = createEditor()
+    startLocation = Editor.start(editor, [])
+  })
   afterEach(() => {
-    editor.select(startLocation)
-    editor.clear()
-    editor.deselect()
+    editor = null
+    startLocation = null
   })
 
   it('get value', () => {
@@ -36,7 +46,36 @@ describe('insert link menu', () => {
   })
 
   it('get modal content elem', () => {
+    const spy = jest.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
+    editor.select(startLocation)
+    editor.insertText('test')
+    document.body.appendChild(elem)
+
+    const textInputId = document.getElementById((menu as any).textInputId) as HTMLInputElement
+    const urlInputId = document.getElementById((menu as any).urlInputId) as HTMLInputElement
+    const button = document.getElementById((menu as any).buttonId) as HTMLButtonElement
+    // 模拟用户输入
+    textInputId.value = 'hello'
+    urlInputId.value = 'https://cycleccc.github.io/docs/'
+    editor.select(startLocation)
+    button.click()
+
     expect(elem.tagName).toBe('DIV')
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('focus input asynchronously', async () => {
+    editor.select(startLocation)
+    editor.insertNode(linkNode)
+    editor.select(startLocation)
+
+    menu.getModalContentElem(editor)
+    const inputSrc = document.getElementById((menu as any).textInputId) as HTMLInputElement
+    jest.spyOn(inputSrc, 'focus')
+
+    await waitFor(() => {
+      expect(inputSrc.focus).toHaveBeenCalled()
+    })
   })
 })

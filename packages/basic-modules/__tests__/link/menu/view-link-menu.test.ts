@@ -14,7 +14,7 @@ describe('view link menu', () => {
 
   const linkNode = {
     type: 'link',
-    url: 'https://www.wangeditor.com/',
+    url: 'https://cycleccc.github.io/docs/',
     children: [{ text: 'xxx' }],
   }
 
@@ -54,5 +54,15 @@ describe('view link menu', () => {
       offset: 1,
     })
     expect(menu.isDisabled(editor)).toBeFalsy()
+  })
+  it('exec', () => {
+    editor.select(startLocation)
+    editor.insertNode(linkNode)
+    editor.select({
+      path: [0, 1, 0], // 选区定位到 link 内部
+      offset: 1,
+    })
+    menu.exec(editor, 'hello')
+    expect(() => menu.exec(editor, false)).toThrow(`View link failed, link url is '${false}'`)
   })
 })

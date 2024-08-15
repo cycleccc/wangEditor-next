@@ -6,6 +6,7 @@
 import { Editor } from 'slate'
 import createEditor from '../../../../../tests/utils/create-editor'
 import EditLink from '../../../src/modules/link/menu/EditLink'
+import { waitFor } from '@testing-library/dom'
 
 describe('edit link menu', () => {
   let editor: any
@@ -14,7 +15,7 @@ describe('edit link menu', () => {
 
   const linkNode = {
     type: 'link',
-    url: 'https://www.wangeditor.com/',
+    url: 'https://cycleccc.github.io/docs/',
     children: [{ text: 'xxx' }],
   }
 
@@ -71,8 +72,33 @@ describe('edit link menu', () => {
   })
 
   it('get modal content elem', () => {
-    editor.select(startLocation)
+    const spy = jest.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
+    editor.select(startLocation)
+    editor.insertText('test')
+    document.body.appendChild(elem)
+
+    const urlInputId = document.getElementById((menu as any).urlInputId) as HTMLInputElement
+    const button = document.getElementById((menu as any).buttonId) as HTMLButtonElement
+    urlInputId.value = 'https://cycleccc.github.io/demo/'
+    editor.select(startLocation)
+    button.click()
+
     expect(elem.tagName).toBe('DIV')
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('focus input asynchronously', async () => {
+    editor.select(startLocation)
+    editor.insertNode(linkNode)
+    editor.select(startLocation)
+
+    menu.getModalContentElem(editor)
+    const inputSrc = document.getElementById((menu as any).urlInputId) as HTMLInputElement
+    jest.spyOn(inputSrc, 'focus')
+
+    await waitFor(() => {
+      expect(inputSrc.focus).toHaveBeenCalled()
+    })
   })
 })

@@ -91,13 +91,15 @@ describe('link module helper', () => {
     expect(linkElem.url).toBe(url)
   })
 
-  it('insert link with max length', async () => {
+  it('insert link with collapsed max length', async () => {
     editor.select(startLocation)
+    editor.insertText('1234456789012')
 
+    editor.select(startLocation)
     const url = 'https://cycleccc.github.io/docs/'
 
+    await insertLink(editor, 'https://cycleccc.github.io/docs/', url)
     await insertLink(editor, 'hello', url)
-
     const links = editor.getElemsByTypePrefix('link')
     expect(links.length).toBe(1)
     const linkElem = links[0]
@@ -120,6 +122,50 @@ describe('link module helper', () => {
     expect(links.length).toBe(1)
     const linkElem = links[0]
     expect(linkElem.url).toBe(url)
+  })
+
+  it('insert link with expand selection not same text', async () => {
+    editor.select(startLocation)
+    editor.insertText('test')
+    Transforms.move(editor, {
+      distance: 3, // 选中 3 个字母
+      unit: 'character',
+    })
+    editor.select([]) // 全选
+
+    const url = 'https://cycleccc.github.io/docs/'
+    await insertLink(editor, 'hello', url)
+
+    const links = editor.getElemsByTypePrefix('link')
+    expect(links.length).toBe(1)
+    const linkElem = links[0]
+    expect(linkElem.url).toBe(url)
+  })
+
+  it('insert link with expand max length', async () => {
+    editor.select(startLocation)
+    editor.insertText('1234456789012')
+    Transforms.move(editor, {
+      distance: 3, // 选中 3 个字母
+      unit: 'character',
+    })
+    editor.select([])
+    const url = 'https://cycleccc.github.io/docs/'
+    await insertLink(editor, 'hello', url)
+    let links = editor.getElemsByTypePrefix('link')
+    expect(links.length).toBe(1)
+    let linkElem = links[0]
+    expect(linkElem.url).toBe(url)
+  })
+
+  it('insert link with expand max length uninput', async () => {
+    editor.select(startLocation)
+    editor.insertText('123445678901234567890')
+    editor.select([])
+    const url = 'https://cycleccc.github.io/docs/'
+    await insertLink(editor, 'hello', url)
+    let links = editor.getElemsByTypePrefix('link')
+    expect(links.length).toBe(0)
   })
 
   it('parse link', async () => {
