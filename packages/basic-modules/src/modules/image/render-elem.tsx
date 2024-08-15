@@ -34,7 +34,7 @@ function renderContainer(
   const style: any = {}
   if (width) style.width = width
   /** 不强制设置高度 */
-  // if (height) style.height = height
+  if (height) style.height = height
 
   const containerId = genContainerId(editor, elemNode)
 
@@ -117,7 +117,7 @@ function renderResizeContainer(
     if (newWidth <= 15 || newHeight <= 15) return // 最小就是 15px
 
     $container.css('width', `${newWidth}px`)
-    // $container.css('height', `${newHeight}px`)
+    $container.css('height', `${newHeight}px`)
   }, 100)
 
   function onMouseup(e: Event) {
@@ -126,14 +126,14 @@ function renderResizeContainer(
 
     if ($container == null) return
     const newWidth = $container.width().toFixed(2)
-    // const newHeight = $container.height().toFixed(2)
+    const newHeight = $container.height().toFixed(2)
 
     // 修改 node
     const props: Partial<ImageElement> = {
       style: {
         ...(elemNode as ImageElement).style,
         width: `${newWidth}px`,
-        // height: `${newHeight}px`,
+        height: `${newHeight}px`,
       },
     }
     Transforms.setNodes(editor, props, { at: DomEditor.findPath(editor, elemNode) })
@@ -144,8 +144,8 @@ function renderResizeContainer(
 
   const style: any = {}
   if (width) style.width = width
-  // if (height) style.height = height
-  // style.boxShadow = '0 0 0 1px #B4D5FF' // 自定义 selected 样式，因为有拖拽触手
+  if (height) style.height = height
+  style.boxShadow = '0 0 0 1px #B4D5FF' // 自定义 selected 样式，因为有拖拽触手
 
   return (
     <div
