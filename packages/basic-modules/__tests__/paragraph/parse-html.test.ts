@@ -27,12 +27,18 @@ describe('paragraph - parse html', () => {
   it('with children', () => {
     const $elem = $('<p></p>')
     const children = [{ text: 'hello ' }, { text: 'world', bold: true }]
+    const image = [{ type: 'image', children: [{ text: '' }] }]
 
     // parse
-    const res = parseParagraphHtmlConf.parseElemHtml($elem[0], children, editor)
+    let res = parseParagraphHtmlConf.parseElemHtml($elem[0], children, editor)
     expect(res).toEqual({
       type: 'paragraph',
       children: [{ text: 'hello ' }, { text: 'world', bold: true }],
+    })
+    res = parseParagraphHtmlConf.parseElemHtml($elem[0], image, editor)
+    expect(res).toEqual({
+      type: 'paragraph',
+      children: [{ type: 'image', children: [{ text: '' }] }],
     })
   })
 })
