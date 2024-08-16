@@ -97,4 +97,7 @@ export default {
   todo: {
     todo: 'Todo',
   },
+  formatPainter: {
+    title: 'Format Painter',
+  },
 }

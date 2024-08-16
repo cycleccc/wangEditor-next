@@ -154,3 +154,7 @@ export const CHECK_BOX_SVG =
 // 回车
 export const ENTER_SVG =
   '<svg viewBox="0 0 1255 1024"><path d="M1095.111111 731.477333h-625.777778V1024L0 658.318222 469.333333 292.408889v292.636444h625.777778V0h156.444445v731.477333z"></path></svg>'
+
+// 格式刷
+export const FORMAT_PAINTER =
+  '<svg viewBox="0 0 24 24"><path d="M8 19.997v-5h2v5h9v-7H5v7zm-4-9h16v-3h-6v-4h-4v4H4zm-1 10v-8H2v-6a1 1 0 0 1 1-1h5v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3h5a1 1 0 0 1 1 1v6h-1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1"/></svg>'

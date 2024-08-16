@@ -55,6 +55,7 @@ export function genDefaultHoverbarKeys() {
     // 也可以自定义 match 来匹配元素，此时 key 就随意了
     text: {
       menuKeys: [
+        'formatPainter',
         'headerSelect',
         'insertLink',
         'bulletedList',

@@ -97,4 +97,7 @@ export default {
   todo: {
     todo: '待办',
   },
+  formatPainter: {
+    title: '格式刷',
+  },
 }

@@ -14,6 +14,7 @@ import {
 
 export function genDefaultToolbarKeys() {
   return [
+    'formatPainter',
     'headerSelect',
     // 'header1',
     // 'header2',
