@@ -92,7 +92,7 @@ class EditLinkMenu implements IModalMenu {
       const $content = $('<div></div>')
 
       // 绑定事件（第一次渲染时绑定，不要重复绑定）
-      $content.on('click', 'button', e => {
+      $content.on('click', `#${buttonId}`, e => {
         e.preventDefault()
         editor.restoreSelection() // 还原选区
 
