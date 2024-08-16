@@ -35,7 +35,9 @@ describe('decrease indent menu', () => {
     // Transforms.removeNodes(editor, { mode: 'highest' }) // 移除 pre/code
   })
 
-  // isActive 不用测试
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   // getValue 在 increase menu 已测试过
 

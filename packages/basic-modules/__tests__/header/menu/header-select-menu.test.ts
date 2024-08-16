@@ -24,7 +24,9 @@ describe('header select menu', () => {
     expect(selectedHeader).toBeTruthy()
   })
 
-  // isActive 无逻辑，不用测试
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   // getValue isDisabled exec 已经在 helper.test.ts 中测试过了
 })
