@@ -11,18 +11,26 @@ describe('link - parse html', () => {
   const editor = createEditor()
 
   it('without children', () => {
-    const $link = $('<a href="http://localhost/" target="_blank">hello world</a>')
+    const $link = $('<a href="http://localhost/" target="_blank"></a>')
+    const table = [{ type: 'table-cell', children: [{ text: 'hello world' }] }]
+    const image = [{ type: 'image', children: [{ text: '' }] }]
 
-    // match selector
-    expect($link[0].matches(parseHtmlConf.selector)).toBeTruthy()
-
-    // parse
-    const res = parseHtmlConf.parseElemHtml($link[0], [], editor)
+    // parse is block
+    let res = parseHtmlConf.parseElemHtml($link[0], table, editor)
     expect(res).toEqual({
       type: 'link',
       url: 'http://localhost/',
       target: '_blank',
-      children: [{ text: 'hello world' }],
+      children: [{ text: '' }],
+    })
+
+    // parse is inline
+    res = parseHtmlConf.parseElemHtml($link[0], image, editor)
+    expect(res).toEqual({
+      type: 'link',
+      url: 'http://localhost/',
+      target: '_blank',
+      children: [{ type: 'image', children: [{ text: '' }] }],
     })
   })
 

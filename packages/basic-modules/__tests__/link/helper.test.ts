@@ -106,6 +106,18 @@ describe('link module helper', () => {
     expect(linkElem.url).toBe(url)
   })
 
+  it('insert link with collapsed max length left length = 0', async () => {
+    editor.select(startLocation)
+    editor.insertText('123445678901234567890')
+
+    editor.select(startLocation)
+    const url = 'https://cycleccc.github.io/docs/'
+
+    await insertLink(editor, 'hello', url)
+    const links = editor.getElemsByTypePrefix('link')
+    expect(links.length).toBe(0)
+  })
+
   it('insert link with expand selection', async () => {
     editor.select(startLocation)
     editor.insertText('hello')
