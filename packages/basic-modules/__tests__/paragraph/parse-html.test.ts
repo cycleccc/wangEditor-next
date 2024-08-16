@@ -12,12 +12,24 @@ describe('paragraph - parse html', () => {
 
   it('without children', () => {
     const $elem = $('<p>hello&nbsp;world</p>')
+    const image = [{ type: 'image', children: [{ text: '' }] }]
+    const table = [{ type: 'table-cell', children: [{ text: 'hello world' }] }]
 
     // match selector
     expect($elem[0].matches(parseParagraphHtmlConf.selector)).toBeTruthy()
 
     // parse
-    const res = parseParagraphHtmlConf.parseElemHtml($elem[0], [], editor)
+    let res = parseParagraphHtmlConf.parseElemHtml($elem[0], [], editor)
+    expect(res).toEqual({
+      type: 'paragraph',
+      children: [{ text: 'hello world' }],
+    })
+    res = parseParagraphHtmlConf.parseElemHtml($elem[0], image, editor)
+    expect(res).toEqual({
+      type: 'paragraph',
+      children: [{ type: 'image', children: [{ text: '' }] }],
+    })
+    res = parseParagraphHtmlConf.parseElemHtml($elem[0], table, editor)
     expect(res).toEqual({
       type: 'paragraph',
       children: [{ text: 'hello world' }],
@@ -27,18 +39,12 @@ describe('paragraph - parse html', () => {
   it('with children', () => {
     const $elem = $('<p></p>')
     const children = [{ text: 'hello ' }, { text: 'world', bold: true }]
-    const image = [{ type: 'image', children: [{ text: '' }] }]
 
     // parse
-    let res = parseParagraphHtmlConf.parseElemHtml($elem[0], children, editor)
+    const res = parseParagraphHtmlConf.parseElemHtml($elem[0], children, editor)
     expect(res).toEqual({
       type: 'paragraph',
       children: [{ text: 'hello ' }, { text: 'world', bold: true }],
-    })
-    res = parseParagraphHtmlConf.parseElemHtml($elem[0], image, editor)
-    expect(res).toEqual({
-      type: 'paragraph',
-      children: [{ type: 'image', children: [{ text: '' }] }],
     })
   })
 })
