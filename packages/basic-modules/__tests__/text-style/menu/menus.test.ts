@@ -46,6 +46,8 @@ describe('text style menus', () => {
       editor.select([])
       editor.addMark(mark, true)
       expect(menu.isActive(editor)).toBeTruthy()
+      editor.setHtml(`<p>hello</p>`)
+      expect(menu.isActive(editor)).toBeFalsy()
     })
   })
 
