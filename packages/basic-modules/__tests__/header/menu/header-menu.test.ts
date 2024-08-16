@@ -10,6 +10,7 @@ import Header2ButtonMenu from '../../../src/modules/header/menu/Header2ButtonMen
 import Header3ButtonMenu from '../../../src/modules/header/menu/Header3ButtonMenu'
 import Header4ButtonMenu from '../../../src/modules/header/menu/Header4ButtonMenu'
 import Header5ButtonMenu from '../../../src/modules/header/menu/Header5ButtonMenu'
+import Header6ButtonMenu from '../../../src/modules/header/menu/Header6ButtonMenu'
 
 describe('header menu', () => {
   const editor = createEditor()
@@ -17,6 +18,19 @@ describe('header menu', () => {
 
   describe('header1 menu', () => {
     const menu = new Header1ButtonMenu()
+
+    it('get value', () => {
+      expect(menu.getValue(editor)).toBe('paragraph')
+    })
+
+    it('is active', () => {
+      expect(menu.isActive(editor)).toBeFalsy()
+    })
+
+    it('is disabled', () => {
+      editor.select(startLocation)
+      expect(menu.isDisabled(editor)).toBeFalsy()
+    })
 
     it('exec', () => {
       editor.select(startLocation)
@@ -91,6 +105,21 @@ describe('header menu', () => {
 
       menu.exec(editor, 'header5') // 取消 header（ header5 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header5')
+      expect(headers2.length).toBe(0)
+    })
+  })
+  describe('header6 menu', () => {
+    const menu = new Header6ButtonMenu()
+
+    it('exec', () => {
+      editor.select(startLocation)
+
+      menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
+      const headers1 = editor.getElemsByTypePrefix('header6')
+      expect(headers1.length).toBe(1)
+
+      menu.exec(editor, 'header6') // 取消 header（ header6 是当前选中的 node type ）
+      const headers2 = editor.getElemsByTypePrefix('header6')
       expect(headers2.length).toBe(0)
     })
   })

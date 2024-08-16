@@ -10,14 +10,20 @@ import withHeader from '../../src/modules/header/plugin'
 describe('header plugin', () => {
   const editor = withHeader(createEditor())
   const startLocation = Editor.start(editor, [])
+  const endLocation = Editor.end(editor, [])
 
   it('header break', () => {
     editor.select(startLocation)
 
-    Transforms.setNodes(editor, { type: 'header1' })
+    editor.insertBreak()
+    editor.insertText('hello')
+    Transforms.setNodes(editor, { type: 'header1', children: [] })
+    editor.select({ path: [1, 0], offset: 2 })
     editor.insertBreak() // 在 header 换行，会生成 p
+    editor.select({ path: [1, 0], offset: 2 })
+    editor.insertBreak()
 
     const paragraphs = editor.getElemsByTypePrefix('paragraph')
-    expect(paragraphs.length).toBe(1)
+    expect(paragraphs.length).toBe(2)
   })
 })

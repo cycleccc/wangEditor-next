@@ -28,5 +28,16 @@ describe('header select menu', () => {
     expect(menu.isActive(editor)).toBeFalsy()
   })
 
-  // getValue isDisabled exec 已经在 helper.test.ts 中测试过了
+  it('is disabled', () => {
+    editor.select(startLocation)
+    expect(menu.isDisabled(editor)).toBeFalsy()
+  })
+
+  it('exec', () => {
+    editor.select(startLocation)
+
+    menu.exec(editor, 'header1')
+    const headers1 = editor.getElemsByTypePrefix('header1')
+    expect(headers1.length).toBe(1)
+  })
 })

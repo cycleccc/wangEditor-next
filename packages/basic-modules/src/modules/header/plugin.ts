@@ -28,7 +28,7 @@ function withHeader<T extends IDomEditor>(editor: T): T {
 
     const isAtLineEnd = DomEditor.isSelectionAtLineEnd(editor, match[1])
 
-    // 如果在行末插入一个空 p，否则正常换行
+    // 如果在行末则插入一个空 p，否则正常换行
     if (isAtLineEnd) {
       const p = { type: 'paragraph', children: [{ text: '' }] }
       Transforms.insertNodes(newEditor, p, { mode: 'highest' })
