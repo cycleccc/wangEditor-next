@@ -32,7 +32,9 @@ describe('increase indent menu', () => {
 
     editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
     expect(menu.isDisabled(editor)).toBeTruthy() // 除了 p header 之外，其他 type 不可用 indent
-    // Transforms.removeNodes(editor, { mode: 'highest' }) // 移除 pre/code
+    Transforms.setNodes(editor, { type: 'header1', children: [{ text: 'hello' }] })
+    menu.exec(editor, '')
+    expect(menu.isDisabled(editor)).toBeTruthy() // 除了 p header 之外，其他 type 不可用 indent
   })
 
   it('is active', () => {
