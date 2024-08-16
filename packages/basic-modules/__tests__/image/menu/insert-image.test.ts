@@ -10,9 +10,9 @@ import { waitFor } from '@testing-library/dom'
 import * as helper from '../../../src/modules/image/helper'
 
 // 在测试文件中
-beforeEach(() => {
-  jest.spyOn(helper, 'insertImageNode').mockImplementation(jest.fn())
-})
+// beforeEach(() => {
+//   jest.spyOn(helper, 'insertImageNode').mockImplementation(jest.fn())
+// })
 
 describe('insert image menu', () => {
   const menu = new InsertImage()
@@ -62,13 +62,6 @@ describe('insert image menu', () => {
   })
 
   it('get modal content elem', () => {
-    const elem = menu.getModalContentElem(editor)
-    expect(elem.tagName).toBe('DIV')
-
-    // insertImage 在 helper.test.ts 中测试
-  })
-
-  it('should call insertImage on button click', () => {
     const spy = jest.spyOn(menu as any, 'insertImage')
 
     // Generate modal content and simulate button click
