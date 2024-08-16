@@ -15,5 +15,14 @@ describe('font size and family - text style to html', () => {
     expect(html).toBe(
       `<span style="font-size: ${fontSize}; font-family: ${fontFamily};">hello</span>`
     )
+
+    const textHtml = styleToHtml(textNode, 'hello')
+    expect(textHtml).toBe(
+      `<span style="font-size: ${fontSize}; font-family: ${fontFamily};">hello</span>`
+    )
+    const pHtml = styleToHtml(textNode, '<p>hello</p>')
+    expect(pHtml).toBe(
+      `<span style="font-size: ${fontSize}; font-family: ${fontFamily};"><p>hello</p></span>`
+    )
   })
 })

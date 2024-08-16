@@ -36,7 +36,9 @@ describe('font family menu', () => {
     expect(selectedHeiti).toBeTruthy()
   })
 
-  // isActive 无代码逻辑，不用测试
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   it('is disabled', () => {
     editor.select(startLocation)
