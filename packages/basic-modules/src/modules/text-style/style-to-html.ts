@@ -43,11 +43,6 @@ export function styleToHtml(textNode: Descendant, textHtml: string): string {
 
   // textHtml 是 html tag
   const $text = $(textHtml)
-  const tagName = getTagName($text)
-
-  if (tagName === 'br') {
-    return genStyledHtml(textNode, '<br>')
-  }
 
   let innerHtml = $text.html()
   innerHtml = genStyledHtml(textNode, innerHtml)
