@@ -13,6 +13,9 @@ describe('todo - plugin', () => {
         content: [{ type: 'todo', children: [{ text: '' }] }],
       })
     )
+
+    // test without selection
+    editor.deleteBackward('character')
     editor.select({
       path: [0, 0],
       offset: 0,

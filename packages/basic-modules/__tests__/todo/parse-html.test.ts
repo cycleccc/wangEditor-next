@@ -28,16 +28,23 @@ describe('todo - parse html', () => {
   it('without children, unchecked', () => {
     const $todo = $('<div data-w-e-type="todo"><input type="checkbox" disabled></div>')
     const children = [{ text: 'hello ' }, { text: 'world', bold: true }]
+    const image = [{ type: 'image', children: [{ text: '' }] }]
 
     // match selector
     expect($todo[0].matches(parseHtmlConf.selector)).toBeTruthy()
 
     // parse
-    const res = parseHtmlConf.parseElemHtml($todo[0], children, editor)
+    let res = parseHtmlConf.parseElemHtml($todo[0], children, editor)
     expect(res).toEqual({
       type: 'todo',
       checked: false,
       children: [{ text: 'hello ' }, { text: 'world', bold: true }],
+    })
+    res = parseHtmlConf.parseElemHtml($todo[0], image, editor)
+    expect(res).toEqual({
+      type: 'todo',
+      checked: false,
+      children: [{ type: 'image', children: [{ text: '' }] }],
     })
   })
 })
