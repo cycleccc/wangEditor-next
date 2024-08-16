@@ -22,7 +22,13 @@ describe('font family menu', () => {
     startLocation = null
   })
 
-  // exec getValue isActive 无代码逻辑，不用测试
+  it('get value', () => {
+    expect(menu.getValue(editor)).toBe('')
+  })
+
+  it('is active', () => {
+    expect(menu.isActive(editor)).toBeFalsy()
+  })
 
   it('is disabled', () => {
     editor.select(startLocation)
@@ -36,5 +42,12 @@ describe('font family menu', () => {
   it('get panel content elem', () => {
     const elem = menu.getPanelContentElem(editor)
     expect(elem instanceof HTMLElement).toBeTruthy()
+    document.body.appendChild(elem)
+
+    const li = elem.querySelector('li') as HTMLLIElement
+    editor.select([])
+    li.click()
+
+    expect(editor.getText()).toBe('😀')
   })
 })
