@@ -103,4 +103,20 @@ describe('code-highlight select lang menu', () => {
       done()
     })
   })
+
+  it('menu exec (without lang)', done => {
+    if (editor == null || menu == null) throw new Error('editor or menu is null')
+
+    // select codeNode
+    editor.select(codeLocation)
+    menu.exec(editor, 'hello') // change lang
+
+    setTimeout(() => {
+      if (editor == null || menu == null) return
+
+      editor.select(codeLocation)
+      expect(menu.getValue(editor)).toBe('')
+      done()
+    })
+  })
 })
