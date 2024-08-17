@@ -6,7 +6,7 @@
 import { IDomEditor } from '@wangeditor-next/core'
 import createEditor from '../../../tests/utils/create-editor'
 import { codeToHtmlConf } from '../src/module/elem-to-html'
-import { content, codeNode, language } from './content'
+import { content, codeNode, preNode, language } from './content'
 
 describe('code-highlight elem to html', () => {
   let editor: IDomEditor | null = null
@@ -30,7 +30,9 @@ describe('code-highlight elem to html', () => {
 
     if (editor == null) throw new Error('editor is null')
     const text = 'var n = 100;'
-    const html = codeToHtmlConf.elemToHtml(codeNode, text)
+    let html = codeToHtmlConf.elemToHtml(codeNode, text)
     expect(html).toBe(`<code class="language-${language}">${text}</code>`)
+    html = codeToHtmlConf.elemToHtml(preNode, text)
+    expect(html).toBe(`<code >${text}</code>`)
   })
 })

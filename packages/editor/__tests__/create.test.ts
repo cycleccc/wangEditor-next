@@ -5,6 +5,8 @@
 
 import { createEditor, createToolbar } from '../../../packages/editor/src/index'
 import { ICreateEditorOption, ICreateToolbarOption } from '../../../packages/editor/src/create'
+import { DOMElement } from '../../../packages/editor/src/utils/dom'
+import Boot from '../../../packages/editor/src/Boot'
 
 function customCreateEditor(config: Partial<ICreateEditorOption> = {}) {
   const editorContainer = document.createElement('div')
@@ -29,7 +31,7 @@ function customCreateToolbar(config: Partial<ICreateToolbarOption> = {}) {
   // create toolbar
   const toolbar = createToolbar({
     editor,
-    selector: toolbarContainer,
+    selector: toolbarContainer as DOMElement,
     ...config,
   })
 
@@ -37,6 +39,22 @@ function customCreateToolbar(config: Partial<ICreateToolbarOption> = {}) {
 }
 
 describe('create editor and toolbar', () => {
+  test('create editor selector undefind', () => {
+    const editor = customCreateEditor()
+    expect(() => {
+      createToolbar({
+        editor,
+        selector: undefined as any,
+      })
+    }).toThrow(`Cannot find 'selector' when create toolbar`)
+  })
+
+  test('test new Boot and registerModule', () => {
+    expect(() => {
+      new Boot()
+    }).toThrow('不能实例化\nCan not construct a instance')
+  })
+
   test('create editor with default mode', () => {
     const editor = customCreateEditor()
 
