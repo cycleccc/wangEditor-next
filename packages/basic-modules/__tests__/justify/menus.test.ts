@@ -29,7 +29,13 @@ describe('justify menus', () => {
     startLocation = null
   })
 
-  // getValue getActive 不需要测试
+  it('get value', () => {
+    expect(centerMenu.getValue(editor)).toBe('')
+  })
+
+  it('is active', () => {
+    expect(centerMenu.isActive(editor)).toBeFalsy()
+  })
 
   it('is disabled', () => {
     editor.deselect()
@@ -40,7 +46,10 @@ describe('justify menus', () => {
 
     editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
     expect(centerMenu.isDisabled(editor)).toBeTruthy()
-    // Transforms.removeNodes(editor, { mode: 'highest' }) // 移除 pre/code
+    Transforms.removeNodes(editor, { mode: 'highest' })
+
+    editor.insertNode({ type: 'divider', children: [{ text: '' }] })
+    expect(centerMenu.isDisabled(editor)).toBeTruthy()
   })
 
   it('exec', () => {
