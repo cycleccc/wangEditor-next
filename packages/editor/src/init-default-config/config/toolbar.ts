@@ -14,7 +14,6 @@ import {
 
 export function genDefaultToolbarKeys() {
   return [
-    'formatPainter',
     'headerSelect',
     // 'header1',
     // 'header2',
@@ -83,6 +82,7 @@ export function genDefaultToolbarKeys() {
     'undo',
     'redo',
     '|',
+    'formatPainter',
     'fullScreen',
   ]
 }

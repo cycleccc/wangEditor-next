@@ -6,7 +6,7 @@
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
 import { SlateEditor } from '@wangeditor-next/editor'
 import { FORMAT_PAINTER } from '../../../constants/icon-svg'
-import { Element, Text } from 'slate'
+import { Text } from 'slate'
 import { clearAllMarks } from '../helper'
 
 interface FormatPaintAttributes {
