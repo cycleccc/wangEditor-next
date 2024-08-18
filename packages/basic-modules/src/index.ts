@@ -26,6 +26,7 @@ import wangEditorDividerModule from './modules/divider'
 import wangEditorCodeBlockModule from './modules/code-block'
 import wangEditorFullScreenModule from './modules/full-screen'
 import wangEditorCommonModule from './modules/common'
+import wangEditorFormatPainterModule from './modules/format-painter'
 
 export default [
   // text style
@@ -54,6 +55,7 @@ export default [
   wangEditorTodoModule,
 
   // command
+  wangEditorFormatPainterModule,
   wangEditorUndoRedoModule,
   wangEditorFullScreenModule,
   wangEditorCommonModule,

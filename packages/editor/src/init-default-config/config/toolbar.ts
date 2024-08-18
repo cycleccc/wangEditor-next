@@ -82,6 +82,7 @@ export function genDefaultToolbarKeys() {
     'undo',
     'redo',
     '|',
+    'formatPainter',
     'fullScreen',
   ]
 }
