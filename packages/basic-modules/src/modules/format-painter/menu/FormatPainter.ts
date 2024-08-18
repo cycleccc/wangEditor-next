@@ -4,9 +4,8 @@
  */
 
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
-import { SlateEditor } from '@wangeditor-next/editor'
 import { FORMAT_PAINTER } from '../../../constants/icon-svg'
-import { Text } from 'slate'
+import { Text, Editor } from 'slate'
 import { clearAllMarks } from '../helper'
 
 interface FormatPaintAttributes {
@@ -54,7 +53,7 @@ class FormatPainter implements IButtonMenu {
     } else {
       // 判断是否选中文本
       if (editor.getSelectionText().length) {
-        FormatPainter.attrs.formatStyle = SlateEditor.marks(editor)
+        FormatPainter.attrs.formatStyle = Editor.marks(editor)
         FormatPainter.attrs.isSelect = true
       }
     }
