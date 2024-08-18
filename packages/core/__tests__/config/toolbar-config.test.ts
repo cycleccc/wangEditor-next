@@ -34,6 +34,27 @@ describe('toolbar config', () => {
     expect(toolbarKeys.length).toBeGreaterThan(0)
   })
 
+  it('create editor is null', () => {
+    const container = document.createElement('div')
+    expect(() => {
+      createToolbarForSrc(null as unknown as IDomEditor, {
+        selector: container,
+      })
+    }).toThrow(`Cannot create toolbar, because editor is null`)
+  })
+
+  it('repeat create tool bar', () => {
+    const container = document.createElement('div')
+    createToolbarForSrc(editor, {
+      selector: container,
+    })
+    expect(() => {
+      createToolbarForSrc(editor, {
+        selector: container,
+      })
+    }).toThrow(`Repeated create toolbar by selector '${container}'`)
+  })
+
   it('toolbarKeys', () => {
     const keys = ['mySelectMenu', 'myModalMenu']
 

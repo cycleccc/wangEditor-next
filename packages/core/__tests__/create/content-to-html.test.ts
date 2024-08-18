@@ -3,6 +3,7 @@
  * @author wangfupeng
  */
 
+import { IDomEditor } from '../../src'
 import createEditor from '../../src/create/create-editor'
 
 describe('convert to html or text', () => {
@@ -18,8 +19,44 @@ describe('convert to html or text', () => {
   })
 
   it('convert to html if give selector option', () => {
+    const fn = e => {
+      return e
+    }
+    const editorConfig = { hoverbarKeys: {} }
+    editorConfig.hoverbarKeys = {
+      link: {
+        menuKeys: ['editLink', 'unLink', 'viewLink'],
+      },
+      image: {
+        menuKeys: [],
+      },
+    }
     const editor = createEditor({
       selector: container,
+      content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
+      plugins: [fn],
+      config: editorConfig,
+    })
+    expect(editor.getHtml()).toBe('<div>hello</div>')
+  })
+
+  it('repeat create editor by same selector', () => {
+    let editor = createEditor({
+      selector: container,
+      content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
+    })
+    expect(editor.getHtml()).toBe('<div>hello</div>')
+    expect(() => {
+      createEditor({
+        selector: container,
+        content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
+      })
+    }).toThrow(`Repeated create editor by selector '${container}'`)
+  })
+
+  it('convert to html if not give selector option', () => {
+    const editor = createEditor({
+      // 不传入 selector ，只有 content
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
     expect(editor.getHtml()).toBe('<div>hello</div>')
@@ -27,8 +64,8 @@ describe('convert to html or text', () => {
 
   it('convert to html if not give selector option', () => {
     const editor = createEditor({
-      // 不传入 selector ，只有 content
-      content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
+      // 不传入 selector ，只有 html
+      html: `hello`,
     })
     expect(editor.getHtml()).toBe('<div>hello</div>')
   })
