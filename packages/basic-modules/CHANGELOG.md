@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.4.2...@wangeditor-next/basic-modules@1.5.0) (2024-08-18)
+
+
+### Bug Fixes
+
+* **format painter:** modify import name ([0cb36dd](https://github.com/cycleccc/wangEditor/commit/0cb36dd2422a27d20cbc0a677c861d3d321af8eb))
+* **link:** typo error ([6a463ad](https://github.com/cycleccc/wangEditor/commit/6a463ad4df50c53c77503c593bdbc4421669a3b3))
+
+
+### Features
+
+* **format painter menu:** add format painter menu ([93a2d4b](https://github.com/cycleccc/wangEditor/commit/93a2d4b4da3632eb15ed7d4aa65499ab3249cdbd))
+
+
+
+
+
 ## [1.4.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/basic-modules@1.4.1...@wangeditor-next/basic-modules@1.4.2) (2024-08-15)
 
 

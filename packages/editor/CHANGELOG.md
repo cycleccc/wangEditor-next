@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.5.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.4.2...@wangeditor-next/editor@5.5.0) (2024-08-18)
+
+
+### Features
+
+* **format painter menu:** add format painter menu ([93a2d4b](https://github.com/cycleccc/wangEditor/commit/93a2d4b4da3632eb15ed7d4aa65499ab3249cdbd))
+
+
+
+
+
 ## [5.4.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/editor@5.4.1...@wangeditor-next/editor@5.4.2) (2024-08-15)
 
 **Note:** Version bump only for package @wangeditor-next/editor
