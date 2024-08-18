@@ -7,6 +7,8 @@ import { Editor, Transforms, Node, Selection } from 'slate'
 import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 import { withContent } from '../../../src/editor/plugins/with-content'
 import { IDomEditor } from '../../../src/editor/interface'
+import { ParseElemHtmlFnType, registerParseElemHtmlConf } from '../../../src'
+import { parseHtmlConf } from '../../../../basic-modules/src/modules/link/parse-elem-html'
 
 function createEditor(...args) {
   return withContent(createCoreEditor(...args))
@@ -291,10 +293,21 @@ describe('editor content API', () => {
       // insertText 必须要设置 selection 才能生效
       setEditorSelection(editor)
 
-      const htmlString = '<div>wangEditor!</div>'
+      let htmlString = '<div>1</div>'
       editor.dangerouslyInsertHtml(htmlString)
 
-      expect(editor.getText().indexOf('wangEditor')).toBeGreaterThan(-1)
+      expect(editor.getText().indexOf('1')).toBeGreaterThan(-1)
+      htmlString = '<br/>'
+      expect(editor.dangerouslyInsertHtml(htmlString)).toBeUndefined()
+      htmlString = '<span>2</span>'
+      expect(editor.dangerouslyInsertHtml(htmlString)).toBeUndefined()
+      htmlString = '<a>3</a>'
+      registerParseElemHtmlConf(parseHtmlConf)
+      expect(editor.dangerouslyInsertHtml(htmlString)).toBeUndefined()
+      expect(editor.children).toStrictEqual([
+        { children: [{ text: '1\n2' }], type: 'paragraph' },
+        { children: [{ text: '3' }], url: '', target: '', type: 'link' },
+      ])
     })
 
     ignoreTag.forEach(tag => {
