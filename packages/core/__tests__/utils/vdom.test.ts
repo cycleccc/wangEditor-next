@@ -10,6 +10,18 @@ import {
   addVnodeDataset,
   addVnodeStyle,
 } from '../../src/utils/vdom'
+import {
+  DOMRange,
+  isDataTransfer,
+  isDOMComment,
+  isDOMSelection,
+  isDOMText,
+  isHTMLElememt,
+  isPlainTextOnlyPaste,
+  DOMPoint,
+  normalizeDOMPoint,
+  NodeType,
+} from '../../src/utils/dom'
 
 describe('vdom util fns', () => {
   it('normalize vnode data', () => {
@@ -70,5 +82,64 @@ describe('vdom util fns', () => {
 
     const { style = {} } = vnode.data || {}
     expect(style.k1).toBe('v1')
+  })
+
+  it('is dataTransfer', () => {
+    // node 环境 无法获取 DataTransfer 的类型
+    expect(isDataTransfer(new DataTransfer())).toBeFalsy()
+  })
+
+  it('is HTMLElememt', () => {
+    expect(isHTMLElememt(document.createElement('div'))).toBeTruthy()
+  })
+
+  it('is DOMElement', () => {
+    const mockDOMNode = {
+      nodeType: 8, // Element 类型的 nodeType
+    }
+    expect(isDOMComment(mockDOMNode)).toBeTruthy()
+  })
+
+  it('is Selection', () => {
+    // node 环境 无法获取 Range 的类型
+    expect(isDOMSelection(new Range())).toBeFalsy()
+  })
+
+  it('is DomText', () => {
+    const mockDOMNode = {
+      nodeType: 3, // Element 类型的 nodeType
+    }
+    expect(isDOMText(mockDOMNode)).toBeTruthy()
+  })
+
+  it('is PlainTextOnlyPaste', () => {
+    const clipboardData = {
+      getData: (type: string) => (type === 'text/plain' ? 'test' : ''),
+      types: ['text/plain'],
+    }
+
+    const event = {
+      clipboardData,
+    } as unknown as ClipboardEvent
+    expect(isPlainTextOnlyPaste(event)).toBeTruthy()
+  })
+
+  it('should handle the case where offset is at the end and adjust accordingly', () => {
+    let mockDOMNode = {
+      nodeType: 1, // Element 类型的 nodeType
+      childNodes: [],
+    } as unknown as Node
+
+    let domPoint = [mockDOMNode, 1] as DOMPoint
+
+    let result = normalizeDOMPoint(domPoint)
+    expect(result).toEqual(domPoint)
+    mockDOMNode = {
+      nodeType: 1, // Element 类型的 nodeType
+      childNodes: [{ nodeType: 8 }],
+    } as unknown as Node
+    domPoint = [mockDOMNode, 1] as DOMPoint
+    result = normalizeDOMPoint(domPoint)
+    expect(result).toEqual([{ nodeType: 8 }, 0])
   })
 })
