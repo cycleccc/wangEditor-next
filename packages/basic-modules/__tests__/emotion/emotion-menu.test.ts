@@ -6,6 +6,7 @@
 import { Editor, Transforms } from 'slate'
 import createEditor from '../../../../tests/utils/create-editor'
 import EmotionMenu from '../../src/modules/emotion/menu/EmotionMenu'
+import { isHTMLElememt } from '../../../../packages/core/src/utils/dom'
 
 describe('font family menu', () => {
   const menu = new EmotionMenu()
@@ -41,7 +42,7 @@ describe('font family menu', () => {
 
   it('get panel content elem', () => {
     const elem = menu.getPanelContentElem(editor)
-    expect(elem instanceof HTMLElement).toBeTruthy()
+    expect(isHTMLElememt(elem)).toBeTruthy()
     document.body.appendChild(elem)
 
     const li = elem.querySelector('li') as HTMLLIElement

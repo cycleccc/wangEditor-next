@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle'
 import { Element as SlateElement, Transforms, Editor } from 'slate'
-import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import { IDomEditor, isHTMLElememt } from '@wangeditor-next/core'
 import { TableElement } from './custom-types'
 import { isOfType } from '../utils'
 import $ from '../utils/dom'
@@ -40,7 +40,7 @@ export function getColumnWidthRatios(columnWidths: number[]) {
  */
 let resizeObserver: ResizeObserver | null = null
 export function observerTableResize(editor: IDomEditor, elm: Node | undefined) {
-  if (elm instanceof HTMLElement) {
+  if (isHTMLElememt(elm)) {
     const table = elm.querySelector('table')
     if (table) {
       resizeObserver = new ResizeObserver(([{ contentRect }]) => {
@@ -183,7 +183,7 @@ export function handleCellBorderVisible(editor: IDomEditor, elemNode: SlateEleme
   // Cell Border 宽度为 10px
   const { clientX, target } = e
   // 当单元格合并的时候，鼠标在 cell 中间，则不显示 cell border
-  if (target instanceof HTMLElement) {
+  if (isHTMLElememt(target)) {
     const rect = target.getBoundingClientRect()
 
     if (clientX > rect.x + 5 && clientX < rect.x + rect.width - 5) {
@@ -197,7 +197,7 @@ export function handleCellBorderVisible(editor: IDomEditor, elemNode: SlateEleme
       return
     }
   }
-  if (target instanceof HTMLElement) {
+  if (isHTMLElememt(target)) {
     const parent = target.closest('.table')
     if (parent) {
       const { clientX } = e

@@ -3,6 +3,7 @@
  * @author luochao
  */
 
+import { isHTMLElememt } from '../../../../packages/core/src/utils/dom'
 import createEditor from '../../../../tests/utils/create-editor'
 import InsertVideoMenu from '../../src/module/menu/InsertVideoMenu'
 import * as core from '@wangeditor-next/core'
@@ -55,7 +56,7 @@ describe('videoModule module', () => {
     })
 
     test('InsertVideoMenu invoke getModalContentElem should return HTML element', () => {
-      expect(insertVideoMenu.getModalContentElem(editor) instanceof HTMLElement).toBe(true)
+      expect(isHTMLElememt(insertVideoMenu.getModalContentElem(editor))).toBe(true)
     })
   })
 })

@@ -4,7 +4,8 @@ import { TABLE_SVG } from '../../src/constants/svg'
 import locale from '../../src/locale/zh-CN'
 import * as slate from 'slate'
 import * as core from '@wangeditor-next/core'
-import $, { DOMElement } from '../../src/utils/dom'
+import $ from '../../src/utils/dom'
+import { isDOMElement } from './../../../core/src/utils/dom'
 
 function setEditorSelection(
   editor: core.IDomEditor,
@@ -111,7 +112,7 @@ describe('Table Module Insert Table Menu', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
 
-    expect(insertTableMenu.getPanelContentElem(editor) instanceof DOMElement).toBeTruthy()
+    expect(isDOMElement(insertTableMenu.getPanelContentElem(editor))).toBeTruthy()
     expect(insertTableMenu.getPanelContentElem(editor).className).toBe('w-e-panel-content-table')
   })
 

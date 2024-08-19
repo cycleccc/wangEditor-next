@@ -39,6 +39,9 @@ export * from './upload/index'
 // i18n
 export * from './i18n/index'
 
+// dom utils
+export * from './utils/dom'
+
 export interface IModuleConf {
   // 注册菜单
   menus: Array<IRegisterMenuConf>

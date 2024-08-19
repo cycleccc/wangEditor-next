@@ -7,6 +7,7 @@ import { Editor, Transforms } from 'slate'
 import createEditor from '../../../../tests/utils/create-editor'
 import ColorMenu from '../../src/modules/color/menu/ColorMenu'
 import BgColorMenu from '../../src/modules/color/menu/BgColorMenu'
+import { isHTMLElememt } from '../../../../packages/core/src/utils/dom'
 
 describe('color menus', () => {
   let editor: any
@@ -68,7 +69,7 @@ describe('color menus', () => {
   it('get panel content elem', () => {
     menus.forEach(({ menu }) => {
       const elem = menu.getPanelContentElem(editor)
-      expect(elem instanceof HTMLElement).toBeTruthy()
+      expect(isHTMLElememt(elem)).toBeTruthy()
     })
   })
   it('should handle click event and add mark to editor', () => {
