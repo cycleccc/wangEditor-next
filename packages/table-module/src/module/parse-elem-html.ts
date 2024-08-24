@@ -87,14 +87,25 @@ function parseTableHtml(
     // @ts-ignore
     children: children.filter(child => DomEditor.getNodeType(child) === 'table-row'),
   }
-  let cellLength: number | undefined = $elem.find('tr')[0]?.children.length
-  let colgroupElments: HTMLCollection = $elem.find('colgroup')[0]?.children || null
+  const tdList = $elem.find('tr')[0]?.children || []
+  const colgroupElments: HTMLCollection = $elem.find('colgroup')[0]?.children || null
   if (colgroupElments) {
     tableELement.columnWidths = Array.from(colgroupElments).map((col: any) => {
       return parseInt(col.getAttribute('width'))
     })
-  } else if (cellLength > 0) {
-    tableELement.columnWidths = Array(cellLength).fill(180)
+  } else if (tdList.length > 0) {
+    const columnWidths: number[] = []
+
+    Array.from(tdList).forEach(td => {
+      const colspan = parseInt($(td).attr('colspan') || '1', 10) // 获取 colspan，默认为 1
+      const width = parseInt(getStyleValue($(td), 'width') || '180', 10) // 获取 width，默认为 180
+
+      // 根据 colspan 的值来填充 columnWidths 数组
+      for (let i = 0; i < colspan; i++) {
+        columnWidths.push(width)
+      }
+    })
+    tableELement.columnWidths = columnWidths
   }
   return tableELement
 }
