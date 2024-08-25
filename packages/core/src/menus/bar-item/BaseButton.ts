@@ -120,6 +120,8 @@ abstract class BaseButton implements IBarItem {
       // 取消 disabled
       $button.removeClass(className)
     }
+
+    this.disabled = disabled // 记录下来
   }
 
   private setIcon() {
