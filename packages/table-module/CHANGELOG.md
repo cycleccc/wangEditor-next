@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.0...@wangeditor-next/table-module@1.5.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **table:** add default columnWidths by first row ([3dadf67](https://github.com/cycleccc/wangEditor/commit/3dadf6760d81f75053dac469813a811946efdf81))
+
+
+
+
+
 # [1.5.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.3.8...@wangeditor-next/table-module@1.5.0) (2024-08-15)
 
 

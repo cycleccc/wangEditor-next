@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.7.0...@wangeditor-next/core@1.7.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **base button menu:** record disabled status ([9a7ab29](https://github.com/cycleccc/wangEditor/commit/9a7ab29fe16666799a20e6173d24b3cb5707f06c))
+* **table:** filter microsoft word o:p tag ([173c08d](https://github.com/cycleccc/wangEditor/commit/173c08d2fd0ff6154bc20dc2931b5856cbc7b228))
+
+
+
+
+
 # [1.7.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.5.6...@wangeditor-next/core@1.7.0) (2024-08-15)
 
 

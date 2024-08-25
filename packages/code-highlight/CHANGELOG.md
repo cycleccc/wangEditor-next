@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/code-highlight@1.2.2...@wangeditor-next/code-highlight@1.2.3) (2024-08-25)
+
+**Note:** Version bump only for package @wangeditor-next/code-highlight
+
+
+
+
+
 ## [1.2.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/code-highlight@1.2.1...@wangeditor-next/code-highlight@1.2.2) (2024-08-18)
 
 **Note:** Version bump only for package @wangeditor-next/code-highlight
