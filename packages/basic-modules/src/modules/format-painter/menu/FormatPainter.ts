@@ -35,24 +35,27 @@ class FormatPainter implements IButtonMenu {
   }
 
   setFormatHtml(editor: IDomEditor) {
-    if (!editor.getSelectionText().length) return
+    const selectionText = editor.getSelectionText()
+    if (!selectionText.length) return
     if (FormatPainter.attrs.formatStyle) {
       clearAllMarks(editor)
       for (const [key, value] of Object.entries(FormatPainter.attrs.formatStyle)) {
         editor.addMark(key, value)
       }
     }
-    FormatPainter.attrs.formatStyle = {}
+    FormatPainter.attrs.formatStyle = null
     FormatPainter.attrs.isSelect = false
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(editor: IDomEditor) {
     // 如果已经选中了格式刷则取消选中，反之保存已经选中文本的样式
     if (FormatPainter.attrs.isSelect) {
       FormatPainter.attrs.isSelect = false
+      FormatPainter.attrs.formatStyle = null
     } else {
+      const selectionText = editor.getSelectionText()
       // 判断是否选中文本
-      if (editor.getSelectionText().length) {
+      if (selectionText.length) {
         FormatPainter.attrs.formatStyle = Editor.marks(editor)
         FormatPainter.attrs.isSelect = true
       }
