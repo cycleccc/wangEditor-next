@@ -21,7 +21,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-          registry-url: https://registry.npmjs.com
+          registry-url: https://registry.npmjs.org
+
+      - name: Configure Git User
+        run: |
+          git config --global user.email "2991205548@qq.com"
+          git config --global user.name "cycleccc"
+
+      - name: Check if able to publish changes
+        run: npm whoami # will throw and exit if npm is not ready to publish
 
       - name: Install dependencies
         run: yarn install
