@@ -16,6 +16,7 @@ function parseCellHtml(
   const $elem = $(elem)
 
   children = children.filter(child => {
+    if (DomEditor.getNodeType(child) === 'paragraph') return true
     if (Text.isText(child)) return true
     if (editor.isInline(child)) return true
     return false
