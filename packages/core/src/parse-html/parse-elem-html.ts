@@ -9,8 +9,7 @@ import { IDomEditor } from '../editor/interface'
 import parseCommonElemHtml from './parse-common-elem-html'
 import parseTextElemHtml from './parse-text-elem-html'
 import { getTagName } from '../utils/dom'
-import { MICROSOFT_WORD_TAGS, PRE_PARSE_HTML_CONF_LIST, TEXT_TAGS } from '../index'
-import { CustomText } from '../../../custom-types'
+import { PRE_PARSE_HTML_CONF_LIST, TEXT_TAGS } from '../index'
 
 /**
  * 处理 DOM Elem html
@@ -36,14 +35,11 @@ function parseElemHtml($elem: Dom7Array, editor: IDomEditor): Descendant | Desce
     } else {
       if ($elem[0].childNodes.length > 1) {
         const childNodes = $elem[0].childNodes
-        return Array.from(childNodes).reduce<CustomText[]>((acc, child) => {
-          if (!MICROSOFT_WORD_TAGS.includes(child.nodeName)) {
-            $($elem[0]).empty()
-            $($elem[0]).append($(child))
-            acc.push(parseTextElemHtml($($elem[0]), editor))
-          }
-          return acc
-        }, [])
+        return Array.from(childNodes).map(child => {
+          $($elem[0]).empty()
+          $($elem[0]).append($(child))
+          return parseTextElemHtml($($elem[0]), editor)
+        })
       }
       return parseTextElemHtml($elem, editor)
     }

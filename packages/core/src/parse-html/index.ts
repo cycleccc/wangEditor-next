@@ -22,9 +22,6 @@ export const TEXT_TAGS = [
   'sup',
 ]
 
-// microsoft word 编辑器特殊的标签
-export const MICROSOFT_WORD_TAGS = ['O:P']
-
 // ------------------------------------ pre-parse html ------------------------------------
 export type PreParseHtmlFnType = ($node: DOMElement) => DOMElement
 
