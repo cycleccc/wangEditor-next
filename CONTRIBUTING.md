@@ -31,6 +31,7 @@
    type(xx module): 简要标题
    (此处为空行)
    详细描述
+   (此处为空行)
    相关 issue 链接
    ```
    样例
@@ -38,6 +39,7 @@
    fix(img link): image incorrectly converted to link
    
    dragging img elements from the page into the editor converts them to links
+   
    https://github.com/cycleccc/wangEditor-next/issues/52
    ```
 - **Pull Request**：将您的分支推送到远程仓库，并在GitHub上发起Pull Request。
