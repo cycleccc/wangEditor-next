@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/upload-image-module@1.1.3...@wangeditor-next/upload-image-module@1.1.4) (2024-08-29)
+
+
+### Reverts
+
+* Revert "chore: modify package publish config" ([7e2785e](https://github.com/cycleccc/wangEditor/commit/7e2785ede4512e19f8a337e745440e7bf9de2f30))
+
+
+
+
+
 ## [1.1.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/upload-image-module@1.1.2...@wangeditor-next/upload-image-module@1.1.3) (2024-08-25)
 
 **Note:** Version bump only for package @wangeditor-next/upload-image-module

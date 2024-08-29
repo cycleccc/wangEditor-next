@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.1...@wangeditor-next/table-module@1.5.2) (2024-08-29)
+
+
+### Bug Fixes
+
+* **table:** Compatible with more types ([0054352](https://github.com/cycleccc/wangEditor/commit/005435267e5d00e2e1d97aba33069a0820db4aeb)), closes [/github.com/cycleccc/wangEditor-next/issues/146#issuecomment-2309433045](https://github.com//github.com/cycleccc/wangEditor-next/issues/146/issues/issuecomment-2309433045)
+
+
+### Reverts
+
+* Revert "chore: modify package publish config" ([7e2785e](https://github.com/cycleccc/wangEditor/commit/7e2785ede4512e19f8a337e745440e7bf9de2f30))
+
+
+
+
+
 ## [1.5.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.0...@wangeditor-next/table-module@1.5.1) (2024-08-25)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.6...@wangeditor-next/list-module@1.1.7) (2024-08-29)
+
+
+### Reverts
+
+* Revert "chore: modify package publish config" ([7e2785e](https://github.com/cycleccc/wangEditor/commit/7e2785ede4512e19f8a337e745440e7bf9de2f30))
+
+
+
+
+
 ## [1.1.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.5...@wangeditor-next/list-module@1.1.6) (2024-08-25)
 
 **Note:** Version bump only for package @wangeditor-next/list-module

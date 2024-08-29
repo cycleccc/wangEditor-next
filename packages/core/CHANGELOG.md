@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.7.1...@wangeditor-next/core@1.7.2) (2024-08-29)
+
+
+### Reverts
+
+* Revert "fix(table): filter microsoft word o:p tag" ([17e4349](https://github.com/cycleccc/wangEditor/commit/17e4349c35f0f96aee3eef917527d859369722d7))
+* Revert "chore: modify package publish config" ([7e2785e](https://github.com/cycleccc/wangEditor/commit/7e2785ede4512e19f8a337e745440e7bf9de2f30))
+
+
+
+
+
 ## [1.7.1](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.7.0...@wangeditor-next/core@1.7.1) (2024-08-25)
 
 
