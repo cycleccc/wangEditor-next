@@ -11,6 +11,7 @@ import { SVG_DOWN_ARROW } from '../../constants/svg'
  * @param $elem svg elem
  */
 export function clearSvgStyle($elem: Dom7Array) {
+  if (!$elem.removeAttr) return
   $elem.removeAttr('width')
   $elem.removeAttr('height')
   $elem.removeAttr('fill')
