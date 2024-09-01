@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.2...@wangeditor-next/table-module@1.5.3) (2024-09-01)
+
+
+### Bug Fixes
+
+* resize in full width ([5529fa1](https://github.com/cycleccc/wangEditor/commit/5529fa1e94175c044583c669bd07156cd46d2032))
+
+
+
+
+
 ## [1.5.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.1...@wangeditor-next/table-module@1.5.2) (2024-08-29)
 
 

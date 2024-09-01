@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.7.2...@wangeditor-next/core@1.7.3) (2024-09-01)
+
+
+### Bug Fixes
+
+* **micro app:** fix removeAttr undefind ([c1398ac](https://github.com/cycleccc/wangEditor/commit/c1398ac0ffa615ab563db6bba261232868f64d84))
+
+
+
+
+
 ## [1.7.2](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/core@1.7.1...@wangeditor-next/core@1.7.2) (2024-08-29)
 
 
