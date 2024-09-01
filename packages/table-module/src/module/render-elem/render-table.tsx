@@ -113,10 +113,13 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
          */
         className={'table ' + (isSelecting ? 'table-selection-none' : '')}
         style={{
-          width: tableWidth == '100%' ? '' : columnWidths.reduce((a, b) => a + b, 0) + 'px',
+          width: tableWidth == '100%' ? tableWidth : columnWidths.reduce((a, b) => a + b, 0) + 'px',
         }}
         on={{
-          mousemove: debounce((e: MouseEvent) => handleCellBorderVisible(editor, elemNode, e), 25),
+          mousemove: debounce(
+            (e: MouseEvent) => handleCellBorderVisible(editor, elemNode, e, scrollWidth),
+            25
+          ),
         }}
       >
         <colgroup contentEditable={false}>

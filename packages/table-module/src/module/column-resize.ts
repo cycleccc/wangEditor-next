@@ -88,16 +88,7 @@ function onMouseDown(event: Event) {
     const [[elemNode]] = Editor.nodes(editorWhenMouseDown, {
       match: isOfType(editorWhenMouseDown, 'table'),
     })
-    const {
-      width: tableWidth = 'auto',
-      columnWidths = [],
-      resizingIndex = -1,
-    } = elemNode as TableElement
-    /**
-     * table width 为 100% 模式时，因无法增加Table宽度，不触发 列宽变更行为
-     * 如需变更，到底哪个列增宽度，哪个列减去宽度？？
-     */
-    if (tableWidth == '100%') return
+    const { columnWidths = [], resizingIndex = -1 } = elemNode as TableElement
 
     // 记录必要信息
     isMouseDownForResize = true
@@ -125,18 +116,15 @@ const onMouseMove = throttle(function (event: Event) {
   const [[elemNode]] = Editor.nodes(editorWhenMouseDown, {
     match: isOfType(editorWhenMouseDown, 'table'),
   })
-  const { columnWidths = [], resizingIndex = -1, scrollWidth = 0 } = elemNode as TableElement
+  const { columnWidths = [], resizingIndex = -1 } = elemNode as TableElement
 
-  /**
-   * 判断拖动引起的宽度是否最大化了
-   * 如果最大化了，则需要调整列的宽度
-   *
-   * 0.5 很微妙
-   */
   const cumulativeTotalWidth = columnWidths.reduce((a, b) => a + b, 0)
   const remainWidth = cumulativeTotalWidth - columnWidths[resizingIndex]
-  if (cumulativeTotalWidth > scrollWidth && remainWidth + newWith > scrollWidth) {
-    newWith = scrollWidth - remainWidth + 0.5
+
+  // 如果拖动引起的宽度超过容器宽度，则不调整
+  const containerElement = document.querySelector('.table-container')
+  if (containerElement && remainWidth + newWith > containerElement.clientWidth) {
+    return
   }
 
   const adjustColumnWidths = [...columnWidths].map(width => Math.floor(width))
@@ -163,7 +151,12 @@ function onMouseUp(event: Event) {
  * Class 先 visible 后 highlight @跟随飞书
  * 避免光标选区功能收到干扰
  */
-export function handleCellBorderVisible(editor: IDomEditor, elemNode: SlateElement, e: MouseEvent) {
+export function handleCellBorderVisible(
+  editor: IDomEditor,
+  elemNode: SlateElement,
+  e: MouseEvent,
+  scrollWidth: number
+) {
   if (editor.isDisabled()) return
   if (isSelectionOperation || isMouseDownForResize) return
 
@@ -173,12 +166,6 @@ export function handleCellBorderVisible(editor: IDomEditor, elemNode: SlateEleme
     isHoverCellBorder,
     resizingIndex,
   } = elemNode as TableElement
-
-  /**
-   * table width 为 100% 模式时，因无法增加Table宽度，不触发 列宽变更行为
-   * 如需变更，到底哪个列增宽度，哪个列减去宽度？？
-   */
-  if (tableWidth == '100%') return
 
   // Cell Border 宽度为 10px
   const { clientX, target } = e
@@ -202,7 +189,12 @@ export function handleCellBorderVisible(editor: IDomEditor, elemNode: SlateEleme
     if (parent) {
       const { clientX } = e
       const rect = parent.getBoundingClientRect()
-      let cumulativeWidths = getCumulativeWidths(columnWidths)
+      const widths =
+        tableWidth === '100%'
+          ? getColumnWidthRatios(columnWidths).map(v => v * scrollWidth)
+          : columnWidths
+
+      let cumulativeWidths = getCumulativeWidths(widths)
 
       // 鼠标移动时，计算当前鼠标位置，判断在哪个 Cell border 上
       for (let i = 0; i < cumulativeWidths.length; i++) {
