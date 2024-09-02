@@ -8,6 +8,7 @@ import { DomEditor } from '@wangeditor-next/core'
 import { ListItemElement } from './custom-types'
 import { ELEM_TO_EDITOR } from '../utils/maps'
 import { hasSameOrderWithBrother } from './helpers'
+import { getListItemColor } from '../utils/util'
 
 /**
  * 当前 list-item 前面需要拼接几个 <ol> 或 <ul>
@@ -156,8 +157,12 @@ function elemToHtml(
     }
   }
 
+  // 获取前缀颜色
+  const prefixColor = getListItemColor(elem)
+  const colorStyle = prefixColor ? ` style="color:${prefixColor}"` : ''
+
   return {
-    html: `<li>${childrenHtml}</li>`,
+    html: `<li${colorStyle}>${childrenHtml}</li>`,
     prefix: startContainerStr,
     suffix: endContainerStr,
   }

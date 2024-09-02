@@ -8,6 +8,7 @@ import { jsx, VNode } from 'snabbdom'
 import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { ListItemElement } from './custom-types'
 import { ELEM_TO_EDITOR } from '../utils/maps'
+import { getListItemColor } from '../utils/util'
 
 /**
  * 无序列表：根据 level 获取的前置符号
@@ -71,27 +72,6 @@ function getOrderedItemNumber(editor: IDomEditor, elem: SlateElement): number {
   }
 
   return num
-}
-
-/**
- * 获取第一个 text-node 的颜色
- * @param elem elem
- */
-function getListItemColor(elem: SlateElement): string {
-  const children = elem.children || []
-  const length = children.length
-  if (length === 0) return ''
-
-  let firstTextNode
-
-  for (let i = 0; i < length; i++) {
-    if (firstTextNode) break // 已找到第一个 text-node ，则退出
-    const child = children[i]
-    if (Text.isText(child)) firstTextNode = child
-  }
-
-  if (firstTextNode == null) return ''
-  return firstTextNode['color'] || ''
 }
 
 function renderListElem(
