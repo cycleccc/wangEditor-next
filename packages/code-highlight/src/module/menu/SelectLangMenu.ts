@@ -14,6 +14,7 @@ class SelectLangMenu implements ISelectMenu {
   readonly tag = 'select'
   readonly width = 95
   readonly selectPanelWidth = 115
+  private defaultCodeLang = ''
 
   getOptions(editor: IDomEditor): IOption[] {
     const options: IOption[] = []
@@ -25,8 +26,14 @@ class SelectLangMenu implements ISelectMenu {
       text: 'plain text',
       value: '', // getValue 默认会返回 ''
     })
-    codeLangs.forEach((lang: { text: string; value: string }) => {
-      const { text, value } = lang
+    codeLangs.forEach((lang: { text: string; value: string; selected?: boolean }) => {
+      const { text, value, selected } = lang
+
+      // 判断是否是默认选中
+      if (selected) {
+        this.defaultCodeLang = value
+      }
+
       options.push({ text, value })
     })
 
@@ -54,8 +61,8 @@ class SelectLangMenu implements ISelectMenu {
    */
   getValue(editor: IDomEditor): string | boolean {
     const elem = this.getSelectCodeElem(editor)
-    if (elem == null) return ''
-    if (!Element.isElement(elem)) return ''
+    if (elem == null) return this.defaultCodeLang
+    if (!Element.isElement(elem)) return this.defaultCodeLang
 
     const lang = elem.language.toString()
 
@@ -64,7 +71,7 @@ class SelectLangMenu implements ISelectMenu {
     const hasLang = codeLangs.some(item => item.value === lang)
 
     if (hasLang) return lang
-    return ''
+    return this.defaultCodeLang
   }
 
   isDisabled(editor: IDomEditor): boolean {
