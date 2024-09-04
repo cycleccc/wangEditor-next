@@ -67,8 +67,10 @@ class InsertCol implements IButtonMenu {
 
     Editor.withoutNormalizing(editor, () => {
       const exitMerge: number[] = []
+      const destIndex = tdIndex + 1
+      const isWithinBounds = destIndex >= 0 && destIndex < matrix.length
 
-      for (let x = 0; x < matrix.length; x++) {
+      for (let x = 0; isWithinBounds && x < matrix.length; x++) {
         const [, { ltr, rtl }] = matrix[x][tdIndex]
 
         // 向左找到 1 元素为止
@@ -101,8 +103,8 @@ class InsertCol implements IButtonMenu {
         if (x === 0 && isTableWithHeader(tableNode)) {
           newCell.isHeader = true
         }
-        const [[, insertPath]] = matrix[x][tdIndex]
-        Transforms.insertNodes(editor, newCell, { at: insertPath })
+        const [[, [xx, yy, zz]]] = matrix[x][tdIndex]
+        Transforms.insertNodes(editor, newCell, { at: [xx, yy, zz + 1] })
       }
 
       // 需要调整 columnWidths
