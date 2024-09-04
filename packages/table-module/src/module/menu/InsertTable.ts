@@ -24,7 +24,7 @@ function genTableNode(editor: IDomEditor, rowNum: number, colNum: number): Table
         children: [{ text: '' }],
       }
       if (i === 0) {
-        cellNode.isHeader = tableHeader?.select ?? true // 第一行默认是 th
+        cellNode.isHeader = tableHeader?.selected ?? true // 第一行默认是 th
       }
       cells.push(cellNode)
     }
