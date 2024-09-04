@@ -14,7 +14,7 @@ class SelectLangMenu implements ISelectMenu {
   readonly tag = 'select'
   readonly width = 95
   readonly selectPanelWidth = 115
-  defaultCodeLang = ''
+  private defaultCodeLang = ''
 
   getOptions(editor: IDomEditor): IOption[] {
     const options: IOption[] = []
