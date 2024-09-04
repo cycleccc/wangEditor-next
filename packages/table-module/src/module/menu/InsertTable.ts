@@ -13,7 +13,7 @@ import { TableElement, TableCellElement, TableRowElement } from '../custom-types
 function genTableNode(editor: IDomEditor, rowNum: number, colNum: number): TableElement {
   // 拼接 rows
   const rows: TableRowElement[] = []
-  const { minWidth = 60, tableFullWidth } = editor.getMenuConfig('insertTable')
+  const { minWidth = 60, tableFullWidth, tableHeader } = editor.getMenuConfig('insertTable')
   const columnWidths: number[] = Array(colNum).fill(parseInt(minWidth) || 60)
   for (let i = 0; i < rowNum; i++) {
     // 拼接 cells
@@ -24,7 +24,7 @@ function genTableNode(editor: IDomEditor, rowNum: number, colNum: number): Table
         children: [{ text: '' }],
       }
       if (i === 0) {
-        cellNode.isHeader = true // 第一行默认是 th
+        cellNode.isHeader = tableHeader?.select ?? true // 第一行默认是 th
       }
       cells.push(cellNode)
     }
