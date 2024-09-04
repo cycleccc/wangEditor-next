@@ -9,11 +9,11 @@ on:
     branches:
       - 'master'
       - 'dev'
-      - 'feature-*'
-      - 'fix-*'
-      - 'hotfix-*'
-      - 'refactor-*'
-      - 'test-*'
+      - '^(feature-.*|feature/.*)$'
+      - '^(fix-.*|fix/.*)$'
+      - '^(hotfix-.*|hotfix/.*)$'
+      - '^(refactor-.*|refactor/.*)$'
+      - '^(test-.*|test/.*)$'
     paths:
       - '.github/workflows/*'
       - 'packages/**'
