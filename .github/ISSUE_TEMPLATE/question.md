@@ -13,7 +13,7 @@ about: 请按照该模板填写，以便我们能真正了解你的问题，否�
 
 ## 是否查阅了文档 ？
 
-（文档链接 [www.wangeditor.com](https://cycleccc.github.io/docs/) ）
+（文档链接 [https://cycleccc.github.io/docs/](https://cycleccc.github.io/docs/) ）
 
 *是/否*
 

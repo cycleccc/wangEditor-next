@@ -16,7 +16,7 @@ about: Please fill out this template so that we can truly understand your issue;
 
 ## Have you consulted the documentation?
 
-(Document link [wangeditor-next doc](https://cycleccc.github.io/docs/))
+(Document link [https://cycleccc.github.io/docs/](https://cycleccc.github.io/docs/))
 
 *Yes/No*
 
