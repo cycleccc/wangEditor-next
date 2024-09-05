@@ -64,7 +64,7 @@ export default async function (
     if (DomEditor.isSelectedEmptyParagraph(editor)) {
       Transforms.removeNodes(editor, { mode: 'highest' })
     }
-    Transforms.insertNodes(editor, video)
+    Transforms.insertNodes(editor, video, { mode: 'highest' })
   })
 
   // 调用 callback
