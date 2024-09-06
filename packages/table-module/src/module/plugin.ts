@@ -94,8 +94,8 @@ function withTable<T extends IDomEditor>(editor: T): T {
       const before = Editor.before(newEditor, selection) // 前一个 location
       if (before) {
         const isTableOnBeforeLocation = isTableLocation(newEditor, before) // before 是否是 table
-        // 如果前面是 table, 当前是空 p，则不执行删除。否则会删除 table 最后一个 cell
-        if (isTableOnBeforeLocation && DomEditor.isSelectedEmptyParagraph(newEditor)) {
+        // 如果前面是 table, 当前是 paragraph ，则不执行删除。否则会删除 table 最后一个 cell
+        if (isTableOnBeforeLocation && DomEditor.getSelectedNodeByType(newEditor, 'paragraph')) {
           return
         }
       }
