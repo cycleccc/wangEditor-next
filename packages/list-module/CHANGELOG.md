@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.8](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.7...@wangeditor-next/list-module@1.1.8) (2024-09-06)
+
+
+### Bug Fixes
+
+* **list:** add the function of getting list color ([ef8bebf](https://github.com/cycleccc/wangEditor/commit/ef8bebf7b5455162e06b8958fcd7cc2aaa886455))
+
+
+
+
+
 ## [1.1.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/list-module@1.1.6...@wangeditor-next/list-module@1.1.7) (2024-08-29)
 
 

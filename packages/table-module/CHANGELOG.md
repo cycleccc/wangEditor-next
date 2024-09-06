@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.3...@wangeditor-next/table-module@1.6.0) (2024-09-06)
+
+
+### Bug Fixes
+
+* **table:** can not delete taable when selection in paragraph ([98d47cd](https://github.com/cycleccc/wangEditor/commit/98d47cdd38f0632a6ebb1df48242763ed73d9bae))
+
+
+### Features
+
+* **insert table:** add config default select tableFullWidth and tableHeader ([#158](https://github.com/cycleccc/wangEditor/issues/158)) ([6567fc7](https://github.com/cycleccc/wangEditor/commit/6567fc7894f158cd3caf07662e9b34dab2a786fd))
+
+
+
+
+
 ## [1.5.3](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/table-module@1.5.2...@wangeditor-next/table-module@1.5.3) (2024-09-01)
 
 

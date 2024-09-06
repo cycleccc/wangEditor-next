@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.6...@wangeditor-next/video-module@1.3.7) (2024-09-06)
+
+
+### Bug Fixes
+
+* **video:** add mode highest ([bbd4565](https://github.com/cycleccc/wangEditor/commit/bbd4565c0c2ba96b3f42512df47fa4f29c0c4d52))
+
+
+
+
+
 ## [1.3.6](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/video-module@1.3.5...@wangeditor-next/video-module@1.3.6) (2024-08-29)
 
 

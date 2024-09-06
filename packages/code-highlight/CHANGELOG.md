@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/code-highlight@1.2.4...@wangeditor-next/code-highlight@1.3.0) (2024-09-06)
+
+
+### Features
+
+* **code select lang:** add default select lang ([#157](https://github.com/cycleccc/wangEditor/issues/157)) ([2e91f8e](https://github.com/cycleccc/wangEditor/commit/2e91f8eb44f9c49fa431b11a5412555d3ef7b1cb))
+
+
+
+
+
 ## [1.2.4](https://github.com/cycleccc/wangEditor/compare/@wangeditor-next/code-highlight@1.2.3...@wangeditor-next/code-highlight@1.2.4) (2024-08-29)
 
 
