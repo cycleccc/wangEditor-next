@@ -1,0 +1,52 @@
+{
+  "name": "@wangeditor-next/yjs",
+  "sideEffects": false,
+  "version": "0.0.0",
+  "description": "Yjs binding for Slate.",
+  "keywords": [
+    "slate",
+    "yjs",
+    "collaborative"
+  ],
+  "homepage": "https://github.com/cycleccc/wangEditor#readme",
+  "type": "module",
+  "exports": {
+    "require": "./dist/index.js",
+    "default": "./dist/index.esm.js"
+  },
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.global.js",
+  "scripts": {
+    "test": "jest",
+    "test-c": "jest --coverage",
+    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js",
+    "dev-watch": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
+    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
+    "dev-size-stats": "cross-env NODE_ENV=development:size_stats rollup -c rollup.config.js",
+    "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cycleccc/wangEditor.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "slate": "^0.72.0",
+    "slate-hyperscript": "^0.67.0",
+    "tsup": "^5.12.1",
+    "typescript": "^4.6.3",
+    "yjs": "^13.5.29"
+  },
+  "peerDependencies": {
+    "slate": ">=0.70.0",
+    "yjs": "^13.5.29"
+  },
+  "bugs": {
+    "url": "https://github.com/cycleccc/wangEditor/issues"
+  },
+  "dependencies": {
+    "y-protocols": "^1.0.5"
+  }
+}

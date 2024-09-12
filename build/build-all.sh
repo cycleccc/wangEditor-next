@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## 一键打包所有 package
+## 一键打包所有 package(只打包基础 module 额外的如 yjs插件 vue2、vue3 等包 进入对应目录下打包)
 
 # 获取 yarn dev/build 类型
 buildType=build
