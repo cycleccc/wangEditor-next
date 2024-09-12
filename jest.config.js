@@ -17,7 +17,10 @@ module.exports = {
   },
   transformIgnorePatterns: ['node_modules/(?!(html-void-elements)/)'],
   setupFilesAfterEnv: ['<rootDir>/tests/setup/index.ts'],
-  collectCoverageFrom: ['<rootDir>/packages/**/src/**/*.(ts|tsx)'],
+  // just collect basic module
+  collectCoverageFrom: [
+    '<rootDir>/packages/{basic-modules,code-highlight,core,editor,list-module,table-module,upload-image-module,video-module}/src/**/*.(ts|tsx)',
+  ],
   coveragePathIgnorePatterns: [
     'dist',
     'locale',
