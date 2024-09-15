@@ -25,7 +25,7 @@
     "react-router-dom": "^6.0.1",
     "slate": "^0.82.1",
     "y-protocols": "^1.0.6",
-    "y-websocket": "^10.3.0",
+    "y-websocket": "^2.0.4",
     "yjs": "^13.6.19"
   },
   "devDependencies": {

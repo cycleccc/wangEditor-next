@@ -8,12 +8,8 @@ export function yTextToSlateElement(yText: Y.XmlText): Element {
   const delta = yTextToInsertDelta(yText)
 
   const children = delta.length > 0 ? delta.map(deltaInsertToSlateNode) : [{ text: '' }]
-  if (delta.length > 0) {
-    return { ...yText.getAttributes(), children }
-  } else {
-    //@ts-ignore
-    return { type: 'paragraph', children }
-  }
+
+  return { ...yText.getAttributes(), children }
 }
 
 export function deltaInsertToSlateNode(insert: DeltaInsert): Node {

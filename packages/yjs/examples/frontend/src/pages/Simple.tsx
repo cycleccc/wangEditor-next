@@ -1,5 +1,5 @@
 import { WebsocketProvider } from 'y-websocket'
-import { withYHistory, withYjs, YjsEditor } from '@wangeditor-next/yjs'
+import { withYHistory, withYjs, YjsEditor, slateNodesToInsertDelta } from '@wangeditor-next/yjs'
 import React, { useEffect, useState } from 'react'
 import { Descendant } from 'slate'
 import * as Y from 'yjs'
@@ -10,7 +10,13 @@ import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor-next/edit
 import { Boot } from '@wangeditor-next/editor'
 
 const yDoc = new Y.Doc()
-const wsProvider = new WebsocketProvider('ws://localhost:1234', 'my-roomname', yDoc)
+const wsProvider = new WebsocketProvider('ws://localhost:1234', 'wangeditor-next-yjs', yDoc)
+const sharedType = yDoc.get('content', Y.XmlText)
+console.log('🚀 ~ SimplePage ~ sharedType:', sharedType.toJSON())
+// @ts-ignore
+Boot.registerPlugin(withYjs(sharedType))
+// @ts-ignore
+Boot.registerPlugin(withYHistory())
 
 wsProvider.on('status', event => {
   console.log(event.status)
@@ -19,7 +25,7 @@ wsProvider.on('status', event => {
 const initialValue: Descendant[] = [
   {
     type: 'paragraph',
-    children: [{ text: 'Try it out for yourself!' }],
+    children: [{ text: 'hello' }],
   },
 ]
 
@@ -35,13 +41,19 @@ export const SimplePage = () => {
   const editorConfig: Partial<IEditorConfig> = {
     placeholder: '请输入内容...',
   }
-  const sharedType = yDoc.get('content', Y.XmlText)
-  // @ts-ignore
-  Boot.registerPlugin(withYjs(sharedType))
-  // Boot.registerPlugin(withYHistory())
+
+  console.log(Boot.plugins)
+
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       setHtml('<p>hello&nbsp;<strong>world</strong>.</p>\n<p><br></p>')
+  //     }, 1500)
+  //   }, [])
 
   useEffect(() => {
     if (editor) {
+      sharedType.applyDelta(slateNodesToInsertDelta(initialValue))
+      //   sharedType.insert(0, 'hello')
       YjsEditor.connect(editor)
     }
     return () => {
@@ -74,7 +86,6 @@ export const SimplePage = () => {
         <Editor
           defaultConfig={editorConfig}
           value={html}
-          defaultContent={initialValue}
           onCreated={setEditor}
           onChange={editor => setHtml(editor.getHtml())}
           mode="default"
@@ -82,6 +93,7 @@ export const SimplePage = () => {
         />
       </div>
       <div style={{ marginTop: '15px' }}>{html}</div>
+      <div style={{ marginTop: '15px' }}>{editor && JSON.stringify(editor.selection)}</div>
     </>
   )
 }
