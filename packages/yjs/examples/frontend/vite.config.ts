@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [react({ fastRefresh: false }), windi()],
   server: { open: true },
   resolve: {
-    dedupe: ['slate', 'slate-react', 'yjs', 'y-protocols'],
+    dedupe: ['slate', 'yjs', 'y-protocols'],
   },
 })

@@ -2547,23 +2547,23 @@
     react-refresh "^0.13.0"
     resolve "^1.22.0"
 
-"@wangeditor-next/basic-modules@^1.5.2":
+"@wangeditor-next/basic-modules@^1.5.1":
   version "1.5.2"
-  resolved "https://registry.npmjs.org/@wangeditor-next/basic-modules/-/basic-modules-1.5.2.tgz#78d4207885d87c7fd7128079bb41ec1cd47ffacc"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/basic-modules/-/basic-modules-1.5.2.tgz#78d4207885d87c7fd7128079bb41ec1cd47ffacc"
   integrity sha512-nuXWSG2lrYCuWxE9RAaJHHuFDJiTTPTUSVkgxEmdjXojXKB8Kv8zYcjHFdr6zdwwKWJ3CYDzGI0BWlxPUOf6MQ==
   dependencies:
     is-url "^1.2.4"
 
-"@wangeditor-next/code-highlight@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/@wangeditor-next/code-highlight/-/code-highlight-1.3.0.tgz#2572f4807b7786fa2f941332cc1ab2c647a0705a"
-  integrity sha512-HxsLl+TGyuMqqVTvNunnfKhSkTqqkPANtl8o4a2wM9YweqeHlo7Cb7kBZUG3HRYi4Nd6DD5YqYR9tUROOO8b6A==
+"@wangeditor-next/code-highlight@^1.2.3":
+  version "1.2.4"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/code-highlight/-/code-highlight-1.2.4.tgz#38e63519a070d5c08798e581d16792cd2fa010b9"
+  integrity sha512-ZKLe+n4H3hBOrAh/PLLeNeynPdkUp+4nc008+++3i95Eevc+HTnbu/6VgkLzyeKbRqmhiEDTIpkaZHg82AmE2w==
   dependencies:
     prismjs "^1.23.0"
 
-"@wangeditor-next/core@>=1.5.5", "@wangeditor-next/core@^1.7.3":
+"@wangeditor-next/core@^1.7.2-experimental.5+17e4349c":
   version "1.7.3"
-  resolved "https://registry.npmjs.org/@wangeditor-next/core/-/core-1.7.3.tgz#a3a42877d8a2605cbd47d57b61a03b37452c1e24"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/core/-/core-1.7.3.tgz#a3a42877d8a2605cbd47d57b61a03b37452c1e24"
   integrity sha512-VDrF8h5QeOaRgDel46YwZdVDpePbhXt0DrM3zsnUEPlP2oaPwYsyhf2VRUo0gMWH9Cwp8VIQGiDBsRFOAEdbwA==
   dependencies:
     "@types/event-emitter" "^0.3.3"
@@ -2578,20 +2578,20 @@
   resolved "https://registry.npmjs.org/@wangeditor-next/editor-for-react/-/editor-for-react-1.0.8.tgz#d3ae15226a071f6d7a8d0bb8712fc00ef923eeb8"
   integrity sha512-GRMvgm1/rgHDWskiG3XCZythbucFGjKQ12Ip3cwN+XfsbbNdX9l2w9Bqvsxo5/9zLSN9hdsj7b7TIU/ZFmQQ5g==
 
-"@wangeditor-next/editor@^5.5.0":
-  version "5.5.4"
-  resolved "https://registry.npmjs.org/@wangeditor-next/editor/-/editor-5.5.4.tgz#fbce47e5efd03ffbf8da9f8b081dffe289893980"
-  integrity sha512-0/jN+B3w2f2XoF3kTXTrfQEIiP+RMjJaJzmvi2JuKbknoAyDB4ZXB5eXYw1TmEu5i8MGxJQ2DaET2xJZntwAMg==
+"@wangeditor-next/editor@5.5.2-experimental.5":
+  version "5.5.2-experimental.5"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/editor/-/editor-5.5.2-experimental.5.tgz#322f9d4effebbf05875c438ada33e2c0fc55d4e8"
+  integrity sha512-AJoA+qdUqrMt2p47KEXfO7IJEXeiQaH9d8sf4S7FKEUMfJUz7ec3FosIE6TyKqEykVecHf4/By+jrudJ37mLnQ==
   dependencies:
     "@uppy/core" "^2.1.1"
     "@uppy/xhr-upload" "^2.0.3"
-    "@wangeditor-next/basic-modules" "^1.5.2"
-    "@wangeditor-next/code-highlight" "^1.3.0"
-    "@wangeditor-next/core" "^1.7.3"
-    "@wangeditor-next/list-module" "^1.1.8"
-    "@wangeditor-next/table-module" "^1.6.0"
-    "@wangeditor-next/upload-image-module" "^1.1.4"
-    "@wangeditor-next/video-module" "^1.3.7"
+    "@wangeditor-next/basic-modules" "^1.5.1"
+    "@wangeditor-next/code-highlight" "^1.2.3"
+    "@wangeditor-next/core" "^1.7.2-experimental.5+17e4349c"
+    "@wangeditor-next/list-module" "^1.1.6"
+    "@wangeditor-next/table-module" "^1.5.1"
+    "@wangeditor-next/upload-image-module" "^1.1.3"
+    "@wangeditor-next/video-module" "^1.3.5"
     dom7 "^3.0.0"
     is-hotkey "^0.2.0"
     lodash.camelcase "^4.3.0"
@@ -2605,24 +2605,24 @@
     slate "^0.72.0"
     snabbdom "^3.1.0"
 
-"@wangeditor-next/list-module@^1.1.8":
+"@wangeditor-next/list-module@^1.1.6":
   version "1.1.8"
-  resolved "https://registry.npmjs.org/@wangeditor-next/list-module/-/list-module-1.1.8.tgz#ef84d969c103e24d27281f2fb3ed7d8b521bae48"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/list-module/-/list-module-1.1.8.tgz#ef84d969c103e24d27281f2fb3ed7d8b521bae48"
   integrity sha512-X4a/yzUoSC60V4Dsmy4M5KiMQpAopITu5Vv05S8Mh8qXmn8qI8NO/YWJAupEZLKKVvcbaagF656GjbnOx4YnaQ==
 
-"@wangeditor-next/table-module@^1.6.0":
+"@wangeditor-next/table-module@^1.5.1":
   version "1.6.0"
-  resolved "https://registry.npmjs.org/@wangeditor-next/table-module/-/table-module-1.6.0.tgz#db2380c64c588d3f703edc7bf7cba69d794080bf"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/table-module/-/table-module-1.6.0.tgz#db2380c64c588d3f703edc7bf7cba69d794080bf"
   integrity sha512-tVU4zWbZKqau2IiVpVqtwcsDyOJOOH1XOelqWr+GQRscUcAfbOD7JFQIJYUnN6QD3MfMHCcG/rKChOBee0nKIw==
 
-"@wangeditor-next/upload-image-module@^1.1.4":
+"@wangeditor-next/upload-image-module@^1.1.3":
   version "1.1.4"
-  resolved "https://registry.npmjs.org/@wangeditor-next/upload-image-module/-/upload-image-module-1.1.4.tgz#2de6d8da54cd9a01df91905da35e44f2dffbb25f"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/upload-image-module/-/upload-image-module-1.1.4.tgz#2de6d8da54cd9a01df91905da35e44f2dffbb25f"
   integrity sha512-9cWImVM2MY1TSSwxwhSqxzsWZBoDDnNcFv6Ws0a9CIMRsU+bv/nyp0/ush8+DFWAqa2bMpLzUG/SITmuPxBqiQ==
 
-"@wangeditor-next/video-module@^1.3.7":
+"@wangeditor-next/video-module@^1.3.5":
   version "1.3.7"
-  resolved "https://registry.npmjs.org/@wangeditor-next/video-module/-/video-module-1.3.7.tgz#a7d03693cb04fb62f68bee6e004d9a4ef21dc257"
+  resolved "https://registry.npmmirror.com/@wangeditor-next/video-module/-/video-module-1.3.7.tgz#a7d03693cb04fb62f68bee6e004d9a4ef21dc257"
   integrity sha512-2rMT1tSIKw2o2CCPp1iQgkjv/6ega+Xy0ANzaVi6zGZUaIdRx1P4LGRZLD4lRbS+wa31N/WYolUCA3mkA56oyw==
 
 "@windicss/config@1.9.3":
@@ -9158,15 +9158,6 @@ slate@^0.72.0:
   version "0.72.8"
   resolved "https://registry.npmjs.org/slate/-/slate-0.72.8.tgz#5a018edf24e45448655293a68bfbcf563aa5ba81"
   integrity sha512-/nJwTswQgnRurpK+bGJFH1oM7naD5qDmHd89JyiKNT2oOKD8marW0QSBtuFnwEbL5aGCS8AmrhXQgNOsn4osAw==
-  dependencies:
-    immer "^9.0.6"
-    is-plain-object "^5.0.0"
-    tiny-warning "^1.0.3"
-
-slate@^0.82.1:
-  version "0.82.1"
-  resolved "https://registry.npmjs.org/slate/-/slate-0.82.1.tgz#cf43cb828c980734dab01c9bbb517fd4d20892f7"
-  integrity sha512-3mdRdq7U3jSEoyFrGvbeb28hgrvrr4NdFCtJX+IjaNvSFozY0VZd/CGHF0zf/JDx7aEov864xd5uj0HQxxEWTQ==
   dependencies:
     immer "^9.0.6"
     is-plain-object "^5.0.0"
