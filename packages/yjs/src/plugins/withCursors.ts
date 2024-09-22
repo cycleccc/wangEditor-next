@@ -72,7 +72,7 @@ export const CursorEditor = {
 
     const listeners = CURSOR_CHANGE_EVENT_LISTENERS.get(editor) ?? new Set()
     listeners.add(handler)
-    CURSOR_CHANGE_EVENT_LISTENERS.set(editor, listeners)
+    if (editor) CURSOR_CHANGE_EVENT_LISTENERS.set(editor, listeners)
   },
 
   off<TCursorData extends Record<string, unknown>>(
@@ -149,106 +149,108 @@ export type WithCursorsOptions<
   autoSend?: boolean
 }
 
-export function withCursors<TCursorData extends Record<string, unknown>, TEditor extends YjsEditor>(
-  editor: TEditor,
+export function withCursors<TCursorData extends Record<string, unknown>>(
   awareness: Awareness,
-  {
-    cursorStateField: selectionStateField = 'selection',
-    cursorDataField = 'data',
-    autoSend = true,
-    data,
-  }: WithCursorsOptions<TCursorData> = {}
-): TEditor & CursorEditor<TCursorData> {
-  const e = editor as TEditor & CursorEditor<TCursorData>
+  options: WithCursorsOptions<TCursorData> = {}
+) {
+  return function <T extends YjsEditor>(editor: T): T & CursorEditor<TCursorData> {
+    const {
+      cursorStateField: selectionStateField = 'selection',
+      cursorDataField = 'data',
+      autoSend = true,
+      data,
+    } = options
+    const e = editor as T & CursorEditor<TCursorData>
 
-  e.awareness = awareness
-  e.cursorDataField = cursorDataField
-  e.selectionStateField = selectionStateField
+    e.awareness = awareness
+    e.cursorDataField = cursorDataField
+    e.selectionStateField = selectionStateField
 
-  e.sendCursorData = (cursorData: TCursorData) => {
-    e.awareness.setLocalStateField(e.cursorDataField, cursorData)
-  }
+    e.sendCursorData = (cursorData: TCursorData) => {
+      e.awareness.setLocalStateField(e.cursorDataField, cursorData)
+    }
 
-  e.sendCursorPosition = range => {
-    const localState = e.awareness.getLocalState()
-    const currentRange = localState?.[selectionStateField]
+    e.sendCursorPosition = range => {
+      const localState = e.awareness.getLocalState()
+      const currentRange = localState?.[selectionStateField]
 
-    if (!range) {
-      if (currentRange) {
-        e.awareness.setLocalStateField(e.selectionStateField, null)
+      if (!range) {
+        if (currentRange) {
+          e.awareness.setLocalStateField(e.selectionStateField, null)
+        }
+
+        return
       }
 
-      return
+      const { anchor, focus } = slateRangeToRelativeRange(e.sharedRoot, e, range)
+
+      if (
+        !currentRange ||
+        !Y.compareRelativePositions(anchor, currentRange) ||
+        !Y.compareRelativePositions(focus, currentRange)
+      ) {
+        e.awareness.setLocalStateField(e.selectionStateField, { anchor, focus })
+      }
     }
 
-    const { anchor, focus } = slateRangeToRelativeRange(e.sharedRoot, e, range)
-
-    if (
-      !currentRange ||
-      !Y.compareRelativePositions(anchor, currentRange) ||
-      !Y.compareRelativePositions(focus, currentRange)
-    ) {
-      e.awareness.setLocalStateField(e.selectionStateField, { anchor, focus })
-    }
-  }
-
-  const awarenessChangeListener: RemoteCursorChangeEventListener = yEvent => {
-    const listeners = CURSOR_CHANGE_EVENT_LISTENERS.get(e)
-    if (!listeners) {
-      return
-    }
-
-    const localId = e.awareness.clientID
-    const event = {
-      added: yEvent.added.filter(id => id !== localId),
-      removed: yEvent.removed.filter(id => id !== localId),
-      updated: yEvent.updated.filter(id => id !== localId),
-    }
-
-    if (event.added.length > 0 || event.removed.length > 0 || event.updated.length > 0) {
-      listeners.forEach(listener => listener(event))
-    }
-  }
-
-  const { connect, disconnect } = e
-  e.connect = () => {
-    connect()
-
-    e.awareness.on('change', awarenessChangeListener)
-
-    awarenessChangeListener({
-      removed: [],
-      added: Array.from(e.awareness.getStates().keys()),
-      updated: [],
-    })
-
-    if (autoSend) {
-      if (data) {
-        CursorEditor.sendCursorData(e, data)
+    const awarenessChangeListener: RemoteCursorChangeEventListener = yEvent => {
+      const listeners = CURSOR_CHANGE_EVENT_LISTENERS.get(e)
+      if (!listeners) {
+        return
       }
 
-      const { onChange } = e
-      e.onChange = () => {
-        onChange()
+      const localId = e.awareness.clientID
+      const event = {
+        added: yEvent.added.filter(id => id !== localId),
+        removed: yEvent.removed.filter(id => id !== localId),
+        updated: yEvent.updated.filter(id => id !== localId),
+      }
 
-        if (YjsEditor.connected(e)) {
-          CursorEditor.sendCursorPosition(e)
+      if (event.added.length > 0 || event.removed.length > 0 || event.updated.length > 0) {
+        listeners.forEach(listener => listener(event))
+      }
+    }
+
+    const { connect, disconnect } = e
+    e.connect = () => {
+      connect()
+
+      e.awareness.on('change', awarenessChangeListener)
+
+      awarenessChangeListener({
+        removed: [],
+        added: Array.from(e.awareness.getStates().keys()),
+        updated: [],
+      })
+
+      if (autoSend) {
+        if (data) {
+          CursorEditor.sendCursorData(e, data)
+        }
+
+        const { onChange } = e
+        e.onChange = () => {
+          onChange()
+
+          if (YjsEditor.connected(e)) {
+            CursorEditor.sendCursorPosition(e)
+          }
         }
       }
     }
+
+    e.disconnect = () => {
+      e.awareness.off('change', awarenessChangeListener)
+
+      awarenessChangeListener({
+        removed: Array.from(e.awareness.getStates().keys()),
+        added: [],
+        updated: [],
+      })
+
+      disconnect()
+    }
+
+    return e
   }
-
-  e.disconnect = () => {
-    e.awareness.off('change', awarenessChangeListener)
-
-    awarenessChangeListener({
-      removed: Array.from(e.awareness.getStates().keys()),
-      added: [],
-      updated: [],
-    })
-
-    disconnect()
-  }
-
-  return e
 }

@@ -1,6 +1,5 @@
 import { CursorEditor, YHistoryEditor, YjsEditor } from '@wangeditor-next/yjs'
 import { Descendant } from 'slate'
-import { ReactEditor } from 'slate-react'
 
 export type CursorData = {
   name: string
@@ -42,7 +41,7 @@ export type BlockQuote = {
 
 export type CustomElement = Paragraph | InlineCode | HeadingOne | HeadingTwo | BlockQuote
 
-export type CustomEditor = ReactEditor & YjsEditor & YHistoryEditor & CursorEditor<CursorData>
+export type CustomEditor = YjsEditor & YHistoryEditor & CursorEditor<CursorData>
 
 declare module 'slate' {
   interface CustomTypes {

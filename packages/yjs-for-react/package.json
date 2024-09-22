@@ -1,12 +1,13 @@
 {
-  "name": "@wangeditor-next/yjs",
-  "sideEffects": false,
-  "version": "0.0.0",
-  "description": "Yjs binding for wangeditor-next.",
+  "name": "@wangeditor-next/yjs-for-react",
+  "private": false,
+  "version": "0.1.0",
+  "description": "React specific components/utils for wangeditor-next-yjs.",
   "keywords": [
     "slate",
     "yjs",
-    "collaborative"
+    "collaborative",
+    "react"
   ],
   "homepage": "https://github.com/cycleccc/wangEditor#readme",
   "type": "module",
@@ -33,20 +34,23 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "slate": "^0.70.0",
-    "slate-hyperscript": "^0.67.0",
-    "tsup": "^5.12.1",
-    "typescript": "^4.6.3",
-    "yjs": "^13.5.29"
+    "@types/react": "^17.0.34",
+    "@types/use-sync-external-store": "^0.0.3",
+    "typescript": "^4.6.3"
   },
   "peerDependencies": {
+    "@wangeditor-next/core": "lastest",
+    "@wangeditor-next/yjs": "^0.0.0",
+    "react": ">=16.8.0",
     "slate": ">=0.70.0",
+    "slate-react": ">=0.70.0",
     "yjs": "^13.5.29"
   },
   "bugs": {
     "url": "https://github.com/cycleccc/wangEditor/issues"
   },
   "dependencies": {
+    "use-sync-external-store": "^1.2.0",
     "y-protocols": "^1.0.5"
   }
 }
