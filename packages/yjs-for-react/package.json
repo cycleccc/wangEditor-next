@@ -35,16 +35,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^17.0.34",
-    "@types/use-sync-external-store": "^0.0.3",
-    "typescript": "^4.6.3"
-  },
-  "peerDependencies": {
-    "@wangeditor-next/core": "lastest",
-    "@wangeditor-next/yjs": "^0.0.0",
-    "react": ">=16.8.0",
-    "slate": ">=0.70.0",
-    "slate-react": ">=0.70.0",
-    "yjs": "^13.5.29"
+    "@types/use-sync-external-store": "^0.0.3"
   },
   "bugs": {
     "url": "https://github.com/cycleccc/wangEditor/issues"
@@ -52,5 +43,12 @@
   "dependencies": {
     "use-sync-external-store": "^1.2.0",
     "y-protocols": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "@wangeditor-next/core": "1.x",
+    "@wangeditor-next/editor": "5.x",
+    "slate": "^0.72.0",
+    "yjs": "^13.5.29"
   }
 }
