@@ -20,6 +20,9 @@ on:
       - 'packages/**'
       - 'tests/**'
       - 'build/**'
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:

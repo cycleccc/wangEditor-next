@@ -23,6 +23,9 @@ on:
       - 'cypress/**'
       - 'babel.config.json'
       - 'cypress.json'
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test-e2e:
