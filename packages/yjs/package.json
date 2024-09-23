@@ -1,23 +1,43 @@
 {
   "name": "@wangeditor-next/yjs",
-  "sideEffects": false,
-  "version": "0.0.0",
+  "version": "0.1.2-beta.0",
+  "author": "cycleccc <2991205548@qq.com>",
+  "contributors": [],
   "description": "Yjs binding for wangeditor-next.",
+  "homepage": "https://github.com/cycleccc/wangEditor#readme",
   "keywords": [
     "slate",
+    "wangEditor",
     "yjs",
     "collaborative"
   ],
-  "homepage": "https://github.com/cycleccc/wangEditor#readme",
-  "type": "module",
-  "exports": {
-    "require": "./dist/index.js",
-    "default": "./dist/index.esm.js"
-  },
+  "license": "MIT",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "unpkg": "dist/index.global.js",
+  "exports": {
+    "require": "./dist/index.js",
+    "default": "./dist/index.esm.js"
+  },
+  "browser": {
+    "./dist/index.js": "./dist/index.js",
+    "./dist/index.esm.js": "./dist/index.esm.js"
+  },
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cycleccc/wangEditor.git"
+  },
   "scripts": {
     "test": "jest",
     "test-c": "jest --coverage",
@@ -27,11 +47,6 @@
     "dev-size-stats": "cross-env NODE_ENV=development:size_stats rollup -c rollup.config.js",
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cycleccc/wangEditor.git"
-  },
-  "license": "MIT",
   "peerDependencies": {
     "@wangeditor-next/core": "1.x",
     "slate": "^0.72.0",
@@ -42,5 +57,10 @@
   },
   "dependencies": {
     "y-protocols": "^1.0.5"
+  },
+  "devDependencies": {
+    "slate": "^0.72.0",
+    "typescript": "^4.6.3",
+    "yjs": "^13.5.29"
   }
 }

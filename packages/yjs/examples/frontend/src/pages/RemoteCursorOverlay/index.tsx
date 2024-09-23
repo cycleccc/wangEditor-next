@@ -5,17 +5,15 @@ import {
   withCursors,
   YjsEditor,
   slateNodesToInsertDelta,
-  relativeRangeToSlateRange,
 } from '@wangeditor-next/yjs'
-import { EditorContext } from './src/hooks/use-editor-static'
+import { EditorContext } from '@wangeditor-next/yjs-for-react'
 import React, { useEffect, useState } from 'react'
 import { Descendant } from 'slate'
 import * as Y from 'yjs'
 
 import '@wangeditor-next/editor/dist/css/style.css'
 import { Editor, Toolbar } from '@wangeditor-next/editor-for-react'
-import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor-next/editor'
-import { Boot } from '@wangeditor-next/editor'
+import { IDomEditor, IEditorConfig, IToolbarConfig, Boot } from '@wangeditor-next/editor'
 import { randomCursorData } from '../../utils'
 import { RemoteCursorOverlay } from './Overlay'
 

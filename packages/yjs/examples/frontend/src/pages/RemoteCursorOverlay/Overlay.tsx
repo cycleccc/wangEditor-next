@@ -1,8 +1,8 @@
 import {
   CursorOverlayData,
   useRemoteCursorOverlayPositions,
-} from './src/hooks/useRemoteCursorOverlayPositions'
-import { useEditorStatic } from './src/hooks/use-editor-static'
+  useEditorStatic,
+} from '@wangeditor-next/yjs-for-react'
 import clsx from 'clsx'
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { CursorData } from '../../types'
