@@ -14,7 +14,8 @@
     "publish": "yarn changeset publish",
     "prerelease": "yarn build",
     "format": "yarn prettier --write",
-    "lint": "eslint \"packages/*/+(src|__tests__)/**/*.+(ts|tsx)\" --cache",
+    "lint": "eslint --cache --quiet --no-error-on-unmatched-pattern ./",
+    "lint:fix": "eslint --fix --cache --quiet --no-error-on-unmatched-pattern ./",
     "lint:staged": "lint-staged",
     "prettier": "prettier --ignore-path .gitignore \"packages/*/+(src|__tests__)/**/*.+(ts|tsx)\"  --cache",
     "cypress:open": "cypress open",
@@ -29,17 +30,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-customizable"
-    }
-  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -93,7 +83,7 @@
     "nock": "^13.2.4",
     "postcss": "^8.2.15",
     "prettier": "^3.3.3",
-    "release-it": "^14.2.0",
+    "minimist": "^1.2.8",
     "rollup": "^2.41.0",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-copy": "^3.4.0",
@@ -110,6 +100,22 @@
     "patch-package": "^8.0.0",
     "typescript": "4.3.2",
     "turbo": "2.0.6"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6"

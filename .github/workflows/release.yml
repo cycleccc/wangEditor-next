@@ -5,6 +5,7 @@ on:
     branches:
       - masster
       - develop
+      - '^(dev-.*|dev/.*)$'
   workflow_dispatch:
 
 permissions:
