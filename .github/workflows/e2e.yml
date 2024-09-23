@@ -9,6 +9,7 @@ on:
     branches:
       - 'master'
       - 'dev'
+      - '^(dev-.*|dev/.*)$'
       - '^(feature-.*|feature/.*)$'
       - '^(fix-.*|fix/.*)$'
       - '^(hotfix-.*|hotfix/.*)$'

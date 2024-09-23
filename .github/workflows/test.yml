@@ -10,6 +10,7 @@ on:
       - 'main'
       - 'master'
       - 'dev'
+      - '^(dev-.*|dev/.*)$'
       - '^(feature-.*|feature/.*)$'
       - '^(fix-.*|fix/.*)$'
       - '^(hotfix-.*|hotfix/.*)$'
