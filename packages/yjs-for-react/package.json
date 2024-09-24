@@ -59,7 +59,7 @@
     "react": ">=16.8.0",
     "@wangeditor-next/core": "1.x",
     "@wangeditor-next/editor": "5.x",
-    "@wangeditor-next/yjs": "0.x",
+    "@wangeditor-next/yjs": "^0.1.2-beta.0",
     "slate": "^0.72.0",
     "yjs": "^13.5.29"
   }
