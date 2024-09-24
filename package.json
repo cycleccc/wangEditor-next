@@ -59,6 +59,7 @@
     "babel-jest": "^27.0.6",
     "babel-plugin-istanbul": "^6.0.0",
     "concurrently": "^6.2.0",
+    "core-js": "3",
     "cross-env": "^7.0.2",
     "cssnano": "^5.0.3",
     "cypress": "^8.6.0",
