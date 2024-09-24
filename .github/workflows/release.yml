@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - masster
+      - master
       - develop
       - '^(dev-.*|dev/.*)$'
   workflow_dispatch:
@@ -51,7 +51,17 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build packages
+      - name: Load cached dependencies
+        uses: actions/cache@v4.0.2
+        id: cache
+        with:
+          path: |
+            **/node_modules
+            **/.turbo
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
         run: yarn build
 
       - name: Unit test
@@ -70,9 +80,9 @@ jobs:
         with:
           createGithubReleases: false
           publish: yarn publish
-          title: ${{ github.ref_name == 'main' && 'Publish a new stable version'  || 'Publish a new pre-release version' }}
+          title: ${{ github.ref_name == 'master' && 'Publish a new stable version'  || 'Publish a new pre-release version' }}
           commit: >-
-            ${{ github.ref_name == 'main' && 'chore(release): publish a new release version'  || 'chore(release): publish a new pre-release version' }}
+            ${{ github.ref_name == 'master' && 'chore(release): publish a new release version'  || 'chore(release): publish a new pre-release version' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
