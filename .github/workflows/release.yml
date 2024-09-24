@@ -79,7 +79,7 @@ jobs:
         uses: changesets/action@v1
         with:
           createGithubReleases: false
-          publish: yarn changeset publish
+          publish: yarn changeset publish --access=public
           title: ${{ github.ref_name == 'master' && 'Publish a new stable version'  || 'Publish a new pre-release version' }}
           commit: >-
             ${{ github.ref_name == 'master' && 'chore(release): publish a new release version'  || 'chore(release): publish a new pre-release version' }}
