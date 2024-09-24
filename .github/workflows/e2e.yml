@@ -9,6 +9,7 @@ on:
     branches:
       - 'master'
       - 'dev'
+      - '^(dev-.*|dev/.*)$'
       - '^(feature-.*|feature/.*)$'
       - '^(fix-.*|fix/.*)$'
       - '^(hotfix-.*|hotfix/.*)$'
@@ -23,6 +24,9 @@ on:
       - 'cypress/**'
       - 'babel.config.json'
       - 'cypress.json'
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test-e2e:

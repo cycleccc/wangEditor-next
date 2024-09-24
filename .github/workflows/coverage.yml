@@ -7,14 +7,7 @@ name:  coverage test
 on:
   push:
     branches:
-      - 'main'
       - 'master'
-      - 'dev'
-      - '^(feature-.*|feature/.*)$'
-      - '^(fix-.*|fix/.*)$'
-      - '^(hotfix-.*|hotfix/.*)$'
-      - '^(refactor-.*|refactor/.*)$'
-      - '^(test-.*|test/.*)$'
     paths:
       - '.github/workflows/*'
       - 'packages/**'

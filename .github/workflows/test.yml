@@ -10,6 +10,7 @@ on:
       - 'main'
       - 'master'
       - 'dev'
+      - '^(dev-.*|dev/.*)$'
       - '^(feature-.*|feature/.*)$'
       - '^(fix-.*|fix/.*)$'
       - '^(hotfix-.*|hotfix/.*)$'
@@ -20,6 +21,9 @@ on:
       - 'packages/**'
       - 'tests/**'
       - 'build/**'
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:
