@@ -44,7 +44,7 @@ jobs:
       run: yarn install
     - name: Build packages
       run: yarn build  
-    - uses: cypress-io/github-action@v2
+    - uses: cypress-io/github-action@v6
       with:
         browser: chrome
         start: yarn run example
