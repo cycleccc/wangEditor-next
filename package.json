@@ -1,7 +1,7 @@
 {
   "name": "@wangeditor-next/wangeditor",
   "private": true,
-  "type": "module",
+  "packageManager": "yarn@1.22.22",
   "browserslist": [
     "defaults",
     "not IE 11"
@@ -26,7 +26,8 @@
     "clean:packages": "rm -rf ./packages/*/dist",
     "prepare": "husky install",
     "turbo": "turbo",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "example": "turbo run example --filter=@wangeditor-next/editor"
   },
   "workspaces": [
     "packages/*"
@@ -117,5 +118,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6"
-  }
+  },
+  "version": "0.0.0"
 }
