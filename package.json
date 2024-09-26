@@ -86,7 +86,7 @@
     "patch-package": "^8.0.0",
     "postcss": "^8.2.15",
     "prettier": "^3.3.3",
-    "rollup": "^2.41.0",
+    "rollup": "^3.0.0",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
