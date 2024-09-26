@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.5.6
+
+### Patch Changes
+
+- 94f8470: revert modify table with hook
+- Updated dependencies [94f8470]
+  - @wangeditor-next/table-module@1.6.2
+
 ## 5.5.5
 
 ### Patch Changes
