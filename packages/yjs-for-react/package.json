@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.34",
-    "@types/use-sync-external-store": "^0.0.3"
+    "@types/use-sync-external-store": "^0.0.6"
   },
   "bugs": {
     "url": "https://github.com/cycleccc/wangEditor/issues"
