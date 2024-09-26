@@ -182,7 +182,7 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
     'div',
     {
       hook: {
-        postpatch: ({ elm }: VNode) => observerTableResize(editor, elm),
+        insert: ({ elm }: VNode) => observerTableResize(editor, elm),
         destroy: () => {
           unObserveTableResize()
         },
