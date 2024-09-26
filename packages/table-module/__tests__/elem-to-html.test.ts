@@ -3,13 +3,14 @@
  * @author luochao
  */
 
-import {
-  tableCellToHtmlConf,
-  tableToHtmlConf,
-  tableRowToHtmlConf,
-} from '../src/module/elem-to-html'
 import * as core from '@wangeditor-next/core'
 import { Ancestor } from 'slate'
+
+import {
+  tableCellToHtmlConf,
+  tableRowToHtmlConf,
+  tableToHtmlConf,
+} from '../src/module/elem-to-html'
 
 describe('TableModule module', () => {
   describe('module elem-to-html', () => {
@@ -27,8 +28,8 @@ describe('TableModule module', () => {
       try {
         tableCellToHtmlConf.elemToHtml(element, '<span>123</span>')
       } catch (err) {
-        expect(err.message).toBe(
-          `Cannot get table row node by cell node ${JSON.stringify(element)}`
+        expect((err as Error).message).toBe(
+          `Cannot get table row node by cell node ${JSON.stringify(element)}`,
         )
       }
     })
@@ -38,13 +39,16 @@ describe('TableModule module', () => {
         type: 'table-cell',
         children: [],
       }
+
       jest
         .spyOn(core.DomEditor, 'getParentNode')
         .mockReturnValue({ type: 'table-row', children: [{ text: '' }] } as any)
       try {
         tableCellToHtmlConf.elemToHtml(element, '<span>123</span>')
       } catch (err) {
-        expect(err.message).toBe(`Cannot get table node by cell node ${JSON.stringify(element)}`)
+        expect((err as Error).message).toBe(
+          `Cannot get table node by cell node ${JSON.stringify(element)}`,
+        )
       }
     })
 
@@ -53,12 +57,14 @@ describe('TableModule module', () => {
         type: 'table-cell',
         children: [],
       }
+
       jest
         .spyOn(core.DomEditor, 'getParentNode')
         .mockReturnValueOnce({ type: 'table-row', children: [{ text: '' }] } as any)
         .mockReturnValueOnce({ type: 'table', children: [{ text: '' }] } as Ancestor)
 
       const res = tableCellToHtmlConf.elemToHtml(element, '<span>123</span>')
+
       expect(res).toBe('<td colSpan="1" rowSpan="1" width="auto" style=""><span>123</span></td>')
     })
 
@@ -73,6 +79,7 @@ describe('TableModule module', () => {
         children: [],
       }
       const res = tableRowToHtmlConf.elemToHtml(element, '<td>123</td>')
+
       expect(res).toBe('<tr><td>123</td></tr>')
     })
 
@@ -87,8 +94,9 @@ describe('TableModule module', () => {
         children: [],
       }
       const res = tableToHtmlConf.elemToHtml(element, '<tr><td>123</td></tr>')
+
       expect(res).toBe(
-        '<table style="width: auto;table-layout: fixed;height:auto"><tbody><tr><td>123</td></tr></tbody></table>'
+        '<table style="width: auto;table-layout: fixed;height:auto"><tbody><tr><td>123</td></tr></tbody></table>',
       )
     })
 
@@ -100,8 +108,9 @@ describe('TableModule module', () => {
         children: [],
       }
       const res = tableToHtmlConf.elemToHtml(element, '<tr><td>123</td></tr>')
+
       expect(res).toBe(
-        '<table style="width: 100%;table-layout: fixed;height:60px"><tbody><tr><td>123</td></tr></tbody></table>'
+        '<table style="width: 100%;table-layout: fixed;height:60px"><tbody><tr><td>123</td></tr></tbody></table>',
       )
     })
   })
