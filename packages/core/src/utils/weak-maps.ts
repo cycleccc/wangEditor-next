@@ -4,17 +4,20 @@
  */
 
 import { Emitter } from 'event-emitter'
+import {
+  Ancestor, Editor, Node, Path, Range,
+} from 'slate'
 import { VNode } from 'snabbdom'
-import { Node, Ancestor, Editor, Path, Range } from 'slate'
-import { IDomEditor } from '../editor/interface'
-import TextArea from '../text-area/TextArea'
-import Toolbar from '../menus/bar/Toolbar'
-import HoverBar from '../menus/bar/HoverBar'
-import { IBarItem } from '../menus/bar-item/index'
-import { Key } from './key'
-import { PatchFn } from '../utils/vdom'
+
 import { IEditorConfig } from '../config/interface'
+import { IDomEditor } from '../editor/interface'
+import HoverBar from '../menus/bar/HoverBar'
+import Toolbar from '../menus/bar/Toolbar'
+import { IBarItem } from '../menus/bar-item/index'
 import PanelAndModal from '../menus/panel-and-modal/BaseClass'
+import TextArea from '../text-area/TextArea'
+import { PatchFn } from '../utils/vdom'
+import { Key } from './key'
 
 // textarea - editor
 export const EDITOR_TO_TEXTAREA = new WeakMap<IDomEditor, TextArea>()

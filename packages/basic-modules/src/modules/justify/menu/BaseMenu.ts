@@ -3,12 +3,14 @@
  * @author wangfupeng
  */
 
-import { Editor, Node, Element } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor } from '@wangeditor-next/core'
+import { DomEditor, IButtonMenu, IDomEditor } from '@wangeditor-next/core'
+import { Editor, Element, Node } from 'slate'
 
 abstract class BaseMenu implements IButtonMenu {
   abstract readonly title: string
+
   abstract readonly iconSvg: string
+
   readonly tag = 'button'
 
   getValue(editor: IDomEditor): string | boolean {
@@ -22,17 +24,18 @@ abstract class BaseMenu implements IButtonMenu {
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
 
     const selectedElems = DomEditor.getSelectedElems(editor)
     const notMatch = selectedElems.some((elem: Node) => {
       const { type } = elem as unknown as Element
-      if (Editor.isVoid(editor, elem) && Editor.isBlock(editor, elem) && type !== 'video')
-        return true
 
-      if (['pre', 'code'].includes(type)) return true
+      if (Editor.isVoid(editor, elem) && Editor.isBlock(editor, elem) && type !== 'video') { return true }
+
+      if (['pre', 'code'].includes(type)) { return true }
     })
-    if (notMatch) return true
+
+    if (notMatch) { return true }
 
     return false
   }

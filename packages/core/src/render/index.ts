@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import { Element as SlateElement, Descendant } from 'slate'
+import { Descendant, Element as SlateElement } from 'slate'
 import { VNode } from 'snabbdom'
+
 import { IDomEditor } from '../editor/interface'
 
 // ------------------------------------ render style ------------------------------------

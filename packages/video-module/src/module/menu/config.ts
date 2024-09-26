@@ -4,6 +4,7 @@
  */
 
 import { IUploadConfig } from '@wangeditor-next/core'
+
 import { VideoElement } from '../custom-types'
 
 type InsertFn = (src: string, poster: string) => void

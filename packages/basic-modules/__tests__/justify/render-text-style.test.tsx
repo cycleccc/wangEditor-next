@@ -4,6 +4,7 @@
  */
 
 import { jsx } from 'snabbdom'
+
 import { renderStyle } from '../../src/modules/justify/render-style'
 
 describe('justify - render text style', () => {
@@ -13,6 +14,7 @@ describe('justify - render text style', () => {
     // @ts-ignore 忽略 vnode 格式
     const newVnode = renderStyle(elem, vnode)
     // @ts-ignore 忽略 vnode 格式
+
     expect(newVnode.data.style?.textAlign).toBe('center')
   })
 })

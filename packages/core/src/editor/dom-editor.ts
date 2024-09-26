@@ -4,24 +4,13 @@
  */
 
 import toArray from 'lodash.toarray'
-import { Editor, Node, Element, Path, Point, Range, Ancestor, Text } from 'slate'
-import type { IDomEditor } from './interface'
-import { Key } from '../utils/key'
-import TextArea from '../text-area/TextArea'
-import Toolbar from '../menus/bar/Toolbar'
-import HoverBar from '../menus/bar/HoverBar'
 import {
-  EDITOR_TO_ELEMENT,
-  ELEMENT_TO_NODE,
-  KEY_TO_ELEMENT,
-  NODE_TO_INDEX,
-  NODE_TO_KEY,
-  NODE_TO_PARENT,
-  EDITOR_TO_TEXTAREA,
-  EDITOR_TO_TOOLBAR,
-  EDITOR_TO_HOVER_BAR,
-  EDITOR_TO_WINDOW,
-} from '../utils/weak-maps'
+  Ancestor, Editor, Element, Node, Path, Point, Range, Text,
+} from 'slate'
+
+import HoverBar from '../menus/bar/HoverBar'
+import Toolbar from '../menus/bar/Toolbar'
+import TextArea from '../text-area/TextArea'
 import $, {
   DOMElement,
   DOMNode,
@@ -29,15 +18,29 @@ import $, {
   DOMRange,
   DOMSelection,
   DOMStaticRange,
-  isDocument,
-  isShadowRoot,
-  isDOMElement,
-  normalizeDOMPoint,
-  isDOMSelection,
   hasShadowRoot,
+  isDocument,
+  isDOMElement,
+  isDOMSelection,
+  isShadowRoot,
+  normalizeDOMPoint,
   walkTextNodes,
 } from '../utils/dom'
+import { Key } from '../utils/key'
 import { IS_CHROME, IS_FIREFOX } from '../utils/ua'
+import {
+  EDITOR_TO_ELEMENT,
+  EDITOR_TO_HOVER_BAR,
+  EDITOR_TO_TEXTAREA,
+  EDITOR_TO_TOOLBAR,
+  EDITOR_TO_WINDOW,
+  ELEMENT_TO_NODE,
+  KEY_TO_ELEMENT,
+  NODE_TO_INDEX,
+  NODE_TO_KEY,
+  NODE_TO_PARENT,
+} from '../utils/weak-maps'
+import type { IDomEditor } from './interface'
 
 /**
  * 自定义全局 command
@@ -48,6 +51,7 @@ export const DomEditor = {
    */
   getWindow(editor: IDomEditor): Window {
     const window = EDITOR_TO_WINDOW.get(editor)
+
     if (!window) {
       throw new Error('Unable to find a host window element for this editor')
     }
@@ -72,6 +76,7 @@ export const DomEditor = {
 
   setNewKey(node: Node) {
     const key = new Key()
+
     NODE_TO_KEY.set(node, key)
   },
 
@@ -91,9 +96,9 @@ export const DomEditor = {
         if (Editor.isEditor(child)) {
           // 已到达最顶层，返回 patch
           return path
-        } else {
-          break
         }
+        break
+
       }
 
       // 获取该节点在父节点中的 index
@@ -147,8 +152,10 @@ export const DomEditor = {
   getParentsNodes(editor: IDomEditor, node: Node): Ancestor[] {
     const nodes: Ancestor[] = []
     let curNode = node
+
     while (curNode !== editor && curNode != null) {
       const parentNode = DomEditor.getParentNode(editor, curNode)
+
       if (parentNode == null) {
         break
       } else {
@@ -167,6 +174,7 @@ export const DomEditor = {
   getTopNode(editor: IDomEditor, curNode: Node): Node {
     const path = DomEditor.findPath(editor, curNode)
     const topPath = [path[0]]
+
     return Node.get(editor, topPath)
   },
 
@@ -176,10 +184,12 @@ export const DomEditor = {
   toDOMNode(editor: IDomEditor, node: Node): HTMLElement {
     let domNode
     const isEditor = Editor.isEditor(node)
+
     if (isEditor) {
       domNode = EDITOR_TO_ELEMENT.get(editor)
     } else {
       const key = DomEditor.findKey(editor, node)
+
       domNode = KEY_TO_ELEMENT.get(key)
     }
 
@@ -205,7 +215,10 @@ export const DomEditor = {
     try {
       targetEl = (isDOMElement(target) ? target : target.parentElement) as HTMLElement
     } catch (err) {
-      if (!err.message.includes('Permission denied to access property "nodeType"')) {
+      if (
+        err instanceof Error
+        && !err.message.includes('Permission denied to access property "nodeType"')
+      ) {
         throw err
       }
     }
@@ -216,14 +229,14 @@ export const DomEditor = {
 
     return (
       // 祖先节点中包括 data-slate-editor 属性，即 textarea
-      (targetEl.closest(`[data-slate-editor]`) === editorEl &&
+      (targetEl.closest('[data-slate-editor]') === editorEl
         // 通过参数 editable 控制开启是否验证是可编辑元素或零宽字符
         // 补全 data-slate-string 可参考本文代码
-        //（data-slate-zero-width、data-slate-string）判断一起出现，唯独此处欠缺，补全
-        (!editable ||
-          targetEl.isContentEditable ||
-          !!targetEl.getAttribute('data-slate-zero-width'))) ||
-      !!targetEl.getAttribute('data-slate-string')
+        // （data-slate-zero-width、data-slate-string）判断一起出现，唯独此处欠缺，补全
+        && (!editable
+          || targetEl.isContentEditable
+          || !!targetEl.getAttribute('data-slate-zero-width')))
+      || !!targetEl.getAttribute('data-slate-string')
     )
   },
 
@@ -277,7 +290,7 @@ export const DomEditor = {
     // For each leaf, we need to isolate its content, which means filtering
     // to its direct text and zero-width spans. (We have to filter out any
     // other siblings that may have been rendered alongside them.)
-    const selector = `[data-slate-string], [data-slate-zero-width]`
+    const selector = '[data-slate-string], [data-slate-zero-width]'
     const texts = Array.from(el.querySelectorAll(selector))
     let start = 0
 
@@ -295,6 +308,7 @@ export const DomEditor = {
 
       if (point.offset <= end) {
         const offset = Math.min(length, Math.max(0, point.offset - start))
+
         domPoint = [domNode, offset]
         break
       }
@@ -316,7 +330,7 @@ export const DomEditor = {
     let domEl = isDOMElement(domNode) ? domNode : domNode.parentElement
 
     if (domEl && !domEl.hasAttribute('data-slate-node')) {
-      domEl = domEl.closest(`[data-slate-node]`)
+      domEl = domEl.closest('[data-slate-node]')
     }
 
     const node = domEl ? ELEMENT_TO_NODE.get(domEl as HTMLElement) : null
@@ -362,6 +376,7 @@ export const DomEditor = {
 
       if (point) {
         const range = Editor.range(editor, point)
+
         return range
       }
     }
@@ -375,6 +390,7 @@ export const DomEditor = {
       domRange = document.caretRangeFromPoint(x, y)
     } else {
       const position = document.caretPositionFromPoint(x, y)
+
       if (position) {
         domRange = document.createRange()
         domRange.setStart(position.offsetNode, position.offset)
@@ -391,6 +407,7 @@ export const DomEditor = {
       exactMatch: false,
       suppressThrow: false,
     })
+
     return range
   },
 
@@ -403,7 +420,7 @@ export const DomEditor = {
     options: {
       exactMatch: T
       suppressThrow: T
-    }
+    },
   ): T extends true ? Range | null : Range {
     const { exactMatch, suppressThrow } = options
     const el = isDOMSelection(domRange) ? domRange.anchorNode : domRange.startContainer
@@ -424,9 +441,8 @@ export const DomEditor = {
         // (2020/08/08)
         // https://bugs.chromium.org/p/chromium/issues/detail?id=447523
         if (IS_CHROME && hasShadowRoot()) {
-          isCollapsed =
-            domRange.anchorNode === domRange.focusNode &&
-            domRange.anchorOffset === domRange.focusOffset
+          isCollapsed = domRange.anchorNode === domRange.focusNode
+            && domRange.anchorOffset === domRange.focusOffset
         } else {
           isCollapsed = domRange.isCollapsed
         }
@@ -447,6 +463,7 @@ export const DomEditor = {
       exactMatch,
       suppressThrow,
     })
+
     if (!anchor) {
       return null as T extends true ? Range | null : Range
     }
@@ -454,6 +471,7 @@ export const DomEditor = {
     const focus = isCollapsed
       ? anchor
       : DomEditor.toSlatePoint(editor, [focusNode, focusOffset], { exactMatch, suppressThrow })
+
     if (!focus) {
       return null as T extends true ? Range | null : Range
     }
@@ -465,11 +483,12 @@ export const DomEditor = {
     // and the DOM focus is an Element
     // (meaning that the selection ends before the element)
     // unhang the range to avoid mistakenly including the void
+
     if (
-      Range.isExpanded(range) &&
-      Range.isForward(range) &&
-      isDOMElement(focusNode) &&
-      Editor.void(editor, { at: range.focus, mode: 'highest' })
+      Range.isExpanded(range)
+      && Range.isForward(range)
+      && isDOMElement(focusNode)
+      && Editor.void(editor, { at: range.focus, mode: 'highest' })
     ) {
       range = Editor.unhangRange(editor, range, { voids: true })
     }
@@ -486,7 +505,7 @@ export const DomEditor = {
     options: {
       exactMatch: T
       suppressThrow: T
-    }
+    },
   ): T extends true ? Point | null : Point {
     const { exactMatch, suppressThrow } = options
     const [nearestNode, nearestOffset] = exactMatch ? domPoint : normalizeDOMPoint(domPoint)
@@ -505,6 +524,7 @@ export const DomEditor = {
         textNode = leafNode.closest('[data-slate-node="text"]')!
         const window = DomEditor.getWindow(editor)
         const range = window.document.createRange()
+
         range.setStart(textNode, 0)
         range.setEnd(nearestNode, nearestOffset)
         const contents = range.cloneContents()
@@ -543,18 +563,18 @@ export const DomEditor = {
       }
 
       if (
-        domNode &&
-        offset === domNode.textContent!.length &&
+        domNode
+        && offset === domNode.textContent!.length
         // COMPAT: If the parent node is a Slate zero-width space, editor is
         // because the text node should have no characters. However, during IME
         // composition the ASCII characters will be prepended to the zero-width
         // space, so subtract 1 from the offset to account for the zero-width
         // space character.
-        (parentNode.hasAttribute('data-slate-zero-width') ||
+        && (parentNode.hasAttribute('data-slate-zero-width')
           // COMPAT: In Firefox, `range.cloneContents()` returns an extra trailing '\n'
           // when the document ends with a new-line character. This results in the offset
           // length being off by one, so we need to subtract one to account for this.
-          (IS_FIREFOX && domNode.textContent?.endsWith('\n')))
+          || (IS_FIREFOX && domNode.textContent?.endsWith('\n')))
       ) {
         offset--
       }
@@ -572,11 +592,13 @@ export const DomEditor = {
     // first, and then afterwards for the correct `element`. (2017/03/03)
     const slateNode = DomEditor.toSlateNode(editor, textNode!)
     const path = DomEditor.findPath(editor, slateNode)
+
     return { path, offset } as T extends true ? Point | null : Point
   },
 
   hasRange(editor: IDomEditor, range: Range): boolean {
     const { anchor, focus } = range
+
     return Editor.hasPath(editor, anchor.path) && Editor.hasPath(editor, focus.path)
   },
 
@@ -599,9 +621,11 @@ export const DomEditor = {
     const elems: Element[] = []
 
     const nodeEntries = Editor.nodes(editor, { universal: true })
-    for (let nodeEntry of nodeEntries) {
+
+    for (const nodeEntry of nodeEntries) {
       const [node] = nodeEntry
-      if (Element.isElement(node)) elems.push(node)
+
+      if (Element.isElement(node)) { elems.push(node) }
     }
 
     return elems
@@ -613,7 +637,7 @@ export const DomEditor = {
       universal: true,
     })
 
-    if (nodeEntry == null) return null
+    if (nodeEntry == null) { return null }
     return nodeEntry[0]
   },
 
@@ -623,7 +647,7 @@ export const DomEditor = {
       universal: true,
     })
 
-    if (nodeEntry == null) return null
+    if (nodeEntry == null) { return null }
     return nodeEntry[0]
   },
 
@@ -632,10 +656,12 @@ export const DomEditor = {
       match: n => n === node,
       universal: true,
     })
-    if (nodeEntry == null) return false
+
+    if (nodeEntry == null) { return false }
 
     const [n] = nodeEntry
-    if (n === node) return true
+
+    if (n === node) { return true }
 
     return false
   },
@@ -643,10 +669,9 @@ export const DomEditor = {
   isSelectionAtLineEnd(editor: IDomEditor, path: Path): boolean {
     const { selection } = editor
 
-    if (!selection) return false
+    if (!selection) { return false }
 
-    const isAtLineEnd =
-      Editor.isEnd(editor, selection.anchor, path) || Editor.isEnd(editor, selection.focus, path)
+    const isAtLineEnd = Editor.isEnd(editor, selection.anchor, path) || Editor.isEnd(editor, selection.focus, path)
 
     return isAtLineEnd
   },
@@ -654,7 +679,8 @@ export const DomEditor = {
   // 获取 textarea 实例
   getTextarea(editor: IDomEditor): TextArea {
     const textarea = EDITOR_TO_TEXTAREA.get(editor)
-    if (textarea == null) throw new Error('Cannot find textarea instance by editor')
+
+    if (textarea == null) { throw new Error('Cannot find textarea instance by editor') }
     return textarea
   },
 
@@ -683,7 +709,7 @@ export const DomEditor = {
     const { maxLength, onMaxLength } = editor.getConfig()
 
     // 未设置 maxLength ，则返回 number 最大值
-    if (typeof maxLength !== 'number' || maxLength <= 0) return Infinity
+    if (typeof maxLength !== 'number' || maxLength <= 0) { return Infinity }
 
     const editorText = editor.getText().replace(/\r|\n|(\r\n)/g, '') // 去掉换行
     const curLength = editorText.length
@@ -691,7 +717,7 @@ export const DomEditor = {
 
     if (leftLength <= 0) {
       // 触发 maxLength 限制，不再继续插入文字
-      if (onMaxLength) onMaxLength(editor)
+      if (onMaxLength) { onMaxLength(editor) }
     }
 
     return leftLength
@@ -702,6 +728,7 @@ export const DomEditor = {
     // 有时候全选删除新增的文本节点可能不在段落内，因此遍历textArea删除掉
     const { $textArea } = DomEditor.getTextarea(editor)
     const childNodes = $textArea?.[0].childNodes
+
     if (childNodes) {
       for (const node of Array.from(childNodes)) {
         if (node.nodeType === 3) {
@@ -724,7 +751,8 @@ export const DomEditor = {
       },
       universal: true,
     })
-    for (let nodeEntry of nodeEntries) {
+
+    for (const nodeEntry of nodeEntries) {
       if (nodeEntry != null) {
         const n = nodeEntry[0]
         const elem = DomEditor.toDOMNode(editor, n)
@@ -732,6 +760,7 @@ export const DomEditor = {
         // 只遍历 elem 范围，考虑性能
         walkTextNodes(elem, (textNode, parent) => {
           const $parent = $(parent)
+
           if ($parent.attr('data-slate-string')) {
             return // 正常的 text
           }
@@ -757,6 +786,7 @@ export const DomEditor = {
   isLastNode(editor: IDomEditor, node: Node) {
     const editorChildren = editor.children || []
     const editorChildrenLength = editorChildren.length
+
     return editorChildren[editorChildrenLength - 1] === node
   },
 
@@ -776,6 +806,7 @@ export const DomEditor = {
       match: n => editor.isVoid(n as Element),
     })
     let len = 0
+
     for (const n of voidNodes) {
       len++
     }
@@ -788,18 +819,22 @@ export const DomEditor = {
    */
   isSelectedEmptyParagraph(editor: IDomEditor) {
     const { selection } = editor
-    if (selection == null) return false
 
-    if (Range.isExpanded(selection)) return false
+    if (selection == null) { return false }
+
+    if (Range.isExpanded(selection)) { return false }
 
     const selectedNode = DomEditor.getSelectedNodeByType(editor, 'paragraph')
-    if (selectedNode === null) return false
+
+    if (selectedNode === null) { return false }
 
     const { children } = selectedNode as Element
-    if (children.length !== 1) return false
+
+    if (children.length !== 1) { return false }
 
     const { text } = children[0] as Text
-    if (text === '') return true
+
+    if (text === '') { return true }
   },
 
   /**
@@ -809,14 +844,17 @@ export const DomEditor = {
    */
   isEmptyPath(editor: IDomEditor, path: Path): boolean {
     const entry = Editor.node(editor, path)
-    if (entry == null) return false
+
+    if (entry == null) { return false }
 
     const [node] = entry
 
     const { children } = node as Element
+
     if (children.length === 1) {
       const { text } = children[0] as Text
-      if (text === '') return true // 内容为空
+
+      if (text === '') { return true } // 内容为空
     }
 
     return false

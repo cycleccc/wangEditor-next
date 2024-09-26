@@ -14,7 +14,7 @@ export type NodeEntryWithContext = [
     ltr: number // left-to-right (colspan)
     ttb: number // top-to-bottom (rowspan)
     btt: number // bottom-to-top (rowspan)
-  }
+  },
 ]
 
 export type SelectionMode = 'start' | 'end' | 'all'

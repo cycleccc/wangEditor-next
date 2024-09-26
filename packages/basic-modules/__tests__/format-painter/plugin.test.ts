@@ -1,6 +1,6 @@
 import createEditor from '../../../../tests/utils/create-editor'
-import withFormatPainter from '../../src/modules/format-painter/plugin'
 import FormatPainter from '../../src/modules/format-painter/menu/FormatPainter'
+import withFormatPainter from '../../src/modules/format-painter/plugin'
 
 describe('format painter plugin', () => {
   let editor: any

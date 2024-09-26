@@ -4,16 +4,19 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
-import withCodeBlock from '../../src/modules/code-block/plugin'
 import { isDataTransfer } from '../../../core/src/utils/dom'
+import withCodeBlock from '../../src/modules/code-block/plugin'
 
 // 模拟 DataTransfer
 class MyDataTransfer {
   private values: object = {}
+
   setData(type: string, value: string) {
     this.values[type] = value
   }
+
   getData(type: string): string {
     return this.values[type]
   }
@@ -52,6 +55,7 @@ describe('code-block plugin', () => {
 
     // code-block 前后会自动生成两个 p
     const pList1 = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList1.length).toBe(2)
 
     editor.select({
@@ -66,6 +70,7 @@ describe('code-block plugin', () => {
 
     // 不会再生成新的 p
     const pList2 = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList2.length).toBe(2)
   })
 
@@ -81,11 +86,13 @@ describe('code-block plugin', () => {
       type: 'pre',
       children: [codeElem],
     }
+
     editor.select(startLocation)
     editor.insertNode(preElem) // 插入 code-block
 
     // code-block 前后会自动生成两个 p
     const pList1 = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList1.length).toBe(2)
 
     editor.select({
@@ -100,6 +107,7 @@ describe('code-block plugin', () => {
 
   it('insert data', () => {
     const data = new MyDataTransfer()
+
     data.setData('text/plain', ' hello')
 
     // 无 codeNode 换行
@@ -122,6 +130,7 @@ describe('code-block plugin', () => {
     editor.insertNode(codeElem)
 
     const pList = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList.length).toBe(2)
   })
 
@@ -130,9 +139,11 @@ describe('code-block plugin', () => {
     editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
 
     const pList = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList.length).toBe(2)
 
     const preList = editor.getElemsByTypePrefix('pre')
+
     expect(preList.length).toBe(1)
   })
 
@@ -141,9 +152,11 @@ describe('code-block plugin', () => {
     editor.insertNode({ type: 'pre', children: [{ type: 'text', children: [{ text: 'var' }] }] })
 
     const pList = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList.length).toBe(2)
 
     const preList = editor.getElemsByTypePrefix('pre')
+
     expect(preList.length).toBe(0)
   })
 })

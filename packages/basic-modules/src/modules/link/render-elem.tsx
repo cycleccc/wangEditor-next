@@ -3,9 +3,10 @@
  * @author wangfupeng
  */
 
+import { IDomEditor } from '@wangeditor-next/core'
 import { Element as SlateElement } from 'slate'
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor } from '@wangeditor-next/core'
+
 import { LinkElement } from './custom-types'
 
 /**

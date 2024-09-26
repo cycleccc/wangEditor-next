@@ -3,13 +3,15 @@
  * @author wangfupeng
  */
 
-import { Transforms, Element } from 'slate'
 import { IDomEditor, t } from '@wangeditor-next/core'
-import BaseMenu from './BaseMenu'
+import { Element, Transforms } from 'slate'
+
 import { JUSTIFY_CENTER_SVG } from '../../../constants/icon-svg'
+import BaseMenu from './BaseMenu'
 
 class JustifyCenterMenu extends BaseMenu {
   readonly title = t('justify.center')
+
   readonly iconSvg = JUSTIFY_CENTER_SVG
 
   exec(editor: IDomEditor, value: string | boolean): void {
@@ -18,7 +20,7 @@ class JustifyCenterMenu extends BaseMenu {
       {
         textAlign: 'center',
       },
-      { match: n => Element.isElement(n) && !editor.isInline(n) } // inline 元素设置text-align 是没作用的
+      { match: n => Element.isElement(n) && !editor.isInline(n) }, // inline 元素设置text-align 是没作用的
     )
   }
 }

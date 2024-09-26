@@ -1,10 +1,11 @@
 import {
   CursorOverlayData,
-  useRemoteCursorOverlayPositions,
   useEditorStatic,
+  useRemoteCursorOverlayPositions,
 } from '@wangeditor-next/yjs-for-react'
 import clsx from 'clsx'
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
+
 import { CursorData } from '../../types'
 import { addAlpha } from '../../utils'
 

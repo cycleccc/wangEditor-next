@@ -3,11 +3,14 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Location, Node, Range, Point } from 'slate'
-import { IDomEditor } from '../interface'
-import { DomEditor } from '../dom-editor'
+import {
+  Editor, Location, Node, Point, Range, Transforms,
+} from 'slate'
+
 import { getPositionByNode, getPositionBySelection } from '../../menus/helpers/position'
 import { EDITOR_TO_SELECTION } from '../../utils/weak-maps'
+import { DomEditor } from '../dom-editor'
+import { IDomEditor } from '../interface'
 
 export const withSelection = <T extends Editor>(editor: T) => {
   const e = editor as T & IDomEditor
@@ -34,8 +37,8 @@ export const withSelection = <T extends Editor>(editor: T) => {
 
   // 移动光标
   e.move = (distance: number, reverse = false) => {
-    if (!distance) return
-    if (distance < 0) return
+    if (!distance) { return }
+    if (distance < 0) { return }
 
     Transforms.move(editor, {
       distance,
@@ -54,7 +57,8 @@ export const withSelection = <T extends Editor>(editor: T) => {
    */
   e.restoreSelection = () => {
     const selection = EDITOR_TO_SELECTION.get(e)
-    if (selection == null) return
+
+    if (selection == null) { return }
 
     e.focus()
     Transforms.select(e, selection)
@@ -79,7 +83,8 @@ export const withSelection = <T extends Editor>(editor: T) => {
    */
   e.isSelectedAll = () => {
     const { selection } = e
-    if (selection == null) return false
+
+    if (selection == null) { return false }
 
     const [start1, end1] = Range.edges(selection) // 获取当前选取的开始、结束 point
     const [start2, end2] = Editor.edges(e, []) // 获取编辑器全部的开始、结束 point

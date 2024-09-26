@@ -3,14 +3,16 @@
  * @author wangfupeng
  */
 
-import { Descendant, Text } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { FontSizeAndFamilyText } from './custom-types'
+import { Descendant, Text } from 'slate'
+
 import $, { DOMElement, getStyleValue } from '../../utils/dom'
+import { FontSizeAndFamilyText } from './custom-types'
 
 export function parseStyleHtml(text: DOMElement, node: Descendant, editor: IDomEditor): Descendant {
   const $text = $(text)
-  if (!Text.isText(node)) return node
+
+  if (!Text.isText(node)) { return node }
 
   const textNode = node as FontSizeAndFamilyText
 
@@ -18,9 +20,8 @@ export function parseStyleHtml(text: DOMElement, node: Descendant, editor: IDomE
   const { fontSizeList = [] } = editor.getMenuConfig('fontSize')
   const fontSize = getStyleValue($text, 'font-size')
 
-  const includesSize =
-    fontSizeList.find(item => item.value && item.value === fontSize) ||
-    fontSizeList.includes(fontSize)
+  const includesSize = fontSizeList.find(item => item.value && item.value === fontSize)
+    || fontSizeList.includes(fontSize)
 
   if (fontSize && includesSize) {
     textNode.fontSize = fontSize
@@ -32,9 +33,8 @@ export function parseStyleHtml(text: DOMElement, node: Descendant, editor: IDomE
   const fontFamily = getStyleValue($text, 'font-family').replace(/"/g, '')
 
   // getFontFamilyConfig 配置支持对象形式
-  const includesFamily =
-    fontFamilyList.find(item => item.value && item.value === fontFamily) ||
-    fontFamilyList.includes(fontFamily)
+  const includesFamily = fontFamilyList.find(item => item.value && item.value === fontFamily)
+    || fontFamilyList.includes(fontFamily)
 
   if (fontFamily && includesFamily) {
     textNode.fontFamily = fontFamily

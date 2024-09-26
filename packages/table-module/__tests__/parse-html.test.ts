@@ -4,13 +4,14 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../tests/utils/create-editor'
-import { preParseTableHtmlConf } from '../src/module/pre-parse-html'
 import {
   parseCellHtmlConf,
   parseRowHtmlConf,
   parseTableHtmlConf,
 } from '../src/module/parse-elem-html'
+import { preParseTableHtmlConf } from '../src/module/pre-parse-html'
 
 describe('table - pre parse html', () => {
   it('pre parse', () => {
@@ -21,6 +22,7 @@ describe('table - pre parse html', () => {
 
     // pre parse
     const res = preParseTableHtmlConf.preParseHtml($table[0])
+
     expect(res.outerHTML).toBe('<table><tr><td>hello</td></tr></table>')
   })
 
@@ -29,6 +31,7 @@ describe('table - pre parse html', () => {
 
     // pre parse
     const res = preParseTableHtmlConf.preParseHtml(fakeTable[0])
+
     expect(res.outerHTML).toBe('<div>hello</div>')
   })
 
@@ -37,6 +40,7 @@ describe('table - pre parse html', () => {
 
     // pre parse
     const res = preParseTableHtmlConf.preParseHtml(table[0])
+
     expect(res.outerHTML).toBe('<table><tr><td>hello</td></tr></table>')
   })
 })
@@ -46,6 +50,7 @@ describe('table - parse html', () => {
 
   it('table cell', () => {
     const $cell1 = $('<td>hello&nbsp;world</td>')
+
     expect($cell1[0].matches(parseCellHtmlConf.selector)).toBeTruthy()
     expect(parseCellHtmlConf.parseElemHtml($cell1[0], [], editor)).toEqual({
       type: 'table-cell',
@@ -59,6 +64,7 @@ describe('table - parse html', () => {
 
     const $cell2 = $('<th style="display:none"></th>')
     const children = [{ text: 'hello ' }, { text: 'world', bold: true }]
+
     expect($cell2[0].matches(parseCellHtmlConf.selector)).toBeTruthy()
     expect(parseCellHtmlConf.parseElemHtml($cell2[0], children, editor)).toEqual({
       type: 'table-cell',

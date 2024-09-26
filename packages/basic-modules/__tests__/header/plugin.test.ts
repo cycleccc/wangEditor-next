@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import withHeader from '../../src/modules/header/plugin'
 
@@ -24,6 +25,7 @@ describe('header plugin', () => {
     editor.insertBreak()
 
     const paragraphs = editor.getElemsByTypePrefix('paragraph')
+
     expect(paragraphs.length).toBe(2)
   })
 })

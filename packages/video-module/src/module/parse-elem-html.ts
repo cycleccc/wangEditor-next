@@ -3,18 +3,19 @@
  * @author wangfupeng
  */
 
-import { Descendant } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { VideoElement, videoStyle } from './custom-types'
+import { Descendant } from 'slate'
+
 import $, { DOMElement } from '../utils/dom'
 import { styleStringToObject } from '../utils/util'
+import { VideoElement, videoStyle } from './custom-types'
 
 function genVideoElem(
   src: string,
-  poster: string = '',
+  poster = '',
   width = 'auto',
   height = 'auto',
-  style: videoStyle = {}
+  style: videoStyle = {},
 ): VideoElement {
   return {
     type: 'video',
@@ -37,6 +38,7 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
 
   // <iframe> 形式
   const $iframe = $elem.find('iframe')
+
   if ($iframe.length > 0) {
     width = $iframe.attr('width') || 'auto'
     height = $iframe.attr('height') || 'auto'
@@ -48,10 +50,12 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
 
   // <video> 形式
   const $video = $elem.find('video')
+
   src = $video.attr('src') || ''
   if (!src) {
     if ($video.length > 0) {
       const $source = $video.find('source')
+
       src = $source.attr('src') || ''
     }
   }

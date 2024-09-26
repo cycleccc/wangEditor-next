@@ -1,18 +1,19 @@
-import throttle from 'lodash.throttle'
-import { Element as SlateElement, Transforms, Editor } from 'slate'
 import { IDomEditor, isHTMLElememt } from '@wangeditor-next/core'
-import { TableElement } from './custom-types'
+import throttle from 'lodash.throttle'
+import { Editor, Element as SlateElement, Transforms } from 'slate'
+
 import { isOfType } from '../utils'
 import $ from '../utils/dom'
+import { TableElement } from './custom-types'
 
-/***
+/** *
  * 计算 cell border 距离 table 左侧距离
  */
 function getCumulativeWidths(columnWidths: number[]) {
-  let cumulativeWidths: number[] = []
+  const cumulativeWidths: number[] = []
   let totalWidth = 0
 
-  for (let width of columnWidths) {
+  for (const width of columnWidths) {
     totalWidth += width
     cumulativeWidths.push(totalWidth)
   }
@@ -20,14 +21,14 @@ function getCumulativeWidths(columnWidths: number[]) {
   return cumulativeWidths
 }
 
-/***
+/** *
  * 用于计算拖动 cell 时，cell 宽度变化的比例
  */
 export function getColumnWidthRatios(columnWidths: number[]) {
-  let columnWidthsRatio: number[] = []
-  let totalWidth = columnWidths.reduce((a, b) => a + b, 0)
+  const columnWidthsRatio: number[] = []
+  const totalWidth = columnWidths.reduce((a, b) => a + b, 0)
 
-  for (let width of columnWidths) {
+  for (const width of columnWidths) {
     columnWidthsRatio.push(width / totalWidth)
   }
 
@@ -39,9 +40,11 @@ export function getColumnWidthRatios(columnWidths: number[]) {
  * ResizeObserver 需要即时释放，以免引起内存泄露
  */
 let resizeObserver: ResizeObserver | null = null
+
 export function observerTableResize(editor: IDomEditor, elm: Node | undefined) {
   if (isHTMLElememt(elm)) {
     const table = elm.querySelector('table')
+
     if (table) {
       resizeObserver = new ResizeObserver(([{ contentRect }]) => {
         // 当非拖动引起的宽度变化，需要调整 columnWidths
@@ -51,7 +54,7 @@ export function observerTableResize(editor: IDomEditor, elm: Node | undefined) {
             scrollWidth: contentRect.width,
             height: contentRect.height,
           } as TableElement,
-          { mode: 'highest' }
+          { mode: 'highest' },
         )
       })
       resizeObserver.observe(table)
@@ -74,16 +77,18 @@ let clientXWhenMouseDown = 0
 let cellWidthWhenMouseDown = 0
 let editorWhenMouseDown: IDomEditor | null = null
 const $window = $(window)
+
 $window.on('mousedown', onMouseDown)
 
 function onMouseDown(event: Event) {
   const elem = event.target as HTMLElement
   // 判断是否为光标选区行为，对列宽变更行为进行过滤
   // console.log('onMouseDown', elem)
+
   if (elem.closest('[data-block-type="table-cell"]')) {
     isSelectionOperation = true
   } else if (elem.tagName == 'DIV' && elem.closest('.column-resizer-item')) {
-    if (editorWhenMouseDown == null) return
+    if (editorWhenMouseDown == null) { return }
 
     const [[elemNode]] = Editor.nodes(editorWhenMouseDown, {
       match: isOfType(editorWhenMouseDown, 'table'),
@@ -93,6 +98,7 @@ function onMouseDown(event: Event) {
     // 记录必要信息
     isMouseDownForResize = true
     const { clientX } = event as MouseEvent
+
     clientXWhenMouseDown = clientX
     cellWidthWhenMouseDown = columnWidths[resizingIndex]
     document.body.style.cursor = 'col-resize'
@@ -103,15 +109,16 @@ function onMouseDown(event: Event) {
   $window.on('mouseup', onMouseUp)
 }
 
-const onMouseMove = throttle(function (event: Event) {
-  if (!isMouseDownForResize) return
-  if (editorWhenMouseDown == null) return
+const onMouseMove = throttle((event: Event) => {
+  if (!isMouseDownForResize) { return }
+  if (editorWhenMouseDown == null) { return }
   event.preventDefault()
 
   const { clientX } = event as MouseEvent
   let newWith = cellWidthWhenMouseDown + (clientX - clientXWhenMouseDown) // 计算新宽度
+
   newWith = Math.floor(newWith * 100) / 100 // 保留小数点后两位
-  if (newWith < 30) newWith = 30 // 最小宽度
+  if (newWith < 30) { newWith = 30 } // 最小宽度
 
   const [[elemNode]] = Editor.nodes(editorWhenMouseDown, {
     match: isOfType(editorWhenMouseDown, 'table'),
@@ -123,11 +130,13 @@ const onMouseMove = throttle(function (event: Event) {
 
   // 如果拖动引起的宽度超过容器宽度，则不调整
   const containerElement = document.querySelector('.table-container')
+
   if (containerElement && remainWidth + newWith > containerElement.clientWidth) {
     return
   }
 
   const adjustColumnWidths = [...columnWidths].map(width => Math.floor(width))
+
   adjustColumnWidths[resizingIndex] = newWith
 
   // 这是宽度
@@ -155,10 +164,10 @@ export function handleCellBorderVisible(
   editor: IDomEditor,
   elemNode: SlateElement,
   e: MouseEvent,
-  scrollWidth: number
+  scrollWidth: number,
 ) {
-  if (editor.isDisabled()) return
-  if (isSelectionOperation || isMouseDownForResize) return
+  if (editor.isDisabled()) { return }
+  if (isSelectionOperation || isMouseDownForResize) { return }
 
   const {
     width: tableWidth = 'auto',
@@ -170,6 +179,7 @@ export function handleCellBorderVisible(
   // Cell Border 宽度为 10px
   const { clientX, target } = e
   // 当单元格合并的时候，鼠标在 cell 中间，则不显示 cell border
+
   if (isHTMLElememt(target)) {
     const rect = target.getBoundingClientRect()
 
@@ -178,7 +188,7 @@ export function handleCellBorderVisible(
         Transforms.setNodes(
           editor,
           { isHoverCellBorder: false, resizingIndex: -1 } as TableElement,
-          { mode: 'highest' }
+          { mode: 'highest' },
         )
       }
       return
@@ -186,28 +196,28 @@ export function handleCellBorderVisible(
   }
   if (isHTMLElememt(target)) {
     const parent = target.closest('.table')
+
     if (parent) {
       const { clientX } = e
       const rect = parent.getBoundingClientRect()
-      const widths =
-        tableWidth === '100%'
-          ? getColumnWidthRatios(columnWidths).map(v => v * scrollWidth)
-          : columnWidths
+      const widths = tableWidth === '100%'
+        ? getColumnWidthRatios(columnWidths).map(v => v * scrollWidth)
+        : columnWidths
 
-      let cumulativeWidths = getCumulativeWidths(widths)
+      const cumulativeWidths = getCumulativeWidths(widths)
 
       // 鼠标移动时，计算当前鼠标位置，判断在哪个 Cell border 上
       for (let i = 0; i < cumulativeWidths.length; i++) {
         if (
-          clientX - rect.x >= cumulativeWidths[i] - 5 &&
-          clientX - rect.x < cumulativeWidths[i] + 5
+          clientX - rect.x >= cumulativeWidths[i] - 5
+          && clientX - rect.x < cumulativeWidths[i] + 5
         ) {
           // 节流，防止多次引起Transforms.setNodes重绘
-          if (resizingIndex == i) return
+          if (resizingIndex == i) { return }
           Transforms.setNodes(
             editor,
             { isHoverCellBorder: true, resizingIndex: i } as TableElement,
-            { mode: 'highest' }
+            { mode: 'highest' },
           )
           return
         }
@@ -236,6 +246,6 @@ export function handleCellBorderHighlight(editor: IDomEditor, e: MouseEvent) {
 }
 
 export function handleCellBorderMouseDown(editor: IDomEditor, elemNode: SlateElement) {
-  if (isMouseDownForResize) return // 此时正在修改列宽
+  if (isMouseDownForResize) { return } // 此时正在修改列宽
   editorWhenMouseDown = editor
 }

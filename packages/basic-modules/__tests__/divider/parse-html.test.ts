@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseHtmlConf } from '../../src/modules/divider/parse-elem-html'
 
@@ -18,6 +19,7 @@ describe('divider - parse html', () => {
 
     // parse
     const res = parseHtmlConf.parseElemHtml($hr[0], [], editor)
+
     expect(res).toEqual({
       type: 'divider',
       children: [{ text: '' }], // void node 有一个空白 text

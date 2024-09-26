@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
+import { fireEvent, waitFor } from '@testing-library/dom'
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import EditImage from '../../../src/modules/image/menu/EditImage'
-import { fireEvent, waitFor } from '@testing-library/dom'
 
 describe('edit image menu', () => {
   const menu = new EditImage()
@@ -50,6 +51,7 @@ describe('edit image menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -70,12 +72,14 @@ describe('edit image menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
       offset: 0,
     })
     const imageNode = menu.getModalPositionNode(editor)
+
     expect((imageNode as any).src).toBe(src)
   })
 
@@ -88,6 +92,7 @@ describe('edit image menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     expect(() => menu.getModalContentElem(editor)).toThrow('Not found selected image node')
     editor.select(startLocation)
     editor.insertNode(imageElem) // 插入图片
@@ -97,6 +102,7 @@ describe('edit image menu', () => {
     })
 
     const elem = menu.getModalContentElem(editor)
+
     expect(elem.tagName).toBe('DIV')
 
     // updateImage 在 helper.test.ts 中测试
@@ -120,6 +126,7 @@ describe('edit image menu', () => {
     })
 
     const elem = menu.getModalContentElem(editor)
+
     document.body.appendChild(elem)
 
     // 使用类型断言访问私有属性
@@ -145,7 +152,7 @@ describe('edit image menu', () => {
       expect.any(Object), // editor 对象
       'https://example.com/new-image.jpg',
       'new alt text',
-      'https://example.com/new-link'
+      'https://example.com/new-link',
     )
 
     editor.select(startLocation)
@@ -161,6 +168,7 @@ describe('edit image menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }],
     }
+
     editor.select(startLocation)
     editor.insertNode(imageElem)
     editor.select({
@@ -170,6 +178,7 @@ describe('edit image menu', () => {
 
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).srcInputId) as HTMLInputElement
+
     jest.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {

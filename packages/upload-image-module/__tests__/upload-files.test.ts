@@ -1,9 +1,11 @@
-import uploadImages from '../src/module/upload-images'
-import createEditor from '../../../tests/utils/create-editor'
 import * as core from '@wangeditor-next/core'
+
+import createEditor from '../../../tests/utils/create-editor'
+import uploadImages from '../src/module/upload-images'
 
 function mockFile(filename: string) {
   const file = new File(['123'], filename)
+
   return file
 }
 
@@ -11,6 +13,7 @@ describe('Upload image menu upload files util', () => {
   test('uploadImages should do nothing if give null value to fileList argument', async () => {
     const editor = createEditor()
     const res = await uploadImages(editor, null)
+
     expect(res).toBeUndefined()
   })
 
@@ -58,7 +61,7 @@ describe('Upload image menu upload files util', () => {
         ({
           addFile: jest.fn(),
           upload: jest.fn(),
-        } as any)
+        } as any),
     )
     const editor = createEditor()
 

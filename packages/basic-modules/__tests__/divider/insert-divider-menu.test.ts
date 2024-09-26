@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import InsertDividerMenu from '../../src/modules/divider/menu/InsertDividerMenu'
 
@@ -38,6 +39,7 @@ describe('divider plugin', () => {
     expect(menu.isDisabled(editor)).toBeFalsy()
 
     const elem = { type: 'divider', children: [{ text: '' }] }
+
     editor.insertNode(elem) // 插入 divider
     editor.select({
       path: [1, 0], // 选中 divider
@@ -51,6 +53,7 @@ describe('divider plugin', () => {
     menu.exec(editor, '')
 
     const dividers = editor.getElemsByTypePrefix('divider')
+
     expect(dividers.length).toBe(1)
   })
 })

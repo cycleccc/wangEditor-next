@@ -3,72 +3,86 @@
  * @author wangfupeng
  */
 
-import { htmlVoidElements } from 'html-void-elements'
 import $, {
-  css,
-  append,
   addClass,
-  removeClass,
-  hasClass,
-  on,
-  focus,
+  append,
   attr,
+  children,
+  css,
+  dataset,
+  Dom7Array,
+  each,
+  empty,
+  find,
+  focus,
+  hasClass,
+  height,
   hide,
-  show,
+  html,
+  is,
   // scrollTop,
   // scrollLeft,
   offset,
-  width,
-  height,
+  on,
   parent,
   parents,
-  is,
-  dataset,
-  val,
-  text,
-  removeAttr,
-  children,
-  html,
   remove,
-  find,
-  each,
-  empty,
-  Dom7Array,
+  removeAttr,
+  removeClass,
+  show,
+  text,
+  val,
+  width,
 } from 'dom7'
-export { Dom7Array } from 'dom7'
-
-if (css) $.fn.css = css
-if (append) $.fn.append = append
-if (addClass) $.fn.addClass = addClass
-if (removeClass) $.fn.removeClass = removeClass
-if (hasClass) $.fn.hasClass = hasClass
-if (on) $.fn.on = on
-if (focus) $.fn.focus = focus
-if (attr) $.fn.attr = attr
-if (removeAttr) $.fn.removeAttr = removeAttr
-if (hide) $.fn.hide = hide
-if (show) $.fn.show = show
-// if (scrollTop) $.fn.scrollTop = scrollTop
-// if (scrollLeft) $.fn.scrollLeft = scrollLeft
-if (offset) $.fn.offset = offset
-if (width) $.fn.width = width
-if (height) $.fn.height = height
-if (parent) $.fn.parent = parent
-if (parents) $.fn.parents = parents
-if (is) $.fn.is = is
-if (dataset) $.fn.dataset = dataset
-if (val) $.fn.val = val
-if (text) $.fn.text = text
-if (html) $.fn.html = html
-if (children) $.fn.children = children
-if (remove) $.fn.remove = remove
-if (find) $.fn.find = find
-if (each) $.fn.each = each
-if (empty) $.fn.empty = empty
-
-export default $
+import { htmlVoidElements } from 'html-void-elements'
 
 import { toString } from './util'
+
+// ------------------------------- 分割线，以下内容参考 slate-react dom.ts -------------------------------
+
+// COMPAT: This is required to prevent TypeScript aliases from doing some very
+// weird things for Slate's types with the same name as globals. (2019/11/27)
+// https://github.com/microsoft/TypeScript/issues/35002
+import DOMNode = globalThis.Node
+import DOMComment = globalThis.Comment
+import DOMElement = globalThis.Element
+import DOMText = globalThis.Text
+import DOMRange = globalThis.Range
+import DOMSelection = globalThis.Selection
+import DOMStaticRange = globalThis.StaticRange
+
+export { Dom7Array } from 'dom7'
+
+if (css) { $.fn.css = css }
+if (append) { $.fn.append = append }
+if (addClass) { $.fn.addClass = addClass }
+if (removeClass) { $.fn.removeClass = removeClass }
+if (hasClass) { $.fn.hasClass = hasClass }
+if (on) { $.fn.on = on }
+if (focus) { $.fn.focus = focus }
+if (attr) { $.fn.attr = attr }
+if (removeAttr) { $.fn.removeAttr = removeAttr }
+if (hide) { $.fn.hide = hide }
+if (show) { $.fn.show = show }
+// if (scrollTop) $.fn.scrollTop = scrollTop
+// if (scrollLeft) $.fn.scrollLeft = scrollLeft
+if (offset) { $.fn.offset = offset }
+if (width) { $.fn.width = width }
+if (height) { $.fn.height = height }
+if (parent) { $.fn.parent = parent }
+if (parents) { $.fn.parents = parents }
+if (is) { $.fn.is = is }
+if (dataset) { $.fn.dataset = dataset }
+if (val) { $.fn.val = val }
+if (text) { $.fn.text = text }
+if (html) { $.fn.html = html }
+if (children) { $.fn.children = children }
+if (remove) { $.fn.remove = remove }
+if (find) { $.fn.find = find }
+if (each) { $.fn.each = each }
+if (empty) { $.fn.empty = empty }
+
+export default $
 
 export const isDocument = (value: any): value is Document => {
   return toString(value) === '[object HTMLDocument]'
@@ -83,23 +97,13 @@ export const isDataTransfer = (value: any): value is DataTransfer => {
 }
 
 const HTML_ELEMENT_STR_REG_EXP = /\[object HTML([A-Z][a-z]*)*Element\]/
+
 export const isHTMLElememt = (value: any): value is HTMLElement => {
   return HTML_ELEMENT_STR_REG_EXP.test(toString(value))
 }
-
-// ------------------------------- 分割线，以下内容参考 slate-react dom.ts -------------------------------
-
-// COMPAT: This is required to prevent TypeScript aliases from doing some very
-// weird things for Slate's types with the same name as globals. (2019/11/27)
-// https://github.com/microsoft/TypeScript/issues/35002
-import DOMNode = globalThis.Node
-import DOMComment = globalThis.Comment
-import DOMElement = globalThis.Element
-import DOMText = globalThis.Text
-import DOMRange = globalThis.Range
-import DOMSelection = globalThis.Selection
-import DOMStaticRange = globalThis.StaticRange
-export { DOMNode, DOMComment, DOMElement, DOMText, DOMRange, DOMSelection, DOMStaticRange }
+export {
+  DOMComment, DOMElement, DOMNode, DOMRange, DOMSelection, DOMStaticRange, DOMText,
+}
 
 export type DOMPoint = [Node, number]
 
@@ -150,9 +154,9 @@ export const isDOMText = (value: any): value is DOMText => {
  */
 export const isPlainTextOnlyPaste = (event: ClipboardEvent) => {
   return (
-    event.clipboardData &&
-    event.clipboardData.getData('text/plain') !== '' &&
-    event.clipboardData.types.length === 1
+    event.clipboardData
+    && event.clipboardData.getData('text/plain') !== ''
+    && event.clipboardData.types.length === 1
   )
 }
 
@@ -166,8 +170,9 @@ export const normalizeDOMPoint = (domPoint: DOMPoint): DOMPoint => {
   // including comment nodes, so try to find the right text child node.
   if (isDOMElement(node) && node.childNodes.length) {
     let isLast = offset === node.childNodes.length
-    let index = isLast ? offset - 1 : offset
-    ;[node, index] = getEditableChildAndIndex(node, index, isLast ? 'backward' : 'forward')
+    let index = isLast ? offset - 1 : offset;
+
+    [node, index] = getEditableChildAndIndex(node, index, isLast ? 'backward' : 'forward')
 
     // If the editable child found is in front of input offset, we instead seek to its end
     // 如果编辑区域的内容被发现在输入光标位置前面，也就是光标位置不正常，则修正光标的位置到结尾
@@ -177,6 +182,7 @@ export const normalizeDOMPoint = (domPoint: DOMPoint): DOMPoint => {
     // can be either text nodes, or other void DOM nodes.
     while (isDOMElement(node) && node.childNodes.length) {
       const i = isLast ? node.childNodes.length - 1 : 0
+
       node = getEditableChild(node, i, isLast ? 'backward' : 'forward')
     }
 
@@ -200,8 +206,8 @@ export const hasShadowRoot = () => {
  */
 export const getElementById = (id: string): null | HTMLElement => {
   return (
-    window.document.getElementById(id) ??
-    (window.document.activeElement?.shadowRoot?.getElementById(id) || null)
+    window.document.getElementById(id)
+    ?? (window.document.activeElement?.shadowRoot?.getElementById(id) || null)
   )
 }
 
@@ -211,7 +217,7 @@ export const getElementById = (id: string): null | HTMLElement => {
 export const getEditableChildAndIndex = (
   parent: DOMElement,
   index: number,
-  direction: 'forward' | 'backward'
+  direction: 'forward' | 'backward',
 ): [DOMNode, number] => {
   const { childNodes } = parent
   let child = childNodes[index]
@@ -222,9 +228,9 @@ export const getEditableChildAndIndex = (
   // While the child is a comment node, or an element node with no children,
   // keep iterating to find a sibling non-void, non-comment node.
   while (
-    isDOMComment(child) ||
-    (isDOMElement(child) && child.childNodes.length === 0) ||
-    (isDOMElement(child) && child.getAttribute('contenteditable') === 'false')
+    isDOMComment(child)
+    || (isDOMElement(child) && child.childNodes.length === 0)
+    || (isDOMElement(child) && child.getAttribute('contenteditable') === 'false')
   ) {
     if (triedForward && triedBackward) {
       break
@@ -260,9 +266,10 @@ export const getEditableChildAndIndex = (
 export const getEditableChild = (
   parent: DOMElement,
   index: number,
-  direction: 'forward' | 'backward'
+  direction: 'forward' | 'backward',
 ): DOMNode => {
   const [child] = getEditableChildAndIndex(parent, index, direction)
+
   return child
 }
 
@@ -287,10 +294,10 @@ export const getPlainText = (domNode: DOMNode) => {
     const display = getComputedStyle(domNode).getPropertyValue('display')
 
     if (
-      display === 'block' ||
-      display === 'list' ||
-      display === 'table-row' ||
-      domNode.tagName === 'BR'
+      display === 'block'
+      || display === 'list'
+      || display === 'table-row'
+      || domNode.tagName === 'BR'
     ) {
       text += '\n'
     }
@@ -306,6 +313,7 @@ export const getPlainText = (domNode: DOMNode) => {
 export function getFirstVoidChild(elem: DOMElement): DOMElement | null {
   // 深度优先遍历
   const stack: Array<DOMElement> = []
+
   stack.push(elem)
 
   let num = 0
@@ -313,19 +321,22 @@ export function getFirstVoidChild(elem: DOMElement): DOMElement | null {
   // 开始遍历
   while (stack.length > 0) {
     const curElem = stack.pop()
-    if (curElem == null) break
+
+    if (curElem == null) { break }
 
     num++
-    if (num > 10000) break
+    if (num > 10000) { break }
 
     const { nodeName, nodeType } = curElem
+
     if (nodeType === 1) {
       const name = nodeName.toLowerCase()
+
       if (
-        htmlVoidElements.includes(name) ||
+        htmlVoidElements.includes(name)
         // 补充一些
-        name === 'iframe' ||
-        name === 'video'
+        || name === 'iframe'
+        || name === 'video'
       ) {
         return curElem // 得到 void elem 并返回
       }
@@ -333,6 +344,7 @@ export function getFirstVoidChild(elem: DOMElement): DOMElement | null {
       // 继续遍历子节点
       const children = curElem.children || []
       const length = children.length
+
       if (length) {
         for (let i = length - 1; i >= 0; i--) {
           // 注意，需要**逆序**追加自节点
@@ -353,14 +365,15 @@ export function getFirstVoidChild(elem: DOMElement): DOMElement | null {
  */
 export function walkTextNodes(
   elem: DOMElement,
-  handler: (textNode: DOMNode, parent: DOMElement) => void
+  handler: (textNode: DOMNode, parent: DOMElement) => void,
 ) {
   // void elem 内部的 text 不处理
-  if (isHTMLElememt(elem) && elem.dataset.slateVoid === 'true') return
+  if (isHTMLElememt(elem) && elem.dataset.slateVoid === 'true') { return }
 
-  for (let nodes = elem.childNodes, i = nodes.length; i--; ) {
+  for (let nodes = elem.childNodes, i = nodes.length; i--;) {
     const node = nodes[i]
     const nodeType = node.nodeType
+
     if (nodeType == 3) {
       // 匹配到 text node ，执行函数
       handler(node, elem)
@@ -387,8 +400,9 @@ export enum NodeType {
  * @param $elem $elem
  */
 export function getTagName($elem: Dom7Array): string {
-  if ($elem.length === 0) return ''
+  if ($elem.length === 0) { return '' }
   const elem = $elem[0]
-  if (elem.nodeType !== NodeType.ELEMENT_NODE) return ''
+
+  if (elem.nodeType !== NodeType.ELEMENT_NODE) { return '' }
   return elem.tagName.toLowerCase()
 }

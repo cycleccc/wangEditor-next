@@ -1,5 +1,6 @@
 import { Editor, Transforms } from 'slate'
 import * as Y from 'yjs'
+
 import { HistoryStackItem, RelativeRange } from '../module/custom-types'
 import { relativeRangeToSlateRange, slateRangeToRelativeRange } from '../utils/position'
 import { YjsEditor } from './withYjs'
@@ -19,11 +20,11 @@ export type YHistoryEditor = YjsEditor & {
 export const YHistoryEditor = {
   isYHistoryEditor(value: unknown): value is YHistoryEditor {
     return (
-      YjsEditor.isYjsEditor(value) &&
-      (value as YHistoryEditor).undoManager instanceof Y.UndoManager &&
-      typeof (value as YHistoryEditor).undo === 'function' &&
-      typeof (value as YHistoryEditor).redo === 'function' &&
-      'withoutSavingOrigin' in value
+      YjsEditor.isYjsEditor(value)
+      && (value as YHistoryEditor).undoManager instanceof Y.UndoManager
+      && typeof (value as YHistoryEditor).undo === 'function'
+      && typeof (value as YHistoryEditor).redo === 'function'
+      && 'withoutSavingOrigin' in value
     )
   },
 
@@ -49,7 +50,7 @@ export type WithYHistoryOptions = NonNullable<ConstructorParameters<typeof Y.Und
 }
 
 export function withYHistory(options: WithYHistoryOptions = {}) {
-  return function <T extends YjsEditor>(editor: T): T & YHistoryEditor {
+  return function <T extends YjsEditor> (editor: T): T & YHistoryEditor {
     const e = editor as T & YHistoryEditor
 
     // 将 trackedOrigins 的初始化放到 editor 被传入之后
@@ -68,6 +69,7 @@ export function withYHistory(options: WithYHistoryOptions = {}) {
     e.withoutSavingOrigin = withoutSavingOrigin
 
     const { onChange, isLocalOrigin } = e
+
     e.onChange = () => {
       onChange()
 
@@ -84,7 +86,7 @@ export function withYHistory(options: WithYHistoryOptions = {}) {
     }) => {
       stackItem.meta.set(
         'selection',
-        e.selection && slateRangeToRelativeRange(e.sharedRoot, e, e.selection)
+        e.selection && slateRangeToRelativeRange(e.sharedRoot, e, e.selection),
       )
       stackItem.meta.set('selectionBefore', LAST_SELECTION.get(e))
     }
@@ -97,7 +99,7 @@ export function withYHistory(options: WithYHistoryOptions = {}) {
     }) => {
       stackItem.meta.set(
         'selection',
-        e.selection && slateRangeToRelativeRange(e.sharedRoot, e, e.selection)
+        e.selection && slateRangeToRelativeRange(e.sharedRoot, e, e.selection),
       )
     }
 
@@ -111,6 +113,7 @@ export function withYHistory(options: WithYHistoryOptions = {}) {
       // TODO: Change once https://github.com/yjs/yjs/issues/353 is resolved
       const inverseStack = type === 'undo' ? e.undoManager.redoStack : e.undoManager.undoStack
       const inverseItem = inverseStack[inverseStack.length - 1]
+
       if (inverseItem) {
         inverseItem.meta.set('selection', stackItem.meta.get('selectionBefore'))
         inverseItem.meta.set('selectionBefore', stackItem.meta.get('selection'))
@@ -132,6 +135,7 @@ export function withYHistory(options: WithYHistoryOptions = {}) {
     }
 
     const { connect, disconnect } = e
+
     e.connect = () => {
       connect()
 

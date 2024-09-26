@@ -4,13 +4,9 @@
  */
 
 import { h, VNode } from 'snabbdom'
+
 import {
-  normalizeVnodeData,
-  addVnodeProp,
-  addVnodeDataset,
-  addVnodeStyle,
-} from '../../src/utils/vdom'
-import {
+  DOMPoint,
   DOMRange,
   isDataTransfer,
   isDOMComment,
@@ -18,10 +14,15 @@ import {
   isDOMText,
   isHTMLElememt,
   isPlainTextOnlyPaste,
-  DOMPoint,
-  normalizeDOMPoint,
   NodeType,
+  normalizeDOMPoint,
 } from '../../src/utils/dom'
+import {
+  addVnodeDataset,
+  addVnodeProp,
+  addVnodeStyle,
+  normalizeVnodeData,
+} from '../../src/utils/vdom'
 
 describe('vdom util fns', () => {
   it('normalize vnode data', () => {
@@ -39,17 +40,19 @@ describe('vdom util fns', () => {
           {
             id: 'p1',
           },
-          ['hello']
+          ['hello'],
         ),
-      ]
+      ],
     )
 
     normalizeVnodeData(vnode)
 
     // 转换 div 自身
     const { data = {}, children = [] } = vnode
+
     expect(data.key).toBe('someKey')
     const { props = {}, dataset = {} } = data
+
     expect(props.id).toBe('div1')
     expect(props.className).toBe('someClassName')
     expect(dataset.customName).toBe('someCustomName')
@@ -57,30 +60,37 @@ describe('vdom util fns', () => {
     // 转换 div 子节点 p
     const pVNode = (children[0] || {}) as VNode
     const { props: pProps = {} } = pVNode.data || {}
+
     expect(pProps.id).toBe('p1')
   })
 
   it('add vnode props', () => {
     const vnode = h('div', {})
+
     addVnodeProp(vnode, { k1: 'v1' })
 
     const { props = {} } = vnode.data || {}
+
     expect(props.k1).toBe('v1')
   })
 
   it('add vnode dataset', () => {
     const vnode = h('div', {})
+
     addVnodeDataset(vnode, { k1: 'v1' })
 
     const { dataset = {} } = vnode.data || {}
+
     expect(dataset.k1).toBe('v1')
   })
 
   it('add vnode style', () => {
     const vnode = h('div', {})
+
     addVnodeStyle(vnode, { k1: 'v1' })
 
     const { style = {} } = vnode.data || {}
+
     expect(style.k1).toBe('v1')
   })
 
@@ -97,6 +107,7 @@ describe('vdom util fns', () => {
     const mockDOMNode = {
       nodeType: 8, // Element 类型的 nodeType
     }
+
     expect(isDOMComment(mockDOMNode)).toBeTruthy()
   })
 
@@ -109,6 +120,7 @@ describe('vdom util fns', () => {
     const mockDOMNode = {
       nodeType: 3, // Element 类型的 nodeType
     }
+
     expect(isDOMText(mockDOMNode)).toBeTruthy()
   })
 
@@ -121,6 +133,7 @@ describe('vdom util fns', () => {
     const event = {
       clipboardData,
     } as unknown as ClipboardEvent
+
     expect(isPlainTextOnlyPaste(event)).toBeTruthy()
   })
 
@@ -133,6 +146,7 @@ describe('vdom util fns', () => {
     let domPoint = [mockDOMNode, 1] as DOMPoint
 
     let result = normalizeDOMPoint(domPoint)
+
     expect(result).toEqual(domPoint)
     mockDOMNode = {
       nodeType: 1, // Element 类型的 nodeType

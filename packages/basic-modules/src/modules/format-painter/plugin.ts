@@ -4,6 +4,7 @@
  */
 
 import { IDomEditor } from '@wangeditor-next/core'
+
 import FormatPainter from './menu/FormatPainter'
 
 function withFormatPainter<T extends IDomEditor>(editor: T): T {

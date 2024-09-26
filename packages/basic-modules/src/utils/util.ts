@@ -10,7 +10,7 @@ import { nanoid } from 'nanoid'
  * @param prefix 前缀
  * @returns 随机数字符串
  */
-export function genRandomStr(prefix: string = 'r'): string {
+export function genRandomStr(prefix = 'r'): string {
   return `${prefix}-${nanoid()}`
 }
 

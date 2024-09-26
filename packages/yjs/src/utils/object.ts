@@ -1,3 +1,5 @@
+import { BaseElement, Descendant } from 'slate'
+
 type InspectableObject = Record<string | number | symbol, unknown>
 
 function isObject(o: unknown): o is InspectableObject {
@@ -11,12 +13,14 @@ export function isPlainObject(o: unknown): o is InspectableObject {
 
   // If has modified constructor
   const ctor = o.constructor
+
   if (ctor === undefined) {
     return true
   }
 
   // If has modified prototype
   const prot = ctor.prototype
+
   if (isObject(prot) === false) {
     return false
   }
@@ -44,7 +48,7 @@ export function deepEquals(node: InspectableObject, another: InspectableObject):
         return false
       }
     } else if (Array.isArray(a) && Array.isArray(b)) {
-      if (a.length !== b.length) return false
+      if (a.length !== b.length) { return false }
       for (let i = 0; i < a.length; i++) {
         if (a[i] !== b[i]) {
           return false
@@ -64,25 +68,27 @@ export function deepEquals(node: InspectableObject, another: InspectableObject):
   return true
 }
 
-export function pick<TObj, TKeys extends keyof TObj>(
+export function pick<TObj extends Object, TKeys extends keyof TObj>(
   obj: TObj,
   ...keys: TKeys[]
 ): Pick<TObj, TKeys> {
   return Object.fromEntries(
-    Object.entries(obj).filter(([key]) => keys.includes(key as TKeys))
+    Object.entries(obj).filter(([key]) => keys.includes(key as TKeys)),
   ) as Pick<TObj, TKeys>
 }
 
-export function omit<TObj, TKeys extends keyof TObj>(
+export function omit<TObj extends Object, TKeys extends keyof TObj>(
   obj: TObj,
   ...keys: TKeys[]
 ): Omit<TObj, TKeys> {
   return Object.fromEntries(
-    Object.entries(obj).filter(([key]) => !keys.includes(key as TKeys))
+    Object.entries(obj).filter(([key]) => !keys.includes(key as TKeys)),
   ) as Omit<TObj, TKeys>
 }
 
-export function omitNullEntries<TObj>(obj: TObj): {
+export function omitNullEntries<TObj extends Record<string, unknown>>(
+  obj: TObj,
+): {
   [K in keyof TObj]: TObj[K] extends null ? never : K
 } {
   return Object.fromEntries(Object.entries(obj).filter(([, value]) => value !== null)) as {

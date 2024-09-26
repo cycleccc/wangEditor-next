@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import { Transforms, Element } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import { Element, Transforms } from 'slate'
 
 function withDivider<T extends IDomEditor>(editor: T): T {
   const { isVoid, normalizeNode } = editor
@@ -24,6 +24,7 @@ function withDivider<T extends IDomEditor>(editor: T): T {
   // 重新 normalize
   newEditor.normalizeNode = ([node, path]) => {
     const type = DomEditor.getNodeType(node)
+
     if (type !== 'divider') {
       // 未命中 divider ，执行默认的 normalizeNode
       return normalizeNode([node, path])
@@ -31,6 +32,7 @@ function withDivider<T extends IDomEditor>(editor: T): T {
 
     // -------------- divider 是 editor 最后一个节点，需要后面插入 p --------------
     const isLast = DomEditor.isLastNode(newEditor, node)
+
     if (isLast) {
       Transforms.insertNodes(newEditor, DomEditor.genEmptyParagraph(), { at: [path[0] + 1] })
     }

@@ -3,8 +3,11 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Range, Path } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import {
+  Editor, Path, Range, Transforms,
+} from 'slate'
+
 import { ListItemElement } from './custom-types'
 import { getBrotherListNodeByLevel } from './helpers'
 
@@ -20,7 +23,9 @@ function getTopSelectedElemsBySelection(editor: IDomEditor) {
 }
 
 function withList<T extends IDomEditor>(editor: T): T {
-  const { deleteBackward, handleTab, normalizeNode, insertBreak } = editor
+  const {
+    deleteBackward, handleTab, normalizeNode, insertBreak,
+  } = editor
   const newEditor = editor
 
   // 重写 insertBreak - 空 list 点击回车时删除该空 list
@@ -29,13 +34,13 @@ function withList<T extends IDomEditor>(editor: T): T {
       match: n => DomEditor.checkNodeType(n, 'list-item'),
       universal: true,
     })
-    if (!nodeEntry) return insertBreak()
+
+    if (!nodeEntry) { return insertBreak() }
     const listElem = nodeEntry[0] as ListItemElement
+
     if (listElem.children[0].text === '') {
       Transforms.setNodes(newEditor, {
         type: 'paragraph',
-        ordered: undefined,
-        level: undefined,
       })
       return
     }
@@ -45,6 +50,7 @@ function withList<T extends IDomEditor>(editor: T): T {
   // 重写 deleteBackward - 降低 level 或者转换为 p 元素
   newEditor.deleteBackward = unit => {
     const { selection } = newEditor
+
     if (selection == null) {
       deleteBackward(unit)
       return
@@ -56,6 +62,7 @@ function withList<T extends IDomEditor>(editor: T): T {
     }
 
     const listItemElem = DomEditor.getSelectedNodeByType(newEditor, 'list-item')
+
     if (listItemElem == null) {
       // 未匹配到 list-item
       deleteBackward(unit)
@@ -65,22 +72,22 @@ function withList<T extends IDomEditor>(editor: T): T {
     if (selection.focus.offset === 0) {
       // 选中了当前 list-item 文本的开头，此时按删除键，应该降低 level 或转换为 p 元素
       const { level = 0, ordered = false } = listItemElem as ListItemElement
+
       if (level > 0) {
         // 如果有兄弟节点，则判断 ordered 是否一致，不一致需要切换 ordered
         const brotherElem = getBrotherListNodeByLevel(
           editor,
           listItemElem as ListItemElement,
-          level - 1
+          level - 1,
         )
+
         if (brotherElem && brotherElem.ordered !== ordered) {
           Transforms.setNodes(newEditor, { level: level - 1, ordered: !ordered })
-        } else Transforms.setNodes(newEditor, { level: level - 1 })
+        } else { Transforms.setNodes(newEditor, { level: level - 1 }) }
       } else {
         // 转换为 p 元素
         Transforms.setNodes(newEditor, {
           type: 'paragraph',
-          ordered: undefined,
-          level: undefined,
         })
       }
       return
@@ -93,6 +100,7 @@ function withList<T extends IDomEditor>(editor: T): T {
   // 重写 tab - 当选中 list-item 文本开头时，增加 level
   newEditor.handleTab = () => {
     const { selection } = newEditor
+
     if (selection == null) {
       handleTab()
       return
@@ -101,6 +109,7 @@ function withList<T extends IDomEditor>(editor: T): T {
     // 选区是合并的，判断单个 list-item 即可
     if (Range.isCollapsed(selection)) {
       const listItemElem = DomEditor.getSelectedNodeByType(newEditor, 'list-item')
+
       if (listItemElem == null) {
         // 未匹配到 list-item
         handleTab()
@@ -110,6 +119,7 @@ function withList<T extends IDomEditor>(editor: T): T {
       if (selection.focus.offset === 0) {
         // 选中了当前 list-item 文本的开头，此时按 tab 应该增加 level
         const { level = 0 } = listItemElem as ListItemElement
+
         Transforms.setNodes(newEditor, { level: level + 1 })
         return
       }
@@ -123,8 +133,8 @@ function withList<T extends IDomEditor>(editor: T): T {
       for (const entry of getTopSelectedElemsBySelection(newEditor)) {
         const [elem] = entry
         const type = DomEditor.getNodeType(elem)
-        if (type === 'list-item') listItemNum++
-        else hasOtherElem = true
+
+        if (type === 'list-item') { listItemNum++ } else { hasOtherElem = true }
       }
 
       if (hasOtherElem || listItemNum <= 1) {
@@ -137,6 +147,7 @@ function withList<T extends IDomEditor>(editor: T): T {
       for (const entry of getTopSelectedElemsBySelection(newEditor)) {
         const [elem, path] = entry
         const { level = 0 } = elem as ListItemElement
+
         Transforms.setNodes(newEditor, { level: level + 1 }, { at: path })
       }
       return

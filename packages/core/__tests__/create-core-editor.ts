@@ -9,6 +9,7 @@ import createToolbarForSrc from '../src/create/create-toolbar'
 
 export default function (options: any = {}) {
   const container = document.createElement('div')
+
   document.body.appendChild(container)
 
   return createEditor({
@@ -19,6 +20,7 @@ export default function (options: any = {}) {
 
 export const createToolbar = function (editor: IDomEditor, customConfig = {}) {
   const container = document.createElement('div')
+
   document.body.appendChild(container)
   return createToolbarForSrc(editor, {
     selector: container,

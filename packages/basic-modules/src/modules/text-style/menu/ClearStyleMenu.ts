@@ -3,14 +3,17 @@
  * @author wangfupeng
  */
 
-import { Editor, Text } from 'slate'
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+import { Editor, Text } from 'slate'
+
 import { ERASER_SVG } from '../../../constants/icon-svg'
 import { isMenuDisabled, removeMarks } from '../helper'
 
 class ClearStyleMenu implements IButtonMenu {
   readonly title = t('textStyle.clear')
+
   readonly iconSvg = ERASER_SVG
+
   readonly tag = 'button'
 
   getValue(editor: IDomEditor): string | boolean {
@@ -36,9 +39,11 @@ class ClearStyleMenu implements IButtonMenu {
       match: n => Text.isText(n),
       universal: true,
     })
+
     for (const nodeEntry of nodeEntries) {
       // 单个 text node
       const n = nodeEntry[0]
+
       removeMarks(editor, n)
     }
   }

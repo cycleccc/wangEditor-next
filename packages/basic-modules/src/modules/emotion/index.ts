@@ -4,6 +4,7 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
+
 import { emotionMenuConf } from './menu/index'
 
 const emotion: Partial<IModuleConf> = {

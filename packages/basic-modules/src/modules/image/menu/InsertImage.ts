@@ -3,17 +3,18 @@
  * @author wangfupeng
  */
 
-import { Node } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Node } from 'slate'
+
+import { IMAGE_SVG } from '../../../constants/icon-svg'
 import $, { Dom7Array, DOMElement } from '../../../utils/dom'
 import { genRandomStr } from '../../../utils/util'
-import { IMAGE_SVG } from '../../../constants/icon-svg'
 import { insertImageNode, isInsertImageMenuDisabled } from '../helper'
 
 /**
@@ -25,14 +26,23 @@ function genDomID(): string {
 
 class InsertImage implements IModalMenu {
   readonly title = t('image.netImage')
+
   readonly iconSvg = IMAGE_SVG
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 300
+
   private $content: Dom7Array | null = null
+
   private readonly srcInputId = genDomID()
+
   private readonly altInputId = genDomID()
+
   private readonly hrefInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
   getValue(editor: IDomEditor): string | boolean {
@@ -59,7 +69,9 @@ class InsertImage implements IModalMenu {
   }
 
   getModalContentElem(editor: IDomEditor): DOMElement {
-    const { srcInputId, altInputId, hrefInputId, buttonId } = this
+    const {
+      srcInputId, altInputId, hrefInputId, buttonId,
+    } = this
 
     // 获取 input button elem
     const [srcContainerElem, inputSrcElem] = genModalInputElems(t('image.src'), srcInputId)
@@ -80,6 +92,7 @@ class InsertImage implements IModalMenu {
         const src = $content.find(`#${srcInputId}`).val().trim()
         const alt = $content.find(`#${altInputId}`).val().trim()
         const href = $content.find(`#${hrefInputId}`).val().trim()
+
         this.insertImage(editor, src, alt, href)
         editor.hidePanelOrModal() // 隐藏 modal
       })
@@ -89,6 +102,7 @@ class InsertImage implements IModalMenu {
     }
 
     const $content = this.$content
+
     $content.empty() // 先清空内容
 
     // append inputs and button
@@ -110,13 +124,13 @@ class InsertImage implements IModalMenu {
     return $content[0]
   }
 
-  private insertImage(editor: IDomEditor, src: string, alt: string = '', href: string = '') {
-    if (!src) return
+  private insertImage(editor: IDomEditor, src: string, alt = '', href = '') {
+    if (!src) { return }
 
     // 还原选区
     editor.restoreSelection()
 
-    if (this.isDisabled(editor)) return
+    if (this.isDisabled(editor)) { return }
 
     // 插入图片
     insertImageNode(editor, src, alt, href)

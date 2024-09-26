@@ -3,14 +3,20 @@
  * @author wangfupeng
  */
 
-import { ISelectMenu, IDomEditor, IOption, t } from '@wangeditor-next/core'
+import {
+  IDomEditor, IOption, ISelectMenu, t,
+} from '@wangeditor-next/core'
+
 import { HEADER_SVG } from '../../../constants/icon-svg'
 import { getHeaderType, isMenuDisabled, setHeaderType } from '../helper'
 
 class HeaderSelectMenu implements ISelectMenu {
   readonly title = t('header.title')
+
   readonly iconSvg = HEADER_SVG
+
   readonly tag = 'select'
+
   readonly width = 60
 
   getOptions(editor: IDomEditor): IOption[] {
@@ -52,6 +58,7 @@ class HeaderSelectMenu implements ISelectMenu {
 
     // 获取 value ，设置 selected
     const curValue = this.getValue(editor).toString()
+
     options.forEach((opt: IOption) => {
       if (opt.value === curValue) {
         opt.selected = true
@@ -86,7 +93,7 @@ class HeaderSelectMenu implements ISelectMenu {
    * @param value node.type
    */
   exec(editor: IDomEditor, value: string | boolean) {
-    //【注意】value 是 select change 时获取的，并不是 this.getValue 的值
+    // 【注意】value 是 select change 时获取的，并不是 this.getValue 的值
     setHeaderType(editor, value.toString())
   }
 }

@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import UndoMenu from '../../src/modules/undo-redo/menu/UndoMenu'
 
@@ -42,6 +43,7 @@ describe('undo menu', () => {
     menu.exec(editor, '')
 
     const newText = editor.getText()
+
     expect(newText).toBe(text)
   })
 })

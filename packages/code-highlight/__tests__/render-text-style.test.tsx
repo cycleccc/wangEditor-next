@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import { renderStyle } from '../src/module/render-style'
 import { jsx } from 'snabbdom'
+
+import { renderStyle } from '../src/module/render-style'
 
 describe('code-highlight render text style', () => {
   it('code text style', () => {
@@ -13,6 +14,7 @@ describe('code-highlight render text style', () => {
 
     // @ts-ignore 忽略 vnode 格式检查
     const newVnode = renderStyle(leafNode, vnode)
+
     expect(newVnode.data?.props?.className).toBe('token keyword')
   })
 })

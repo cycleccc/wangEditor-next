@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import { IDomEditor } from '@wangeditor-next/core'
 import { isInsertImageMenuDisabled } from '@wangeditor-next/basic-modules'
+import { IDomEditor } from '@wangeditor-next/core'
+
 import uploadImages from './upload-images'
 
 function withUploadImage<T extends IDomEditor>(editor: T): T {
@@ -20,6 +21,7 @@ function withUploadImage<T extends IDomEditor>(editor: T): T {
 
     // 如有 text ，则优先粘贴 text
     const text = data.getData('text/plain')
+
     if (text) {
       insertData(data)
       return
@@ -27,6 +29,7 @@ function withUploadImage<T extends IDomEditor>(editor: T): T {
 
     // 获取文件
     const { files } = data
+
     if (files.length <= 0) {
       insertData(data)
       return
@@ -34,8 +37,9 @@ function withUploadImage<T extends IDomEditor>(editor: T): T {
 
     // 判断是否有图片文件（可能是其他类型的文件）
     const fileList = Array.prototype.slice.call(files)
-    let _hasImageFiles = fileList.some(file => {
+    const _hasImageFiles = fileList.some(file => {
       const [mime] = file.type.split('/')
+
       return mime === 'image'
     })
 

@@ -3,49 +3,66 @@
  * @author wangfupeng
  */
 
-import { Range } from 'slate'
-import throttle from 'lodash.throttle'
 import forEach from 'lodash.foreach'
-import $, { Dom7Array, DOMElement } from '../utils/dom'
-import { TEXTAREA_TO_EDITOR } from '../utils/weak-maps'
-import { IDomEditor } from '../editor/interface'
+import throttle from 'lodash.throttle'
+import { Range } from 'slate'
+
 import { DomEditor } from '../editor/dom-editor'
-import updateView from './update-view'
-import { handlePlaceholder } from './place-holder'
-import { editorSelectionToDOM, DOMSelectionToEditor } from './syncSelection'
+import { IDomEditor } from '../editor/interface'
+import $, { Dom7Array, DOMElement } from '../utils/dom'
 import { promiseResolveThen } from '../utils/util'
+import { TEXTAREA_TO_EDITOR } from '../utils/weak-maps'
 import eventHandlerConf from './event-handlers/index'
+import { handlePlaceholder } from './place-holder'
+import { DOMSelectionToEditor, editorSelectionToDOM } from './syncSelection'
+import updateView from './update-view'
 
 let ID = 1
 
 class TextArea {
   readonly id = ID++
+
   $box: Dom7Array
+
   $textAreaContainer: Dom7Array
+
   $scroll: Dom7Array
+
   $textArea: Dom7Array | null = null
+
   private readonly $progressBar = $('<div class="w-e-progress-bar"></div>')
+
   private readonly $maxLengthInfo = $('<div class="w-e-max-length-info"></div>')
-  isComposing: boolean = false
-  isUpdatingSelection: boolean = false
-  isDraggingInternally: boolean = false
+
+  isComposing = false
+
+  isUpdatingSelection = false
+
+  isDraggingInternally = false
+
   latestElement: DOMElement | null = null
+
   showPlaceholder = false
+
   $placeholder: Dom7Array | null = null
+
   private latestEditorSelection: Range | null = null
 
   constructor(boxSelector: string | DOMElement) {
     // @ts-ignore 初始化 dom
     const $box = $(boxSelector)
+
     if ($box.length === 0) {
       throw new Error(`Cannot find textarea DOM by selector '${boxSelector}'`)
     }
     this.$box = $box
-    const $container = $(`<div class="w-e-text-container"></div>`)
+    const $container = $('<div class="w-e-text-container"></div>')
+
     $container.append(this.$progressBar) // 进度条
     $container.append(this.$maxLengthInfo) // max length 提示信息
     $box.append($container)
-    const $scroll = $(`<div class="w-e-scroll"></div>`)
+    const $scroll = $('<div class="w-e-scroll"></div>')
+
     $container.append($scroll)
     this.$scroll = $scroll
     this.$textAreaContainer = $container
@@ -70,6 +87,7 @@ class TextArea {
 
       // editor onchange 时触发用户配置的 onChange （需要在 changeViewState 后执行）
       const { onChange, scroll } = editor.getConfig()
+
       if (onChange) {
         editor.on('change', () => onChange(editor))
       }
@@ -92,12 +110,14 @@ class TextArea {
 
   private get editorInstance(): IDomEditor {
     const editor = TEXTAREA_TO_EDITOR.get(this)
-    if (editor == null) throw new Error('Can not get editor instance')
+
+    if (editor == null) { throw new Error('Can not get editor instance') }
     return editor
   }
 
   private onDOMSelectionChange = throttle(() => {
     const editor = this.editorInstance
+
     DOMSelectionToEditor(this, editor)
   }, 100)
 
@@ -108,7 +128,7 @@ class TextArea {
     const { $textArea, $scroll } = this
     const editor = this.editorInstance
 
-    if ($textArea == null) return
+    if ($textArea == null) { return }
 
     // 遍历所有事件类型，绑定
     forEach(eventHandlerConf, (fn, eventType) => {
@@ -119,6 +139,7 @@ class TextArea {
 
     // 设置 scroll
     const { scroll } = editor.getConfig()
+
     if (scroll) {
       $scroll.css('overflow-y', 'auto')
       // scroll 自定义事件
@@ -126,7 +147,7 @@ class TextArea {
         'scroll',
         throttle(() => {
           editor.emit('scroll')
-        }, 100)
+        }, 100),
       )
     }
   }
@@ -134,6 +155,7 @@ class TextArea {
   private onFocusAndOnBlur() {
     const editor = this.editorInstance
     const { onBlur, onFocus } = editor.getConfig()
+
     this.latestEditorSelection = editor.selection
 
     editor.on('change', () => {
@@ -155,9 +177,11 @@ class TextArea {
   private changeMaxLengthInfo() {
     const editor = this.editorInstance
     const { maxLength } = editor.getConfig()
+
     if (maxLength) {
       const leftLength = DomEditor.getLeftLengthOfMaxLength(editor)
       const curLength = maxLength - leftLength
+
       this.$maxLengthInfo[0].innerHTML = `${curLength}/${maxLength}`
     }
   }
@@ -168,6 +192,7 @@ class TextArea {
    */
   changeProgress(progress: number) {
     const $progressBar = this.$progressBar
+
     $progressBar.css('width', `${progress}%`)
 
     // 进度 100% 之后，定时隐藏

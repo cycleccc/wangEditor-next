@@ -3,23 +3,24 @@
  * @author wangfupeng
  */
 
-import { Editor, Node, Element as SlateElement } from 'slate'
+import { Editor, Element as SlateElement, Node } from 'slate'
 import { jsx, VNode } from 'snabbdom'
-import { node2Vnode } from '../node2Vnode'
+
 import { DomEditor } from '../../editor/dom-editor'
 import { IDomEditor } from '../../editor/interface'
+import { getElementById } from '../../utils/dom'
+import { promiseResolveThen } from '../../utils/util'
 import {
+  ELEMENT_TO_NODE,
   KEY_TO_ELEMENT,
   NODE_TO_ELEMENT,
-  ELEMENT_TO_NODE,
   NODE_TO_INDEX,
   NODE_TO_PARENT,
 } from '../../utils/weak-maps'
+import { genElemId } from '../helper'
+import { node2Vnode } from '../node2Vnode'
 import getRenderElem from './getRenderElem'
 import renderStyle from './renderStyle'
-import { promiseResolveThen } from '../../utils/util'
-import { genElemId } from '../helper'
-import { getElementById } from '../../utils/dom'
 
 interface IAttrs {
   id: string
@@ -45,9 +46,10 @@ function renderElement(elemNode: SlateElement, editor: IDomEditor): VNode {
 
   // 根据 type 生成 vnode 的函数
   const { type, children = [] } = elemNode
-  let renderElem = getRenderElem(type)
+  const renderElem = getRenderElem(type)
 
   let childrenVnode
+
   if (isVoid) {
     childrenVnode = null // void 节点 render elem 时不传入 children
   } else {
@@ -101,7 +103,7 @@ function renderElement(elemNode: SlateElement, editor: IDomEditor): VNode {
   }
 
   // 添加 element 属性
-  if (vnode.data == null) vnode.data = {}
+  if (vnode.data == null) { vnode.data = {} }
   Object.assign(vnode.data, attrs)
 
   // 添加文本相关的样式，如 text-align
@@ -114,7 +116,8 @@ function renderElement(elemNode: SlateElement, editor: IDomEditor): VNode {
   promiseResolveThen(() => {
     // 异步，否则拿不到 DOM 节点
     const dom = getElementById(domId)
-    if (dom == null) return
+
+    if (dom == null) { return }
     KEY_TO_ELEMENT.set(key, dom)
     NODE_TO_ELEMENT.set(elemNode, dom)
     ELEMENT_TO_NODE.set(dom, elemNode)

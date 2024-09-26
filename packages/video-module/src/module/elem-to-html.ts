@@ -4,8 +4,9 @@
  */
 
 import { Element } from 'slate'
-import { VideoElement } from './custom-types'
+
 import { genSizeStyledIframeHtml } from '../utils/dom'
+import { VideoElement } from './custom-types'
 
 function videoToHtml(elemNode: Element, childrenHtml?: string): string {
   const {
@@ -21,13 +22,15 @@ function videoToHtml(elemNode: Element, childrenHtml?: string): string {
   if (src.trim().indexOf('<iframe ') === 0) {
     // iframe 形式
     const iframeHtml = genSizeStyledIframeHtml(src, width, height, style)
+
     res += iframeHtml
   } else {
     // 其他，mp4 等 url 格式
     const { width: styleWidth = '', height: styleHeight = '' } = style
     let styleStr = ''
-    if (styleWidth) styleStr += `width: ${styleWidth};`
-    if (styleHeight) styleStr += `height: ${styleHeight};`
+
+    if (styleWidth) { styleStr += `width: ${styleWidth};` }
+    if (styleHeight) { styleStr += `height: ${styleHeight};` }
     res += `<video poster="${poster}" controls="true" width="${width}" height="${height}" style="${styleStr}"><source src="${src}" type="video/mp4"/></video>`
   }
   res += '\n</div>'

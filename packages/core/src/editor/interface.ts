@@ -3,9 +3,12 @@
  * @author wangfupeng
  */
 
-import { Editor, Location, Node, Ancestor, Element } from 'slate'
 import ee from 'event-emitter'
-import { IEditorConfig, AlertType, ISingleMenuConfig } from '../config/interface'
+import {
+  Ancestor, Editor, Element, Location, Node,
+} from 'slate'
+
+import { AlertType, IEditorConfig, ISingleMenuConfig } from '../config/interface'
 import { IPositionStyle } from '../menus/interface'
 import { DOMElement } from '../utils/dom'
 

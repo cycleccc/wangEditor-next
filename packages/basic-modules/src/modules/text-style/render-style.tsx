@@ -5,6 +5,7 @@
 
 import { Descendant } from 'slate'
 import { jsx, VNode } from 'snabbdom'
+
 import { StyledText } from './custom-types'
 
 /**
@@ -14,7 +15,9 @@ import { StyledText } from './custom-types'
  * @returns vnode
  */
 export function renderStyle(node: Descendant, vnode: VNode): VNode {
-  const { bold, italic, underline, code, through, sub, sup } = node as StyledText
+  const {
+    bold, italic, underline, code, through, sub, sup,
+  } = node as StyledText
   let styleVnode: VNode = vnode
 
   // color bgColor 在另外的菜单

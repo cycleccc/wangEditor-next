@@ -1,30 +1,44 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "ES2015",
-    "lib": [
-      "es6",
-      "dom",
-      "esnext"
-    ],
-    "declaration": true,
-    "sourceMap": true,
-    "outDir": "dist",
+    "target": "es2019",
+    "module": "esnext",
     "strict": true,
-    "noImplicitAny": false,
+    "jsx": "react",
+    "importHelpers": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
-    "jsxFactory": "jsx", /* snabbdom jsx */
-    "downlevelIteration": true,
-    "allowJs": true
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "allowJs": true,
+    "checkJs": false,
+    "paths": {
+      "@wangedtor-next/*": [
+        "packages/*/dist",
+        "packages/*/src"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "__tests__"
+  "files": [
+    "./env.d.ts"
   ],
-  "include": ["./tests/setup/index.ts", "./packages/custom-types.d.ts"]
+  "include": [
+    "**/*.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.vue"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/dist"
+  ]
 }

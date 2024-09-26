@@ -3,8 +3,9 @@
  * @author cycleccc
  */
 
-import { getTagName } from '../../src/utils/dom'
 import { Dom7Array } from 'dom7'
+
+import { getTagName } from '../../src/utils/dom'
 
 describe('redo menu', () => {
   it('get tag name', () => {
@@ -12,6 +13,7 @@ describe('redo menu', () => {
     const emptyElem: Dom7Array = [] as unknown as Dom7Array
 
     const result = getTagName(emptyElem)
+
     expect(result).toBe('') // 验证返回的是空字符串
   })
 })

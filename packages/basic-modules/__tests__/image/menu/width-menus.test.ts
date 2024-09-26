@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import Width30 from '../../../src/modules/image/menu/Width30'
 import Width50 from '../../../src/modules/image/menu/Width50'
@@ -58,6 +59,7 @@ describe('image width menus', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -78,6 +80,7 @@ describe('image width menus', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -86,16 +89,19 @@ describe('image width menus', () => {
 
     width30Menu.exec(editor, '')
     const image1 = editor.getElemsByTypePrefix('image')[0]
+
     expect(image1.style.width).toBe('30%')
     expect(image1.style.height).toBe('')
 
     width50Menu.exec(editor, '')
     const image2 = editor.getElemsByTypePrefix('image')[0]
+
     expect(image2.style.width).toBe('50%')
     expect(image2.style.height).toBe('')
 
     width100Menu.exec(editor, '')
     const image3 = editor.getElemsByTypePrefix('image')[0]
+
     expect(image3.style.width).toBe('100%')
     expect(image3.style.height).toBe('')
   })

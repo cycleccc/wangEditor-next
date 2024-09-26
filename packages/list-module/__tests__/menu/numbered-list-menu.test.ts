@@ -3,14 +3,15 @@
  * @author wangfupeng
  */
 
-import NumberedListMenu from '../../src/module/menu/NumberedListMenu'
 import createEditor from '../../../../tests/utils/create-editor'
+import NumberedListMenu from '../../src/module/menu/NumberedListMenu'
 
 describe('list NumberedListMenu', () => {
   const menu = new NumberedListMenu()
 
   it('getValue', () => {
     const editor = createEditor()
+
     expect(menu.getValue(editor)).toBe('')
   })
 
@@ -75,6 +76,7 @@ describe('list NumberedListMenu', () => {
     const editor = createEditor({
       content: [pElem],
     })
+
     editor.select({ path: [0, 0], offset: 0 }) // 选中 p
 
     menu.exec(editor, '') // p 转 li

@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseHtmlConf } from '../../src/modules/link/parse-elem-html'
 
@@ -17,6 +18,7 @@ describe('link - parse html', () => {
 
     // parse is block
     let res = parseHtmlConf.parseElemHtml($link[0], table, editor)
+
     expect(res).toEqual({
       type: 'link',
       url: 'http://localhost/',
@@ -43,6 +45,7 @@ describe('link - parse html', () => {
 
     // parse
     const res = parseHtmlConf.parseElemHtml($link[0], children, editor)
+
     expect(res).toEqual({
       type: 'link',
       url: 'http://localhost/',

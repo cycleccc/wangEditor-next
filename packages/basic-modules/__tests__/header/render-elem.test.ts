@@ -20,6 +20,7 @@ describe('render header elem', () => {
 
     const elem = { type: 'header1', children: [] }
     const vnode = renderHeader1Conf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('h1')
   })
 
@@ -28,6 +29,7 @@ describe('render header elem', () => {
 
     const elem = { type: 'header2', children: [] }
     const vnode = renderHeader2Conf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('h2')
   })
 
@@ -36,6 +38,7 @@ describe('render header elem', () => {
 
     const elem = { type: 'header3', children: [] }
     const vnode = renderHeader3Conf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('h3')
   })
 
@@ -44,6 +47,7 @@ describe('render header elem', () => {
 
     const elem = { type: 'header4', children: [] }
     const vnode = renderHeader4Conf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('h4')
   })
 
@@ -52,6 +56,7 @@ describe('render header elem', () => {
 
     const elem = { type: 'header5', children: [] }
     const vnode = renderHeader5Conf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('h5')
   })
 })

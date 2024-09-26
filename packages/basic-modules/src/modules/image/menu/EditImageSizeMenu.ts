@@ -3,15 +3,16 @@
  * @author wangfupeng
  */
 
-import { Node as SlateNode, Transforms } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
   DomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Node as SlateNode, Transforms } from 'slate'
+
 import $, { Dom7Array, DOMElement } from '../../../utils/dom'
 import { genRandomStr } from '../../../utils/util'
 import { ImageElement } from '../custom-types'
@@ -25,12 +26,19 @@ function genDomID(): string {
 
 class EditorImageSizeMenu implements IModalMenu {
   readonly title = t('image.editSize')
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 320
+
   private $content: Dom7Array | null = null
+
   private readonly widthInputId = genDomID()
+
   private readonly heightInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
   private getSelectedImageNode(editor: IDomEditor): SlateNode | null {
@@ -53,9 +61,10 @@ class EditorImageSizeMenu implements IModalMenu {
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
 
     const imageNode = this.getSelectedImageNode(editor)
+
     if (imageNode == null) {
       // 选区未处于 image node ，则禁用
       return true
@@ -75,13 +84,13 @@ class EditorImageSizeMenu implements IModalMenu {
     const [widthContainerElem, inputWidthElem] = genModalInputElems(
       t('image.width'),
       widthInputId,
-      'auto'
+      'auto',
     )
     const $inputWidth = $(inputWidthElem)
     const [heightContainerElem, inputHeightElem] = genModalInputElems(
       t('image.height'),
       heightInputId,
-      'auto'
+      'auto',
     )
     const $inputHeight = $(inputHeightElem)
     const [buttonContainerElem] = genModalButtonElems(buttonId, t('image.ok'))
@@ -107,7 +116,7 @@ class EditorImageSizeMenu implements IModalMenu {
         if (isPercentage(rawWidth)) {
           width = rawWidth
         } else if (isNumeric(rawWidth)) {
-          width = parseInt(rawWidth) + 'px'
+          width = `${parseInt(rawWidth)}px`
         } else if (isPixelValue(rawWidth)) {
           width = rawWidth
         }
@@ -115,7 +124,7 @@ class EditorImageSizeMenu implements IModalMenu {
         if (isPercentage(rawHeight)) {
           height = rawHeight
         } else if (isNumeric(rawHeight)) {
-          height = parseInt(rawHeight) + 'px'
+          height = `${parseInt(rawHeight)}px`
         } else if (isPixelValue(rawHeight)) {
           height = rawHeight
         }
@@ -126,8 +135,8 @@ class EditorImageSizeMenu implements IModalMenu {
         const props: Partial<ImageElement> = {
           ...style,
           style: {
-            width: width,
-            height: height,
+            width,
+            height,
           },
         }
 
@@ -150,11 +159,13 @@ class EditorImageSizeMenu implements IModalMenu {
     $content.append(buttonContainerElem)
 
     const imageNode = this.getSelectedImageNode(editor) as ImageElement
-    if (imageNode == null) return $content[0]
+
+    if (imageNode == null) { return $content[0] }
 
     // 初始化 input 值
     const { style = {} } = imageNode
     const { width = 'auto', height = 'auto' } = style
+
     $inputWidth.val(width)
     $inputHeight.val(height)
     setTimeout(() => {

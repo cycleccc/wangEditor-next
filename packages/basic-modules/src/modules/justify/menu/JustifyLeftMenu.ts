@@ -3,13 +3,15 @@
  * @author wangfupeng
  */
 
-import { Transforms, Element } from 'slate'
 import { IDomEditor, t } from '@wangeditor-next/core'
-import BaseMenu from './BaseMenu'
+import { Element, Transforms } from 'slate'
+
 import { JUSTIFY_LEFT_SVG } from '../../../constants/icon-svg'
+import BaseMenu from './BaseMenu'
 
 class JustifyLeftMenu extends BaseMenu {
   readonly title = t('justify.left')
+
   readonly iconSvg = JUSTIFY_LEFT_SVG
 
   exec(editor: IDomEditor, value: string | boolean): void {
@@ -18,7 +20,7 @@ class JustifyLeftMenu extends BaseMenu {
       {
         textAlign: 'left',
       },
-      { match: n => Element.isElement(n) && !editor.isInline(n) }
+      { match: n => Element.isElement(n) && !editor.isInline(n) },
     )
   }
 }

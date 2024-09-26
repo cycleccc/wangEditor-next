@@ -9,9 +9,12 @@ import { EDITOR_TO_PANEL_AND_MODAL, PANEL_OR_MODAL_TO_EDITOR } from '../../utils
 
 abstract class PanelAndModal {
   abstract readonly type: string
+
   abstract readonly $elem: Dom7Array
-  isShow: boolean = false
-  private showTime: number = 0 // 显示时的时间戳
+
+  isShow = false
+
+  private showTime = 0 // 显示时的时间戳
 
   constructor(editor: IDomEditor) {
     this.record(editor)
@@ -22,6 +25,7 @@ abstract class PanelAndModal {
    */
   private record(editor: IDomEditor) {
     let set = EDITOR_TO_PANEL_AND_MODAL.get(editor)
+
     if (set == null) {
       set = new Set()
       EDITOR_TO_PANEL_AND_MODAL.set(editor, set)
@@ -38,11 +42,13 @@ abstract class PanelAndModal {
 
   renderContent(contentElem: DOMElement) {
     const { $elem } = this
+
     $elem.empty() // 先清空，再填充内容
     $elem.append(contentElem)
 
     // 添加自己额外的 elem
     const $selfElem = this.genSelfElem()
+
     if ($selfElem) {
       $elem.append($selfElem)
     }
@@ -50,38 +56,44 @@ abstract class PanelAndModal {
 
   appendTo($menuElem: Dom7Array) {
     const { $elem } = this
+
     $menuElem.append($elem)
   }
 
   show() {
-    if (this.isShow) return
+    if (this.isShow) { return }
     this.showTime = Date.now()
 
     const { $elem } = this
+
     $elem.show()
     this.isShow = true
 
     // 触发事件
     const editor = PANEL_OR_MODAL_TO_EDITOR.get(this)
-    if (editor) editor.emit('modalOrPanelShow', this)
+
+    if (editor) { editor.emit('modalOrPanelShow', this) }
   }
 
   hide() {
-    if (!this.isShow) return
+    if (!this.isShow) { return }
 
     const now = Date.now()
+
     if (now - this.showTime < 200) {
       // 刚显示的，不要立刻隐藏（避免频繁触发 show/hide ）
       return
     }
 
     const { $elem } = this
+
     $elem.hide()
     this.isShow = false
 
     // 触发事件
     const editor = PANEL_OR_MODAL_TO_EDITOR.get(this)
-    if (editor) editor.emit('modalOrPanelHide')
+
+    if (editor) { editor.emit('modalOrPanelHide') }
   }
 }
 

@@ -4,8 +4,9 @@
  */
 
 import { Editor } from 'slate'
-import { renderImageConf } from '../../src/modules/image/render-elem'
+
 import createEditor from '../../../../tests/utils/create-editor'
+import { renderImageConf } from '../../src/modules/image/render-elem'
 
 describe('image render elem', () => {
   let editor: any
@@ -38,12 +39,14 @@ describe('image render elem', () => {
     }
 
     const containerVnode = renderImageConf.renderElem(elem, null, editor) as any
+
     expect(containerVnode.sel).toBe('div')
     expect(containerVnode.data.className).toBe('w-e-image-container')
     expect(containerVnode.data.style.width).toBe('100')
     // expect(containerVnode.data.style.height).toBe('80')
 
     const imageVnode = containerVnode.children[0] as any
+
     expect(imageVnode.sel).toBe('img')
     expect(imageVnode.data.src).toBe(src)
     expect(imageVnode.data['data-href']).toBe(href)
@@ -69,6 +72,7 @@ describe('image render elem', () => {
     })
 
     const containerVnode = renderImageConf.renderElem(elem, null, editor) as any
+
     expect(containerVnode.sel).toBe('div')
     expect(containerVnode.data.className.indexOf('w-e-selected-image-container')).toBeGreaterThan(0)
     expect(containerVnode.children.length).toBe(5) // image + 4 个拖拽触手

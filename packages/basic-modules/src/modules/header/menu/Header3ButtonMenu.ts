@@ -7,6 +7,7 @@ import HeaderButtonMenuBase from './HeaderButtonMenuBase'
 
 class Header3ButtonMenu extends HeaderButtonMenuBase {
   title = 'H3'
+
   type = 'header3'
 }
 

@@ -3,7 +3,8 @@
  * @author wangfupeng
  */
 
-import { Range, NodeEntry, Node } from 'slate'
+import { Node, NodeEntry, Range } from 'slate'
+
 import { IDomEditor } from '../editor/interface'
 import { IMenuGroup } from '../menus/interface'
 
@@ -29,7 +30,7 @@ export interface IMenuConfig {
  * editor config
  */
 export interface IEditorConfig {
-  //【注意】如增加 onXxx 回调函数时，要同步到 vue2/vue3 组件
+  // 【注意】如增加 onXxx 回调函数时，要同步到 vue2/vue3 组件
   customAlert: (info: string, type: AlertType) => void
 
   onCreated?: (editor: IDomEditor) => void

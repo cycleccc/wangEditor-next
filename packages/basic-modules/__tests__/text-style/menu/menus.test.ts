@@ -3,7 +3,8 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Element } from 'slate'
+import { Editor, Element, Transforms } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import BoldMenu from '../../../src/modules/text-style/menu/BoldMenu'
 import CodeMenu from '../../../src/modules/text-style/menu/CodeMenu'
@@ -24,7 +25,7 @@ const MENU_INFO_LIST = [
 ]
 
 describe('text style menus', () => {
-  let editor = createEditor()
+  const editor = createEditor()
   const startLocation = Editor.start(editor, [])
 
   afterEach(() => {
@@ -46,7 +47,7 @@ describe('text style menus', () => {
       editor.select([])
       editor.addMark(mark, true)
       expect(menu.isActive(editor)).toBeTruthy()
-      editor.setHtml(`<p>hello</p>`)
+      editor.setHtml('<p>hello</p>')
       expect(menu.isActive(editor)).toBeFalsy()
     })
   })
@@ -85,12 +86,14 @@ describe('text style menus', () => {
       // 增加 mark
       menu.exec(editor, false)
       const marks1 = Editor.marks(editor) as any
+
       expect(marks1[mark]).toBeTruthy()
 
       // 取消 mark
       editor.select([])
       menu.exec(editor, true)
       const marks2 = Editor.marks(editor) as any
+
       expect(marks2[mark]).toBeUndefined()
     })
   })

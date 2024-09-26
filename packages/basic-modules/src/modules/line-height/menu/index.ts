@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import LineHeightMenu from './LineHeightMenu'
 import { genLineHeightConfig } from './config'
+import LineHeightMenu from './LineHeightMenu'
 
 export const lineHeightMenuConf = {
   key: 'lineHeight',

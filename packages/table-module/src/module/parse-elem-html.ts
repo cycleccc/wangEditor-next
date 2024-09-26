@@ -3,22 +3,23 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Descendant, Text } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
-import { TableCellElement, TableRowElement, TableElement } from './custom-types'
-import $, { getTagName, getStyleValue, DOMElement } from '../utils/dom'
+
+import $, { DOMElement, getStyleValue, getTagName } from '../utils/dom'
+import { TableCellElement, TableElement, TableRowElement } from './custom-types'
 
 function parseCellHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): TableCellElement {
   const $elem = $(elem)
 
   children = children.filter(child => {
-    if (DomEditor.getNodeType(child) === 'paragraph') return true
-    if (Text.isText(child)) return true
-    if (editor.isInline(child)) return true
+    if (DomEditor.getNodeType(child) === 'paragraph') { return true }
+    if (Text.isText(child)) { return true }
+    if (editor.isInline(child)) { return true }
     return false
   })
 
@@ -52,7 +53,7 @@ export const parseCellHtmlConf = {
 function parseRowHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): TableRowElement {
   return {
     type: 'table-row',
@@ -69,17 +70,18 @@ export const parseRowHtmlConf = {
 function parseTableHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): TableElement {
   const $elem = $(elem)
 
   // 计算宽度
   let width = 'auto'
-  if (getStyleValue($elem, 'width') === '100%') width = '100%'
-  if ($elem.attr('width') === '100%') width = '100%' // 兼容 v4 格式
+
+  if (getStyleValue($elem, 'width') === '100%') { width = '100%' }
+  if ($elem.attr('width') === '100%') { width = '100%' } // 兼容 v4 格式
 
   // 计算高度
-  let height = parseInt(getStyleValue($elem, 'height') || '0')
+  const height = parseInt(getStyleValue($elem, 'height') || '0')
 
   const tableELement: TableElement = {
     type: 'table',
@@ -90,6 +92,7 @@ function parseTableHtml(
   }
   const tdList = $elem.find('tr')[0]?.children || []
   const colgroupElments: HTMLCollection = $elem.find('colgroup')[0]?.children || null
+
   if (colgroupElments) {
     tableELement.columnWidths = Array.from(colgroupElments).map((col: any) => {
       return parseInt(col.getAttribute('width'))

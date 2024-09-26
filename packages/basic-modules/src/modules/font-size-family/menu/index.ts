@@ -3,9 +3,9 @@
  * @author wangfupeng
  */
 
-import FontSizeMenu from './FontSizeMenu'
-import FontFamilyMenu from './FontFamilyMenu'
 import { genFontSizeConfig, getFontFamilyConfig } from './config'
+import FontFamilyMenu from './FontFamilyMenu'
+import FontSizeMenu from './FontSizeMenu'
 
 export const fontSizeMenuConf = {
   key: 'fontSize',

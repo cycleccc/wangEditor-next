@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 import { withEmitter } from '../../../src/editor/plugins/with-emitter'
+import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 function createEditor(...args) {
   return withEmitter(createCoreEditor(...args))

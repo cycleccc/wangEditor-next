@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import { MenuFactoryType, IRegisterMenuConf } from './interface'
 import { registerGlobalMenuConf } from '../config/register'
+import { IRegisterMenuConf, MenuFactoryType } from './interface'
 
 // menu item 的工厂函数 - 集合
 export const MENU_ITEM_FACTORIES: {
@@ -18,7 +18,7 @@ export const MENU_ITEM_FACTORIES: {
  */
 export function registerMenu(
   registerMenuConf: IRegisterMenuConf,
-  customConfig?: { [key: string]: any }
+  customConfig?: { [key: string]: any },
 ) {
   const { key, factory, config } = registerMenuConf
 

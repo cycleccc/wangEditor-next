@@ -12,7 +12,7 @@ export function genImageMenuConfig() {
      * @param imageElem ImageElement
      */
     onInsertedImage(imageElem: ImageElement) {
-      /*自定义*/
+      /* 自定义 */
     },
 
     /**
@@ -20,7 +20,7 @@ export function genImageMenuConfig() {
      * @param node image node
      */
     onUpdatedImage(node: ImageElement | null) {
-      /*自定义*/
+      /* 自定义 */
     },
 
     /**

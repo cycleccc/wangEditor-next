@@ -4,7 +4,7 @@
  */
 
 import createEditor from '../../../../tests/utils/create-editor'
-import { renderPreConf, renderCodeConf } from '../../src/modules/code-block/render-elem'
+import { renderCodeConf, renderPreConf } from '../../src/modules/code-block/render-elem'
 
 describe('code-block render elem', () => {
   const editor = createEditor()
@@ -14,6 +14,7 @@ describe('code-block render elem', () => {
 
     const elem = { type: 'code', children: [] }
     const vnode = renderCodeConf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('code')
   })
 
@@ -22,6 +23,7 @@ describe('code-block render elem', () => {
 
     const elem = { type: 'pre', children: [] }
     const vnode = renderPreConf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('pre')
   })
 })

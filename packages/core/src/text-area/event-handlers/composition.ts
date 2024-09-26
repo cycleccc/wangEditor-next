@@ -3,15 +3,18 @@
  * @author wangfupeng
  */
 
-import { Editor, Range, Element, Text } from 'slate'
-import { IDomEditor } from '../../editor/interface'
+import {
+  Editor, Element, Range, Text,
+} from 'slate'
+
 import { DomEditor } from '../../editor/dom-editor'
-import TextArea from '../TextArea'
-import { hasEditableTarget } from '../helpers'
-import { IS_SAFARI, IS_CHROME, IS_FIREFOX } from '../../utils/ua'
+import { IDomEditor } from '../../editor/interface'
 import { DOMNode } from '../../utils/dom'
+import { IS_CHROME, IS_FIREFOX, IS_SAFARI } from '../../utils/ua'
+import { hasEditableTarget } from '../helpers'
 import { hidePlaceholder } from '../place-holder'
 import { editorSelectionToDOM } from '../syncSelection'
+import TextArea from '../TextArea'
 
 const EDITOR_TO_TEXT: WeakMap<IDomEditor, string> = new WeakMap()
 const EDITOR_TO_START_CONTAINER: WeakMap<IDomEditor, DOMNode> = new WeakMap()
@@ -25,9 +28,10 @@ const EDITOR_TO_START_CONTAINER: WeakMap<IDomEditor, DOMNode> = new WeakMap()
 export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDomEditor) {
   const event = e as CompositionEvent
 
-  if (!hasEditableTarget(editor, event.target)) return
+  if (!hasEditableTarget(editor, event.target)) { return }
 
   const { selection } = editor
+
   if (selection && Range.isExpanded(selection)) {
     Editor.deleteFragment(editor)
 
@@ -45,6 +49,7 @@ export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDo
     const domRange = DomEditor.toDOMRange(editor, selection)
     const startContainer = domRange.startContainer
     const curText = startContainer.textContent || ''
+
     EDITOR_TO_TEXT.set(editor, curText)
 
     // 记录下 dom range startContainer
@@ -63,7 +68,7 @@ export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDo
  * @param editor editor
  */
 export function handleCompositionUpdate(event: Event, textarea: TextArea, editor: IDomEditor) {
-  if (!hasEditableTarget(editor, event.target)) return
+  if (!hasEditableTarget(editor, event.target)) { return }
 
   textarea.isComposing = true
 }
@@ -77,11 +82,12 @@ export function handleCompositionUpdate(event: Event, textarea: TextArea, editor
 export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomEditor) {
   const event = e as CompositionEvent
 
-  if (!hasEditableTarget(editor, event.target)) return
+  if (!hasEditableTarget(editor, event.target)) { return }
   textarea.isComposing = false
 
   const { selection } = editor
-  if (selection == null) return
+
+  if (selection == null) { return }
 
   // 清理可能暴露的 text 节点
   // 例如 chrome 在链接后面，输入拼音，就会出现有暴露出来的 text node
@@ -98,6 +104,7 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
 
   for (let i = 0; i < start.path.length; i++) {
     const [node] = Editor.node(editor, start.path.slice(0, i + 1))
+
     if (Element.isElement(node)) {
       if (((IS_SAFARI || IS_FIREFOX) && node.type === 'link') || node.type === 'code') {
         DomEditor.setNewKey(paragraph)
@@ -107,14 +114,18 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
   }
 
   const { data } = event
-  if (!data) return
+
+  if (!data) { return }
 
   // 检查 maxLength -【注意】这里只处理拼音输入的 maxLength 限制。其他限制，在插件 with-max-length.ts 中处理
   const { maxLength } = editor.getConfig()
+
   if (maxLength) {
     const leftLengthOfMaxLength = DomEditor.getLeftLengthOfMaxLength(editor)
+
     if (leftLengthOfMaxLength < data.length) {
       const domRange = DomEditor.toDOMRange(editor, selection)
+
       domRange.startContainer.textContent = EDITOR_TO_TEXT.get(editor) || ''
       if (leftLengthOfMaxLength > 0) {
         // 剩余长度 >0 ，但小于 data 长度，截取一部分插入
@@ -128,6 +139,7 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
     // 拼音输入，当选区的边缘在两个 text node 之间时 需要重置为 domselction 的 选区
     const root = DomEditor.findDocumentOrShadowRoot(editor)
     const domSelection = root.getSelection()
+
     if (domSelection && areBothTextNodes(editor, selection)) {
       editor.selection = DomEditor.toSlateRange(editor, domSelection, {
         exactMatch: false,
@@ -141,10 +153,13 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
   if (!IS_SAFARI) {
     setTimeout(() => {
       const { selection } = editor
-      if (selection == null) return
+
+      if (selection == null) { return }
       const oldStartContainer = EDITOR_TO_START_CONTAINER.get(editor) // 拼音输入开始时的 text node
-      if (oldStartContainer == null) return
+
+      if (oldStartContainer == null) { return }
       const curStartContainer = DomEditor.toDOMRange(editor, selection).startContainer // 拼音输入结束时的 text node
+
       if (curStartContainer === oldStartContainer) {
         // 拼音输入的开始和结束，都在同一个 text node ，则不做处理
         return
@@ -157,14 +172,16 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
 function areBothTextNodes(editor, selection) {
   if (Range.isCollapsed(selection)) {
     const { anchor, focus } = selection
+
     if (
-      anchor.path.length === 2 &&
-      focus.path.length === 2 &&
-      (anchor.offset === 0 || focus.path.offset === 0)
+      anchor.path.length === 2
+      && focus.path.length === 2
+      && (anchor.offset === 0 || focus.path.offset === 0)
     ) {
       const nowEntry = Editor.node(editor, anchor.path)
       const nowPath = anchor.offset === 0 ? anchor.path : focus.path
       const prePath = [nowPath[0], nowPath[1] - 1]
+
       if (nowPath[1] === 0) {
         return false
       }

@@ -5,31 +5,32 @@
 
 import { createEditor, Descendant } from 'slate'
 import { withHistory } from 'slate-history'
-import { withDOM } from '../editor/plugins/with-dom'
+
+import { genEditorConfig } from '../config/index'
+import { IEditorConfig } from '../config/interface'
+import { DomEditor } from '../editor/dom-editor'
+import { IDomEditor } from '../editor/interface'
 import { withConfig } from '../editor/plugins/with-config'
 import { withContent } from '../editor/plugins/with-content'
-import { withEventData } from '../editor/plugins/with-event-data'
+import { withDOM } from '../editor/plugins/with-dom'
 import { withEmitter } from '../editor/plugins/with-emitter'
-import { withSelection } from '../editor/plugins/with-selection'
+import { withEventData } from '../editor/plugins/with-event-data'
 import { withMaxLength } from '../editor/plugins/with-max-length'
-import TextArea from '../text-area/TextArea'
+import { withSelection } from '../editor/plugins/with-selection'
 import HoverBar from '../menus/bar/HoverBar'
-import { genEditorConfig } from '../config/index'
-import { IDomEditor } from '../editor/interface'
-import { DomEditor } from '../editor/dom-editor'
-import { IEditorConfig } from '../config/interface'
-import { promiseResolveThen } from '../utils/util'
-import { isRepeatedCreateTextarea, genDefaultContent, htmlToContent } from './helper'
+import TextArea from '../text-area/TextArea'
 import type { DOMElement } from '../utils/dom'
+import $ from '../utils/dom'
+import { promiseResolveThen } from '../utils/util'
 import {
-  EDITOR_TO_TEXTAREA,
-  TEXTAREA_TO_EDITOR,
   EDITOR_TO_CONFIG,
-  HOVER_BAR_TO_EDITOR,
   EDITOR_TO_HOVER_BAR,
+  EDITOR_TO_TEXTAREA,
+  HOVER_BAR_TO_EDITOR,
+  TEXTAREA_TO_EDITOR,
 } from '../utils/weak-maps'
 import bindNodeRelation from './bind-node-relation'
-import $ from '../utils/dom'
+import { genDefaultContent, htmlToContent, isRepeatedCreateTextarea } from './helper'
 
 type PluginFnType = <T extends IDomEditor>(editor: T) => T
 
@@ -45,14 +46,17 @@ interface ICreateOption {
  * 创建编辑器
  */
 export default function (option: Partial<ICreateOption>) {
-  const { selector = '', config = {}, content, html, plugins = [] } = option
+  const {
+    selector = '', config = {}, content, html, plugins = [],
+  } = option
 
   // 创建实例 - 使用插件
   let editor = withHistory(
     withMaxLength(
-      withEmitter(withSelection(withContent(withConfig(withDOM(withEventData(createEditor()))))))
-    )
+      withEmitter(withSelection(withContent(withConfig(withDOM(withEventData(createEditor())))))),
+    ),
   )
+
   if (selector) {
     // 检查是否对同一个 DOM 重复创建
     if (isRepeatedCreateTextarea(editor, selector)) {
@@ -62,6 +66,7 @@ export default function (option: Partial<ICreateOption>) {
 
   // 处理配置
   const editorConfig = genEditorConfig(config)
+
   EDITOR_TO_CONFIG.set(editor, editorConfig)
   const { hoverbarKeys = {} } = editorConfig
 
@@ -86,6 +91,7 @@ export default function (option: Partial<ICreateOption>) {
   if (selector) {
     // 传入了 selector ，则创建 textarea DOM
     const textarea = new TextArea(selector)
+
     EDITOR_TO_TEXTAREA.set(editor, textarea)
     TEXTAREA_TO_EDITOR.set(textarea, editor)
     textarea.changeViewState() // 初始化时触发一次，以便能初始化 textarea DOM 和 selection
@@ -93,9 +99,11 @@ export default function (option: Partial<ICreateOption>) {
     // 判断 textarea 最小高度，并给出提示
     promiseResolveThen(() => {
       const $scroll = textarea.$scroll
-      if ($scroll == null) return
+
+      if ($scroll == null) { return }
       if ($scroll.height() < 300) {
         let info = '编辑区域高度 < 300px 这可能会导致 modal hoverbar 定位异常'
+
         info += '\nTextarea height < 300px . This may be cause modal and hoverbar position error'
         console.warn(info, $scroll)
       }
@@ -103,6 +111,7 @@ export default function (option: Partial<ICreateOption>) {
 
     // 创建 hoverbar DOM
     let hoverbar: HoverBar | null
+
     if (Object.keys(hoverbarKeys).length > 0) {
       hoverbar = new HoverBar()
       HOVER_BAR_TO_EDITOR.set(hoverbar, editor)
@@ -123,6 +132,7 @@ export default function (option: Partial<ICreateOption>) {
 
   // 触发生命周期
   const { onCreated, onDestroyed } = editorConfig
+
   if (onCreated) {
     editor.on('created', () => onCreated(editor))
   }

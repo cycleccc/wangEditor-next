@@ -3,9 +3,9 @@
  * @author wangfupeng
  */
 
+import { IDomEditor } from '@wangeditor-next/core'
 import { Element as SlateElement } from 'slate'
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor } from '@wangeditor-next/core'
 
 /**
  * render paragraph elem
@@ -17,9 +17,10 @@ import { IDomEditor } from '@wangeditor-next/core'
 function renderParagraph(
   elemNode: SlateElement,
   children: VNode[] | null,
-  editor: IDomEditor
+  editor: IDomEditor,
 ): VNode {
   const vnode = <p>{children}</p>
+
   return vnode
 }
 

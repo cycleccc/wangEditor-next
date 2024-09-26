@@ -11,9 +11,10 @@ import { VNode } from 'snabbdom'
  * @param className css class
  */
 export function addVnodeClassName(vnode: VNode, className: string) {
-  if (vnode.data == null) vnode.data = {}
+  if (vnode.data == null) { vnode.data = {} }
   const data = vnode.data
-  if (data.props == null) data.props = {}
+
+  if (data.props == null) { data.props = {} }
 
   Object.assign(data.props, { className })
 }

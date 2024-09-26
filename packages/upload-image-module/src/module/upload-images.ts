@@ -4,8 +4,9 @@
  */
 
 import Uppy, { UppyFile } from '@uppy/core'
-import { IDomEditor, createUploader } from '@wangeditor-next/core'
 import { insertImageNode } from '@wangeditor-next/basic-modules'
+import { createUploader, IDomEditor } from '@wangeditor-next/core'
+
 import { IUploadConfigForImage } from './menu/config'
 
 // 存储 editor uppy 的关系 - 缓存 uppy ，不重复创建
@@ -18,10 +19,13 @@ const EDITOR_TO_UPPY_MAP = new WeakMap<IDomEditor, Uppy>()
 function getUppy(editor: IDomEditor): Uppy {
   // 从缓存中获取
   let uppy = EDITOR_TO_UPPY_MAP.get(editor)
-  if (uppy != null) return uppy
+
+  if (uppy != null) { return uppy }
 
   const menuConfig = getMenuConfig(editor)
-  const { onSuccess, onProgress, onFailed, customInsert, onError } = menuConfig
+  const {
+    onSuccess, onProgress, onFailed, customInsert, onError,
+  } = menuConfig
 
   // 上传完成之后
   const successHandler = (file: UppyFile, res: any) => {
@@ -37,7 +41,8 @@ function getUppy(editor: IDomEditor): Uppy {
       return
     }
 
-    let { errno = 1, data = {} } = res
+    const { errno = 1, data = {} } = res
+
     if (errno !== 0) {
       // failed 回调
       onFailed(file, res)
@@ -49,11 +54,13 @@ function getUppy(editor: IDomEditor): Uppy {
       data.forEach((item: { url: string; alt?: string; href?: string }) => {
         const { url = '', alt = '', href = '' } = item
         // 使用 basic-module 的 insertImageNode 方法插入图片，其中有用户配置的校验和 callback
+
         insertImageNode(editor, url, alt, href)
       })
     } else {
       // 返回的对象
       const { url = '', alt = '', href = '' } = data
+
       insertImageNode(editor, url, alt, href)
     }
 
@@ -100,12 +107,15 @@ function getMenuConfig(editor: IDomEditor) {
 async function insertBase64(editor: IDomEditor, file: File) {
   return new Promise(resolve => {
     const reader = new FileReader()
+
     reader.readAsDataURL(file)
     reader.onload = () => {
       const { result } = reader
-      if (!result) return
+
+      if (!result) { return }
       const src = result.toString()
-      let href = src.indexOf('data:image') === 0 ? '' : src // base64 格式则不设置 href
+      const href = src.indexOf('data:image') === 0 ? '' : src // base64 格式则不设置 href
+
       insertImageNode(editor, src, file.name, href)
 
       resolve('ok')
@@ -122,6 +132,7 @@ async function uploadFile(editor: IDomEditor, file: File) {
   const uppy = getUppy(editor)
 
   const { name, type, size } = file
+
   uppy.addFile({
     name,
     type,
@@ -137,7 +148,7 @@ async function uploadFile(editor: IDomEditor, file: File) {
  * @param files files
  */
 export default async function (editor: IDomEditor, files: FileList | null) {
-  if (files == null) return
+  if (files == null) { return }
   const fileList = Array.prototype.slice.call(files)
 
   // 获取菜单配置
@@ -146,6 +157,7 @@ export default async function (editor: IDomEditor, files: FileList | null) {
   // 按顺序上传
   for await (const file of fileList) {
     const size = file.size // size kb
+
     if (base64LimitSize && size <= base64LimitSize) {
       // 允许 base64 ，而且 size 在 base64 限制之内，则插入 base64 格式
       await insertBase64(editor, file)

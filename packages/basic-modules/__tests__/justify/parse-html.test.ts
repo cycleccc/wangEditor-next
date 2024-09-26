@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseStyleHtml } from '../../src/modules/justify/parse-style-html'
 
@@ -16,6 +17,7 @@ describe('text align - parse style', () => {
 
     // parse
     const res = parseStyleHtml($p[0], paragraph, editor)
+
     expect(res).toEqual({
       type: 'paragraph',
       textAlign: 'center',

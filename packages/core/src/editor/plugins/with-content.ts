@@ -3,20 +3,23 @@
  * @author wangfupeng
  */
 
-import { Editor, Node, Text, Path, Operation, Range, Transforms, Element, Descendant } from 'slate'
-import { DomEditor } from '../dom-editor'
+import {
+  Descendant, Editor, Element, Node, Operation, Path, Range, Text, Transforms,
+} from 'slate'
+
 import { IDomEditor } from '../..'
-import { EDITOR_TO_SELECTION, NODE_TO_KEY } from '../../utils/weak-maps'
-import node2html from '../../to-html/node2html'
-import { genElemId } from '../../render/helper'
-import { Key } from '../../utils/key'
-import $, { DOMElement, NodeType } from '../../utils/dom'
-import { findCurrentLineRange } from '../../utils/line'
-import { ElementWithId } from '../interface'
+import { IGNORE_TAGS } from '../../constants'
+import { htmlToContent } from '../../create/helper'
 import { PARSE_ELEM_HTML_CONF, TEXT_TAGS } from '../../parse-html/index'
 import parseElemHtml from '../../parse-html/parse-elem-html'
-import { htmlToContent } from '../../create/helper'
-import { IGNORE_TAGS } from '../../constants'
+import { genElemId } from '../../render/helper'
+import node2html from '../../to-html/node2html'
+import $, { DOMElement, NodeType } from '../../utils/dom'
+import { Key } from '../../utils/key'
+import { findCurrentLineRange } from '../../utils/line'
+import { EDITOR_TO_SELECTION, NODE_TO_KEY } from '../../utils/weak-maps'
+import { DomEditor } from '../dom-editor'
+import { ElementWithId } from '../interface'
 
 /**
  * 把 elem 插入到编辑器
@@ -29,7 +32,7 @@ function insertElemToEditor(editor: IDomEditor, elem: Element) {
     editor.insertNode(elem)
 
     // link 特殊处理，否则后面插入的文字全都在 a 里面 issue#4573
-    if (elem.type === 'link') editor.insertFragment([{ text: '' }])
+    if (elem.type === 'link') { editor.insertFragment([{ text: '' }]) }
   } else {
     // block elem ，另起一行插入 —— 重要
     Transforms.insertNodes(editor, elem, { mode: 'highest' })
@@ -38,11 +41,14 @@ function insertElemToEditor(editor: IDomEditor, elem: Element) {
 
 export const withContent = <T extends Editor>(editor: T) => {
   const e = editor as T & IDomEditor
-  const { onChange, insertText, apply, deleteBackward } = e
+  const {
+    onChange, insertText, apply, deleteBackward,
+  } = e
 
   e.insertText = (text: string) => {
     const { readOnly } = e.getConfig()
-    if (readOnly) return
+
+    if (readOnly) { return }
 
     insertText(text)
   }
@@ -60,6 +66,7 @@ export const withContent = <T extends Editor>(editor: T) => {
         for (const [node, path] of Editor.levels(e, { at: op.path })) {
           // 在当前节点寻找
           const key = DomEditor.findKey(e, node)
+
           matches.push([path, key])
         }
         break
@@ -72,6 +79,7 @@ export const withContent = <T extends Editor>(editor: T) => {
         for (const [node, path] of Editor.levels(e, { at: Path.parent(op.path) })) {
           // 在父节点寻找
           const key = DomEditor.findKey(e, node)
+
           matches.push([path, key])
         }
         break
@@ -82,6 +90,7 @@ export const withContent = <T extends Editor>(editor: T) => {
           at: Path.common(Path.parent(op.path), Path.parent(op.newPath)),
         })) {
           const key = DomEditor.findKey(e, node)
+
           matches.push([path, key])
         }
         break
@@ -94,6 +103,7 @@ export const withContent = <T extends Editor>(editor: T) => {
     // 绑定 node 和 key
     for (const [path, key] of matches) {
       const [node] = Editor.node(e, path)
+
       NODE_TO_KEY.set(node, key)
     }
   }
@@ -126,6 +136,7 @@ export const withContent = <T extends Editor>(editor: T) => {
   e.onChange = () => {
     // 记录当前选区
     const { selection } = e
+
     if (selection != null) {
       EDITOR_TO_SELECTION.set(e, selection)
     }
@@ -145,19 +156,22 @@ export const withContent = <T extends Editor>(editor: T) => {
   e.getHtml = (): string => {
     const { children = [] } = e
     const html = children.map(child => node2html(child, e)).join('')
+
     return html
   }
 
   // 获取 text
   e.getText = (): string => {
     const { children = [] } = e
+
     return children.map(child => Node.string(child)).join('\n')
   }
 
   // 获取选区文字
   e.getSelectionText = (): string => {
     const { selection } = e
-    if (selection == null) return ''
+
+    if (selection == null) { return '' }
     return Editor.string(editor, selection)
   }
 
@@ -170,11 +184,14 @@ export const withContent = <T extends Editor>(editor: T) => {
       at: [],
       universal: true,
     })
-    for (let nodeEntry of nodeEntries) {
+
+    for (const nodeEntry of nodeEntries) {
       const [node] = nodeEntry
+
       if (Element.isElement(node)) {
         // 判断 type （前缀 or 全等）
-        let flag = isPrefix ? node.type.indexOf(type) >= 0 : node.type === type
+        const flag = isPrefix ? node.type.indexOf(type) >= 0 : node.type === type
+
         if (flag) {
           const key = DomEditor.findKey(e, node)
           const id = genElemId(key.id)
@@ -201,19 +218,23 @@ export const withContent = <T extends Editor>(editor: T) => {
    */
   e.isEmpty = () => {
     const { children = [] } = e
-    if (children.length > 1) return false // >1 个顶级节点
+
+    if (children.length > 1) { return false } // >1 个顶级节点
 
     const firstNode = children[0]
-    if (firstNode == null) return true // editor.children 空数组
+
+    if (firstNode == null) { return true } // editor.children 空数组
 
     if (Element.isElement(firstNode) && firstNode.type === 'paragraph') {
       const { children: texts = [] } = firstNode
-      if (texts.length > 1) return false // >1 text node
+
+      if (texts.length > 1) { return false } // >1 text node
 
       const t = texts[0]
-      if (t == null) return true // 无 text 节点
 
-      if (Text.isText(t) && t.text === '') return true // 只有一个 text 且是空字符串
+      if (t == null) { return true } // 无 text 节点
+
+      if (Text.isText(t) && t.text === '') { return true } // 只有一个 text 且是空字符串
     }
 
     return false
@@ -251,11 +272,12 @@ export const withContent = <T extends Editor>(editor: T) => {
    * @param html html string
    * @param isRecursive 是否递归调用（内部使用，使用者不要传参）
    */
-  e.dangerouslyInsertHtml = (html: string = '', isRecursive = false) => {
-    if (!html) return
+  e.dangerouslyInsertHtml = (html = '', isRecursive = false) => {
+    if (!html) { return }
 
     // ------------- 把 html 转换为 DOM nodes -------------
     const div = document.createElement('div')
+
     div.innerHTML = html
     let domNodes = Array.from(div.childNodes)
 
@@ -263,28 +285,31 @@ export const withContent = <T extends Editor>(editor: T) => {
     domNodes = domNodes.filter(n => {
       const { nodeType, nodeName } = n
       // Text Node
-      if (nodeType === NodeType.TEXT_NODE) return true
+
+      if (nodeType === NodeType.TEXT_NODE) { return true }
 
       // Element Node
       if (nodeType === NodeType.ELEMENT_NODE) {
         // 过滤掉忽略的 tag
-        if (IGNORE_TAGS.has(nodeName.toLowerCase())) return false
-        else return true
+        if (IGNORE_TAGS.has(nodeName.toLowerCase())) { return false }
+        return true
       }
       return false
     })
-    if (domNodes.length === 0) return
+    if (domNodes.length === 0) { return }
 
     // ------------- 把 DOM nodes 转换为 slate nodes ，并插入到编辑器 -------------
 
     const { selection } = e
-    if (selection == null) return
+
+    if (selection == null) { return }
     let curEmptyParagraphPath: Path | null = null
 
     // 是否当前选中了一个空 p （如果是，后面会删掉）
     // 递归调用时不判断
     if (DomEditor.isSelectedEmptyParagraph(e) && !isRecursive) {
       const { focus } = selection
+
       curEmptyParagraphPath = [focus.path[0]] // 只记录顶级 path 即可
     }
 
@@ -292,15 +317,16 @@ export const withContent = <T extends Editor>(editor: T) => {
     document.body.appendChild(div)
 
     let insertedElemNum = 0 // 记录插入 elem 的数量 ( textNode 不算 )
+
     domNodes.forEach((n, index) => {
       const { nodeType, nodeName, textContent = '' } = n
 
       // ------ Text node ------
       if (nodeType === NodeType.TEXT_NODE) {
-        if (!textContent || !textContent.trim()) return // 无内容的 Text
+        if (!textContent || !textContent.trim()) { return } // 无内容的 Text
 
         // 插入文本
-        //【注意】insertNode 和 insertText 有区别：后者会继承光标处的文本样式（如加粗）；前者会加入纯文本，无样式；
+        // 【注意】insertNode 和 insertText 有区别：后者会继承光标处的文本样式（如加粗）；前者会加入纯文本，无样式；
         e.insertNode({ text: textContent })
         return
       }
@@ -314,11 +340,12 @@ export const withContent = <T extends Editor>(editor: T) => {
       // 判断当前的 el 是否是可识别的 tag
       const el = n as DOMElement
       let isParseMatch = false
+
       if (TEXT_TAGS.includes(nodeName.toLowerCase())) {
         // text elem，如 <span>
         isParseMatch = true
       } else {
-        for (let selector in PARSE_ELEM_HTML_CONF) {
+        for (const selector in PARSE_ELEM_HTML_CONF) {
           if (el.matches(selector)) {
             // 普通 elem，如 <p> <a> 等（非 text elem）
             isParseMatch = true
@@ -342,22 +369,24 @@ export const withContent = <T extends Editor>(editor: T) => {
         }
 
         // 如果当前选中 void node ，则选区移动一下
-        if (DomEditor.isSelectedVoidNode(e)) e.move(1)
+        if (DomEditor.isSelectedVoidNode(e)) { e.move(1) }
 
         return
       }
 
       // 没有匹配上（如 div ）
       const display = window.getComputedStyle(el).display
+
       if (!DomEditor.isSelectedEmptyParagraph(e)) {
         // 当前不是空行，且 非 inline - 则换行
         if (display.indexOf('inline') < 0) {
           if (index >= 1) {
             const prevEl = domNodes[index - 1] as DOMElement
             // 如果是 list 列表需要多插入一个回车,模拟双回车删除空 list
+
             if (
-              'matches' in prevEl &&
-              prevEl.matches('ul:not([data-w-e-type]),ol:not([data-w-e-type])')
+              'matches' in prevEl
+              && prevEl.matches('ul:not([data-w-e-type]),ol:not([data-w-e-type])')
             ) {
               e.insertBreak()
             }
@@ -397,6 +426,7 @@ export const withContent = <T extends Editor>(editor: T) => {
     e.clear()
     // 设置新内容
     const newContent = htmlToContent(e, html == null ? '' : html)
+
     Transforms.insertFragment(e, newContent)
 
     // 恢复编辑器状态和选区

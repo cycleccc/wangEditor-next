@@ -4,17 +4,18 @@
  */
 
 import { Element } from 'slate'
-import { TableCellElement, TableRowElement, TableElement } from './custom-types'
+
+import { TableCellElement, TableElement, TableRowElement } from './custom-types'
 
 function tableToHtml(elemNode: Element, childrenHtml: string): string {
   const { width = 'auto', columnWidths, height = 'auto' } = elemNode as TableElement
-  let cols = columnWidths
+  const cols = columnWidths
     ?.map(width => {
       return `<col width=${width}></col>`
     })
     .join('')
 
-  const colgroupStr = cols ? '<colgroup contentEditable="false">' + cols + '</colgroup>' : ''
+  const colgroupStr = cols ? `<colgroup contentEditable="false">${cols}</colgroup>` : ''
 
   return `<table style="width: ${width};table-layout: fixed;height:${height}">${colgroupStr}<tbody>${childrenHtml}</tbody></table>`
 }
@@ -33,6 +34,7 @@ function tableCellToHtml(cellNode: Element, childrenHtml: string): string {
   } = cellNode as TableCellElement
   const tag = isHeader ? 'th' : 'td'
   const style = hidden ? 'display:none' : ''
+
   return `<${tag} colSpan="${colSpan}" rowSpan="${rowSpan}" width="${width}" style="${style}">${childrenHtml}</${tag}>`
 }
 

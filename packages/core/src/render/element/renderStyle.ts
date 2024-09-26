@@ -5,6 +5,7 @@
 
 import { Element as SlateElement } from 'slate'
 import { VNode } from 'snabbdom'
+
 import { RENDER_STYLE_HANDLER_LIST } from '../index'
 
 /**

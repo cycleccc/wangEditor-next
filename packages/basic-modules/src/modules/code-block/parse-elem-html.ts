@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Descendant } from 'slate'
+
 import $, { DOMElement } from '../../utils/dom'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
-import { PreElement, CodeElement } from './custom-types'
+import { CodeElement, PreElement } from './custom-types'
 
 function parseCodeHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor): CodeElement {
   const $elem = $(elem)

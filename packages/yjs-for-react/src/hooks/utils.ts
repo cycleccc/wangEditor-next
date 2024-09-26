@@ -1,4 +1,6 @@
-import { RefObject, useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import {
+  RefObject, useCallback, useEffect, useReducer, useRef, useState,
+} from 'react'
 
 export function useRequestRerender() {
   const [, rerender] = useReducer(s => s + 1, 0)
@@ -30,16 +32,16 @@ export function useRequestRerender() {
 
 export function useOnResize<T extends HTMLElement>(
   ref: RefObject<T> | undefined,
-  onResize: () => void
+  onResize: () => void,
 ) {
   const onResizeRef = useRef(onResize)
+
   onResizeRef.current = onResize
 
   const [observer] = useState(
-    () =>
-      new ResizeObserver(() => {
-        onResizeRef.current()
-      })
+    () => new ResizeObserver(() => {
+      onResizeRef.current()
+    }),
   )
 
   useEffect(() => {
@@ -48,6 +50,7 @@ export function useOnResize<T extends HTMLElement>(
     }
 
     const { current: element } = ref
+
     observer.observe(element)
     return () => observer.unobserve(element)
   }, [observer, ref])

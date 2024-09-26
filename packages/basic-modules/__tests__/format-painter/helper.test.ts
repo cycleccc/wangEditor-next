@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { clearAllMarks } from '../../src/modules/format-painter/helper'
 

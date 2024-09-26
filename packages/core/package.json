@@ -1,6 +1,7 @@
 {
   "name": "@wangeditor-next/core",
   "version": "1.7.4",
+  "type": "module",
   "description": "wangEditor core",
   "author": "cycleccc <2991205548@qq.com>",
   "contributors": [],
@@ -58,7 +59,7 @@
   "dependencies": {
     "@types/event-emitter": "^0.3.3",
     "event-emitter": "^0.3.5",
-    "html-void-elements": "^2.0.0",
+    "html-void-elements": "^3.0.0",
     "i18next": "^20.4.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "slate-history": "^0.66.0"

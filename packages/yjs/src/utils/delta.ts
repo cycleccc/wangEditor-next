@@ -1,4 +1,5 @@
 import * as Y from 'yjs'
+
 import { DeltaInsert, InsertDelta } from '../module/custom-types'
 import { deepEquals } from './object'
 
@@ -11,15 +12,15 @@ export function normalizeInsertDelta(delta: InsertDelta): InsertDelta {
     }
 
     const prev = normalized[normalized.length - 1]
+
     if (!prev || typeof prev.insert !== 'string' || typeof element.insert !== 'string') {
       normalized.push(element)
       continue
     }
 
-    const merge =
-      prev.attributes === element.attributes ||
-      (!prev.attributes === !element.attributes &&
-        deepEquals(prev.attributes ?? {}, element.attributes ?? {}))
+    const merge = prev.attributes === element.attributes
+      || (!prev.attributes === !element.attributes
+        && deepEquals(prev.attributes ?? {}, element.attributes ?? {}))
 
     if (merge) {
       prev.insert += element.insert

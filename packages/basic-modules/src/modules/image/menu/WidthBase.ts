@@ -3,13 +3,16 @@
  * @author wangfupeng
  */
 
-import { Transforms, Node } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor } from '@wangeditor-next/core'
+import { DomEditor, IButtonMenu, IDomEditor } from '@wangeditor-next/core'
+import { Node, Transforms } from 'slate'
+
 import { ImageElement } from '../custom-types'
 
 abstract class ImageWidthBaseClass implements IButtonMenu {
   abstract readonly title: string // 菜单标题
+
   readonly tag = 'button'
+
   abstract readonly value: string // css width 的值
 
   getValue(editor: IDomEditor): string | boolean {
@@ -27,9 +30,10 @@ abstract class ImageWidthBaseClass implements IButtonMenu {
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
 
     const imageNode = this.getSelectedNode(editor)
+
     if (imageNode == null) {
       // 选区未处于 image node ，则禁用
       return true
@@ -38,14 +42,16 @@ abstract class ImageWidthBaseClass implements IButtonMenu {
   }
 
   exec(editor: IDomEditor, value: string | boolean) {
-    if (this.isDisabled(editor)) return
+    if (this.isDisabled(editor)) { return }
 
     const imageNode = this.getSelectedNode(editor)
-    if (imageNode == null) return
+
+    if (imageNode == null) { return }
 
     // 隐藏 hoverbar
     const hoverbar = DomEditor.getHoverbar(editor)
-    if (hoverbar) hoverbar.hideAndClean()
+
+    if (hoverbar) { hoverbar.hideAndClean() }
 
     const { style = {} } = imageNode as ImageElement
     const props: Partial<ImageElement> = {

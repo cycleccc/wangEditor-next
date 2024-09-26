@@ -20,14 +20,16 @@ describe('text style - text to html', () => {
 
     // is plain text
     const html1 = styleToHtml(textNode, 'hello')
+
     expect(html1).toBe(
-      '<sup><sub><s><u><em><code><strong>hello</strong></code></em></u></s></sub></sup>'
+      '<sup><sub><s><u><em><code><strong>hello</strong></code></em></u></s></sub></sup>',
     )
 
     // is text tag (exclude <br>)
     const html2 = styleToHtml(textNode, '<span>world</span>')
+
     expect(html2).toBe(
-      '<span><sup><sub><s><u><em><code><strong>world</strong></code></em></u></s></sub></sup></span>'
+      '<span><sup><sub><s><u><em><code><strong>world</strong></code></em></u></s></sub></sup></span>',
     )
   })
 })

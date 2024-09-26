@@ -1,5 +1,6 @@
 import { Element, Node, Text } from 'slate'
 import * as Y from 'yjs'
+
 import { DeltaInsert, InsertDelta } from '../module/custom-types'
 import { yTextToInsertDelta } from './delta'
 import { getProperties } from './slate'

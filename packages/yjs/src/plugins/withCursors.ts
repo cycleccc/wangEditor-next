@@ -1,6 +1,7 @@
 import { Editor, Range } from 'slate'
 import { Awareness } from 'y-protocols/awareness'
 import * as Y from 'yjs'
+
 import { RelativeRange } from '../module/custom-types'
 import { slateRangeToRelativeRange } from '../utils/position'
 import { YjsEditor } from './withYjs'
@@ -38,25 +39,25 @@ export type CursorEditor<TCursorData extends Record<string, unknown> = Record<st
 export const CursorEditor = {
   isCursorEditor(value: unknown): value is CursorEditor {
     return (
-      YjsEditor.isYjsEditor(value) &&
-      (value as CursorEditor).awareness &&
-      typeof (value as CursorEditor).cursorDataField === 'string' &&
-      typeof (value as CursorEditor).selectionStateField === 'string' &&
-      typeof (value as CursorEditor).sendCursorPosition === 'function' &&
-      typeof (value as CursorEditor).sendCursorData === 'function'
+      YjsEditor.isYjsEditor(value)
+      && (value as CursorEditor).awareness
+      && typeof (value as CursorEditor).cursorDataField === 'string'
+      && typeof (value as CursorEditor).selectionStateField === 'string'
+      && typeof (value as CursorEditor).sendCursorPosition === 'function'
+      && typeof (value as CursorEditor).sendCursorData === 'function'
     )
   },
 
   sendCursorPosition<TCursorData extends Record<string, unknown>>(
     editor: CursorEditor<TCursorData>,
-    range: Range | null = editor.selection
+    range: Range | null = editor.selection,
   ) {
     editor.sendCursorPosition(range)
   },
 
   sendCursorData<TCursorData extends Record<string, unknown>>(
     editor: CursorEditor<TCursorData>,
-    data: TCursorData
+    data: TCursorData,
   ) {
     editor.sendCursorData(data)
   },
@@ -64,27 +65,29 @@ export const CursorEditor = {
   on<TCursorData extends Record<string, unknown>>(
     editor: CursorEditor<TCursorData>,
     event: 'change',
-    handler: RemoteCursorChangeEventListener
+    handler: RemoteCursorChangeEventListener,
   ) {
     if (event !== 'change') {
       return
     }
 
     const listeners = CURSOR_CHANGE_EVENT_LISTENERS.get(editor) ?? new Set()
+
     listeners.add(handler)
-    if (editor) CURSOR_CHANGE_EVENT_LISTENERS.set(editor, listeners)
+    if (editor) { CURSOR_CHANGE_EVENT_LISTENERS.set(editor, listeners) }
   },
 
   off<TCursorData extends Record<string, unknown>>(
     editor: CursorEditor<TCursorData>,
     event: 'change',
-    listener: RemoteCursorChangeEventListener
+    listener: RemoteCursorChangeEventListener,
   ) {
     if (event !== 'change') {
       return
     }
 
     const listeners = CURSOR_CHANGE_EVENT_LISTENERS.get(editor)
+
     if (listeners) {
       listeners.delete(listener)
     }
@@ -92,13 +95,14 @@ export const CursorEditor = {
 
   cursorState<TCursorData extends Record<string, unknown>>(
     editor: CursorEditor<TCursorData>,
-    clientId: number
+    clientId: number,
   ): CursorState<TCursorData> | null {
     if (clientId === editor.awareness.clientID || !YjsEditor.connected(editor)) {
       return null
     }
 
     const state = editor.awareness.getStates().get(clientId)
+
     if (!state) {
       return null
     }
@@ -111,7 +115,7 @@ export const CursorEditor = {
   },
 
   cursorStates<TCursorData extends Record<string, unknown>>(
-    editor: CursorEditor<TCursorData>
+    editor: CursorEditor<TCursorData>,
   ): Record<string, CursorState<TCursorData>> {
     if (!YjsEditor.connected(editor)) {
       return {}
@@ -131,13 +135,13 @@ export const CursorEditor = {
             data: state[editor.cursorDataField],
           },
         ]
-      }).filter(Array.isArray)
+      }).filter(Array.isArray),
     )
   },
 }
 
 export type WithCursorsOptions<
-  TCursorData extends Record<string, unknown> = Record<string, unknown>
+  TCursorData extends Record<string, unknown> = Record<string, unknown>,
 > = {
   // Local state field used to store the user selection
   cursorStateField?: string
@@ -151,9 +155,9 @@ export type WithCursorsOptions<
 
 export function withCursors<TCursorData extends Record<string, unknown>>(
   awareness: Awareness,
-  options: WithCursorsOptions<TCursorData> = {}
+  options: WithCursorsOptions<TCursorData> = {},
 ) {
-  return function <T extends YjsEditor>(editor: T): T & CursorEditor<TCursorData> {
+  return function <T extends YjsEditor> (editor: T): T & CursorEditor<TCursorData> {
     const {
       cursorStateField: selectionStateField = 'selection',
       cursorDataField = 'data',
@@ -185,9 +189,9 @@ export function withCursors<TCursorData extends Record<string, unknown>>(
       const { anchor, focus } = slateRangeToRelativeRange(e.sharedRoot, e, range)
 
       if (
-        !currentRange ||
-        !Y.compareRelativePositions(anchor, currentRange) ||
-        !Y.compareRelativePositions(focus, currentRange)
+        !currentRange
+        || !Y.compareRelativePositions(anchor, currentRange)
+        || !Y.compareRelativePositions(focus, currentRange)
       ) {
         e.awareness.setLocalStateField(e.selectionStateField, { anchor, focus })
       }
@@ -195,6 +199,7 @@ export function withCursors<TCursorData extends Record<string, unknown>>(
 
     const awarenessChangeListener: RemoteCursorChangeEventListener = yEvent => {
       const listeners = CURSOR_CHANGE_EVENT_LISTENERS.get(e)
+
       if (!listeners) {
         return
       }
@@ -212,6 +217,7 @@ export function withCursors<TCursorData extends Record<string, unknown>>(
     }
 
     const { connect, disconnect } = e
+
     e.connect = () => {
       connect()
 
@@ -229,6 +235,7 @@ export function withCursors<TCursorData extends Record<string, unknown>>(
         }
 
         const { onChange } = e
+
         e.onChange = () => {
           onChange()
 

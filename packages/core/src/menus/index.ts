@@ -11,17 +11,17 @@ export { registerMenu } from './register'
 // menu 相关接口
 export {
   IButtonMenu,
-  ISelectMenu,
   IDropPanelMenu,
   IModalMenu,
-  IRegisterMenuConf,
   IOption,
+  IRegisterMenuConf,
+  ISelectMenu,
 } from './interface'
 
 // 输出 modal 相关方法
 export {
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
   genModalTextareaElems,
 } from './panel-and-modal/Modal'
 

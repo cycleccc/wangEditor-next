@@ -4,6 +4,7 @@
  */
 
 import { jsx } from 'snabbdom'
+
 import { renderStyle } from '../../src/modules/font-size-family/render-style'
 
 describe('font size and family - render text style', () => {
@@ -15,6 +16,7 @@ describe('font size and family - render text style', () => {
 
     // @ts-ignore 忽略 vnode 格式检查
     const newVnode = renderStyle(textNode, vnode) as any
+
     expect(newVnode.data.style.fontSize).toBe(fontSize)
     expect(newVnode.data.style.fontFamily).toBe(fontFamily)
   })

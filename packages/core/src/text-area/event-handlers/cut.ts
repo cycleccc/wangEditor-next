@@ -3,23 +3,27 @@
  * @author wangfupeng
  */
 
-import { Editor, Range, Node, Transforms } from 'slate'
+import {
+  Editor, Node, Range, Transforms,
+} from 'slate'
+
 import { IDomEditor } from '../../editor/interface'
-import TextArea from '../TextArea'
 import { hasEditableTarget } from '../helpers'
+import TextArea from '../TextArea'
 
 function handleOnCut(e: Event, textarea: TextArea, editor: IDomEditor) {
   const event = e as ClipboardEvent
   const { selection } = editor
   const { readOnly } = editor.getConfig()
 
-  if (readOnly) return
-  if (!hasEditableTarget(editor, event.target)) return
+  if (readOnly) { return }
+  if (!hasEditableTarget(editor, event.target)) { return }
 
   event.preventDefault()
 
   const data = event.clipboardData
-  if (data == null) return
+
+  if (data == null) { return }
   editor.setFragmentData(data)
 
   if (selection) {
@@ -27,6 +31,7 @@ function handleOnCut(e: Event, textarea: TextArea, editor: IDomEditor) {
       Editor.deleteFragment(editor)
     } else {
       const node = Node.parent(editor, selection.anchor.path)
+
       if (Editor.isVoid(editor, node)) {
         Transforms.delete(editor)
       }

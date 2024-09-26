@@ -1,5 +1,5 @@
 import createEditor from '../../../tests/utils/create-editor'
-import { renderTableConf, renderTableCellConf, renderTableRowConf } from '../src/module/render-elem'
+import { renderTableCellConf, renderTableConf, renderTableRowConf } from '../src/module/render-elem'
 
 describe('table module - render elem', () => {
   const editor = createEditor()
@@ -9,6 +9,7 @@ describe('table module - render elem', () => {
 
     const elem = { type: 'table-cell', children: [] }
     const vnode = renderTableCellConf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('td')
   })
 
@@ -27,6 +28,7 @@ describe('table module - render elem', () => {
 
     const elem = { type: 'table-row', children: [] }
     const vnode = renderTableRowConf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('tr')
   })
 
@@ -39,10 +41,13 @@ describe('table module - render elem', () => {
      * 改变了结构，新增外层 DIV
      */
     const observerVnode = renderTableConf.renderElem(elem, null, editor) as any
+
     expect(observerVnode.sel).toBe('div')
     const containerVnode = observerVnode.children[0] as any
+
     expect(containerVnode.sel).toBe('div')
     const tableVnode = containerVnode.children[0] as any
+
     expect(tableVnode.sel).toBe('table')
   })
 
@@ -52,6 +57,7 @@ describe('table module - render elem', () => {
     const observerVnode = renderTableConf.renderElem(elem, null, editor) as any
     const containerVnode = observerVnode.children[0] as any
     const tableVnode = containerVnode.children[0] as any
+
     expect(tableVnode.data.width).toBe('100%')
   })
 })

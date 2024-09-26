@@ -1,5 +1,8 @@
-import { MoveNodeOperation, Node, Path, Text } from 'slate'
+import {
+  MoveNodeOperation, Node, Path, Text,
+} from 'slate'
 import * as Y from 'yjs'
+
 import { Delta } from '../../module/custom-types'
 import { cloneInsertDeltaDeep } from '../../utils/clone'
 import { getInsertDeltaLength, yTextToInsertDelta } from '../../utils/delta'
@@ -13,6 +16,7 @@ export function moveNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MoveNodeOpe
   const newParentPath = Path.parent(op.newPath)
   const newPathOffset = op.newPath[op.newPath.length - 1]
   const parent = Node.get(slateRoot, newParentPath)
+
   if (Text.isText(parent)) {
     throw new Error('Cannot move slate node into text element')
   }
@@ -25,7 +29,7 @@ export function moveNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MoveNodeOpe
   const storedPositions = getStoredPositionsInDeltaAbsolute(
     sharedRoot,
     origin.yParent,
-    origin.targetDelta
+    origin.targetDelta,
   )
 
   origin.yParent.delete(origin.textRange.start, origin.textRange.end - origin.textRange.start)
@@ -42,6 +46,6 @@ export function moveNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MoveNodeOpe
     storedPositions,
     insertDelta,
     deltaApplyYOffset,
-    origin.textRange.start
+    origin.textRange.start,
   )
 }

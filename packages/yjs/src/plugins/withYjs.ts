@@ -1,5 +1,8 @@
-import { BaseEditor, Descendant, Editor, Operation, Point } from 'slate'
+import {
+  BaseEditor, Descendant, Editor, Operation, Point,
+} from 'slate'
 import * as Y from 'yjs'
+
 import { applyYjsEvents } from '../applyToSlate'
 import { applySlateOp } from '../applyToYjs'
 import { yTextToSlateElement } from '../utils/convert'
@@ -46,16 +49,16 @@ export type YjsEditor = BaseEditor & {
 export const YjsEditor = {
   isYjsEditor(value: unknown): value is YjsEditor {
     return (
-      Editor.isEditor(value) &&
-      (value as YjsEditor).sharedRoot instanceof Y.XmlText &&
-      'localOrigin' in value &&
-      'positionStorageOrigin' in value &&
-      typeof (value as YjsEditor).applyRemoteEvents === 'function' &&
-      typeof (value as YjsEditor).storeLocalChange === 'function' &&
-      typeof (value as YjsEditor).flushLocalChanges === 'function' &&
-      typeof (value as YjsEditor).isLocalOrigin === 'function' &&
-      typeof (value as YjsEditor).connect === 'function' &&
-      typeof (value as YjsEditor).disconnect === 'function'
+      Editor.isEditor(value)
+      && (value as YjsEditor).sharedRoot instanceof Y.XmlText
+      && 'localOrigin' in value
+      && 'positionStorageOrigin' in value
+      && typeof (value as YjsEditor).applyRemoteEvents === 'function'
+      && typeof (value as YjsEditor).storeLocalChange === 'function'
+      && typeof (value as YjsEditor).flushLocalChanges === 'function'
+      && typeof (value as YjsEditor).isLocalOrigin === 'function'
+      && typeof (value as YjsEditor).connect === 'function'
+      && typeof (value as YjsEditor).disconnect === 'function'
     )
   },
 
@@ -93,11 +96,13 @@ export const YjsEditor = {
 
   origin(editor: YjsEditor): unknown {
     const origin = ORIGIN.get(editor)
+
     return origin !== undefined ? origin : editor.localOrigin
   },
 
   withOrigin(editor: YjsEditor, origin: unknown, fn: () => void): void {
     const prev = YjsEditor.origin(editor)
+
     ORIGIN.set(editor, origin)
     fn()
     ORIGIN.set(editor, prev)
@@ -105,6 +110,7 @@ export const YjsEditor = {
 
   storePosition(editor: YjsEditor, key: string, point: Point): void {
     const { sharedRoot, positionStorageOrigin: locationStorageOrigin } = editor
+
     assertDocumentAttachment(sharedRoot)
 
     const position = slatePointToRelativePosition(sharedRoot, editor, point)
@@ -116,6 +122,7 @@ export const YjsEditor = {
 
   removeStoredPosition(editor: YjsEditor, key: string): void {
     const { sharedRoot, positionStorageOrigin: locationStorageOrigin } = editor
+
     assertDocumentAttachment(sharedRoot)
 
     sharedRoot.doc.transact(() => {
@@ -125,6 +132,7 @@ export const YjsEditor = {
 
   position(editor: YjsEditor, key: string): Point | null | undefined {
     const position = getStoredPosition(editor.sharedRoot, key)
+
     if (!position) {
       return undefined
     }
@@ -148,7 +156,7 @@ export type WithYjsOptions = {
 }
 
 export function withYjs(sharedRoot: Y.XmlText, options: WithYjsOptions = {}) {
-  return function <T extends Editor>(editor: T): T & YjsEditor {
+  return function <T extends Editor> (editor: T): T & YjsEditor {
     const e = editor as T & YjsEditor
 
     e.sharedRoot = sharedRoot
@@ -177,6 +185,7 @@ export function withYjs(sharedRoot: Y.XmlText, options: WithYjsOptions = {}) {
     }
 
     let autoConnectTimeoutId: ReturnType<typeof setTimeout> | null = null
+
     if (options.autoConnect) {
       autoConnectTimeoutId = setTimeout(() => {
         autoConnectTimeoutId = null
@@ -191,6 +200,7 @@ export function withYjs(sharedRoot: Y.XmlText, options: WithYjsOptions = {}) {
 
       e.sharedRoot.observeDeep(handleYEvents)
       const content = yTextToSlateElement(e.sharedRoot)
+
       e.children = content.children
       CONNECTED.add(e)
 
@@ -220,11 +230,14 @@ export function withYjs(sharedRoot: Y.XmlText, options: WithYjsOptions = {}) {
     e.flushLocalChanges = () => {
       assertDocumentAttachment(e.sharedRoot)
       const localChanges = YjsEditor.localChanges(e)
+
       LOCAL_CHANGES.delete(e)
 
       const txGroups: LocalChange[][] = []
+
       localChanges.forEach(change => {
         const currentGroup = txGroups[txGroups.length - 1]
+
         if (currentGroup && currentGroup[0].origin === change.origin) {
           return currentGroup.push(change)
         }
@@ -245,6 +258,7 @@ export function withYjs(sharedRoot: Y.XmlText, options: WithYjsOptions = {}) {
     }
 
     const { apply, onChange } = e
+
     e.apply = op => {
       if (YjsEditor.connected(e) && YjsEditor.isLocal(e)) {
         YjsEditor.storeLocalChange(e, op)

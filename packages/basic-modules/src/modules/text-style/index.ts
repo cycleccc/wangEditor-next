@@ -4,19 +4,20 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import { renderStyle } from './render-style'
-import { styleToHtml } from './style-to-html'
-import { parseStyleHtml } from './parse-style-html'
+
 import {
   boldMenuConf,
-  underlineMenuConf,
-  italicMenuConf,
-  throughMenuConf,
+  clearStyleMenuConf,
   codeMenuConf,
+  italicMenuConf,
   subMenuConf,
   supMenuConf,
-  clearStyleMenuConf,
+  throughMenuConf,
+  underlineMenuConf,
 } from './menu/index'
+import { parseStyleHtml } from './parse-style-html'
+import { renderStyle } from './render-style'
+import { styleToHtml } from './style-to-html'
 
 const textStyle: Partial<IModuleConf> = {
   renderStyle,

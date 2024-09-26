@@ -4,12 +4,15 @@
  */
 
 import { IDomEditor, IOption, t } from '@wangeditor-next/core'
-import BaseMenu from './BaseMenu'
+
 import { FONT_SIZE_SVG } from '../../../constants/icon-svg'
+import BaseMenu from './BaseMenu'
 
 class FontSizeMenu extends BaseMenu {
   readonly title = t('fontSize.title')
+
   readonly iconSvg = FONT_SIZE_SVG
+
   readonly mark = 'fontSize'
 
   getOptions(editor: IDomEditor): IOption[] {
@@ -31,15 +34,17 @@ class FontSizeMenu extends BaseMenu {
         })
       } else if (typeof size === 'object') {
         const { name, value } = size
+
         options.push({
           text: name,
-          value: value,
+          value,
         })
       }
     })
 
     // 设置 selected
     const curValue = this.getValue(editor)
+
     options.forEach(opt => {
       if (opt.value === curValue) {
         opt.selected = true

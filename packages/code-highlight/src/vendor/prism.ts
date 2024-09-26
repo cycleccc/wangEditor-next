@@ -3,9 +3,6 @@
  * @author wangfupeng
  */
 
-import { Text } from 'slate'
-
-import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-markup'
@@ -25,6 +22,9 @@ import 'prismjs/components/prism-markdown'
 import 'prismjs/components/prism-lua'
 import 'prismjs/components/prism-groovy'
 import 'prismjs/components/prism-abap'
+
+import Prism from 'prismjs'
+import { Text } from 'slate'
 // 语言模块，参考 https://github.com/PrismJS/prism/tree/master/components
 
 // prismjs 的 token 类型汇总
@@ -72,16 +72,16 @@ export const prismTokenTypes = [
 export function getPrismTokenLength(token: any) {
   if (typeof token === 'string') {
     return token.length
-  } else if (typeof token.content === 'string') {
+  } if (typeof token.content === 'string') {
     return token.content.length
-  } else {
-    // 累加 length
-    return token.content.reduce(
-      // @ts-ignore
-      (l, t) => l + getPrismTokenLength(t),
-      0
-    )
   }
+  // 累加 length
+  return token.content.reduce(
+    // @ts-ignore
+    (l, t) => l + getPrismTokenLength(t),
+    0,
+  )
+
 }
 
 /**
@@ -90,10 +90,11 @@ export function getPrismTokenLength(token: any) {
  * @param language 代码语言
  */
 export function getPrismTokens(textNode: Text, language: string) {
-  if (!language) return []
+  if (!language) { return [] }
 
   const langGrammar = Prism.languages[language]
-  if (!langGrammar) return []
+
+  if (!langGrammar) { return [] }
 
   return Prism.tokenize(textNode.text, langGrammar)
 

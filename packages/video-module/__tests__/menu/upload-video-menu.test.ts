@@ -3,10 +3,11 @@
  * @author luochao
  */
 
-import createEditor from '../../../../tests/utils/create-editor'
-import UploadVideoMenu from '../../src/module/menu/UploadVideoMenu'
 import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
+
+import createEditor from '../../../../tests/utils/create-editor'
+import UploadVideoMenu from '../../src/module/menu/UploadVideoMenu'
 import $ from '../../src/utils/dom'
 
 function setEditorSelection(
@@ -14,7 +15,7 @@ function setEditorSelection(
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }

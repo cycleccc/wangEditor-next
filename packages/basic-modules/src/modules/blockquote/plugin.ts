@@ -3,8 +3,10 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Node, Point } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import {
+  Editor, Node, Point, Transforms,
+} from 'slate'
 
 function withBlockquote<T extends IDomEditor>(editor: T): T {
   const { insertBreak, insertText } = editor
@@ -13,17 +15,20 @@ function withBlockquote<T extends IDomEditor>(editor: T): T {
   // 重写 insertBreak - 换行时插入 p
   newEditor.insertBreak = () => {
     const { selection } = newEditor
-    if (selection == null) return insertBreak()
+
+    if (selection == null) { return insertBreak() }
 
     const [nodeEntry] = Editor.nodes(editor, {
       match: n => DomEditor.checkNodeType(n, 'blockquote'),
       universal: true,
     })
-    if (!nodeEntry) return insertBreak()
+
+    if (!nodeEntry) { return insertBreak() }
 
     const quoteElem = nodeEntry[0]
     // 如果正在粘贴中，没有 path 可用，则直接换行退出 blockquote
     // TODO: 粘贴未处理其它富文本一个 block 中套两个 div 用作换行的情况
+
     if (!DomEditor.getParentNode(editor, quoteElem)) {
       insertParagraphBeforeNewline(newEditor)
       return
@@ -34,6 +39,7 @@ function withBlockquote<T extends IDomEditor>(editor: T): T {
     if (Point.equals(quoteEndLocation, selection.focus)) {
       // 光标位于 blockquote 最后
       const str = Node.string(quoteElem)
+
       if (str && str.slice(-1) === '\n') {
         insertParagraphBeforeNewline(newEditor)
         return
@@ -53,6 +59,7 @@ function insertParagraphBeforeNewline(editor: any) {
 
   // 插入一个 paragraph
   const p = { type: 'paragraph', children: [{ text: '' }] }
+
   Transforms.insertNodes(editor, p, { mode: 'highest' })
 }
 

@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import Boot from '../Boot'
 import { IModuleConf } from '@wangeditor-next/core'
+
+import Boot from '../Boot'
 
 function registerModule(module: Partial<IModuleConf>) {
   const {

@@ -1,6 +1,9 @@
 import { CursorState } from '@wangeditor-next/yjs'
-import { RefObject, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import {
+  RefObject, useCallback, useLayoutEffect, useMemo, useRef, useState,
+} from 'react'
 import { BaseRange, NodeMatch, Text } from 'slate'
+
 import { getCursorRange } from '../utils/getCursorRange'
 import {
   CaretPosition,
@@ -42,7 +45,7 @@ export type CursorOverlayData<TCursorData extends Record<string, unknown>> =
 
 export function useRemoteCursorOverlayPositions<
   TCursorData extends Record<string, unknown>,
-  TContainer extends HTMLElement = HTMLDivElement
+  TContainer extends HTMLElement = HTMLDivElement,
 >({
   containerRef,
   shouldGenerateOverlay,
@@ -74,8 +77,7 @@ export function useRemoteCursorOverlayPositions<
     const xOffset = containerRect?.x ?? 0
     const yOffset = containerRect?.y ?? 0
 
-    let overlayPositionsChanged =
-      Object.keys(overlayPositions).length !== Object.keys(cursorStates).length
+    let overlayPositionsChanged = Object.keys(overlayPositions).length !== Object.keys(cursorStates).length
 
     const updated = Object.fromEntries(
       Object.entries(cursorStates).map(([key, state]) => {
@@ -86,6 +88,7 @@ export function useRemoteCursorOverlayPositions<
         }
 
         const cached = overlayPositionCache.current.get(range)
+
         if (cached) {
           return [key, cached]
         }
@@ -95,10 +98,11 @@ export function useRemoteCursorOverlayPositions<
           yOffset,
           shouldGenerateOverlay,
         })
+
         overlayPositionsChanged = true
         overlayPositionCache.current.set(range, overlayPosition)
         return [key, overlayPosition]
-      })
+      }),
     )
 
     if (overlayPositionsChanged) {
@@ -107,19 +111,18 @@ export function useRemoteCursorOverlayPositions<
   })
 
   const overlayData = useMemo<CursorOverlayData<TCursorData>[]>(
-    () =>
-      Object.entries(cursorStates).map(([clientId, state]) => {
-        const range = state.relativeSelection && getCursorRange(editor, state)
-        const overlayPosition = overlayPositions[clientId]
+    () => Object.entries(cursorStates).map(([clientId, state]) => {
+      const range = state.relativeSelection && getCursorRange(editor, state)
+      const overlayPosition = overlayPositions[clientId]
 
-        return {
-          ...state,
-          range,
-          caretPosition: overlayPosition?.caretPosition ?? null,
-          selectionRects: overlayPosition?.selectionRects ?? FROZEN_EMPTY_ARRAY,
-        }
-      }),
-    [cursorStates, editor, overlayPositions]
+      return {
+        ...state,
+        range,
+        caretPosition: overlayPosition?.caretPosition ?? null,
+        selectionRects: overlayPosition?.selectionRects ?? FROZEN_EMPTY_ARRAY,
+      }
+    }),
+    [cursorStates, editor, overlayPositions],
   )
 
   const refresh = useCallback(() => {

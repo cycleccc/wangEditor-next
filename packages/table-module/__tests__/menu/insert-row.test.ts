@@ -1,22 +1,24 @@
-import InsertRow from '../../src/module/menu/InsertRow'
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { ADD_ROW_SVG } from '../../src/constants/svg'
 import locale from '../../src/locale/zh-CN'
-import * as slate from 'slate'
-import * as core from '@wangeditor-next/core'
+import InsertRow from '../../src/module/menu/InsertRow'
 
 function setEditorSelection(
   editor: core.IDomEditor,
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
 describe('Table Module Insert Row Menu', () => {
   test('it should create InsertRow object', () => {
     const insertRowMenu = new InsertRow()
+
     expect(typeof insertRowMenu).toBe('object')
     expect(insertRowMenu.tag).toBe('button')
     expect(insertRowMenu.iconSvg).toBe(ADD_ROW_SVG)
@@ -26,18 +28,21 @@ describe('Table Module Insert Row Menu', () => {
   test('it should get empty string if invoke getValue method', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     expect(insertRowMenu.getValue(editor)).toBe('')
   })
 
   test('it should get falsy value if invoke isActive method', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     expect(insertRowMenu.isActive(editor)).toBeFalsy()
   })
 
   test('isDisabled should get truthy value if editor selection is null', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     editor.selection = null
     expect(insertRowMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -45,6 +50,7 @@ describe('Table Module Insert Row Menu', () => {
   test('isDisabled should get truthy value if editor selection is collapsed', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
@@ -55,6 +61,7 @@ describe('Table Module Insert Row Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is not table cell', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -66,6 +73,7 @@ describe('Table Module Insert Row Menu', () => {
   test('isDisabled should get falsy value if editor current selected node is table cell', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -77,6 +85,7 @@ describe('Table Module Insert Row Menu', () => {
   test('exec should return directly if menu is disabled', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
+
     setEditorSelection(editor, null)
 
     expect(insertRowMenu.exec(editor, '')).toBeUndefined()
@@ -109,8 +118,10 @@ describe('Table Module Insert Row Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     const insertNodesFn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
 
     insertRowMenu.exec(editor, '')
@@ -135,8 +146,10 @@ describe('Table Module Insert Row Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     const insertNodesFn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
 
     expect(insertRowMenu.exec(editor, '')).toBeUndefined()

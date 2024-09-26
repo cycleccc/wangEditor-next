@@ -4,6 +4,7 @@
  */
 
 import { Node } from 'slate'
+
 import { IDomEditor } from '../editor/interface'
 import { DOMElement } from '../utils/dom'
 

@@ -4,8 +4,9 @@
  */
 
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+import { Editor, Text } from 'slate'
+
 import { FORMAT_PAINTER } from '../../../constants/icon-svg'
-import { Text, Editor } from 'slate'
 import { clearAllMarks } from '../helper'
 
 interface FormatPaintAttributes {
@@ -15,8 +16,11 @@ interface FormatPaintAttributes {
 
 class FormatPainter implements IButtonMenu {
   title = t('formatPainter.title')
+
   iconSvg = FORMAT_PAINTER
+
   tag = 'button'
+
   static attrs: FormatPaintAttributes = {
     isSelect: false,
     formatStyle: null,
@@ -36,7 +40,8 @@ class FormatPainter implements IButtonMenu {
 
   setFormatHtml(editor: IDomEditor) {
     const selectionText = editor.getSelectionText()
-    if (!selectionText.length) return
+
+    if (!selectionText.length) { return }
     if (FormatPainter.attrs.formatStyle) {
       clearAllMarks(editor)
       for (const [key, value] of Object.entries(FormatPainter.attrs.formatStyle)) {
@@ -55,6 +60,7 @@ class FormatPainter implements IButtonMenu {
     } else {
       const selectionText = editor.getSelectionText()
       // 判断是否选中文本
+
       if (selectionText.length) {
         FormatPainter.attrs.formatStyle = Editor.marks(editor)
         FormatPainter.attrs.isSelect = true

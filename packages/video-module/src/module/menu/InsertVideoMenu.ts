@@ -3,18 +3,19 @@
  * @author wangfupeng
  */
 
-import { Range, Node } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
   DomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Node, Range } from 'slate'
+
+import { VIDEO_SVG } from '../../constants/svg'
 import $, { Dom7Array, DOMElement } from '../../utils/dom'
 import { genRandomStr } from '../../utils/util'
-import { VIDEO_SVG } from '../../constants/svg'
 import insertVideo from '../helper/insert-video'
 
 /**
@@ -26,13 +27,21 @@ function genDomID(): string {
 
 class InsertVideoMenu implements IModalMenu {
   readonly title = t('videoModule.insertVideo')
+
   readonly iconSvg = VIDEO_SVG
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 320
+
   private $content: Dom7Array | null = null
+
   private readonly srcInputId = genDomID()
+
   private readonly posterInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
   getValue(editor: IDomEditor): string | boolean {
@@ -52,18 +61,21 @@ class InsertVideoMenu implements IModalMenu {
 
   isDisabled(editor: IDomEditor): boolean {
     const { selection } = editor
-    if (selection == null) return true
-    if (!Range.isCollapsed(selection)) return true // 选区非折叠，禁用
+
+    if (selection == null) { return true }
+    if (!Range.isCollapsed(selection)) { return true } // 选区非折叠，禁用
 
     const selectedElems = DomEditor.getSelectedElems(editor)
     const hasVoidOrPre = selectedElems.some(elem => {
       const type = DomEditor.getNodeType(elem)
-      if (type === 'pre') return true
-      if (type === 'list-item') return true
-      if (editor.isVoid(elem)) return true
+
+      if (type === 'pre') { return true }
+      if (type === 'list-item') { return true }
+      if (editor.isVoid(elem)) { return true }
       return false
     })
-    if (hasVoidOrPre) return true // void 或 pre ，禁用
+
+    if (hasVoidOrPre) { return true } // void 或 pre ，禁用
 
     return false
   }
@@ -79,12 +91,12 @@ class InsertVideoMenu implements IModalMenu {
     const [srcContainerElem, inputSrcElem] = genModalInputElems(
       t('videoModule.videoSrc'),
       srcInputId,
-      t('videoModule.videoSrcPlaceHolder')
+      t('videoModule.videoSrcPlaceHolder'),
     )
     const [posterContainerElem, inputPosterElem] = genModalInputElems(
       t('videoModule.videoPoster'),
       posterInputId,
-      t('videoModule.videoPosterPlaceHolder')
+      t('videoModule.videoPosterPlaceHolder'),
     )
     const $inputSrc = $(inputSrcElem)
     const $inputPoster = $(inputPosterElem)
@@ -99,6 +111,7 @@ class InsertVideoMenu implements IModalMenu {
         e.preventDefault()
         const src = $content.find(`#${srcInputId}`).val().trim()
         const poster = $content.find(`#${posterInputId}`).val().trim()
+
         await insertVideo(editor, src, poster)
         editor.hidePanelOrModal() // 隐藏 modal
       })
@@ -108,6 +121,7 @@ class InsertVideoMenu implements IModalMenu {
     }
 
     const $content = this.$content
+
     $content.empty() // 先清空内容
 
     // append inputs and button

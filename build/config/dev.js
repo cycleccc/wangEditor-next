@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
+import postcss from 'rollup-plugin-postcss'
+
 import genCommonConf from './common'
 
 /**
@@ -12,7 +13,9 @@ import genCommonConf from './common'
  * @param {string} format 'umd' 'esm'
  */
 function genDevConf(format) {
-  const { input, output = {}, plugins = [], external } = genCommonConf(format)
+  const {
+    input, output = {}, plugins = [], external,
+  } = genCommonConf(format)
 
   return {
     input,

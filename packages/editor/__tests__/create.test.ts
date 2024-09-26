@@ -3,13 +3,14 @@
  * @author wangfupeng
  */
 
-import { createEditor, createToolbar } from '../../../packages/editor/src/index'
-import { ICreateEditorOption, ICreateToolbarOption } from '../../../packages/editor/src/create'
-import { DOMElement } from '../../../packages/editor/src/utils/dom'
 import Boot from '../../../packages/editor/src/Boot'
+import { ICreateEditorOption, ICreateToolbarOption } from '../../../packages/editor/src/create'
+import { createEditor, createToolbar } from '../../../packages/editor/src/index'
+import { DOMElement } from '../../../packages/editor/src/utils/dom'
 
 function customCreateEditor(config: Partial<ICreateEditorOption> = {}) {
   const editorContainer = document.createElement('div')
+
   document.body.appendChild(editorContainer)
 
   // create editor
@@ -23,6 +24,7 @@ function customCreateEditor(config: Partial<ICreateEditorOption> = {}) {
 
 function customCreateToolbar(config: Partial<ICreateToolbarOption> = {}) {
   const toolbarContainer = document.createElement('div')
+
   document.body.appendChild(toolbarContainer)
 
   // create editor
@@ -41,12 +43,13 @@ function customCreateToolbar(config: Partial<ICreateToolbarOption> = {}) {
 describe('create editor and toolbar', () => {
   test('create editor selector undefind', () => {
     const editor = customCreateEditor()
+
     expect(() => {
       createToolbar({
         editor,
         selector: undefined as any,
       })
-    }).toThrow(`Cannot find 'selector' when create toolbar`)
+    }).toThrow('Cannot find \'selector\' when create toolbar')
   })
 
   test('test new Boot and registerModule', () => {
@@ -72,6 +75,7 @@ describe('create editor and toolbar', () => {
     const editor = customCreateEditor({
       mode: 'simple',
     })
+
     expect(editor.id).not.toBeNull()
   })
 
@@ -86,6 +90,7 @@ describe('create editor and toolbar', () => {
 
   test('create editor can not be called twice with same container', () => {
     const editorContainer = document.createElement('div')
+
     document.body.appendChild(editorContainer)
     // create editor
     customCreateEditor({
@@ -103,6 +108,7 @@ describe('create editor and toolbar', () => {
 
   test('create toolbar with default mode', () => {
     const toolbar = customCreateToolbar()
+
     expect(toolbar.$box).not.toBeNull()
   })
 
@@ -110,6 +116,7 @@ describe('create editor and toolbar', () => {
     const toolbar = customCreateToolbar({
       mode: 'simple',
     })
+
     expect(toolbar.$box).not.toBeNull()
   })
 
@@ -118,13 +125,15 @@ describe('create editor and toolbar', () => {
       mode: 'simple',
     })
     const defaultToolbar = customCreateToolbar()
+
     expect(simpleToolbar.getConfig().toolbarKeys).not.toEqual(
-      defaultToolbar.getConfig().toolbarKeys
+      defaultToolbar.getConfig().toolbarKeys,
     )
   })
 
   test('create toolbar can not be called twice with same container', () => {
     const toolbarContainer = document.createElement('div')
+
     document.body.appendChild(toolbarContainer)
 
     customCreateToolbar({
@@ -145,6 +154,7 @@ describe('create editor and toolbar', () => {
 </p><p><br></p>`
 
     const editor = customCreateEditor({ html })
+
     expect(editor.children).toEqual([
       { type: 'header1', children: [{ text: 'header' }] },
       {

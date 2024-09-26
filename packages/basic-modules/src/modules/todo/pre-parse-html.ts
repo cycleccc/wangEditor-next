@@ -20,10 +20,12 @@ function preParse(elem: DOMElement): DOMElement {
 
   // 1. 把 input 移动到 $container
   const $input = $li.find('input[type]')
+
   $container.append($input)
 
   // 2. 删除之前包裹 input 的 span
   const $spanForInput = $li.children()[0]
+
   $spanForInput.remove()
 
   // 3. 再把剩余的内容移动到 $container （有纯文本内容，不能用 children ，得用 innerHTML）

@@ -3,11 +3,11 @@
  * @author wangfupeng
  */
 
+import { SVG_CHECK_MARK } from '../../constants/svg'
+import { IDomEditor } from '../../editor/interface'
 import $, { Dom7Array } from '../../utils/dom'
 import { IOption } from '../interface'
 import PanelAndModal from './BaseClass'
-import { IDomEditor } from '../../editor/interface'
-import { SVG_CHECK_MARK } from '../../constants/svg'
 
 // “对号”icon
 function gen$SelectedIcon() {
@@ -16,7 +16,8 @@ function gen$SelectedIcon() {
 
 class SelectList extends PanelAndModal {
   type = 'selectList'
-  readonly $elem: Dom7Array = $(`<div class="w-e-select-list"></div>`)
+
+  readonly $elem: Dom7Array = $('<div class="w-e-select-list"></div>')
 
   constructor(editor: IDomEditor, width?: number) {
     super(editor)
@@ -38,11 +39,15 @@ class SelectList extends PanelAndModal {
    */
   renderList(options: IOption[]) {
     const $elem = this.$elem
+
     $elem.empty() // 先清空内容，再重新渲染
 
-    const $list = $(`<ul></ul>`)
+    const $list = $('<ul></ul>')
+
     options.forEach(opt => {
-      const { value, text, selected, styleForRenderMenuList } = opt
+      const {
+        value, text, selected, styleForRenderMenuList,
+      } = opt
       const $li = $(`<li data-value="${value}"></li>`) // 【注意】必须用 <li> 必须用 data-value！！！
 
       if (styleForRenderMenuList) {
@@ -51,6 +56,7 @@ class SelectList extends PanelAndModal {
 
       if (selected) {
         const $selectedIcon = gen$SelectedIcon()
+
         $li.append($selectedIcon)
         $li.addClass('selected')
       }

@@ -3,7 +3,8 @@
  * @author wangfupeng
  */
 
-import { Element as SlateElement, Descendant } from 'slate'
+import { Descendant, Element as SlateElement } from 'slate'
+
 import { IDomEditor } from '../editor/interface'
 
 // ------------------------------------ style to html ------------------------------------

@@ -1,6 +1,6 @@
 import { IDomEditor } from '../../../packages/editor/src'
-import UploadImageMenu from '../src/module/menu/UploadImageMenu'
 import createEditor from '../../../tests/utils/create-editor'
+import UploadImageMenu from '../src/module/menu/UploadImageMenu'
 import uploadImages from '../src/module/upload-images'
 
 let editor: IDomEditor
@@ -41,6 +41,7 @@ describe('Upload image menu', () => {
         },
       },
     })
+
     menu.exec(editor, 'test.jpg')
     expect(jestFn).toBeCalled()
   })

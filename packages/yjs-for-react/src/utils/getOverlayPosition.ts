@@ -1,5 +1,8 @@
-import { BaseRange, Editor, Path, Range, Text } from 'slate'
 import { DomEditor, IDomEditor } from '@wangeditor-next/editor'
+import {
+  BaseRange, Editor, Path, Range, Text,
+} from 'slate'
+
 import { reactEditorToDomRangeSafe } from './react-editor-to-dom-range-safe'
 
 export type SelectionRect = {
@@ -29,10 +32,11 @@ export type GetSelectionRectsOptions = {
 export function getOverlayPosition(
   editor: IDomEditor,
   range: BaseRange,
-  { yOffset, xOffset, shouldGenerateOverlay }: GetSelectionRectsOptions
+  { yOffset, xOffset, shouldGenerateOverlay }: GetSelectionRectsOptions,
 ): OverlayPosition {
   const [start, end] = Range.edges(range)
   const domRange = reactEditorToDomRangeSafe(editor, range)
+
   if (!domRange) {
     return {
       caretPosition: null,
@@ -48,6 +52,7 @@ export function getOverlayPosition(
 
   let caretPosition: CaretPosition | null = null
   const isBackward = Range.isBackward(range)
+
   for (const [node, path] of nodeIterator) {
     const domNode = DomEditor.toDOMNode(editor, node)
 
@@ -55,8 +60,10 @@ export function getOverlayPosition(
     const isEndNode = Path.equals(path, end.path)
 
     let clientRects: DOMRectList | null = null
+
     if (isStartNode || isEndNode) {
       const nodeRange = document.createRange()
+
       nodeRange.selectNode(domNode)
 
       if (isStartNode) {
@@ -72,8 +79,10 @@ export function getOverlayPosition(
     }
 
     const isCaret = isBackward ? isStartNode : isEndNode
+
     for (let i = 0; i < clientRects.length; i++) {
       const clientRect = clientRects.item(i)
+
       if (!clientRect) {
         continue
       }

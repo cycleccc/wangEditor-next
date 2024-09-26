@@ -3,9 +3,10 @@
  * @author wangfupeng
  */
 
-import { Descendant, Text } from 'slate'
-import $, { DOMElement } from '../../utils/dom'
 import { IDomEditor } from '@wangeditor-next/core'
+import { Descendant, Text } from 'slate'
+
+import $, { DOMElement } from '../../utils/dom'
 import {
   Header1Element,
   Header2Element,
@@ -17,9 +18,10 @@ import {
 function genParser<T>(level: number) {
   function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor): T {
     const $elem = $(elem)
+
     children = children.filter(child => {
-      if (Text.isText(child)) return true
-      if (editor.isInline(child)) return true
+      if (Text.isText(child)) { return true }
+      if (editor.isInline(child)) { return true }
       return false
     })
 

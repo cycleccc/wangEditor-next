@@ -3,17 +3,23 @@
  * @author wangfupeng
  */
 
-import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
+import {
+  DomEditor, IButtonMenu, IDomEditor, t,
+} from '@wangeditor-next/core'
+
 import { EXTERNAL_SVG } from '../../../constants/icon-svg'
 import { ImageElement } from '../custom-types'
 
 class ViewImageLink implements IButtonMenu {
   readonly title = t('image.viewLink')
+
   readonly iconSvg = EXTERNAL_SVG
+
   readonly tag = 'button'
 
   getValue(editor: IDomEditor): string | boolean {
     const imageNode = DomEditor.getSelectedNodeByType(editor, 'image')
+
     if (imageNode) {
       // 选区处于 image node
       return (imageNode as ImageElement).href || ''
@@ -27,9 +33,10 @@ class ViewImageLink implements IButtonMenu {
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
 
     const href = this.getValue(editor)
+
     if (href) {
       // 有 image href ，则不禁用
       return false
@@ -38,7 +45,7 @@ class ViewImageLink implements IButtonMenu {
   }
 
   exec(editor: IDomEditor, value: string | boolean) {
-    if (this.isDisabled(editor)) return
+    if (this.isDisabled(editor)) { return }
 
     if (!value || typeof value !== 'string') {
       throw new Error(`View image link failed, image.href is '${value}'`)

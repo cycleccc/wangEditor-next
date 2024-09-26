@@ -5,8 +5,9 @@
 
 import Uppy from '@uppy/core'
 import XHRUpload from '@uppy/xhr-upload'
-import { IUploadConfig } from './interface'
+
 import { addQueryToUrl } from '../utils/util'
+import { IUploadConfig } from './interface'
 
 function createUploader(config: IUploadConfig): Uppy {
   // 获取配置
@@ -42,6 +43,7 @@ function createUploader(config: IUploadConfig): Uppy {
 
   // 是否要追加 url 参数
   let url = server
+
   if (metaWithUrl) {
     url = addQueryToUrl(url, meta)
   }
@@ -67,6 +69,7 @@ function createUploader(config: IUploadConfig): Uppy {
   // 各个 callback
   uppy.on('upload-success', (file, response) => {
     const { body = {} } = response
+
     try {
       // 有用户传入的第三方代码，得用 try catch 包裹
       onSuccess(file, body)
@@ -78,7 +81,7 @@ function createUploader(config: IUploadConfig): Uppy {
 
   uppy.on('progress', progress => {
     // progress 值范围： 0 - 100
-    if (progress < 1) return
+    if (progress < 1) { return }
     onProgress(progress)
   })
 

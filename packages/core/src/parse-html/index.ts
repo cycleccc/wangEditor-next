@@ -3,9 +3,10 @@
  * @author wangfupeng
  */
 
-import { DOMElement } from '../utils/dom'
-import { Element as SlateElement, Descendant } from 'slate'
+import { Descendant, Element as SlateElement } from 'slate'
+
 import { IDomEditor } from '../editor/interface'
+import { DOMElement } from '../utils/dom'
 
 // 常见的 text tag
 export const TEXT_TAGS = [
@@ -77,5 +78,6 @@ export interface IParseElemHtmlConf {
 
 export function registerParseElemHtmlConf(conf: IParseElemHtmlConf) {
   const { selector, parseElemHtml } = conf
+
   PARSE_ELEM_HTML_CONF[selector] = parseElemHtml
 }

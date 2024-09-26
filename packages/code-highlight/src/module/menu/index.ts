@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import SelectLangMenu from './SelectLangMenu'
 import { genCodeLangs } from './config'
+import SelectLangMenu from './SelectLangMenu'
 
 export const selectLangMenuConf = {
   key: 'codeSelectLang',

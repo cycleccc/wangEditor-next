@@ -14,6 +14,6 @@ export const GLOBAL_MENU_CONF: IMenuConfig = {}
  * @param config config
  */
 export function registerGlobalMenuConf(key: string, config?: ISingleMenuConfig) {
-  if (config == null) return
+  if (config == null) { return }
   GLOBAL_MENU_CONF[key] = config
 }

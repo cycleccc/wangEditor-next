@@ -10,8 +10,9 @@ import {
   Range,
   Transforms,
 } from 'slate'
-import { EDITOR_TO_SELECTION, EDITOR_TO_SELECTION_SET } from './weak-maps'
+
 import { isOfType } from '../utils'
+import { EDITOR_TO_SELECTION, EDITOR_TO_SELECTION_SET } from './weak-maps'
 
 export const TableCursor = {
   /** @returns {boolean} `true` if the selection is inside a table, otherwise `false`. */
@@ -27,10 +28,12 @@ export const TableCursor = {
    * Retrieves a matrix representing the selected cells within a table.
    * @returns {NodeEntry<T>[][]} A matrix containing the selected cells.
    */
-  *selection(editor: Editor): Generator<NodeEntry[]> {
+  * selection(editor: Editor): Generator<NodeEntry[]> {
     const matrix = EDITOR_TO_SELECTION.get(editor)
+
     for (let x = 0; matrix && x < matrix.length; x++) {
       const cells: NodeEntry[] = []
+
       for (let y = 0; y < matrix[x].length; y++) {
         const [entry, { ltr: colSpan, ttb }] = matrix[x][y]
 

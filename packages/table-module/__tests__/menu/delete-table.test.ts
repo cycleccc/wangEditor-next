@@ -1,21 +1,23 @@
-import DeleteTable from '../../src/module/menu/DeleteTable'
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import locale from '../../src/locale/zh-CN'
-import * as slate from 'slate'
-import * as core from '@wangeditor-next/core'
+import DeleteTable from '../../src/module/menu/DeleteTable'
 
 function setEditorSelection(
   editor: core.IDomEditor,
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
 describe('Table Module Delete Table Menu', () => {
   test('it should create DeleteTable object', () => {
     const deleteTableMenu = new DeleteTable()
+
     expect(typeof deleteTableMenu).toBe('object')
     expect(deleteTableMenu.tag).toBe('button')
     expect(deleteTableMenu.title).toBe(locale.tableModule.deleteTable)
@@ -24,18 +26,21 @@ describe('Table Module Delete Table Menu', () => {
   test('it should get empty string if invoke getValue method', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
+
     expect(deleteTableMenu.getValue(editor)).toBe('')
   })
 
   test('it should get falsy value if invoke isActive method', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
+
     expect(deleteTableMenu.isActive(editor)).toBeFalsy()
   })
 
   test('isDisabled should get truthy value if editor selection is null', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
+
     editor.selection = null
     expect(deleteTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -43,6 +48,7 @@ describe('Table Module Delete Table Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is not table cell', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
@@ -53,6 +59,7 @@ describe('Table Module Delete Table Menu', () => {
   test('isDisabled should get falsy value if editor current selected node is table cell', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({} as any))
@@ -63,6 +70,7 @@ describe('Table Module Delete Table Menu', () => {
   test('exec should return directly if menu is disabled', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
+
     setEditorSelection(editor, null)
 
     expect(deleteTableMenu.exec(editor, '')).toBeUndefined()

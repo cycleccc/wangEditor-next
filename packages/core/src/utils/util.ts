@@ -13,7 +13,7 @@ type PromiseCallback = (value: void) => void | PromiseLike<void>
  * @param prefix 前缀
  * @returns 随机数字符串
  */
-export function genRandomStr(prefix: string = 'r'): string {
+export function genRandomStr(prefix = 'r'): string {
   return `${prefix}-${nanoid()}`
 }
 
@@ -31,6 +31,7 @@ export function addQueryToUrl(url: string, data: object): string {
 
   // 拼接 query string
   const queryArr: string[] = []
+
   forEach(data, (val, key) => {
     queryArr.push(`${key}=${val}`)
   })
@@ -48,9 +49,9 @@ export function addQueryToUrl(url: string, data: object): string {
   // 返回拼接好的 url
   if (hash) {
     return `${urlWithoutHash}#${hash}`
-  } else {
-    return urlWithoutHash
   }
+  return urlWithoutHash
+
 }
 
 /**

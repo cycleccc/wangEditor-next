@@ -3,12 +3,15 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Node, Selection } from 'slate'
-import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
-import { withContent } from '../../../src/editor/plugins/with-content'
-import { IDomEditor } from '../../../src/editor/interface'
-import { ParseElemHtmlFnType, registerParseElemHtmlConf } from '../../../src'
+import {
+  Editor, Node, Selection, Transforms,
+} from 'slate'
+
 import { parseHtmlConf } from '../../../../basic-modules/src/modules/link/parse-elem-html'
+import { ParseElemHtmlFnType, registerParseElemHtmlConf } from '../../../src'
+import { IDomEditor } from '../../../src/editor/interface'
+import { withContent } from '../../../src/editor/plugins/with-content'
+import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 function createEditor(...args) {
   return withContent(createCoreEditor(...args))
@@ -21,7 +24,7 @@ function setEditorSelection(
   selection: Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
@@ -46,6 +49,7 @@ describe('editor content API', () => {
 
   it('handleTab', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor))
     editor.handleTab()
     expect(editor.getText().length).toBe(4) // 默认 tab 键，输入 4 空格
@@ -57,6 +61,7 @@ describe('editor content API', () => {
     })
 
     const html = editor.getHtml()
+
     expect(html).toBe('<div>hello</div>')
   })
 
@@ -69,6 +74,7 @@ describe('editor content API', () => {
     })
 
     const html = editor.getHtml()
+
     expect(html).toBe('<div>hello</div><div></div>')
   })
 
@@ -80,16 +86,19 @@ describe('editor content API', () => {
       ],
     })
     const text = editor.getText()
+
     expect(text).toBe('hello\nworld')
   })
 
   it('isEmpty', () => {
     const editor1 = createEditor()
+
     expect(editor1.isEmpty()).toBeTruthy()
 
     const editor2 = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     expect(editor2.isEmpty()).toBeFalsy()
   })
 
@@ -97,6 +106,7 @@ describe('editor content API', () => {
     const editor = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
     expect(editor.getSelectionText()).toBe('')
 
@@ -113,10 +123,13 @@ describe('editor content API', () => {
       ],
     })
     const headers = editor.getElemsByTypePrefix('header')
+
     expect(headers.length).toBe(2)
     const pList = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList.length).toBe(1)
     const images = editor.getElemsByTypePrefix('image')
+
     expect(images.length).toBe(0)
   })
 
@@ -129,10 +142,13 @@ describe('editor content API', () => {
       ],
     })
     const headers = editor.getElemsByType('header')
+
     expect(headers.length).toBe(0)
     const pList = editor.getElemsByType('paragraph')
+
     expect(pList.length).toBe(1)
     const images = editor.getElemsByType('image')
+
     expect(images.length).toBe(0)
   })
 
@@ -140,6 +156,7 @@ describe('editor content API', () => {
     const editor = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
     Transforms.move(editor, { distance: 2, unit: 'character' }) // 光标移动 2 个字符
 
@@ -151,6 +168,7 @@ describe('editor content API', () => {
     const editor = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello world' }] }],
     })
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
     Transforms.move(editor, { distance: 1, unit: 'word' }) // 光标移动 1 个单词
 
@@ -162,6 +180,7 @@ describe('editor content API', () => {
     const editor = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
     Transforms.move(editor, { distance: 1, unit: 'character' }) // 光标移动 1 个字符
 
@@ -173,6 +192,7 @@ describe('editor content API', () => {
     const editor = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello world' }] }],
     })
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
     Transforms.move(editor, { distance: 1, unit: 'word' }) // 光标移动 1 个 word
 
@@ -187,6 +207,7 @@ describe('editor content API', () => {
         { type: 'paragraph', children: [{ text: 'world' }] },
       ],
     })
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
 
     editor.deleteForward('line') // 向前删除
@@ -198,6 +219,7 @@ describe('editor content API', () => {
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
     // 选中 'hel'lo
+
     editor.select({
       anchor: {
         path: [0, 0],
@@ -210,6 +232,7 @@ describe('editor content API', () => {
     })
 
     const fragment = editor.getFragment() // 获取选中内容
+
     expect(Node.string(fragment[0])).toBe('hel')
   })
 
@@ -218,6 +241,7 @@ describe('editor content API', () => {
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
     // 选中 'hel'lo
+
     editor.select({
       anchor: {
         path: [0, 0],
@@ -235,15 +259,18 @@ describe('editor content API', () => {
 
   it('insertBreak', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
 
     editor.insertBreak()
     const pList = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList.length).toBe(2)
   })
 
   it('insertText', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
     editor.insertText('xxx')
     expect(editor.getText()).toBe('xxx')
@@ -253,12 +280,14 @@ describe('editor content API', () => {
     const editor = createEditor({
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     editor.clear()
     expect(editor.getText()).toBe('')
   })
 
   it('undo', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
 
     editor.insertText('hello')
@@ -270,6 +299,7 @@ describe('editor content API', () => {
 
   it('redo', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor)) // 光标在开始位置
 
     editor.insertText('hello')
@@ -294,6 +324,7 @@ describe('editor content API', () => {
       setEditorSelection(editor)
 
       let htmlString = '<div>1</div>'
+
       editor.dangerouslyInsertHtml(htmlString)
 
       expect(editor.getText().indexOf('1')).toBeGreaterThan(-1)
@@ -306,7 +337,9 @@ describe('editor content API', () => {
       expect(editor.dangerouslyInsertHtml(htmlString)).toBeUndefined()
       expect(editor.children).toStrictEqual([
         { children: [{ text: '1\n2' }], type: 'paragraph' },
-        { children: [{ text: '3' }], url: '', target: '', type: 'link' },
+        {
+          children: [{ text: '3' }], url: '', target: '', type: 'link',
+        },
       ])
     })
 
@@ -314,6 +347,7 @@ describe('editor content API', () => {
       test(`insert html string with ${tag} element should to be ignore`, () => {
         setEditorSelection(editor)
         const htmlString = `<${tag}></${tag}>`
+
         editor.dangerouslyInsertHtml(htmlString)
 
         expect(editor.getHtml().indexOf(tag)).toBe(-1)
@@ -329,27 +363,33 @@ describe('editor content API', () => {
     })
 
     const parentNode = editor.getParentNode(textNode) as any
+
     expect(parentNode).not.toBeNull()
     expect(parentNode.type).toBe('paragraph')
   })
 
   it('insertNode', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor))
 
     const p = { type: 'paragraph', children: [{ text: 'hello' }] }
+
     editor.insertNode(p)
 
     const pList = editor.getElemsByTypePrefix('paragraph')
+
     expect(pList.length).toBe(2)
   })
 
   describe('setHtml', () => {
     it('setHtml normal', () => {
       const editor = createEditor({ html: '<div>hello</div>' })
+
       editor.select(getStartLocation(editor))
 
       const newHtml = '<div>world</div>'
+
       editor.setHtml(newHtml)
 
       expect(editor.getHtml()).toBe(newHtml)
@@ -360,9 +400,11 @@ describe('editor content API', () => {
         html: '<div>hello</div>',
         autoFocus: false,
       })
+
       expect(editor.isFocused()).toBe(false)
 
       const newHtml = '<div>world</div>'
+
       editor.setHtml(newHtml)
 
       expect(editor.getHtml()).toBe(newHtml)
@@ -371,10 +413,12 @@ describe('editor content API', () => {
 
     it('setHtml disabled', () => {
       const editor = createEditor({ html: '<div>hello</div>' })
+
       editor.disable()
       expect(editor.isDisabled()).toBe(true)
 
       const newHtml = '<div>world</div>'
+
       editor.setHtml(newHtml)
 
       expect(editor.getHtml()).toBe(newHtml)

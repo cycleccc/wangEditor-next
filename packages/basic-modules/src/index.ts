@@ -4,29 +4,28 @@
  */
 
 import './assets/index.less'
-
 // 配置多语言
 import './locale/index'
 
-import wangEditorParagraphModule from './modules/paragraph'
-import wangEditorTextStyleModule from './modules/text-style'
-import wangEditorHeaderModule from './modules/header'
-import wangEditorColorModule from './modules/color'
-import wangEditorLinkModule from './modules/link'
-import wangEditorImageModule from './modules/image'
-import wangEditorTodoModule from './modules/todo'
 import wangEditorBlockQuoteModule from './modules/blockquote'
+import wangEditorCodeBlockModule from './modules/code-block'
+import wangEditorColorModule from './modules/color'
+import wangEditorCommonModule from './modules/common'
+import wangEditorDividerModule from './modules/divider'
 import wangEditorEmotionModule from './modules/emotion'
 import wangEditorFontSizeAndFamilyModule from './modules/font-size-family'
+import wangEditorFormatPainterModule from './modules/format-painter'
+import wangEditorFullScreenModule from './modules/full-screen'
+import wangEditorHeaderModule from './modules/header'
+import wangEditorImageModule from './modules/image'
 import wangEditorIndentModule from './modules/indent'
 import wangEditorJustifyModule from './modules/justify'
 import wangEditorLineHeightModule from './modules/line-height'
+import wangEditorLinkModule from './modules/link'
+import wangEditorParagraphModule from './modules/paragraph'
+import wangEditorTextStyleModule from './modules/text-style'
+import wangEditorTodoModule from './modules/todo'
 import wangEditorUndoRedoModule from './modules/undo-redo'
-import wangEditorDividerModule from './modules/divider'
-import wangEditorCodeBlockModule from './modules/code-block'
-import wangEditorFullScreenModule from './modules/full-screen'
-import wangEditorCommonModule from './modules/common'
-import wangEditorFormatPainterModule from './modules/format-painter'
 
 export default [
   // text style

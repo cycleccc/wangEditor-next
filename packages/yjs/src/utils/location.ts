@@ -1,5 +1,8 @@
-import { Element, Node, Path, Text } from 'slate'
+import {
+  Element, Node, Path, Text,
+} from 'slate'
 import * as Y from 'yjs'
+
 import { YTarget } from '../module/custom-types'
 import { sliceInsertDelta, yTextToInsertDelta } from './delta'
 
@@ -35,11 +38,13 @@ export function getYTarget(yRoot: Y.XmlText, slateRoot: Node, path: Path): YTarg
   const targetLength = getSlateNodeYLength(targetNode)
 
   const targetDelta = sliceInsertDelta(delta, yOffset, targetLength)
+
   if (targetDelta.length > 1) {
     throw new Error("Path doesn't match yText, yTarget spans multiple nodes")
   }
 
   const yTarget = targetDelta[0]?.insert
+
   if (childPath.length > 0) {
     if (!(yTarget instanceof Y.XmlText)) {
       throw new Error("Path doesn't match yText, cannot descent into non-yText")
@@ -61,12 +66,13 @@ export function getYTarget(yRoot: Y.XmlText, slateRoot: Node, path: Path): YTarg
 export function yOffsetToSlateOffsets(
   parent: Element,
   yOffset: number,
-  opts: { assoc?: number; insert?: boolean } = {}
+  opts: { assoc?: number; insert?: boolean } = {},
 ): [number, number] {
   const { assoc = 0, insert = false } = opts
 
   let currentOffset = 0
   let lastNonEmptyPathOffset = 0
+
   for (let pathOffset = 0; pathOffset < parent.children.length; pathOffset++) {
     const child = parent.children[pathOffset]
     const nodeLength = Text.isText(child) ? child.text.length : 1
@@ -76,6 +82,7 @@ export function yOffsetToSlateOffsets(
     }
 
     const endOffset = currentOffset + nodeLength
+
     if (nodeLength > 0 && (assoc >= 0 ? endOffset > yOffset : endOffset >= yOffset)) {
       return [pathOffset, yOffset - currentOffset]
     }
@@ -93,11 +100,13 @@ export function yOffsetToSlateOffsets(
 
   const child = parent.children[lastNonEmptyPathOffset]
   const textOffset = Text.isText(child) ? child.text.length : 1
+
   return [lastNonEmptyPathOffset, textOffset]
 }
 
 export function getSlatePath(sharedRoot: Y.XmlText, slateRoot: Node, yText: Y.XmlText): Path {
   const yNodePath = [yText]
+
   while (yNodePath[0] !== sharedRoot) {
     const { parent: yParent } = yNodePath[0]
 
@@ -117,14 +126,17 @@ export function getSlatePath(sharedRoot: Y.XmlText, slateRoot: Node, yText: Y.Xm
   }
 
   let slateParent = slateRoot
+
   return yNodePath.reduce<Path>((path, yParent, idx) => {
     const yChild = yNodePath[idx + 1]
+
     if (!yChild) {
       return path
     }
 
     let yOffset = 0
     const currentDelta = yTextToInsertDelta(yParent)
+
     for (const element of currentDelta) {
       if (element.insert === yChild) {
         break
@@ -138,6 +150,7 @@ export function getSlatePath(sharedRoot: Y.XmlText, slateRoot: Node, yText: Y.Xm
     }
 
     const [pathOffset] = yOffsetToSlateOffsets(slateParent, yOffset)
+
     slateParent = slateParent.children[pathOffset]
     return path.concat(pathOffset)
   }, [])

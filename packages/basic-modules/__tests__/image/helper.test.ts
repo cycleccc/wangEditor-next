@@ -3,13 +3,14 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms } from 'slate'
 import { DomEditor } from '@wangeditor-next/core'
+import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import {
   insertImageNode,
-  updateImageNode,
   isInsertImageMenuDisabled,
+  updateImageNode,
 } from '../../src/modules/image/helper'
 
 describe('image helper', () => {
@@ -34,7 +35,8 @@ describe('image helper', () => {
   }
 
   const editorConfig = { MENU_CONF: {} }
-  editorConfig.MENU_CONF['insertImage'] = {
+
+  editorConfig.MENU_CONF.insertImage = {
     checkImage: customCheckImageFn,
   }
 
@@ -57,20 +59,24 @@ describe('image helper', () => {
     await insertImageNode(editor, emptySrc, alt, href)
     await insertImageNode(editor, inValidSrc, alt, href)
     const images = editor.getElemsByTypePrefix('image')
+
     expect(images.length).toBe(2)
   })
 
   it('parse image src', async () => {
     const editorConfig = { MENU_CONF: {} }
-    editorConfig.MENU_CONF['insertImage'] = {
+
+    editorConfig.MENU_CONF.insertImage = {
       parseImageSrc: false,
     }
     const editor = createEditor({
       config: editorConfig,
     })
+
     editor.select(startLocation)
     await insertImageNode(editor, src, alt, href)
     const images = editor.getElemsByTypePrefix('image')
+
     expect(images.length).toBe(1)
   })
 
@@ -85,6 +91,7 @@ describe('image helper', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -94,9 +101,11 @@ describe('image helper', () => {
     const newSrc = 'https://www.baidu.com/logo.png'
     const newAlt = 'baidu'
     const newHref = 'https://www.baidu.com/'
+
     await updateImageNode(editor, newSrc, newAlt, newHref, {}) // 更新图片信息
 
     const imageNode = DomEditor.getSelectedNodeByType(editor, 'image')
+
     expect(imageNode).not.toBeNull()
   })
 

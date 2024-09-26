@@ -3,14 +3,15 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Range } from 'slate'
+import { Editor, Range, Transforms } from 'slate'
+
 import { DomEditor } from '../../editor/dom-editor'
 import { IDomEditor } from '../../editor/interface'
-import TextArea from '../TextArea'
-import { hasEditableTarget } from '../helpers'
 import { DOMStaticRange, isDataTransfer } from '../../utils/dom'
 import { HAS_BEFORE_INPUT_SUPPORT } from '../../utils/ua'
 import { EDITOR_TO_CAN_PASTE } from '../../utils/weak-maps'
+import { hasEditableTarget } from '../helpers'
+import TextArea from '../TextArea'
 
 // 补充 beforeInput event 的属性
 interface BeforeInputEventType {
@@ -25,9 +26,9 @@ function handleBeforeInput(e: Event, textarea: TextArea, editor: IDomEditor) {
   const event = e as Event & BeforeInputEventType
   const { readOnly } = editor.getConfig()
 
-  if (!HAS_BEFORE_INPUT_SUPPORT) return // 有些浏览器完全不支持 beforeInput ，会用 keypress 和 keydown 兼容
-  if (readOnly) return
-  if (!hasEditableTarget(editor, event.target)) return
+  if (!HAS_BEFORE_INPUT_SUPPORT) { return } // 有些浏览器完全不支持 beforeInput ，会用 keypress 和 keydown 兼容
+  if (readOnly) { return }
+  if (!hasEditableTarget(editor, event.target)) { return }
 
   const { selection } = editor
   const { inputType: type } = event
@@ -53,6 +54,7 @@ function handleBeforeInput(e: Event, textarea: TextArea, editor: IDomEditor) {
         exactMatch: false,
         suppressThrow: false,
       })
+
       if (!selection || !Range.equals(selection, range)) {
         Transforms.select(editor, range)
       }
@@ -63,6 +65,7 @@ function handleBeforeInput(e: Event, textarea: TextArea, editor: IDomEditor) {
   // a delete forward/backward command it should delete the selection.
   if (selection && Range.isExpanded(selection) && type.startsWith('delete')) {
     const direction = type.endsWith('Backward') ? 'backward' : 'forward'
+
     Editor.deleteFragment(editor, { direction })
     return
   }
@@ -135,7 +138,7 @@ function handleBeforeInput(e: Event, textarea: TextArea, editor: IDomEditor) {
     case 'insertReplacementText':
     case 'insertText': {
       if (type === 'insertFromPaste') {
-        if (!EDITOR_TO_CAN_PASTE.get(editor)) break // 不可默认粘贴
+        if (!EDITOR_TO_CAN_PASTE.get(editor)) { break } // 不可默认粘贴
       }
 
       if (isDataTransfer(data)) {

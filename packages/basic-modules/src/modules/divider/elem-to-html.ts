@@ -6,7 +6,7 @@
 import { Element } from 'slate'
 
 function dividerToHtml(elem: Element, childrenHtml: string): string {
-  return `<hr/>`
+  return '<hr/>'
 }
 
 export const dividerToHtmlConf = {

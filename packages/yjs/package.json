@@ -1,6 +1,7 @@
 {
   "name": "@wangeditor-next/yjs",
   "version": "0.1.2",
+  "type": "module",
   "author": "cycleccc <2991205548@qq.com>",
   "contributors": [],
   "description": "Yjs binding for wangeditor-next.",
@@ -43,7 +44,7 @@
     "test-c": "jest --coverage",
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js",
     "dev-watch": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
-    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
+    "build": "rollup -c",
     "dev-size-stats": "cross-env NODE_ENV=development:size_stats rollup -c rollup.config.js",
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },

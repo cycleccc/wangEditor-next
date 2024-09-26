@@ -4,11 +4,12 @@
  */
 
 import { Editor, Range as SlateRange } from 'slate'
+
 import { DomEditor } from '../../src/editor/dom-editor'
 import { IDomEditor } from '../../src/editor/interface'
-import createCoreEditor from '../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 import { Key } from '../../src/utils/key'
 import { NODE_TO_KEY } from '../../src/utils/weak-maps'
+import createCoreEditor from '../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 let editor: IDomEditor
 
@@ -83,6 +84,7 @@ describe('Core DomEditor', () => {
     expect(NODE_TO_KEY.get(node)).toBeUndefined()
 
     const newKey = DomEditor.findKey(editor, node)
+
     expect(NODE_TO_KEY.get(node)).toEqual(newKey)
   })
 
@@ -105,11 +107,13 @@ describe('Core DomEditor', () => {
     const textNode = p.children[0]
 
     const path = DomEditor.findPath(null, textNode)
+
     expect(path).toEqual([0, 0])
   })
 
   test('findDocumentOrShadowRoot', () => {
     const doc = DomEditor.findDocumentOrShadowRoot(editor)
+
     expect(doc).toBe(document)
   })
 
@@ -128,6 +132,7 @@ describe('Core DomEditor', () => {
     const textNode = p.children[0]
 
     const parents = DomEditor.getParentsNodes(editor, textNode)
+
     expect(parents[0]).toBe(p)
     expect(parents[1]).toBe(editor)
   })
@@ -138,6 +143,7 @@ describe('Core DomEditor', () => {
     const textNode = p.children[0]
 
     const topNode = DomEditor.getTopNode(editor, textNode)
+
     expect(topNode).toBe(p)
   })
 
@@ -147,6 +153,7 @@ describe('Core DomEditor', () => {
     const key = DomEditor.findKey(editor, p)
 
     const domNode = DomEditor.toDOMNode(editor, p)
+
     expect(domNode.tagName).toBe('DIV')
     expect(domNode.id).toBe(`w-e-element-${key.id}`)
   })
@@ -156,6 +163,7 @@ describe('Core DomEditor', () => {
     const domNode = DomEditor.toDOMNode(editor, p)
 
     const res = DomEditor.hasDOMNode(editor, domNode)
+
     expect(res).toBeTruthy()
   })
 
@@ -170,6 +178,7 @@ describe('Core DomEditor', () => {
     const domNode = DomEditor.toDOMNode(editor, p)
 
     const slateNode = DomEditor.toSlateNode(null, domNode)
+
     expect(slateNode).toBe(p)
   })
 
@@ -187,6 +196,7 @@ describe('Core DomEditor', () => {
     editor.selectAll()
 
     const res = DomEditor.hasRange(editor, editor.selection as SlateRange)
+
     expect(res).toBeTruthy()
 
     // expect(1).toBe(1)
@@ -203,6 +213,7 @@ describe('Core DomEditor', () => {
 
   test('checkNodeType', () => {
     const p = editor.children[0]
+
     expect(DomEditor.checkNodeType(p, 'paragraph')).toBeTruthy()
   })
 
@@ -222,6 +233,7 @@ describe('Core DomEditor', () => {
   test('getSelectedNodeByType', () => {
     const p = editor.children[0]
     const selectedNode = DomEditor.getSelectedNodeByType(editor, 'paragraph')
+
     expect(selectedNode).toBe(p)
   })
 
@@ -231,6 +243,7 @@ describe('Core DomEditor', () => {
     const textNode = p.children[0]
 
     const selectedTextNode = DomEditor.getSelectedTextNode(editor)
+
     expect(selectedTextNode).toBe(textNode)
   })
 

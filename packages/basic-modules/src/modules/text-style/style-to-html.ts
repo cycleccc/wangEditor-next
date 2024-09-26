@@ -3,11 +3,12 @@
  * @author wangfupeng
  */
 
-import { Text, Descendant } from 'slate'
-import { StyledText } from './custom-types'
-import $, { getOuterHTML, getTagName, isPlainText } from '../../utils/dom'
+import { Descendant, Text } from 'slate'
 
-//【注意】color bgColor fontSize fontFamily 在另外的菜单
+import $, { getOuterHTML, getTagName, isPlainText } from '../../utils/dom'
+import { StyledText } from './custom-types'
+
+// 【注意】color bgColor fontSize fontFamily 在另外的菜单
 
 /**
  * 生成加了样式的 text html
@@ -16,14 +17,17 @@ import $, { getOuterHTML, getTagName, isPlainText } from '../../utils/dom'
  */
 function genStyledHtml(textNode: Descendant, html: string): string {
   let styledHtml = html
-  const { bold, italic, underline, code, through, sub, sup } = textNode as StyledText
-  if (bold) styledHtml = `<strong>${styledHtml}</strong>`
-  if (code) styledHtml = `<code>${styledHtml}</code>`
-  if (italic) styledHtml = `<em>${styledHtml}</em>`
-  if (underline) styledHtml = `<u>${styledHtml}</u>`
-  if (through) styledHtml = `<s>${styledHtml}</s>`
-  if (sub) styledHtml = `<sub>${styledHtml}</sub>`
-  if (sup) styledHtml = `<sup>${styledHtml}</sup>`
+  const {
+    bold, italic, underline, code, through, sub, sup,
+  } = textNode as StyledText
+
+  if (bold) { styledHtml = `<strong>${styledHtml}</strong>` }
+  if (code) { styledHtml = `<code>${styledHtml}</code>` }
+  if (italic) { styledHtml = `<em>${styledHtml}</em>` }
+  if (underline) { styledHtml = `<u>${styledHtml}</u>` }
+  if (through) { styledHtml = `<s>${styledHtml}</s>` }
+  if (sub) { styledHtml = `<sub>${styledHtml}</sub>` }
+  if (sup) { styledHtml = `<sup>${styledHtml}</sup>` }
   return styledHtml
 }
 
@@ -34,7 +38,7 @@ function genStyledHtml(textNode: Descendant, html: string): string {
  * @returns styled html
  */
 export function styleToHtml(textNode: Descendant, textHtml: string): string {
-  if (!Text.isText(textNode)) return textHtml
+  if (!Text.isText(textNode)) { return textHtml }
 
   if (isPlainText(textHtml)) {
     // textHtml 是纯文本，而不是 html tag
@@ -45,6 +49,7 @@ export function styleToHtml(textNode: Descendant, textHtml: string): string {
   const $text = $(textHtml)
 
   let innerHtml = $text.html()
+
   innerHtml = genStyledHtml(textNode, innerHtml)
   $text.html(innerHtml)
   return getOuterHTML($text)

@@ -3,9 +3,10 @@
  * @author wangfupeng
  */
 
+import nock from 'nock'
+
 import createUploader from '../../src/upload/createUploader'
 import { IUploadConfig } from '../../src/upload/interface'
-import nock from 'nock'
 
 const server = 'https://fake-endpoint.wangeditor-v5.com'
 
@@ -22,6 +23,7 @@ describe('uploader', () => {
       onFailed: (file, res) => {},
       onError: (file, err, res) => {},
     })
+
     expect(uppy).not.toBeNull()
   })
 
@@ -99,9 +101,10 @@ describe('uploader', () => {
       .reply(200, {})
 
     const fn = jest.fn()
+
     console.error = fn
 
-    let uppy = createUploader({
+    const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
@@ -206,6 +209,7 @@ describe('uploader', () => {
       .reply(400, {})
 
     const fn = jest.fn()
+
     console.error = fn
     const uppy = createUploader({
       server,
@@ -240,6 +244,7 @@ describe('uploader', () => {
       .reply(400, {})
 
     const fn = jest.fn()
+
     console.error = fn
     const uppy = createUploader({
       server,
@@ -268,6 +273,7 @@ describe('uploader', () => {
   test('it should invoke error callback if file size over max size', () => {
     const fn = jest.fn()
     const consoleFn = jest.fn()
+
     console.error = consoleFn
     let uppy = createUploader({
       server,

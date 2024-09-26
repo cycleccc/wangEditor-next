@@ -4,20 +4,21 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import withImage from './plugin'
-import { renderImageConf } from './render-elem'
+
 import { imageToHtmlConf } from './elem-to-html'
-import { parseHtmlConf } from './parse-elem-html'
 import {
-  insertImageMenuConf,
   deleteImageMenuConf,
   editImageMenuConf,
-  viewImageLinkMenuConf,
+  EditorImageSizeMenuConf,
   imageWidth30MenuConf,
   imageWidth50MenuConf,
   imageWidth100MenuConf,
-  EditorImageSizeMenuConf,
+  insertImageMenuConf,
+  viewImageLinkMenuConf,
 } from './menu/index'
+import { parseHtmlConf } from './parse-elem-html'
+import withImage from './plugin'
+import { renderImageConf } from './render-elem'
 
 const image: Partial<IModuleConf> = {
   renderElems: [renderImageConf],

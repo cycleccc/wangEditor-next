@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import Header1ButtonMenu from '../../../src/modules/header/menu/Header1ButtonMenu'
 import Header2ButtonMenu from '../../../src/modules/header/menu/Header2ButtonMenu'
@@ -37,10 +38,12 @@ describe('header menu', () => {
 
       menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
       const headers1 = editor.getElemsByTypePrefix('header1')
+
       expect(headers1.length).toBe(1)
 
       menu.exec(editor, 'header1') // 取消 header（ header1 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header1')
+
       expect(headers2.length).toBe(0)
     })
   })
@@ -53,10 +56,12 @@ describe('header menu', () => {
 
       menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
       const headers1 = editor.getElemsByTypePrefix('header2')
+
       expect(headers1.length).toBe(1)
 
       menu.exec(editor, 'header2') // 取消 header（ header2 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header2')
+
       expect(headers2.length).toBe(0)
     })
   })
@@ -69,10 +74,12 @@ describe('header menu', () => {
 
       menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
       const headers1 = editor.getElemsByTypePrefix('header3')
+
       expect(headers1.length).toBe(1)
 
       menu.exec(editor, 'header3') // 取消 header（ header3 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header3')
+
       expect(headers2.length).toBe(0)
     })
   })
@@ -85,10 +92,12 @@ describe('header menu', () => {
 
       menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
       const headers1 = editor.getElemsByTypePrefix('header4')
+
       expect(headers1.length).toBe(1)
 
       menu.exec(editor, 'header4') // 取消 header（ header4 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header4')
+
       expect(headers2.length).toBe(0)
     })
   })
@@ -101,10 +110,12 @@ describe('header menu', () => {
 
       menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
       const headers1 = editor.getElemsByTypePrefix('header5')
+
       expect(headers1.length).toBe(1)
 
       menu.exec(editor, 'header5') // 取消 header（ header5 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header5')
+
       expect(headers2.length).toBe(0)
     })
   })
@@ -116,10 +127,12 @@ describe('header menu', () => {
 
       menu.exec(editor, 'paragraph') // 设置 header （ paragraph 是当前选中的 node type ）
       const headers1 = editor.getElemsByTypePrefix('header6')
+
       expect(headers1.length).toBe(1)
 
       menu.exec(editor, 'header6') // 取消 header（ header6 是当前选中的 node type ）
       const headers2 = editor.getElemsByTypePrefix('header6')
+
       expect(headers2.length).toBe(0)
     })
   })

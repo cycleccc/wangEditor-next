@@ -3,15 +3,22 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Range, Path } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
+import {
+  DomEditor, IButtonMenu, IDomEditor, t,
+} from '@wangeditor-next/core'
+import {
+  Editor, Path, Range, Transforms,
+} from 'slate'
+
 import { ADD_ROW_SVG } from '../../constants/svg'
-import { TableRowElement, TableCellElement } from '../custom-types'
 import { filledMatrix } from '../../utils'
+import { TableCellElement, TableRowElement } from '../custom-types'
 
 class InsertRow implements IButtonMenu {
   readonly title = t('tableModule.insertRow')
+
   readonly iconSvg = ADD_ROW_SVG
+
   readonly tag = 'button'
 
   getValue(editor: IDomEditor): string | boolean {
@@ -26,10 +33,12 @@ class InsertRow implements IButtonMenu {
 
   isDisabled(editor: IDomEditor): boolean {
     const { selection } = editor
-    if (selection == null) return true
-    if (!Range.isCollapsed(selection)) return true
+
+    if (selection == null) { return true }
+    if (!Range.isCollapsed(selection)) { return true }
 
     const tableNode = DomEditor.getSelectedNodeByType(editor, 'table')
+
     if (tableNode == null) {
       // 选区未处于 table cell node ，则禁用
       return true
@@ -38,7 +47,7 @@ class InsertRow implements IButtonMenu {
   }
 
   exec(editor: IDomEditor, value: string | boolean) {
-    if (this.isDisabled(editor)) return
+    if (this.isDisabled(editor)) { return }
 
     const [cellEntry] = Editor.nodes(editor, {
       match: n => DomEditor.checkNodeType(n, 'table-cell'),
@@ -49,15 +58,18 @@ class InsertRow implements IButtonMenu {
     // 获取 cell length ，即多少列
     const rowNode = DomEditor.getParentNode(editor, cellNode)
     const cellsLength = rowNode?.children.length || 0
-    if (cellsLength === 0) return
+
+    if (cellsLength === 0) { return }
 
     const matrix = filledMatrix(editor)
     // 向下插入行为，先找到
     // 当前选区所在的 tr 索引
     let trIndex = 0
+
     outer: for (let x = 0; x < matrix.length; x++) {
       for (let y = 0; y < matrix[x].length; y++) {
         const [[, path]] = matrix[x][y]
+
         if (!Path.equals(cellPath, path)) {
           continue
         }
@@ -77,7 +89,7 @@ class InsertRow implements IButtonMenu {
 
         // 向上找到 1 元素为止
         if (ttb > 1 || btt > 1) {
-          if (btt == 1) continue
+          if (btt == 1) { continue }
           const [[element, path]] = matrix[trIndex - (ttb - 1)][y]
           const rowSpan = element.rowSpan || 1
 
@@ -88,7 +100,7 @@ class InsertRow implements IButtonMenu {
               {
                 rowSpan: rowSpan + 1,
               },
-              { at: path }
+              { at: path },
             )
           }
         }
@@ -96,18 +108,21 @@ class InsertRow implements IButtonMenu {
 
       // 拼接新的 row
       const newRow: TableRowElement = { type: 'table-row', children: [] }
+
       for (let i = 0; i < cellsLength; i++) {
         const cell: TableCellElement = {
           type: 'table-cell',
           hidden: exitMerge.includes(i),
           children: [{ text: '' }],
         }
+
         newRow.children.push(cell)
       }
 
       // 插入 row
       const rowPath = Path.parent(cellPath) // 获取 tr 的 path
       const newRowPath = Path.next(rowPath)
+
       Transforms.insertNodes(editor, newRow, { at: newRowPath })
     })
   }

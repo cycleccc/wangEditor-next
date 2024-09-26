@@ -25,7 +25,7 @@ if (typeof global === 'object') {
     }
     global.btoa = () => {}
     global.crypto = {
-      getRandomValues: function (buffer: any) {
+      getRandomValues(buffer: any) {
         return nodeCrypto.randomFillSync(buffer)
       },
     }

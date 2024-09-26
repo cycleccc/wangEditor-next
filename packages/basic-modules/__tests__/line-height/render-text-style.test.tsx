@@ -4,6 +4,7 @@
  */
 
 import { jsx } from 'snabbdom'
+
 import { renderStyle } from '../../src/modules/line-height/render-style'
 
 describe('line-height render-text-style', () => {
@@ -13,6 +14,7 @@ describe('line-height render-text-style', () => {
     // @ts-ignore 忽略 vnode 格式检查
     const newVnode = renderStyle(elem, vnode)
     // @ts-ignore 忽略 vnode 格式检查
+
     expect(newVnode.data.style.lineHeight).toBe('1.5')
   })
 })

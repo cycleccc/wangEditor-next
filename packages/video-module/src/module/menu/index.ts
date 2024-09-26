@@ -3,12 +3,12 @@
  * @author wangfupeng
  */
 
+import { genInsertVideoMenuConfig, genUploadVideoMenuConfig } from './config'
+import EditorVideoSizeMenu from './EditVideoSizeMenu'
+import EditorVideoSrcMenu from './EditVideoSrcMenu'
 import InsertVideoMenu from './InsertVideoMenu'
 // import DeleteVideoMenu from './DeleteVideoMenu'
 import UploadVideoMenu from './UploadVideoMenu'
-import EditorVideoSizeMenu from './EditVideoSizeMenu'
-import EditorVideoSrcMenu from './EditVideoSrcMenu'
-import { genInsertVideoMenuConfig, genUploadVideoMenuConfig } from './config'
 
 export const insertVideoMenuConf = {
   key: 'insertVideo',

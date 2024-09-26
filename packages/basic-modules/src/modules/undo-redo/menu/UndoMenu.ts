@@ -4,11 +4,14 @@
  */
 
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+
 import { UNDO_SVG } from '../../../constants/icon-svg'
 
 class UndoMenu implements IButtonMenu {
   title = t('undo.undo')
+
   iconSvg = UNDO_SVG
+
   tag = 'button'
 
   getValue(editor: IDomEditor): string | boolean {
@@ -20,7 +23,7 @@ class UndoMenu implements IButtonMenu {
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
     return false
   }
 

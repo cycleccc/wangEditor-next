@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Editor, Range, Transforms } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
-import { LinkElement } from './custom-types'
+
 import { replaceSymbols } from '../../utils/util'
+import { LinkElement } from './custom-types'
 
 /**
  * 校验 link
@@ -19,11 +20,13 @@ async function check(
   menuKey: string,
   editor: IDomEditor,
   text: string,
-  url: string
+  url: string,
 ): Promise<boolean> {
   const { checkLink } = editor.getMenuConfig(menuKey)
+
   if (checkLink) {
     const res = await checkLink(text, url)
+
     if (typeof res === 'string') {
       // 检验未通过，提示信息
       editor.alert(res, 'error')
@@ -47,23 +50,27 @@ async function check(
  */
 async function parse(menuKey: string, editor: IDomEditor, url: string): Promise<string> {
   const { parseLinkUrl } = editor.getMenuConfig(menuKey)
+
   if (parseLinkUrl) {
     const newUrl = await parseLinkUrl(url)
+
     return newUrl
   }
   return url
 }
 
 export function isMenuDisabled(editor: IDomEditor): boolean {
-  if (editor.selection == null) return true
+  if (editor.selection == null) { return true }
 
   const selectedElems = DomEditor.getSelectedElems(editor)
   const notMatch = selectedElems.some(elem => {
     const { type } = elem
-    if (editor.isVoid(elem)) return true
-    if (['pre', 'code', 'link'].includes(type)) return true
+
+    if (editor.isVoid(elem)) { return true }
+    if (['pre', 'code', 'link'].includes(type)) { return true }
   })
-  if (notMatch) return true // disabled
+
+  if (notMatch) { return true } // disabled
   return false // enable
 }
 
@@ -78,6 +85,7 @@ function genLinkNode(url: string, text?: string): LinkElement {
     url: replaceSymbols(url),
     children: text ? [{ text }] : [],
   }
+
   return linkNode
 }
 
@@ -88,29 +96,32 @@ function genLinkNode(url: string, text?: string): LinkElement {
  * @param url url
  */
 export async function insertLink(editor: IDomEditor, text: string, url: string) {
-  if (!url) return
-  if (!text) text = url // 无 text 则用 url 代替
+  if (!url) { return }
+  if (!text) { text = url } // 无 text 则用 url 代替
 
   // 还原选区
   editor.restoreSelection()
 
-  if (isMenuDisabled(editor)) return
+  if (isMenuDisabled(editor)) { return }
 
   // 校验
   const checkRes = await check('insertLink', editor, text, url)
-  if (!checkRes) return // 校验未通过
+
+  if (!checkRes) { return } // 校验未通过
 
   // 转换 url
   const parsedUrl = await parse('insertLink', editor, url)
 
   // 判断选区是否折叠
   const { selection } = editor
-  if (selection == null) return
+
+  if (selection == null) { return }
   const isCollapsed = Range.isCollapsed(selection)
 
   // 执行：插入链接
   if (isCollapsed) {
     const leftLength = DomEditor.getLeftLengthOfMaxLength(editor)
+
     if (leftLength <= 0) {
       // 已经触发 maxLength ，不再输入文字
       return
@@ -125,6 +136,7 @@ export async function insertLink(editor: IDomEditor, text: string, url: string) 
     }
 
     const linkNode = genLinkNode(parsedUrl, text)
+
     Transforms.insertNodes(editor, linkNode)
 
     // https://github.com/cycleccc/wangEditor/issues/332
@@ -132,10 +144,12 @@ export async function insertLink(editor: IDomEditor, text: string, url: string) 
     editor.insertFragment([{ text: ' ' }])
   } else {
     const selectedText = Editor.string(editor, selection) // 选中的文字
+
     if (selectedText !== text) {
       // 选中的文字和输入的文字不一样，则删掉文字，插入链接
 
       const leftLength = DomEditor.getLeftLengthOfMaxLength(editor)
+
       if (leftLength <= 0) {
         // 已经触发 maxLength ，不再输入文字
         return
@@ -147,10 +161,12 @@ export async function insertLink(editor: IDomEditor, text: string, url: string) 
 
       editor.deleteFragment()
       const linkNode = genLinkNode(parsedUrl, text)
+
       Transforms.insertNodes(editor, linkNode)
     } else {
       // 选中的文字和输入的文字一样，则只包裹链接即可
       const linkNode = genLinkNode(parsedUrl)
+
       Transforms.wrapNodes(editor, linkNode, { split: true })
       Transforms.collapse(editor, { edge: 'end' })
     }
@@ -164,17 +180,19 @@ export async function insertLink(editor: IDomEditor, text: string, url: string) 
  * @param url link url
  */
 export async function updateLink(editor: IDomEditor, text: string, url: string) {
-  if (!url) return
+  if (!url) { return }
 
   // 校验
   const checkRes = await check('editLink', editor, text, url)
-  if (!checkRes) return // 校验未通过
+
+  if (!checkRes) { return } // 校验未通过
 
   // 转换 url
   const parsedUrl = await parse('editLink', editor, url)
 
   // 修改链接
   const props: Partial<LinkElement> = { url: replaceSymbols(parsedUrl) }
+
   Transforms.setNodes(editor, props, {
     match: n => DomEditor.checkNodeType(n, 'link'),
   })

@@ -4,6 +4,7 @@
  */
 
 import { Element } from 'slate'
+
 import { CodeElement } from '../custom-types'
 
 function codeToHtml(elem: Element, childrenHtml: string): string {

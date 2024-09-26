@@ -21,6 +21,7 @@ function preParse(elem: DOMElement): DOMElement {
   if (/\dpx/.test(paddingLeft)) {
     // px 单位
     const num = parseInt(paddingLeft, 10)
+
     if (num % 32 === 0) {
       // 如 32px 64px ，V5 早期格式
       $elem.css('text-indent', '2em')

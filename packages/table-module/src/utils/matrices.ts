@@ -1,11 +1,12 @@
 import { Editor, Location, NodeEntry } from 'slate'
-import { NodeEntryWithContext, CellElement } from './types'
+
 import { isOfType } from './is-of-type'
+import { CellElement, NodeEntryWithContext } from './types'
 
 /** Generates a matrix for each table section (`thead`, `tbody`, `tfoot`) */
 export function* matrices(
   editor: Editor,
-  options: { at?: Location } = {}
+  options: { at?: Location } = {},
 ): Generator<NodeEntry<CellElement>[][]> {
   const [table] = Editor.nodes(editor, {
     match: isOfType(editor, 'table'),
@@ -43,7 +44,7 @@ export function* matrices(
 
 export function filledMatrix(
   editor: Editor,
-  options: { at?: Location } = {}
+  options: { at?: Location } = {},
 ): NodeEntryWithContext[][] {
   const filled: NodeEntryWithContext[][] = []
 

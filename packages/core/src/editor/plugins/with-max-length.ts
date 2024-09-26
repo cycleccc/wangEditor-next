@@ -3,26 +3,31 @@
  * @author wangfupeng
  */
 
-//【注意】拼音输入时 maxLength 限制在 CompositionEnd 事件中处理
+// 【注意】拼音输入时 maxLength 限制在 CompositionEnd 事件中处理
 
 import { Editor, Node } from 'slate'
-import { IDomEditor, DomEditor } from '../..'
+
+import { DomEditor, IDomEditor } from '../..'
 import { IGNORE_TAGS } from '../../constants'
 import { NodeType } from '../../utils/dom'
 
 export const withMaxLength = <T extends Editor>(editor: T) => {
   const e = editor as T & IDomEditor
-  const { insertText, insertNode, insertFragment, dangerouslyInsertHtml } = e
+  const {
+    insertText, insertNode, insertFragment, dangerouslyInsertHtml,
+  } = e
 
   // 处理 text
   e.insertText = (text: string) => {
     const { maxLength } = e.getConfig()
+
     if (!maxLength) {
       insertText(text)
       return
     }
 
     const leftLength = DomEditor.getLeftLengthOfMaxLength(e)
+
     if (leftLength <= 0) {
       // 已经触发 maxLength ，不再输入文字
       return
@@ -40,18 +45,21 @@ export const withMaxLength = <T extends Editor>(editor: T) => {
   // 处理 node
   e.insertNode = (node: Node) => {
     const { maxLength } = e.getConfig()
+
     if (!maxLength) {
       insertNode(node)
       return
     }
 
     const leftLength = DomEditor.getLeftLengthOfMaxLength(e)
+
     if (leftLength <= 0) {
       // 已经触发 maxLength ，不再插入
       return
     }
 
     const text = Node.string(node)
+
     if (leftLength < text.length) {
       // 剩余长度，不够 node text 长度，不再插入
       return
@@ -63,6 +71,7 @@ export const withMaxLength = <T extends Editor>(editor: T) => {
   // 处理 fragment
   e.insertFragment = (fragment: Node[]) => {
     const { maxLength } = e.getConfig()
+
     if (!maxLength) {
       // 无 maxLength
       insertFragment(fragment)
@@ -90,16 +99,18 @@ export const withMaxLength = <T extends Editor>(editor: T) => {
     }
   }
 
-  e.dangerouslyInsertHtml = (html: string = '', isRecursive = false) => {
-    if (!html) return
+  e.dangerouslyInsertHtml = (html = '', isRecursive = false) => {
+    if (!html) { return }
 
     const { maxLength } = e.getConfig()
+
     if (!maxLength) {
       // 无 maxLength
       dangerouslyInsertHtml(html, isRecursive)
       return
     }
     const leftLength = DomEditor.getLeftLengthOfMaxLength(e)
+
     if (leftLength <= 0) {
       // 已经触发 maxLength ，不再输入文字
       return
@@ -107,20 +118,22 @@ export const withMaxLength = <T extends Editor>(editor: T) => {
 
     // ------------- 把 html 转换为 DOM nodes -------------
     const div = document.createElement('div')
+
     div.innerHTML = html
     const text = Array.from(div.childNodes).reduce<string>((acc, node) => {
       const { nodeType, nodeName } = node
+
       if (!node) {
         return acc
       }
       // Text Node
-      if (nodeType === NodeType.TEXT_NODE) return acc + (node.textContent || '')
+      if (nodeType === NodeType.TEXT_NODE) { return acc + (node.textContent || '') }
 
       // Element Node
       if (nodeType === NodeType.ELEMENT_NODE) {
         // 过滤掉忽略的 tag
-        if (IGNORE_TAGS.has(nodeName.toLowerCase())) return acc
-        else return acc + (node.textContent || '')
+        if (IGNORE_TAGS.has(nodeName.toLowerCase())) { return acc }
+        return acc + (node.textContent || '')
       }
       return acc
     }, '')

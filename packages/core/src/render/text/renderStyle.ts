@@ -5,6 +5,7 @@
 
 import { Text as SlateText } from 'slate'
 import { VNode } from 'snabbdom'
+
 import { RENDER_STYLE_HANDLER_LIST } from '../index'
 
 /**

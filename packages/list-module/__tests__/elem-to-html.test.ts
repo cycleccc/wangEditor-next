@@ -4,9 +4,9 @@
  */
 
 import createEditor from '../../../tests/utils/create-editor'
-import { ELEM_TO_EDITOR } from '../src/utils/maps'
-import $, { getTagName } from '../src/utils/dom'
 import listItemToHtmlConf from '../src/module/elem-to-html'
+import $, { getTagName } from '../src/utils/dom'
+import { ELEM_TO_EDITOR } from '../src/utils/maps'
 
 describe('module elem-to-html', () => {
   const childrenHtml = '<span>hello</span>'
@@ -28,15 +28,16 @@ describe('module elem-to-html', () => {
   ELEM_TO_EDITOR.set(unOrderedItem2, editor)
   ELEM_TO_EDITOR.set(unOrderedItem21, editor)
 
-  test(`toHtml conf type`, () => {
+  test('toHtml conf type', () => {
     expect(listItemToHtmlConf.type).toBe('list-item')
   })
 
-  test(`ordered item toHtml`, () => {
+  test('ordered item toHtml', () => {
     const { elemToHtml } = listItemToHtmlConf
 
     // first item
     const firstHtml = elemToHtml(orderedElem1, childrenHtml)
+
     expect(firstHtml).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '<ol>', // 第一个 item ，前面会有 <ol>
@@ -45,6 +46,7 @@ describe('module elem-to-html', () => {
 
     // last item
     const lastHtml = elemToHtml(orderedElem2, childrenHtml)
+
     expect(lastHtml).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '',
@@ -52,11 +54,12 @@ describe('module elem-to-html', () => {
     })
   })
 
-  test(`unOrdered item toHtml`, () => {
+  test('unOrdered item toHtml', () => {
     const { elemToHtml } = listItemToHtmlConf
 
     // first item
     const firstHtml = elemToHtml(unOrderedItem1, childrenHtml)
+
     expect(firstHtml).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '<ul>', // 第一个 item ，前面会有 <ul>
@@ -65,6 +68,7 @@ describe('module elem-to-html', () => {
 
     // second item
     const secondHtml = elemToHtml(unOrderedItem2, childrenHtml)
+
     expect(secondHtml).toEqual({
       html: '<li><span>hello</span></li>', // 第二个 item ，不应该有 <ul>
       prefix: '',
@@ -73,6 +77,7 @@ describe('module elem-to-html', () => {
 
     // last item - leveled
     const lastHtml = elemToHtml(unOrderedItem21, childrenHtml)
+
     expect(lastHtml).toEqual({
       html: '<li><span>hello</span></li>', // 最后一个 item ( leveled ) ，包裹 <ul>
       prefix: '<ul>',
@@ -85,15 +90,20 @@ describe('module elem-to-html', () => {
     // 创建一个空的 Dom7Array
     const $elem = $()
     const tagName = getTagName($elem)
+
     expect(tagName).toBe('')
   })
 })
 
 describe('module elem-to-html complex list', () => {
   const unOrderedElem1 = { type: 'list-item', ordered: false, children: [{ text: '' }] }
-  const unOrderedElem2 = { type: 'list-item', ordered: false, level: 1, children: [{ text: '' }] }
+  const unOrderedElem2 = {
+    type: 'list-item', ordered: false, level: 1, children: [{ text: '' }],
+  }
   const unOrderedElem3 = { type: 'list-item', ordered: false, children: [{ text: '' }] }
-  const orderedElem1 = { type: 'list-item', ordered: true, level: 1, children: [{ text: '' }] }
+  const orderedElem1 = {
+    type: 'list-item', ordered: true, level: 1, children: [{ text: '' }],
+  }
   const orderedElem2 = { type: 'list-item', ordered: true, children: [{ text: '' }] }
   const firstTextHtml = { type: 'paragraph', children: [{ text: 'hello' }] }
   const lastTextHtml = { type: 'paragraph', children: [{ text: 'world' }] }
@@ -122,24 +132,28 @@ describe('module elem-to-html complex list', () => {
     const childrenHtml = '<span>hello</span>'
     const { elemToHtml } = listItemToHtmlConf
     const unOrderedHtml1 = elemToHtml(unOrderedElem1, childrenHtml)
+
     expect(unOrderedHtml1).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '<ul>',
       suffix: '',
     })
     const unOrderedHtml2 = elemToHtml(unOrderedElem2, childrenHtml)
+
     expect(unOrderedHtml2).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '<ul>',
       suffix: '</ul>',
     })
     const orderedHtml1 = elemToHtml(orderedElem1, childrenHtml)
+
     expect(orderedHtml1).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '<ol>',
       suffix: '</ol></ul>',
     })
     const orderedHtml2 = elemToHtml(orderedElem2, childrenHtml)
+
     expect(orderedHtml2).toEqual({
       html: '<li><span>hello</span></li>',
       prefix: '<ol>',

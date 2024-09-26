@@ -3,8 +3,13 @@ module.exports = {
   testEnvironment: 'jsdom',
   testMatch: ['**/(*.)+(spec|test).+(ts|js|tsx)'],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-    '^.+\\.js$': 'ts-jest',
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        useESM: true,
+      },
+    ],
+    '^.+\\.js$': 'babel-jest',
   },
   globals: {
     'ts-jest': {
@@ -15,7 +20,7 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.(css|less)$': '<rootDir>/tests/utils/stylesMock.js',
   },
-  transformIgnorePatterns: ['node_modules/(?!(html-void-elements)/)'],
+  transformIgnorePatterns: ['node_modules/(?!html-void-elements)'],
   setupFilesAfterEnv: ['<rootDir>/tests/setup/index.ts'],
   // just collect basic module
   collectCoverageFrom: [
@@ -28,5 +33,7 @@ module.exports = {
     'config.ts',
     'browser-polyfill.ts',
     'node-polyfill.ts',
+    '/node_modules/',
+    '\\.d\\.ts$',
   ],
 }
