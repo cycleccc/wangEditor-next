@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.2
+
+### Patch Changes
+
+- 94f8470: revert modify table with hook
+
 ## 1.6.1
 
 ### Patch Changes

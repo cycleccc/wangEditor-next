@@ -4,33 +4,20 @@ module.exports = {
     sourceType: 'module',
   },
   env: {
+    browser: true,
     es6: true,
+    jest: true,
     node: true,
+    webextensions: false,
   },
   overrides: [
     {
-      files: [
-        './**/*.ts',
-        './**/*.tsx',
-        './**/*.js',
-        './**/*.jsx',
-      ],
+      files: ['./**/*.ts', './**/*.tsx', './**/*.js', './**/*.jsx'],
       extends: ['plugin:react-hooks/recommended'],
     },
     {
-      files: [
-        './**/*.ts',
-        './**/*.tsx',
-        './**/*.js',
-        './**/*.jsx',
-        './**/*.vue',
-      ],
-      plugins: [
-        'html',
-        'cypress',
-        '@typescript-eslint',
-        'simple-import-sort',
-      ],
+      files: ['./**/*.ts', './**/*.tsx', './**/*.js', './**/*.jsx', './**/*.vue'],
+      plugins: ['html', 'cypress', '@typescript-eslint', 'simple-import-sort'],
       env: {
         'cypress/globals': true,
       },
@@ -45,6 +32,17 @@ module.exports = {
         'airbnb-base',
       ],
       rules: {
+        'import/extensions': [
+          'error',
+          'ignorePackages',
+          {
+            '': 'never',
+            js: 'never',
+            jsx: 'never',
+            ts: 'never',
+            tsx: 'never',
+          },
+        ],
         curly: ['error', 'all'],
         'newline-after-var': ['error', 'always'],
         'no-continue': 'off',
@@ -52,8 +50,8 @@ module.exports = {
         'no-console': ['warn', { allow: ['warn', 'error'] }],
         semi: ['error', 'never'],
         'import/order': 'off',
-        'import/extensions': ['error', 'ignorePackages'],
-        'no-restricted-imports': ['error',
+        'no-restricted-imports': [
+          'error',
           {
             paths: [
               {
@@ -65,6 +63,17 @@ module.exports = {
                 message: 'Import from ./index.js instead.',
               },
             ],
+          },
+        ],
+        'no-restricted-syntax': [
+          'off',
+          {
+            selector: 'ForOfStatement',
+            message: 'Avoid using for...of loops',
+          },
+          {
+            selector: 'YieldExpression',
+            message: 'Avoid using generators and yield.',
           },
         ],
         'import/no-extraneous-dependencies': 'off',
@@ -81,14 +90,17 @@ module.exports = {
         'vue/one-component-per-file': 'off',
         'vue/this-in-template': ['error', 'never'],
         'vue/multi-word-component-names': 'off',
-        'vue/max-attributes-per-line': ['error', {
-          singleline: {
-            max: 3,
+        'vue/max-attributes-per-line': [
+          'error',
+          {
+            singleline: {
+              max: 3,
+            },
+            multiline: {
+              max: 1,
+            },
           },
-          multiline: {
-            max: 1,
-          },
-        }],
+        ],
         'vue/singleline-html-element-content-newline': 'off',
         'no-param-reassign': 'off',
         'import/prefer-default-export': 'off',
