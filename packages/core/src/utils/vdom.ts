@@ -45,6 +45,7 @@ const DATA_PRESERVE_KEYS = ['props', 'attrs', 'style', 'dataset', 'on', 'hook']
  * @param vnode vnode
  */
 export function normalizeVnodeData(vnode: VNode) {
+  if (!vnode) return
   const { data = {}, children = [] } = vnode
   const dataKeys = Object.keys(data)
   dataKeys.forEach((key: string) => {

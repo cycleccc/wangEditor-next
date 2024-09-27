@@ -4,7 +4,7 @@
  */
 
 import { Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor } from '@wangeditor-next/core'
 
 /**
@@ -19,7 +19,7 @@ function renderParagraph(
   children: VNode[] | null,
   editor: IDomEditor
 ): VNode {
-  const vnode = <p>{children}</p>
+  const vnode = h('p', children)
   return vnode
 }
 

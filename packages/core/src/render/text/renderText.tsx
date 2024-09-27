@@ -4,7 +4,7 @@
  */
 
 import { Text as SlateText, Ancestor } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { DomEditor } from '../../editor/dom-editor'
 import { IDomEditor } from '../../editor/interface'
 import { KEY_TO_ELEMENT, NODE_TO_ELEMENT, ELEMENT_TO_NODE } from '../../utils/weak-maps'
@@ -33,15 +33,21 @@ function renderText(textNode: SlateText, parent: Ancestor, editor: IDomEditor): 
     let strVnode = genTextVnode(leafNode, isLast, textNode, parent, editor)
     strVnode = addTextVnodeStyle(leafNode, strVnode)
     // 生成每一个 leaf 节点
-    return <span data-slate-leaf>{strVnode}</span>
+    return h('span', { attrs: { 'data-slate-leaf': true } }, [strVnode])
   })
 
   // 生成 text vnode
   const textId = genTextId(key.id)
-  const vnode = (
-    <span data-slate-node="text" id={textId} key={key.id}>
-      {leavesVnode /* 一个 text 可能包含多个 leaf */}
-    </span>
+  const vnode = h(
+    'span',
+    {
+      attrs: {
+        'data-slate-node': 'text',
+        id: textId,
+      },
+      key: key.id, // key 需要单独处理
+    },
+    leavesVnode // 子节点
   )
 
   // 更新 weak-map

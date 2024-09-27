@@ -4,7 +4,7 @@
  */
 
 import { Element } from 'slate'
-import { h, jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { VideoElement } from './custom-types'
 import { genSizeStyledIframeHtml } from '../utils/dom'
@@ -29,35 +29,60 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
     const iframeHtml = genSizeStyledIframeHtml(src, width, height, style)
 
     // iframe 形式，第三方视频
-    vnode = (
-      <div
-        className="w-e-textarea-video-container"
-        data-selected={selected ? 'true' : ''} // 标记为 选中
-        style={{ textAlign }}
-        innerHTML={iframeHtml} // 内嵌第三方 iframe 视频
-      ></div>
-    )
+    vnode = h('div', {
+      class: {
+        'w-e-textarea-video-container': true,
+      },
+      attrs: {
+        'data-selected': selected ? 'true' : '', // 标记为选中
+      },
+      style: { textAlign },
+      props: {
+        innerHTML: iframeHtml, // 内嵌第三方 iframe 视频
+      },
+    })
   } else {
     // 其他，mp4 格式
-    const videoVnode = (
-      <video key={key} poster={poster} controls style={style}>
-        <source src={src} type="video/mp4" />
-        {`Sorry, your browser doesn't support embedded videos.\n 抱歉，浏览器不支持 video 视频`}
-      </video>
+    const videoVnode = h(
+      'video',
+      {
+        key,
+        attrs: {
+          poster,
+          controls: true,
+        },
+        style,
+      },
+      [
+        h('source', { attrs: { src, type: 'video/mp4' } }),
+        `Sorry, your browser doesn't support embedded videos.\n 抱歉，浏览器不支持 video 视频`,
+      ]
     )
-    // @ts-ignore 添加尺寸
-    if (width !== 'auto') videoVnode.data.width = width
-    // @ts-ignore
-    if (height !== 'auto') videoVnode.data.height = height
 
-    vnode = (
-      <div
-        className="w-e-textarea-video-container"
-        data-selected={selected ? 'true' : ''} // 标记为 选中
-        style={{ textAlign }}
-      >
-        {videoVnode}
-      </div>
+    // 添加尺寸
+    if (width !== 'auto') {
+      videoVnode.data = videoVnode.data || {}
+      videoVnode.data.attrs = videoVnode.data.attrs || {}
+      videoVnode.data.attrs.width = width
+    }
+    if (height !== 'auto') {
+      videoVnode.data = videoVnode.data || {}
+      videoVnode.data.attrs = videoVnode.data.attrs || {}
+      videoVnode.data.attrs.height = height
+    }
+
+    vnode = h(
+      'div',
+      {
+        class: {
+          'w-e-textarea-video-container': true,
+        },
+        attrs: {
+          'data-selected': selected ? 'true' : '', // 标记为选中
+        },
+        style: { textAlign },
+      },
+      [videoVnode]
     )
   }
 

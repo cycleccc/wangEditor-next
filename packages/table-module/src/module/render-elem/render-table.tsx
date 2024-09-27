@@ -5,7 +5,7 @@
 
 import debounce from 'lodash.debounce'
 import { Editor, Element as SlateElement, Range, Point, Path } from 'slate'
-import { h, jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { TableElement } from '../custom-types'
 import { TableCursor } from '../table-cursor'
@@ -72,11 +72,16 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
   // 列宽之间比值
   const columnWidthRatios = getColumnWidthRatios(columnWidths)
 
-  const vnode = (
-    <div
-      className="table-container"
-      data-selected={selected}
-      on={{
+  const vnode = h(
+    'div',
+    {
+      class: {
+        'table-container': true, // 始终应用的类名
+      },
+      attrs: {
+        'data-selected': selected,
+      },
+      on: {
         mousedown: (e: MouseEvent) => {
           // @ts-ignore 阻止光标定位到 table 后面
           if (e.target.tagName === 'DIV') e.preventDefault()
@@ -101,76 +106,92 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
 
           editor.select(tableStart) // 选中 table 内部
         },
-      }}
-    >
-      <table
-        width={tableWidth}
-        contentEditable={editable}
-        /**
-         * 1. 当表格处于选区状态，屏蔽 Chrome 自带的样式
-         * 2. table 宽度为 auto 时，宽度为 列宽之和
-         * 3. 鼠标移动到 单元格 边缘，设置 visible className
-         */
-        className={'table ' + (isSelecting ? 'table-selection-none' : '')}
-        style={{
-          width: tableWidth == '100%' ? tableWidth : columnWidths.reduce((a, b) => a + b, 0) + 'px',
-        }}
-        on={{
-          mousemove: debounce(
-            (e: MouseEvent) => handleCellBorderVisible(editor, elemNode, e, scrollWidth),
-            25
+      },
+    },
+    [
+      h(
+        'table',
+        {
+          attrs: {
+            width: tableWidth,
+            contentEditable: editable,
+          },
+          class: {
+            table: true,
+            'table-selection-none': !!isSelecting,
+          },
+          style: {
+            width:
+              tableWidth === '100%' ? tableWidth : columnWidths.reduce((a, b) => a + b, 0) + 'px',
+          },
+          on: {
+            mousemove: debounce(
+              (e: MouseEvent) => handleCellBorderVisible(editor, elemNode, e, scrollWidth),
+              25
+            ),
+          },
+        },
+        [
+          h(
+            'colgroup',
+            { attrs: { contentEditable: false } },
+            columnWidths.map(width => h('col', { attrs: { width } }))
           ),
-        }}
-      >
-        <colgroup contentEditable={false}>
-          {
-            /**
-             * 剔除 firstRowCells，因单元格合并 表头 th，会计算错误。
-             * 使用 columnWidth 数组长度代表列数
-             * 拖动行为及变量设置均参考 飞书
-             */
-            columnWidths.map(width => {
-              return <col width={width}></col>
-            })
-          }
-        </colgroup>
-        <tbody>{children}</tbody>
-      </table>
+          h('tbody', {}, children),
+        ]
+      ),
 
-      <div className="column-resizer" contenteditable="false">
-        {columnWidths.map((width, index) => {
+      h(
+        'div',
+        {
+          class: {
+            'column-resizer': true,
+          },
+          attrs: {
+            contenteditable: 'false',
+          },
+        },
+        columnWidths.map((width, index) => {
           let minWidth = width
-          /**
-           * table width 为 100% 模式时
-           * columnWidths 表示的是比例
-           * 1. 需要计算出真实的宽度
-           */
-          if (tableWidth == '100%') {
+
+          // table width 为 100% 模式时
+          // columnWidths 表示的是比例
+          // 1. 需要计算出真实的宽度
+          if (tableWidth === '100%') {
             minWidth = columnWidthRatios[index] * scrollWidth
           }
 
-          return (
-            <div className="column-resizer-item" style={{ minWidth: `${minWidth}px` }}>
-              <div
-                className={
-                  'resizer-line-hotzone ' +
-                  (isHoverCellBorder && index == resizingIndex ? 'visible ' : '') +
-                  (isResizing && index == resizingIndex ? 'highlight' : '')
-                }
-                style={{ height: height + 'px' }}
-                on={{
-                  mouseenter: (e: MouseEvent) => handleCellBorderHighlight(editor, e),
-                  mouseleave: (e: MouseEvent) => handleCellBorderHighlight(editor, e),
-                  mousedown: (e: MouseEvent) => handleCellBorderMouseDown(editor, elemNode),
-                }}
-              >
-                <div className="resizer-line"></div>
-              </div>
-            </div>
+          return h(
+            'div',
+            {
+              class: {
+                'column-resizer-item': true,
+              },
+              style: { minWidth: `${minWidth}px` },
+            },
+            [
+              h(
+                'div',
+                {
+                  class: {
+                    'resizer-line-hotzone': true,
+                    visible: !!isHoverCellBorder && index === resizingIndex,
+                    highlight: !!isResizing && index === resizingIndex,
+                  },
+                  style: { height: `${height}px` },
+                  on: {
+                    mouseenter: (e: MouseEvent) => handleCellBorderHighlight(editor, e),
+                    mouseleave: (e: MouseEvent) => handleCellBorderHighlight(editor, e),
+                    mousedown: (e: MouseEvent) => handleCellBorderMouseDown(editor, elemNode),
+                  },
+                },
+                [h('div', { class: { 'resizer-line': true } })]
+              ),
+            ]
           )
-        })}
-      </div>
-    </div>
+        })
+      ),
+    ]
   )
 
   /**

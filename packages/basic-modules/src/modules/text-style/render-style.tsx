@@ -4,7 +4,7 @@
  */
 
 import { Descendant } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { StyledText } from './custom-types'
 
 /**
@@ -20,25 +20,25 @@ export function renderStyle(node: Descendant, vnode: VNode): VNode {
   // color bgColor 在另外的菜单
 
   if (bold) {
-    styleVnode = <strong>{styleVnode}</strong>
+    styleVnode = h('strong', styleVnode)
   }
   if (code) {
-    styleVnode = <code>{styleVnode}</code>
+    styleVnode = h('code', styleVnode)
   }
   if (italic) {
-    styleVnode = <em>{styleVnode}</em>
+    styleVnode = h('em', styleVnode)
   }
   if (underline) {
-    styleVnode = <u>{styleVnode}</u>
+    styleVnode = h('u', styleVnode)
   }
   if (through) {
-    styleVnode = <s>{styleVnode}</s>
+    styleVnode = h('s', styleVnode)
   }
   if (sub) {
-    styleVnode = <sub>{styleVnode}</sub>
+    styleVnode = h('sub', styleVnode)
   }
   if (sup) {
-    styleVnode = <sup>{styleVnode}</sup>
+    styleVnode = h('sup', styleVnode)
   }
 
   return styleVnode

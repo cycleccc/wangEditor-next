@@ -4,7 +4,7 @@
  */
 
 import { Element as SlateElement, Path, Editor, Text } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 import { ListItemElement } from './custom-types'
 import { ELEM_TO_EDITOR } from '../utils/maps'
@@ -100,18 +100,19 @@ function renderListElem(
   // 获取前缀颜色
   const prefixColor = getListItemColor(elemNode)
 
-  const vnode = (
-    <div style={listStyle}>
-      <span
-        contentEditable={false}
-        style={{ marginRight: '0.5em', color: prefixColor }}
-        data-w-e-reserve
-      >
-        {prefix}
-      </span>
-      <span>{children}</span>
-    </div>
-  )
+  const vnode = h('div', { style: listStyle }, [
+    h(
+      'span',
+      {
+        contentEditable: false,
+        style: { marginRight: '0.5em', color: prefixColor },
+        'data-w-e-reserve': true,
+      },
+      prefix
+    ),
+    h('span', {}, children),
+  ])
+
   return vnode
 }
 

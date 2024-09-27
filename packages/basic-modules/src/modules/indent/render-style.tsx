@@ -4,7 +4,7 @@
  */
 
 import { Element, Descendant } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { VNode } from 'snabbdom'
 import { addVnodeStyle } from '../../utils/vdom'
 import { IndentElement } from './custom-types'
 

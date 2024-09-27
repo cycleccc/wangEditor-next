@@ -4,20 +4,24 @@
  */
 
 import { Editor, Path, Node, Text as SlateText, Ancestor } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { DomEditor } from '../../editor/dom-editor'
 import { IDomEditor } from '../../editor/interface'
 
 function str(text: string, isTrailing = false): VNode {
-  return <span data-slate-string>{isTrailing ? text + '\n' : text}</span>
+  return h('span', { 'data-slate-string': true }, isTrailing ? text + '\n' : text)
 }
 
 function zeroWidthStr(length = 0, isLineBreak = false): VNode {
-  return (
-    <span data-slate-zero-width={isLineBreak ? 'n' : 'z'} data-slate-length={length}>
-      {'\uFEFF'}
-      {isLineBreak ? <br /> : null}
-    </span>
+  return h(
+    'span',
+    {
+      attrs: {
+        'data-slate-zero-width': isLineBreak ? 'n' : 'z',
+        'data-slate-length': length,
+      },
+    },
+    ['\uFEFF', isLineBreak ? h('br') : null]
   )
 }
 

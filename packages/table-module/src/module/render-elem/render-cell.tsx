@@ -4,7 +4,7 @@
  */
 
 import { Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor } from '@wangeditor-next/core'
 import { TableCellElement } from '../custom-types'
 import { isCellInFirstRow } from '../helpers'
@@ -26,43 +26,44 @@ function renderTableCell(
 
   // ------------------ 不是第一行，直接渲染 <td> ------------------
   if (!isFirstRow) {
-    return (
-      <td
-        colSpan={colSpan}
-        rowSpan={rowSpan}
-        /**
-         * 1. 添加一个方便寻址的 block-type
-         * 2. 选区颜色
-         * 3. 合并单元格时，判断隐藏
-         */
-        data-block-type="table-cell"
-        className={selected ? 'w-e-selected' : ''}
-        style={{ display: hidden ? 'none' : '' }}
-      >
-        {children}
-      </td>
+    return h(
+      'td',
+      {
+        attrs: {
+          colSpan: colSpan,
+          rowSpan: rowSpan,
+          'data-block-type': 'table-cell',
+        },
+        class: {
+          'w-e-selected': selected, // 仅当 selected 为 true 时添加类名
+        },
+        style: { display: hidden ? 'none' : '' },
+      },
+      children // 这里的 children 可以是一个 VNode 或数组
     )
   }
 
   // ------------------ 是第一行：1. 判断 th ；2. 拖拽列宽 ------------------
   const Tag = isHeader ? 'th' : 'td'
 
-  const vnode = (
-    <Tag
-      colSpan={colSpan}
-      rowSpan={rowSpan}
-      /**
-       * 1. 添加一个方便寻址的 block-type
-       * 2. 选区颜色
-       * 3. 合并单元格时，判断隐藏
-       */
-      data-block-type="table-cell"
-      className={selected ? 'w-e-selected' : ''}
-      style={{ display: hidden ? 'none' : '' }}
-    >
-      {children}
-    </Tag>
+  const vnode = h(
+    Tag,
+    {
+      attrs: {
+        colSpan: colSpan,
+        rowSpan: rowSpan,
+        'data-block-type': 'table-cell',
+      },
+      class: {
+        'w-e-selected': selected, // 仅当 selected 为 true 时添加类名
+      },
+      style: {
+        display: hidden ? 'none' : '', // 如果 hidden 为 true，则设置 display: none
+      },
+    },
+    children // 子节点
   )
+
   return vnode
 }
 

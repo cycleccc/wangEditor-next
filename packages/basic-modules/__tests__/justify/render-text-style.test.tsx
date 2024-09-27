@@ -3,13 +3,13 @@
  * @author wangfupeng
  */
 
-import { jsx } from 'snabbdom'
+import { h } from 'snabbdom'
 import { renderStyle } from '../../src/modules/justify/render-style'
 
 describe('justify - render text style', () => {
   it('render text style', () => {
     const elem = { type: 'paragraph', textAlign: 'center', children: [] }
-    const vnode = <span>hello</span>
+    const vnode = h('span', 'hello')
     // @ts-ignore 忽略 vnode 格式
     const newVnode = renderStyle(elem, vnode)
     // @ts-ignore 忽略 vnode 格式

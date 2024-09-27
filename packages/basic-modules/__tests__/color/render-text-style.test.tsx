@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { jsx } from 'snabbdom'
+import { h } from 'snabbdom'
 import { renderStyle } from '../../src/modules/color/render-style'
 
 describe('color - render text style', () => {
@@ -11,7 +11,7 @@ describe('color - render text style', () => {
     const color = 'rgb(51, 51, 51)'
     const bgColor = 'rgb(204, 204, 204)'
     const textNode = { text: 'hello', color, bgColor }
-    const vnode = <span>hello</span>
+    const vnode = h('span', 'hello')
 
     // @ts-ignore
     const newVnode = renderStyle(textNode, vnode) as any

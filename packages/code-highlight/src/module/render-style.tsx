@@ -4,7 +4,7 @@
  */
 
 import { Text as SlateText, Descendant } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { VNode } from 'snabbdom'
 import { addVnodeClassName } from '../utils/vdom'
 import { prismTokenTypes } from '../vendor/prism'
 

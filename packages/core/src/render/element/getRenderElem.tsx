@@ -4,7 +4,7 @@
  */
 
 import { Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor } from '../../editor/interface'
 import { RENDER_ELEM_CONF, RenderElemFnType } from '../index'
 
@@ -21,8 +21,7 @@ function defaultRender(
   editor: IDomEditor
 ): VNode {
   const Tag = editor.isInline(elemNode) ? 'span' : 'div'
-
-  const vnode = <Tag>{children}</Tag>
+  const vnode = h(Tag, children)
 
   return vnode
 }

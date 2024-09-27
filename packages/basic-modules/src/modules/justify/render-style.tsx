@@ -4,7 +4,7 @@
  */
 
 import { Descendant, Element } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { VNode } from 'snabbdom'
 import { addVnodeStyle } from '../../utils/vdom'
 import { JustifyElement } from './custom-types'
 

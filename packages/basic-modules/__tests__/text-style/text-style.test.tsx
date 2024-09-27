@@ -3,13 +3,13 @@
  * @author wangfupeng
  */
 
-import { jsx } from 'snabbdom'
+import { h } from 'snabbdom'
 import { renderStyle } from '../../src/modules/text-style/render-style'
 import { StyledText } from '../../src/modules/text-style/custom-types'
 
 describe('text style - render text style', () => {
   it('render text style', () => {
-    const vnode = <span>hello</span>
+    const vnode = h('span', 'hello')
     let newVnode
 
     const textNode: StyledText = { text: '' }

@@ -4,7 +4,7 @@
  */
 
 import { Editor, Node, Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { node2Vnode } from '../node2Vnode'
 import { DomEditor } from '../../editor/dom-editor'
 import { IDomEditor } from '../../editor/interface'
@@ -72,28 +72,24 @@ function renderElement(elemNode: SlateElement, editor: IDomEditor): VNode {
     const [[text]] = Node.texts(elemNode)
 
     const textVnode = node2Vnode(text, 0, elemNode, editor)
-    const textWrapperVnode = (
-      <Tag
-        data-slate-spacer
-        style={{
+    const textWrapperVnode = h(
+      Tag,
+      {
+        attrs: {
+          'data-slate-spacer': true,
+        },
+        style: {
           height: '0',
           color: 'transparent',
           outline: 'none',
           position: 'absolute',
-        }}
-      >
-        {textVnode}
-      </Tag>
+        },
+      },
+      textVnode
     )
 
     // 重写 vnode
-    vnode = (
-      // 设置 position: relative，保证 absolute 的 textWrapperVnode 不乱跑
-      <Tag style={{ position: 'relative' }}>
-        {vnode}
-        {textWrapperVnode}
-      </Tag>
-    )
+    vnode = h('div', { style: { position: 'relative' } }, [vnode, textWrapperVnode])
 
     // 记录 text 相关 weakMap
     NODE_TO_INDEX.set(text, 0)

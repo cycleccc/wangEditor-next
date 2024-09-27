@@ -4,7 +4,7 @@
  */
 
 import { Descendant } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { VNode } from 'snabbdom'
 import { addVnodeStyle } from '../../utils/vdom'
 import { FontSizeAndFamilyText } from './custom-types'
 

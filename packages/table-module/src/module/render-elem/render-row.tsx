@@ -4,7 +4,7 @@
  */
 
 import { Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, VNode } from 'snabbdom'
 import { IDomEditor } from '@wangeditor-next/core'
 
 function renderTableRow(
@@ -12,7 +12,7 @@ function renderTableRow(
   children: VNode[] | null,
   editor: IDomEditor
 ): VNode {
-  const vnode = <tr>{children}</tr>
+  const vnode = h('tr', children)
   return vnode
 }
 

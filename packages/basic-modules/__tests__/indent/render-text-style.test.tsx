@@ -3,14 +3,14 @@
  * @author wangfupeng
  */
 
-import { jsx } from 'snabbdom'
+import { h } from 'snabbdom'
 import { renderStyle } from '../../src/modules/indent/render-style'
 
 describe('indent - render text style', () => {
   it('render text style', () => {
     const indent = '2em'
     const elem = { type: 'paragraph', indent, children: [] }
-    const vnode = <p>hello</p>
+    const vnode = h('p', {}, 'hello')
 
     // @ts-ignore
     const newVnode = renderStyle(elem, vnode)
