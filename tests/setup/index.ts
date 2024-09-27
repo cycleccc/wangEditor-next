@@ -1,40 +1,21 @@
 import '@testing-library/jest-dom'
+
 import nodeCrypto from 'crypto'
+
+import { DataTransfer } from './DataTransfer'
+import { ResizeObserver } from './ResizeObserver'
 
 // @ts-ignore
 global.crypto = {
-  getRandomValues: function (buffer: any) {
+  getRandomValues(buffer: any) {
     return nodeCrypto.randomFillSync(buffer)
   },
 }
+jest.spyOn(global.console, 'warn').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn())
 
 // Jest environment not contains DataTransfer object, so mock a DataTransfer class
 // @ts-ignore
-global.DataTransfer = class DataTransfer {
-  clearData() { }
-  getData(type: string) {
-    if (type === 'text/plain') return ''
-    return []
-  }
-  setData() { }
-  get files() {
-    return [new File(['124'], 'test.jpg')]
-  }
-}
+global.DataTransfer = DataTransfer
 
-
-global.ResizeObserver = class ResizeObserver {
-  constructor(callback) {
-    // @ts-ignore
-    this.callback = callback;
-  }
-  observe() {
-    // 可以根据需要添加具体实现
-  }
-  unobserve() {
-    // 可以根据需要添加具体实现
-  }
-  disconnect() {
-    // 可以根据需要添加具体实现
-  }
-}
+global.ResizeObserver = ResizeObserver
