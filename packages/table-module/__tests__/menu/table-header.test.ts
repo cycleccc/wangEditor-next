@@ -27,7 +27,7 @@ describe('Table Module Table Header Menu', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
 
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(tableHeaderMenu.getValue(editor)).toBeFalsy()
   })
@@ -36,7 +36,7 @@ describe('Table Module Table Header Menu', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
 
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(tableHeaderMenu.isActive(editor)).toBeFalsy()
   })
@@ -53,7 +53,7 @@ describe('Table Module Table Header Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
 
     expect(tableHeaderMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -63,8 +63,8 @@ describe('Table Module Table Header Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(tableHeaderMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -74,8 +74,8 @@ describe('Table Module Table Header Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({} as any))
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({}) as any)
 
     expect(tableHeaderMenu.isDisabled(editor)).toBeFalsy()
   })
@@ -92,8 +92,8 @@ describe('Table Module Table Header Menu', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
 
-    jest.spyOn(tableHeaderMenu, 'isDisabled').mockReturnValue(false)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(tableHeaderMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(tableHeaderMenu.exec(editor, '')).toBeUndefined()
   })
@@ -102,8 +102,8 @@ describe('Table Module Table Header Menu', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
 
-    jest.spyOn(tableHeaderMenu, 'isDisabled').mockReturnValue(false)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({
+    vi.spyOn(tableHeaderMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({
       type: 'table',
       children: [
         {
@@ -123,9 +123,9 @@ describe('Table Module Table Header Menu', () => {
       ],
     }))
 
-    const fn = jest.fn()
-    jest.spyOn(slate.Transforms, 'setNodes').mockImplementation(fn)
-    jest.spyOn(core.DomEditor, 'findPath').mockImplementation(() => [0, 1])
+    const fn = vi.fn()
+    vi.spyOn(slate.Transforms, 'setNodes').mockImplementation(fn)
+    vi.spyOn(core.DomEditor, 'findPath').mockImplementation(() => [0, 1])
 
     tableHeaderMenu.exec(editor, '')
 

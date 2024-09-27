@@ -12,9 +12,9 @@
                 "--runInBand",
                 "--watchAll=false",
                 "--testNamePattern",
-                "${jest.testNamePattern}",
+                "${vi.testNamePattern}",
                 "--runTestsByPath",
-                "${jest.testFile}"
+                "${vi.testFile}"
             ],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",

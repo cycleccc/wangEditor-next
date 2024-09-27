@@ -40,14 +40,14 @@ describe('videoModule module', () => {
     test('InsertVideoMenu invoke isDisabled if editor selection is not collapsed that the function return true', () => {
       setEditorSelection(editor)
 
-      jest.spyOn(slate.Range, 'isCollapsed').mockReturnValue(false)
+      vi.spyOn(slate.Range, 'isCollapsed').mockReturnValue(false)
       expect(insertVideoMenu.isDisabled(editor)).toBe(true)
     })
 
     test('InsertVideoMenu invoke isDisabled if editor selection is not null and collapsed that the function return false', () => {
       setEditorSelection(editor)
 
-      jest.spyOn(slate.Range, 'isCollapsed').mockReturnValue(true)
+      vi.spyOn(slate.Range, 'isCollapsed').mockReturnValue(true)
       expect(insertVideoMenu.isDisabled(editor)).toBe(false)
     })
 

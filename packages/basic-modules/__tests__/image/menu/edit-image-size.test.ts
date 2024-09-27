@@ -100,7 +100,7 @@ describe('edit image size menu', () => {
       offset: 0,
     })
 
-    const spy = jest.spyOn(editor, 'hidePanelOrModal')
+    const spy = vi.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
     document.body.appendChild(elem)
 
@@ -148,7 +148,7 @@ describe('edit image size menu', () => {
 
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).widthInputId) as HTMLInputElement
-    jest.spyOn(inputSrc, 'focus')
+    vi.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {
       expect(inputSrc.focus).toHaveBeenCalled()

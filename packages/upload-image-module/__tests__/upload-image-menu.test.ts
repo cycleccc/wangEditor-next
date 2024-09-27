@@ -6,7 +6,7 @@ import uploadImages from '../src/module/upload-images'
 let editor: IDomEditor
 let menu: UploadImageMenu
 
-jest.mock('../src/module/upload-images', () => jest.fn())
+vi.mock('../src/module/upload-images', () => vi.fn())
 
 describe('Upload image menu', () => {
   beforeEach(() => {
@@ -31,18 +31,18 @@ describe('Upload image menu', () => {
   })
 
   test('UploadImageMenu invoke exec should exec customBrowseAndUpload if config has customBrowseAndUpload option', () => {
-    const jestFn = jest.fn()
+    const viFn = vi.fn()
     const editor = createEditor({
       config: {
         MENU_CONF: {
           uploadImage: {
-            customBrowseAndUpload: jestFn,
+            customBrowseAndUpload: viFn,
           },
         },
       },
     })
     menu.exec(editor, 'test.jpg')
-    expect(jestFn).toBeCalled()
+    expect(viFn).toBeCalled()
   })
 
   test('UploadImageMenu invoke exec should insert hidden input element to body', () => {

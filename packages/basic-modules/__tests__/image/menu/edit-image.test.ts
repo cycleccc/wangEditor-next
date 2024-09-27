@@ -134,7 +134,7 @@ describe('edit image menu', () => {
     inputHref.value = 'https://example.com/new-link'
 
     // 设置 spy 监听 updateImage 方法
-    const spy = jest.spyOn(menu as any, 'updateImage')
+    const spy = vi.spyOn(menu as any, 'updateImage')
 
     // 模拟点击事件
     editor.deselect()
@@ -170,7 +170,7 @@ describe('edit image menu', () => {
 
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).srcInputId) as HTMLInputElement
-    jest.spyOn(inputSrc, 'focus')
+    vi.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {
       expect(inputSrc.focus).toHaveBeenCalled()

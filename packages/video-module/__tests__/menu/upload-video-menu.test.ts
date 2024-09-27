@@ -40,19 +40,19 @@ describe('videoModule module', () => {
     test('UploadVideoMenu invoke isDisabled if editor selection is not collapsed that the function return true', () => {
       setEditorSelection(editor)
 
-      jest.spyOn(slate.Range, 'isCollapsed').mockReturnValue(false)
+      vi.spyOn(slate.Range, 'isCollapsed').mockReturnValue(false)
       expect(uploadVideoMenu.isDisabled(editor)).toBe(true)
     })
 
     test('UploadVideoMenu invoke isDisabled if editor selection is not null and collapsed that the function return false', () => {
       setEditorSelection(editor)
 
-      jest.spyOn(slate.Range, 'isCollapsed').mockReturnValue(true)
+      vi.spyOn(slate.Range, 'isCollapsed').mockReturnValue(true)
       expect(uploadVideoMenu.isDisabled(editor)).toBe(false)
     })
 
     test('UploadVideoMenu invoke customBrowseAndUpload if editor give customBrowseAndUpload option', () => {
-      const fn = jest.fn()
+      const fn = vi.fn()
       const editor = createEditor({
         config: {
           MENU_CONF: {

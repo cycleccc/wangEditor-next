@@ -45,7 +45,7 @@ describe('Table Module Delete Table Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(deleteTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -55,7 +55,7 @@ describe('Table Module Delete Table Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({} as any))
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({}) as any)
 
     expect(deleteTableMenu.isDisabled(editor)).toBeFalsy()
   })
@@ -72,10 +72,10 @@ describe('Table Module Delete Table Menu', () => {
     const deleteTableMenu = new DeleteTable()
     const editor = createEditor()
 
-    jest.spyOn(deleteTableMenu, 'isDisabled').mockReturnValue(false)
-    const fn = jest.fn()
+    vi.spyOn(deleteTableMenu, 'isDisabled').mockReturnValue(false)
+    const fn = vi.fn()
 
-    jest.spyOn(slate.Transforms, 'removeNodes').mockImplementation(fn)
+    vi.spyOn(slate.Transforms, 'removeNodes').mockImplementation(fn)
 
     deleteTableMenu.exec(editor, '')
     expect(fn).toBeCalled()

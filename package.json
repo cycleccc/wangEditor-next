@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "cz": "cz",
-    "test": "cross-env NODE_OPTIONS=--unhandled-rejections=warn jest --detectOpenHandles --passWithNoTests",
+    "test": "vitest run",
     "test-c": "cross-env NODE_OPTIONS=--unhandled-rejections=warn jest --coverage",
     "dev": "sh build/build-all.sh dev",
     "build": "sh build/build-all.sh",
@@ -79,6 +79,7 @@
     "http-server": "^0.13.0",
     "husky": "^9.1.6",
     "jest": "^27.0.6",
+    "vitest": "^2.2.1",
     "less": "^3.11.1",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",

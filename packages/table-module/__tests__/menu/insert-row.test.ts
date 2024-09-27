@@ -47,7 +47,7 @@ describe('Table Module Insert Row Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
 
     expect(insertRowMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -57,8 +57,8 @@ describe('Table Module Insert Row Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(insertRowMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -68,8 +68,8 @@ describe('Table Module Insert Row Menu', () => {
     const editor = createEditor()
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({} as any))
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({}) as any)
 
     expect(insertRowMenu.isDisabled(editor)).toBeFalsy()
   })
@@ -86,8 +86,8 @@ describe('Table Module Insert Row Menu', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
 
-    jest.spyOn(insertRowMenu, 'isDisabled').mockReturnValue(false)
-    jest.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
+    vi.spyOn(insertRowMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
       type: 'table-row',
       children: [
         {
@@ -109,9 +109,9 @@ describe('Table Module Insert Row Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    const insertNodesFn = jest.fn()
-    jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    const insertNodesFn = vi.fn()
+    vi.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
 
     insertRowMenu.exec(editor, '')
     expect(insertNodesFn).toBeCalled()
@@ -121,8 +121,8 @@ describe('Table Module Insert Row Menu', () => {
     const insertRowMenu = new InsertRow()
     const editor = createEditor()
 
-    jest.spyOn(insertRowMenu, 'isDisabled').mockReturnValue(false)
-    jest.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
+    vi.spyOn(insertRowMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
       type: 'table-row',
       children: [],
     }))
@@ -135,9 +135,9 @@ describe('Table Module Insert Row Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    const insertNodesFn = jest.fn()
-    jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    const insertNodesFn = vi.fn()
+    vi.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
 
     expect(insertRowMenu.exec(editor, '')).toBeUndefined()
     expect(insertNodesFn).not.toBeCalled()

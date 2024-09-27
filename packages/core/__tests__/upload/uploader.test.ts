@@ -64,7 +64,7 @@ describe('uploader', () => {
       .post('/')
       .reply(200, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     const uppy = createUploader({
       server,
       fieldName: 'file1',
@@ -76,7 +76,7 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -98,7 +98,7 @@ describe('uploader', () => {
       .post('/')
       .reply(200, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     console.error = fn
 
     let uppy = createUploader({
@@ -114,7 +114,7 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -136,7 +136,7 @@ describe('uploader', () => {
       .post('/')
       .reply(200, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     const uppy = createUploader({
       server,
       fieldName: 'file1',
@@ -149,7 +149,7 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -171,7 +171,7 @@ describe('uploader', () => {
       .post('/')
       .reply(400, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     const uppy = createUploader({
       server,
       fieldName: 'file1',
@@ -183,7 +183,7 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -205,7 +205,7 @@ describe('uploader', () => {
       .post('/')
       .reply(400, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     console.error = fn
     const uppy = createUploader({
       server,
@@ -217,7 +217,7 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -239,7 +239,7 @@ describe('uploader', () => {
       .post('/')
       .reply(400, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     console.error = fn
     const uppy = createUploader({
       server,
@@ -254,7 +254,7 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -266,8 +266,8 @@ describe('uploader', () => {
   })
 
   test('it should invoke error callback if file size over max size', () => {
-    const fn = jest.fn()
-    const consoleFn = jest.fn()
+    const fn = vi.fn()
+    const consoleFn = vi.fn()
     console.error = consoleFn
     let uppy = createUploader({
       server,
@@ -281,7 +281,7 @@ describe('uploader', () => {
 
     try {
       uppy.addFile({
-        source: 'jest',
+        source: 'vi',
         name: 'foo.jpg',
         type: 'image/jpeg',
         data: new Blob([Buffer.alloc(8192)]),
@@ -304,7 +304,7 @@ describe('uploader', () => {
 
     try {
       uppy.addFile({
-        source: 'jest',
+        source: 'vi',
         name: 'foo.jpg',
         type: 'image/jpeg',
         data: new Blob([Buffer.alloc(8192)]),
