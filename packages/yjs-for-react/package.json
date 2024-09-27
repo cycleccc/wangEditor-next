@@ -45,7 +45,7 @@
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },
   "devDependencies": {
-    "@types/react": "^17.0.34",
+    "@types/react": "^18.0.0",
     "@types/use-sync-external-store": "^0.0.6"
   },
   "bugs": {
