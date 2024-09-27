@@ -63,7 +63,6 @@
     "cssnano": "^7.0.0",
     "cypress": "^8.6.0",
     "cz-conventional-changelog": "^3.3.0",
-    "cz-customizable": "^7.0.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
