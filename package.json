@@ -60,7 +60,7 @@
     "concurrently": "^9.0.0",
     "core-js": "3",
     "cross-env": "^7.0.2",
-    "cssnano": "^5.0.3",
+    "cssnano": "^7.0.0",
     "cypress": "^8.6.0",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
