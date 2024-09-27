@@ -57,7 +57,7 @@
     "autoprefixer": "^10.2.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^27.0.6",
-    "concurrently": "^6.2.0",
+    "concurrently": "^9.0.0",
     "core-js": "3",
     "cross-env": "^7.0.2",
     "cssnano": "^5.0.3",
