@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies [7d067a0]
+  - @wangeditor-next/basic-modules@1.5.4
+  - @wangeditor-next/core@1.7.5
+
 ## 1.1.5
 
 ### Patch Changes

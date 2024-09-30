@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.5
+
+### Patch Changes
+
+- 7d067a0: Improved compatibility with styles of nested tags (e.g., <b>, <strong>, <sup>) to ensure correct rendering within the editor
+
 ## 1.7.4
 
 ### Patch Changes
