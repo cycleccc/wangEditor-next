@@ -16,14 +16,19 @@ module.exports = {
       extends: ['plugin:react-hooks/recommended'],
     },
     {
-      files: ['./**/*.ts', './**/*.tsx', './**/*.js', './**/*.jsx', './**/*.vue'],
+      files: [
+        './**/*.ts',
+        './**/*.tsx',
+        './**/*.js',
+        './**/*.jsx',
+        './**/*.vue',
+        './**/*.json',
+        './**/*.cjs',
+        './**/*.mjs',
+      ],
       plugins: ['html', 'cypress', '@typescript-eslint', 'simple-import-sort'],
       env: {
         'cypress/globals': true,
-      },
-      globals: {
-        document: false,
-        window: false,
       },
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
@@ -109,7 +114,7 @@ module.exports = {
         'no-redeclare': 'off',
         '@typescript-eslint/no-redeclare': ['error'],
         'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error'],
         'no-dupe-class-members': 'off',
