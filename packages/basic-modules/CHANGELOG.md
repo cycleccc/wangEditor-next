@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.4
+
+### Patch Changes
+
+- 7d067a0: Improved compatibility with styles of nested tags (e.g., <b>, <strong>, <sup>) to ensure correct rendering within the editor
+- Updated dependencies [7d067a0]
+  - @wangeditor-next/core@1.7.5
+
 ## 1.5.3
 
 ### Patch Changes
