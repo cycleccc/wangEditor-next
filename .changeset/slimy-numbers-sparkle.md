@@ -3,4 +3,4 @@
 '@wangeditor-next/core': patch
 ---
 
-Compatible with the styles of nested tags such as b, strong, and sup
+Improved compatibility with styles of nested tags (e.g., <b>, <strong>, <sup>) to ensure correct rendering within the editor

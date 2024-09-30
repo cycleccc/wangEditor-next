@@ -39,9 +39,9 @@ function parseElemHtml($elem: Dom7Array, editor: IDomEditor): Descendant | Desce
       const childNodes = $elem[0].childNodes
 
       return Array.from(childNodes).map(child => {
-        $($elem[0]).empty()
-        $($elem[0]).append($(child))
-        return parseTextElemHtml($($elem[0]), editor)
+        const $childElem = $(child)
+
+        return parseTextElemHtml($childElem, editor)
       })
     }
     return parseTextElemHtml($elem, editor)
