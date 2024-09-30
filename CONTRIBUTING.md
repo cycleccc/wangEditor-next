@@ -19,11 +19,14 @@
 - **克隆仓库**：Fork并克隆项目到本地。
 - **创建分支**：基于主分支`master`创建一个新的分支。
 - **编写代码**：确保您的代码遵循项目中的编码规范(清晰的注释、空行、lint 校验)。
+- **提交之前**：
+  - 确保在提交更改之前运行测试和 linter。
+  - 如果您要对其中一个包进行更改，请确保**始终**在您的 PR 中包含一个 [changeset](https://github.com/changesets/changesets)，描述**更改的内容**以及更改的**说明**。这些负责创建变更日志
 - **提交更改**：提交您的更改，并确保提交信息清晰明了。
   
    commit 格式
   
-   type [WIP, feat, fix, refactor, release, docs, test, perf, chore, workflow, style, revert]
+   type [feat, fix, refactor, docs, test, perf, chore, ci, style, build, revert]
 
    commit 模版如下
 
