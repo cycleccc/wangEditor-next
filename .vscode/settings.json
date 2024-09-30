@@ -1,50 +1,35 @@
 {
-    "editor.formatOnSave": true,
-    "cSpell.words": [
-      "beforeinput",
-      "bodyparser",
-      "browserslist",
-      "chmod",
-      "clonedeep",
-      "compositionend",
-      "compositionstart",
-      "config",
-      "contenteditable",
-      "elems",
-      "hoverbar",
-      "img",
-      "isequal",
-      "js",
-      "keyscan",
-      "luochao",
-      "middlewares",
-      "mkdir",
-      "next",
-      "nocheck",
-      "prettier",
-      "prettierrc",
-      "prismjs",
-      "snabbdom",
-      "src",
-      "team",
-      "tecent",
-      "toarray",
-      "ts",
-      "uppy",
-      "vdom",
-      "vnode",
-      "wangeditor",
-      "wangfupeng",
-      "we",
-      "write",
-      "yuque"
-    ],
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    },
-    "eslint.validate": ["javascript"],
-
-    "editor.detectIndentation": false,
-    "editor.tabSize": 2
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ]
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "files.eol": "\n"
 }
