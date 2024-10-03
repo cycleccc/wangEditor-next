@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.6
+
+### Patch Changes
+
+- c7ef2d0: refactor by new eslint rule
+
 ## 1.7.5
 
 ### Patch Changes
