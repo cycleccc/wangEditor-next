@@ -4,13 +4,13 @@
  */
 
 import BoldMenu from './BoldMenu'
+import ClearStyleMenu from './ClearStyleMenu'
 import CodeMenu from './CodeMenu'
 import ItalicMenu from './ItalicMenu'
-import ThroughMenu from './ThroughMenu'
-import UnderlineMenu from './UnderlineMenu'
 import SubMenu from './SubMenu'
 import SupMenu from './SupMenu'
-import ClearStyleMenu from './ClearStyleMenu'
+import ThroughMenu from './ThroughMenu'
+import UnderlineMenu from './UnderlineMenu'
 
 export const boldMenuConf = {
   key: 'bold',

@@ -22,13 +22,15 @@ module.exports = {
         './**/*.js',
         './**/*.jsx',
         './**/*.vue',
-        './**/*.json',
         './**/*.cjs',
         './**/*.mjs',
       ],
       plugins: ['html', 'cypress', '@typescript-eslint', 'simple-import-sort'],
       env: {
         'cypress/globals': true,
+      },
+      globals: {
+        globalThis:'readonly',
       },
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',

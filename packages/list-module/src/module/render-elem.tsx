@@ -3,12 +3,16 @@
  * @author wangfupeng
  */
 
-import { Element as SlateElement, Path, Editor, Text } from 'slate'
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import {
+  Editor, Element as SlateElement, Path,
+} from 'slate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
-import { ListItemElement } from './custom-types'
+
 import { ELEM_TO_EDITOR } from '../utils/maps'
 import { getListItemColor } from '../utils/util'
+import { ListItemElement } from './custom-types'
 
 /**
  * 无序列表：根据 level 获取的前置符号
@@ -16,6 +20,7 @@ import { getListItemColor } from '../utils/util'
  */
 function genPreSymbol(level = 0): string {
   let s = ''
+
   switch (level) {
     case 0:
       s = '•' // 第一层级
@@ -45,25 +50,27 @@ function getOrderedItemNumber(editor: IDomEditor, elem: SlateElement): number {
   let curPath = DomEditor.findPath(editor, curElem)
 
   // 第一个元素，直接返回 1
-  if (curPath[0] === 0) return 1
+  if (curPath[0] === 0) { return 1 }
 
   while (curPath[0] > 0) {
     const prevPath = Path.previous(curPath)
     const prevEntry = Editor.node(editor, prevPath)
-    if (prevEntry == null) break
+
+    if (prevEntry == null) { break }
     const prevElem = prevEntry[0] as ListItemElement // 上一个节点
     const { level: prevLevel = 0, type: prevType, ordered: prevOrdered } = prevElem
 
     // type 不一致，退出循环，不再累加 num
-    if (prevType !== type) break
+    if (prevType !== type) { break }
     // prevLevel 更小，退出循环，不再累加 num
-    if (prevLevel < level) break
+    if (prevLevel < level) { break }
 
     if (prevLevel === level) {
       // level 一样，如果 ordered 不一样，则退出循环，不再累加 num
-      if (prevOrdered !== ordered) break
-      // level 一样，order 一样，则累加 num
-      else num++
+      if (prevOrdered !== ordered) { break } else {
+        // level 一样，order 一样，则累加 num
+        num += 1
+      }
     }
 
     // prevLevel 更大，不累加 num ，继续向前
@@ -77,7 +84,7 @@ function getOrderedItemNumber(editor: IDomEditor, elem: SlateElement): number {
 function renderListElem(
   elemNode: SlateElement,
   children: VNode[] | null,
-  editor: IDomEditor
+  editor: IDomEditor,
 ): VNode {
   ELEM_TO_EDITOR.set(elemNode, editor) // 记录 elem 和 editor 关系，elem-to-html 时要用
 
@@ -88,9 +95,11 @@ function renderListElem(
 
   // list-item 前缀
   let prefix = ''
+
   if (ordered) {
     // 有序列表：获取前缀 number
     const orderedNumber = getOrderedItemNumber(editor, elemNode)
+
     prefix = `${orderedNumber}.`
   } else {
     // 无序列表：根据层级，使用不同的前缀符号
@@ -112,6 +121,7 @@ function renderListElem(
       <span>{children}</span>
     </div>
   )
+
   return vnode
 }
 

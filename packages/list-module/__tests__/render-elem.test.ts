@@ -10,14 +10,14 @@ describe('list module - render elem', () => {
   const unOrderedItem = { type: 'list-item', children: [{ text: '' }] }
   const leveleOneUndOrderedItem = { type: 'list-item', level: 1, children: [{ text: '' }] }
   const leveleTwoUndOrderedItem = { type: 'list-item', level: 2, children: [{ text: '' }] }
-  const orderedItem = { type: 'list-item', ordered: true, children: [{ text: '' }] }
+  const baseOrderedItem = { type: 'list-item', ordered: true, children: [{ text: '' }] }
   const leveledItem = { type: 'list-item', level: 3, children: [{ text: '' }] }
-  const editor = createEditor({
+  const baseEditor = createEditor({
     content: [
       unOrderedItem,
       leveleOneUndOrderedItem,
       leveleTwoUndOrderedItem,
-      orderedItem,
+      baseOrderedItem,
       leveledItem,
     ],
   })
@@ -27,40 +27,49 @@ describe('list module - render elem', () => {
   })
 
   it('render ordered list item elem', () => {
-    const vnode: any = renderListItemConf.renderElem(orderedItem, null, editor)
+    const vnode: any = renderListItemConf.renderElem(baseOrderedItem, null, baseEditor)
+
     expect(vnode.sel).toBe('div') // render-elem 使用 <div> 模拟 <li>
 
     const prefixVnode = vnode.children[0] || {}
+
     expect(prefixVnode.text).toBe('1.') // ordered list-item 有序号
   })
 
   it('render unOrdered list item elem', () => {
-    const vnode: any = renderListItemConf.renderElem(unOrderedItem, null, editor)
+    const vnode: any = renderListItemConf.renderElem(unOrderedItem, null, baseEditor)
+
     expect(vnode.sel).toBe('div') // render-elem 使用 <div> 模拟 <li>
 
     const prefixVnode = vnode.children[0] || {}
+
     expect(prefixVnode.text).toBe('•') // unOrdered list-item 点号
   })
 
   it('render leveled list item elem', () => {
-    const vnode: any = renderListItemConf.renderElem(leveledItem, null, editor)
+    const vnode: any = renderListItemConf.renderElem(leveledItem, null, baseEditor)
     const style = vnode.data.style
+
     expect(style).toEqual({ margin: '5px 0 5px 60px' }) // margin-left 60px
   })
 
   it('render one leveled orderd list item elem', () => {
-    const vnode: any = renderListItemConf.renderElem(leveleOneUndOrderedItem, null, editor)
+    const vnode: any = renderListItemConf.renderElem(leveleOneUndOrderedItem, null, baseEditor)
+
     expect(vnode.sel).toBe('div') // render-elem 使用 <div> 模拟 <li>
 
     const prefixVnode = vnode.children[0] || {}
+
     expect(prefixVnode.text).toBe('◦') // unOrdered list-item 点号
   })
 
   it('render two leveled orderd list item elem', () => {
-    const vnode: any = renderListItemConf.renderElem(leveleTwoUndOrderedItem, null, editor)
+    const vnode: any = renderListItemConf.renderElem(leveleTwoUndOrderedItem, null, baseEditor)
+
     expect(vnode.sel).toBe('div') // render-elem 使用 <div> 模拟 <li>
 
     const prefixVnode = vnode.children[0] || {}
+
     expect(prefixVnode.text).toBe('▪') // unOrdered list-item 点号
   })
 
@@ -70,9 +79,11 @@ describe('list module - render elem', () => {
       content: [orderedItem, orderedItem],
     })
     const vnode: any = renderListItemConf.renderElem(orderedItem, null, editor)
+
     expect(vnode.sel).toBe('div') // render-elem 使用 <div> 模拟 <li>
 
     const prefixVnode = vnode.children[0] || {}
+
     expect(prefixVnode.text).toBe('2.') // ordered list-item 有序号
   })
 })

@@ -3,12 +3,14 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IButtonMenu, IDomEditor } from '@wangeditor-next/core'
 import { Editor, Node } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 abstract class BaseMenu implements IButtonMenu {
   abstract readonly title: string
+
   abstract readonly iconSvg: string
+
   readonly tag = 'button'
 
   /**
@@ -22,13 +24,14 @@ abstract class BaseMenu implements IButtonMenu {
       universal: true,
     })
 
-    if (nodeEntry == null) return ''
+    if (nodeEntry == null) { return '' }
     const [n] = nodeEntry
     // @ts-ignore
+
     return n.indent || ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 不需要 active
     return false
   }
@@ -43,8 +46,8 @@ abstract class BaseMenu implements IButtonMenu {
         const type = DomEditor.getNodeType(n)
 
         // 只可用于 p 和 header
-        if (type === 'paragraph') return true
-        if (type.startsWith('header')) return true
+        if (type === 'paragraph') { return true }
+        if (type.startsWith('header')) { return true }
 
         return false
       },
@@ -52,7 +55,7 @@ abstract class BaseMenu implements IButtonMenu {
       mode: 'highest', // 匹配最高层级
     })
 
-    if (nodeEntry == null) return null
+    if (nodeEntry == null) { return null }
     return nodeEntry[0]
   }
 

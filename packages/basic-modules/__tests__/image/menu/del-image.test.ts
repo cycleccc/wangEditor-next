@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import DeleteImage from '../../../src/modules/image/menu/DeleteImage'
 
@@ -48,6 +49,7 @@ describe('delete image menu', () => {
       href,
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -65,6 +67,7 @@ describe('delete image menu', () => {
       href,
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -73,6 +76,7 @@ describe('delete image menu', () => {
 
     menu.exec(editor, '')
     const images = editor.getElemsByTypePrefix('image')
+
     expect(images.length).toBe(0)
   })
 })

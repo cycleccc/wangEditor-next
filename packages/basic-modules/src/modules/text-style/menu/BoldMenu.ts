@@ -4,13 +4,17 @@
  */
 
 import { t } from '@wangeditor-next/core'
-import BaseMenu from './BaseMenu'
+
 import { BOLD_SVG } from '../../../constants/icon-svg'
+import BaseMenu from './BaseMenu'
 
 class BoldMenu extends BaseMenu {
   readonly mark = 'bold'
+
   readonly title = t('textStyle.bold')
+
   readonly iconSvg = BOLD_SVG
+
   readonly hotkey = 'mod+b'
 }
 

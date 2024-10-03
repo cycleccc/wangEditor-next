@@ -11,6 +11,7 @@ describe('divider - elem to html', () => {
 
     const elem = { type: 'divider', children: [{ text: '' }] }
     const html = dividerToHtmlConf.elemToHtml(elem, '')
+
     expect(html).toBe('<hr/>')
   })
 })

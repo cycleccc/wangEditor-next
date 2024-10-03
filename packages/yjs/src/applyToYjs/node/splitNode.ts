@@ -1,5 +1,6 @@
 import { Node, SplitNodeOperation, Text } from 'slate'
 import * as Y from 'yjs'
+
 import { cloneInsertDeltaDeep } from '../../utils/clone'
 import { sliceInsertDelta, yTextToInsertDelta } from '../../utils/delta'
 import { getSlateNodeYLength, getYTarget } from '../../utils/location'
@@ -21,6 +22,7 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
     }
 
     const unset: Record<string, null> = {}
+
     target.targetDelta.forEach(element => {
       if (element.attributes) {
         Object.keys(element.attributes).forEach(key => {
@@ -32,7 +34,7 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
     return target.yParent.format(
       target.textRange.start,
       target.textRange.end - target.textRange.start,
-      { ...unset, ...op.properties }
+      { ...unset, ...op.properties },
     )
   }
 
@@ -48,13 +50,13 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
 
   const length = target.slateTarget.children.reduce(
     (current, child) => current + getSlateNodeYLength(child),
-    0
+    0,
   )
 
   const splitDelta = sliceInsertDelta(
     yTextToInsertDelta(target.yTarget),
     ySplitOffset,
-    length - ySplitOffset
+    length - ySplitOffset,
   )
   const clonedDelta = cloneInsertDeltaDeep(splitDelta)
 
@@ -62,10 +64,11 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
     sharedRoot,
     target.yTarget,
     splitDelta,
-    ySplitOffset
+    ySplitOffset,
   )
 
   const toInsert = new Y.XmlText()
+
   toInsert.applyDelta(clonedDelta, {
     sanitize: false,
   })
@@ -76,7 +79,7 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
 
   target.yTarget.delete(
     splitTarget.textRange.start,
-    target.yTarget.length - splitTarget.textRange.start
+    target.yTarget.length - splitTarget.textRange.start,
   )
 
   target.yParent.insertEmbed(target.textRange.end, toInsert)
@@ -87,6 +90,6 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
     storedPositions,
     clonedDelta,
     0,
-    ySplitOffset
+    ySplitOffset,
   )
 }

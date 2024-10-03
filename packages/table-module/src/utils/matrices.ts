@@ -1,11 +1,12 @@
 import { Editor, Location, NodeEntry } from 'slate'
-import { NodeEntryWithContext, CellElement } from './types'
+
 import { isOfType } from './is-of-type'
+import { CellElement, NodeEntryWithContext } from './types'
 
 /** Generates a matrix for each table section (`thead`, `tbody`, `tfoot`) */
 export function* matrices(
   editor: Editor,
-  options: { at?: Location } = {}
+  options: { at?: Location } = {},
 ): Generator<NodeEntry<CellElement>[][]> {
   const [table] = Editor.nodes(editor, {
     match: isOfType(editor, 'table'),
@@ -43,7 +44,7 @@ export function* matrices(
 
 export function filledMatrix(
   editor: Editor,
-  options: { at?: Location } = {}
+  options: { at?: Location } = {},
 ): NodeEntryWithContext[][] {
   const filled: NodeEntryWithContext[][] = []
 
@@ -51,16 +52,16 @@ export function filledMatrix(
   for (const matrix of matrices(editor, { at: options.at })) {
     const filledSection: NodeEntryWithContext[][] = []
 
-    for (let x = 0; x < matrix.length; x++) {
+    for (let x = 0; x < matrix.length; x += 1) {
       if (!filledSection[x]) {
         filledSection[x] = []
       }
 
-      for (let y = 0; y < matrix[x].length; y++) {
+      for (let y = 0; y < matrix[x].length; y += 1) {
         const [{ rowSpan = 1, colSpan = 1 }] = matrix[x][y]
 
-        for (let c = 0, occupied = 0; c < colSpan + occupied; c++) {
-          for (let r = 0; r < rowSpan; r++) {
+        for (let c = 0, occupied = 0; c < colSpan + occupied; c += 1) {
+          for (let r = 0; r < rowSpan; r += 1) {
             if (!filledSection[x + r]) {
               filledSection[x + r] = []
             }

@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
-import { Descendant, Text } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { StyledText } from './custom-types'
+import { Descendant, Text } from 'slate'
+
 import $, { Dom7Array, DOMElement } from '../../utils/dom'
+import { StyledText } from './custom-types'
 
 /**
  * $text 是否匹配 tags
@@ -14,11 +15,11 @@ import $, { Dom7Array, DOMElement } from '../../utils/dom'
  * @param selector selector 如 'b,strong' 或 'sub'
  */
 function isMatch($text: Dom7Array, selector: string): boolean {
-  if ($text.length === 0) return false
+  if ($text.length === 0) { return false }
 
-  if ($text[0].matches(selector)) return true
+  if ($text[0].matches(selector)) { return true }
 
-  if ($text.find(selector).length > 0) return true
+  if ($text.find(selector).length > 0) { return true }
 
   return false
 }
@@ -26,11 +27,11 @@ function isMatch($text: Dom7Array, selector: string): boolean {
 export function parseStyleHtml(
   textElem: DOMElement,
   node: Descendant,
-  editor: IDomEditor
+  _editor: IDomEditor,
 ): Descendant {
   const $text = $(textElem)
 
-  if (!Text.isText(node)) return node
+  if (!Text.isText(node)) { return node }
 
   const textNode = node as StyledText
 

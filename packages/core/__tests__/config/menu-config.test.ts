@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import createCoreEditor from '../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 import { registerGlobalMenuConf } from '../../src/config/register'
+import createCoreEditor from '../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 describe('menu config', () => {
   it('set and get', () => {

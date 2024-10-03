@@ -1,5 +1,6 @@
 import { Element, Node, Text } from 'slate'
 import * as Y from 'yjs'
+
 import { DeltaInsert, InsertDelta } from '../module/custom-types'
 import { yTextToInsertDelta } from './delta'
 import { getProperties } from './slate'
@@ -7,6 +8,7 @@ import { getProperties } from './slate'
 export function yTextToSlateElement(yText: Y.XmlText): Element {
   const delta = yTextToInsertDelta(yText)
 
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const children = delta.length > 0 ? delta.map(deltaInsertToSlateNode) : [{ text: '' }]
 
   return { ...yText.getAttributes(), children }

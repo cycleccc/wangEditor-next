@@ -3,14 +3,16 @@
  * @author wangfupeng
  */
 
-import { Descendant } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { ImageElement } from './custom-types'
-import $, { DOMElement, getStyleValue } from '../../utils/dom'
+import { Descendant } from 'slate'
 
-function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor): ImageElement {
+import $, { DOMElement, getStyleValue } from '../../utils/dom'
+import { ImageElement } from './custom-types'
+
+function parseHtml(elem: DOMElement, _children: Descendant[], _editor: IDomEditor): ImageElement {
   const $elem = $(elem)
   let href = $elem.attr('data-href') || ''
+
   href = decodeURIComponent(href) // 兼容 V4
 
   return {

@@ -1,24 +1,26 @@
-import InsertTable from '../../src/module/menu/InsertTable'
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
+import { isDOMElement } from '../../../core/src/utils/dom'
 import { TABLE_SVG } from '../../src/constants/svg'
 import locale from '../../src/locale/zh-CN'
-import * as slate from 'slate'
-import * as core from '@wangeditor-next/core'
+import InsertTable from '../../src/module/menu/InsertTable'
 import $ from '../../src/utils/dom'
-import { isDOMElement } from './../../../core/src/utils/dom'
 
 function setEditorSelection(
   editor: core.IDomEditor,
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
 describe('Table Module Insert Table Menu', () => {
   test('it should create InsertTable object', () => {
     const insertTableMenu = new InsertTable()
+
     expect(typeof insertTableMenu).toBe('object')
     expect(insertTableMenu.tag).toBe('button')
     expect(insertTableMenu.iconSvg).toBe(TABLE_SVG)
@@ -28,18 +30,21 @@ describe('Table Module Insert Table Menu', () => {
   test('it should get empty string if invoke getValue method', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     expect(insertTableMenu.getValue(editor)).toBe('')
   })
 
   test('it should get falsy value if invoke isActive method', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     expect(insertTableMenu.isActive(editor)).toBeFalsy()
   })
 
   test('isDisabled should get truthy value if editor selection is null', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     editor.selection = null
     expect(insertTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -47,6 +52,7 @@ describe('Table Module Insert Table Menu', () => {
   test('isDisabled should get truthy value if editor selection is collapsed', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
@@ -57,6 +63,7 @@ describe('Table Module Insert Table Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is contains pre node', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -70,6 +77,7 @@ describe('Table Module Insert Table Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is contains table node', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -83,6 +91,7 @@ describe('Table Module Insert Table Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is contains void node', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -98,6 +107,7 @@ describe('Table Module Insert Table Menu', () => {
   test('isDisabled should get falsy value if editor current selected node is valid', () => {
     const insertTableMenu = new InsertTable()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -124,6 +134,7 @@ describe('Table Module Insert Table Menu', () => {
     const tdEl = $(tablePanel).find('td')[0]
 
     const fn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
 
     tdEl.dispatchEvent(
@@ -131,7 +142,7 @@ describe('Table Module Insert Table Menu', () => {
         view: window,
         bubbles: true,
         cancelable: true,
-      })
+      }),
     )
 
     expect(fn).toBeCalled()
@@ -151,7 +162,7 @@ describe('Table Module Insert Table Menu', () => {
         view: window,
         bubbles: true,
         cancelable: true,
-      })
+      }),
     )
 
     expect(tdEl.className).toBe('active')

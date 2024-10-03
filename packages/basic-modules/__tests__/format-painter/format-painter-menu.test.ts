@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import FormatPainter from '../../src/modules/format-painter/menu/FormatPainter'
 

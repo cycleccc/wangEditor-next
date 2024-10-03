@@ -3,18 +3,19 @@
  * @author
  */
 
-import { Node as SlateNode, Transforms } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
   DomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Node as SlateNode, Transforms } from 'slate'
+
+import { PENCIL_SVG } from '../../constants/svg'
 import $, { Dom7Array, DOMElement } from '../../utils/dom'
 import { genRandomStr } from '../../utils/util'
-import { PENCIL_SVG } from '../../constants/svg'
 import { VideoElement } from '../custom-types'
 
 /**
@@ -26,38 +27,47 @@ function genDomID(): string {
 
 class Editvideo implements IModalMenu {
   readonly title = t('videoModule.edit')
+
   readonly iconSvg = PENCIL_SVG
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 300
+
   private $content: Dom7Array | null = null
+
   private readonly srcInputId = genDomID()
+
   private readonly posterInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
   private getSelectedVideoNode(editor: IDomEditor): SlateNode | null {
     return DomEditor.getSelectedNodeByType(editor, 'video')
   }
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 编辑视频，用不到 getValue
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 无需 active
     return false
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(_editor: IDomEditor, _value: string | boolean) {
     // 点击菜单时，弹出 modal 之前，不需要执行其他代码
     // 此处空着即可
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
 
     const videoNode = this.getSelectedVideoNode(editor)
+
     if (videoNode == null) {
       // 选区未处于 video node ，则禁用
       return true
@@ -76,12 +86,12 @@ class Editvideo implements IModalMenu {
     const [srcContainerElem, inputSrcElem] = genModalInputElems(
       t('videoModule.videoSrc'),
       srcInputId,
-      t('videoModule.videoSrcPlaceHolder')
+      t('videoModule.videoSrcPlaceHolder'),
     )
     const [posterContainerElem, inputPosterElem] = genModalInputElems(
       t('videoModule.videoPoster'),
       posterInputId,
-      t('videoModule.videoPosterPlaceHolder')
+      t('videoModule.videoPosterPlaceHolder'),
     )
     const $inputSrc = $(inputSrcElem)
     const $inputPoster = $(inputPosterElem)
@@ -101,8 +111,8 @@ class Editvideo implements IModalMenu {
         const videoId = genRandomStr('video-')
 
         const props: Partial<VideoElement> = {
-          src: src,
-          poster: poster,
+          src,
+          poster,
           key: videoId,
         }
 
@@ -119,6 +129,7 @@ class Editvideo implements IModalMenu {
     }
 
     const $content = this.$content
+
     $content.empty() // 先清空内容
 
     // append inputs and button
@@ -127,10 +138,12 @@ class Editvideo implements IModalMenu {
     $content.append(buttonContainerElem)
 
     const videoNode = this.getSelectedVideoNode(editor) as VideoElement
-    if (videoNode == null) return $content[0]
+
+    if (videoNode == null) { return $content[0] }
 
     // 初始化 input 值
     const { src = '', poster = '' } = videoNode
+
     $inputSrc.val(src)
     $inputPoster.val(poster)
 

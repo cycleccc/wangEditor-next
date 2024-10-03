@@ -3,9 +3,11 @@
  * @author wangfupeng
  */
 
-import { Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
 import { IDomEditor } from '@wangeditor-next/core'
+import { Element as SlateElement } from 'slate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { jsx, VNode } from 'snabbdom'
+
 import { TableCellElement } from '../custom-types'
 import { isCellInFirstRow } from '../helpers'
 import { TableCursor } from '../table-cursor'
@@ -13,7 +15,7 @@ import { TableCursor } from '../table-cursor'
 function renderTableCell(
   cellNode: SlateElement,
   children: VNode[] | null,
-  editor: IDomEditor
+  editor: IDomEditor,
 ): VNode {
   const isFirstRow = isCellInFirstRow(editor, cellNode as TableCellElement)
   const {
@@ -63,6 +65,7 @@ function renderTableCell(
       {children}
     </Tag>
   )
+
   return vnode
 }
 

@@ -1,4 +1,5 @@
 import * as Y from 'yjs'
+
 import { InsertDelta } from '../module/custom-types'
 import { yTextToInsertDelta } from './delta'
 
@@ -17,6 +18,7 @@ export function cloneDeep(yText: Y.XmlText): Y.XmlText {
   const clone = new Y.XmlText()
 
   const attributes = yText.getAttributes()
+
   Object.entries(attributes).forEach(([key, value]) => {
     clone.setAttribute(key, value)
   })

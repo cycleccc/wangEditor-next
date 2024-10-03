@@ -12,10 +12,12 @@ import $, { DOMElement, getTagName } from '../../utils/dom'
 function preParse(fontElem: DOMElement): DOMElement {
   const $font = $(fontElem)
   const tagName = getTagName($font)
-  if (tagName !== 'font') return fontElem
+
+  if (tagName !== 'font') { return fontElem }
 
   // 处理 color （V4 使用 <font color="#ccc">xx</font> 格式）
   const color = $font.attr('color') || ''
+
   if (color) {
     $font.removeAttr('color')
     $font.css('color', color)

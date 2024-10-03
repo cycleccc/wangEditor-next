@@ -3,22 +3,23 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Descendant, Text } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
-import { TableCellElement, TableRowElement, TableElement } from './custom-types'
-import $, { getTagName, getStyleValue, DOMElement } from '../utils/dom'
+
+import $, { DOMElement, getStyleValue, getTagName } from '../utils/dom'
+import { TableCellElement, TableElement, TableRowElement } from './custom-types'
 
 function parseCellHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): TableCellElement {
   const $elem = $(elem)
 
   children = children.filter(child => {
-    if (DomEditor.getNodeType(child) === 'paragraph') return true
-    if (Text.isText(child)) return true
-    if (editor.isInline(child)) return true
+    if (DomEditor.getNodeType(child) === 'paragraph') { return true }
+    if (Text.isText(child)) { return true }
+    if (editor.isInline(child)) { return true }
     return false
   })
 
@@ -27,8 +28,8 @@ function parseCellHtml(
     children = [{ text: $elem.text().replace(/\s+/gm, ' ') }]
   }
 
-  const colSpan = parseInt($elem.attr('colSpan') || '1')
-  const rowSpan = parseInt($elem.attr('rowSpan') || '1')
+  const colSpan = parseInt($elem.attr('colSpan') || '1', 10)
+  const rowSpan = parseInt($elem.attr('rowSpan') || '1', 10)
   const hidden = getStyleValue($elem, 'display') === 'none'
   const width = $elem.attr('width') || 'auto'
 
@@ -50,9 +51,9 @@ export const parseCellHtmlConf = {
 }
 
 function parseRowHtml(
-  elem: DOMElement,
+  _elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  _editor: IDomEditor,
 ): TableRowElement {
   return {
     type: 'table-row',
@@ -69,30 +70,32 @@ export const parseRowHtmlConf = {
 function parseTableHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  _editor: IDomEditor,
 ): TableElement {
   const $elem = $(elem)
 
   // 计算宽度
-  let width = 'auto'
-  if (getStyleValue($elem, 'width') === '100%') width = '100%'
-  if ($elem.attr('width') === '100%') width = '100%' // 兼容 v4 格式
+  let tableWidth = 'auto'
+
+  if (getStyleValue($elem, 'width') === '100%') { tableWidth = '100%' }
+  if ($elem.attr('width') === '100%') { tableWidth = '100%' } // 兼容 v4 格式
 
   // 计算高度
-  let height = parseInt(getStyleValue($elem, 'height') || '0')
+  const height = parseInt(getStyleValue($elem, 'height') || '0', 10)
 
   const tableELement: TableElement = {
     type: 'table',
-    width,
+    width: tableWidth,
     height,
     // @ts-ignore
     children: children.filter(child => DomEditor.getNodeType(child) === 'table-row'),
   }
   const tdList = $elem.find('tr')[0]?.children || []
   const colgroupElments: HTMLCollection = $elem.find('colgroup')[0]?.children || null
+
   if (colgroupElments) {
     tableELement.columnWidths = Array.from(colgroupElments).map((col: any) => {
-      return parseInt(col.getAttribute('width'))
+      return parseInt(col.getAttribute('width'), 10)
     })
   } else if (tdList.length > 0) {
     const columnWidths: number[] = []
@@ -102,7 +105,7 @@ function parseTableHtml(
       const width = parseInt(getStyleValue($(td), 'width') || '180', 10) // 获取 width，默认为 180
 
       // 根据 colspan 的值来填充 columnWidths 数组
-      for (let i = 0; i < colspan; i++) {
+      for (let i = 0; i < colspan; i += 1) {
         columnWidths.push(width)
       }
     })

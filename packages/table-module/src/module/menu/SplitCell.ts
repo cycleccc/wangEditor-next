@@ -1,21 +1,24 @@
-import { Editor, Path, Transforms } from 'slate'
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+import { Editor, Path, Transforms } from 'slate'
+
 import { SPLIT_CELL_SVG } from '../../constants/svg'
+import { CellElement, filledMatrix, isOfType } from '../../utils'
 import { EDITOR_TO_SELECTION } from '../weak-maps'
-import { filledMatrix, isOfType, CellElement } from '../../utils'
 // import { DEFAULT_WITH_TABLE_OPTIONS } from "../../utils/options";
 
 class SplitCell implements IButtonMenu {
   readonly title = t('tableModule.splitCell')
+
   readonly iconSvg = SPLIT_CELL_SVG
+
   readonly tag = 'button'
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 无需获取 val
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 无需 active
     return false
   }
@@ -34,8 +37,8 @@ class SplitCell implements IButtonMenu {
     return true
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
-    if (this.isDisabled(editor)) return
+  exec(editor: IDomEditor, _value: string | boolean) {
+    if (this.isDisabled(editor)) { return }
 
     this.split(editor)
   }
@@ -66,10 +69,12 @@ class SplitCell implements IButtonMenu {
     // const { blocks } = DEFAULT_WITH_TABLE_OPTIONS;
 
     Editor.withoutNormalizing(editor, () => {
-      for (let x = matrix.length - 1; x >= 0; x--) {
-        for (let y = matrix[x].length - 1; y >= 0; y--) {
+      for (let x = matrix.length - 1; x >= 0; x -= 1) {
+        for (let y = matrix[x].length - 1; y >= 0; y -= 1) {
           const [[, path], context] = matrix[x][y]
-          const { ltr: colSpan, rtl, btt: rowSpan, ttb } = context
+          const {
+            ltr: colSpan, rtl, btt: rowSpan, ttb,
+          } = context
 
           if (rtl > 1) {
             // get to the start of the colspan
@@ -88,18 +93,21 @@ class SplitCell implements IButtonMenu {
           let found = !!options.all
 
           if (selection.length) {
-            outer: for (let i = 0; !options.all && i < selection.length; i++) {
-              for (let j = 0; j < selection[i].length; j++) {
+            // eslint-disable-next-line no-labels
+            outer: for (let i = 0; !options.all && i < selection.length; i += 1) {
+              for (let j = 0; j < selection[i].length; j += 1) {
                 const [[, tdPath]] = selection[i][j]
 
                 if (Path.equals(tdPath, path)) {
                   found = true
+                  // eslint-disable-next-line no-labels
                   break outer
                 }
               }
             }
           } else {
             const [, tdPath] = td
+
             if (Path.equals(tdPath, path)) {
               found = true
             }
@@ -109,30 +117,28 @@ class SplitCell implements IButtonMenu {
             continue
           }
 
-          const [[section]] = Editor.nodes(editor, {
-            match: isOfType(editor, 'table'),
-            at: path,
-          })
+          // eslint-disable-next-line no-labels
+          out: for (let r = 1; r < rowSpan; r += 1) {
+            for (let i = y; i >= 0; i -= 1) {
+              // eslint-disable-next-line @typescript-eslint/no-shadow
+              const [, { ttb }] = matrix[x + r][i]
 
-          out: for (let r = 1; r < rowSpan; r++) {
-            for (let i = y; i >= 0; i--) {
-              const [[, path], { ttb }] = matrix[x + r][i]
-
-              if (ttb == 1) {
+              if (ttb === 1) {
                 continue
               }
 
-              for (let c = 0; c < colSpan; c++) {
-                let [[, nextPath]] = matrix[x + r][i + c]
+              for (let c = 0; c < colSpan; c += 1) {
+                const [[, nextPath]] = matrix[x + r][i + c]
 
                 Transforms.unsetNodes(editor, ['hidden', 'colSpan', 'rowSpan'], { at: nextPath })
               }
+              // eslint-disable-next-line no-labels
               continue out
             }
           }
 
-          for (let c = 1; c < colSpan; c++) {
-            let [[, nextPath]] = matrix[x][y + c]
+          for (let c = 1; c < colSpan; c += 1) {
+            const [[, nextPath]] = matrix[x][y + c]
 
             Transforms.unsetNodes(editor, ['hidden', 'colSpan', 'rowSpan'], { at: nextPath })
           }

@@ -1,10 +1,11 @@
-import InsertCol from '../../src/module/menu/InsertCol'
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { ADD_COL_SVG } from '../../src/constants/svg'
-import * as utils from '../../src/utils'
 import locale from '../../src/locale/zh-CN'
-import * as slate from 'slate'
-import * as core from '@wangeditor-next/core'
+import InsertCol from '../../src/module/menu/InsertCol'
+import * as utils from '../../src/utils'
 
 jest.mock('../../src/utils', () => ({
   filledMatrix: jest.fn(),
@@ -16,13 +17,14 @@ function setEditorSelection(
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
 describe('Table Module Insert Col Menu', () => {
   test('it should create InsertCol object', () => {
     const insertColMenu = new InsertCol()
+
     expect(typeof insertColMenu).toBe('object')
     expect(insertColMenu.tag).toBe('button')
     expect(insertColMenu.iconSvg).toBe(ADD_COL_SVG)
@@ -32,18 +34,21 @@ describe('Table Module Insert Col Menu', () => {
   test('it should get empty string if invoke getValue method', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     expect(insertColMenu.getValue(editor)).toBe('')
   })
 
   test('it should get falsy value if invoke isActive method', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     expect(insertColMenu.isActive(editor)).toBeFalsy()
   })
 
   test('isDisabled should get truthy value if editor selection is null', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     editor.selection = null
     expect(insertColMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -51,6 +56,7 @@ describe('Table Module Insert Col Menu', () => {
   test('isDisabled should get truthy value if editor selection is collapsed', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
@@ -61,6 +67,7 @@ describe('Table Module Insert Col Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is not table cell', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -72,6 +79,7 @@ describe('Table Module Insert Col Menu', () => {
   test('isDisabled should get falsy value if editor current selected node is table cell', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -83,6 +91,7 @@ describe('Table Module Insert Col Menu', () => {
   test('exec should return directly if menu is disabled', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
+
     setEditorSelection(editor, null)
 
     expect(insertColMenu.exec(editor, '')).toBeUndefined()
@@ -94,7 +103,7 @@ describe('Table Module Insert Col Menu', () => {
 
     jest.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
 
-    const fn = function* a() {
+    const fn = function* () {
       yield [
         {
           type: 'table-cell',
@@ -103,6 +112,7 @@ describe('Table Module Insert Col Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     jest.spyOn(core.DomEditor, 'getParentNode').mockReturnValue(null)
 
@@ -115,7 +125,7 @@ describe('Table Module Insert Col Menu', () => {
 
     jest.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
 
-    const fn = function* a() {
+    const fn = function* () {
       yield [
         {
           type: 'table-cell',
@@ -124,6 +134,7 @@ describe('Table Module Insert Col Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     jest
       .spyOn(core.DomEditor, 'getParentNode')
@@ -139,7 +150,7 @@ describe('Table Module Insert Col Menu', () => {
 
     jest.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
 
-    const fn = function* a() {
+    const fn = function* () {
       yield [
         {
           type: 'table-cell',
@@ -148,6 +159,7 @@ describe('Table Module Insert Col Menu', () => {
         [0, 1],
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     jest
       .spyOn(core.DomEditor, 'getParentNode')
@@ -186,27 +198,36 @@ describe('Table Module Insert Col Menu', () => {
 
     jest.spyOn(core.DomEditor, 'findPath').mockReturnValue([0, 1])
     const insertNodesFn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
     mockedUtils.filledMatrix.mockImplementation(() => {
       return [
         [
           [
             [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 0]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
           [
             [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 1]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
         ],
         [
           [
             [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 0]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
           [
             [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 1]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
         ],
       ]
@@ -217,7 +238,7 @@ describe('Table Module Insert Col Menu', () => {
     expect(insertNodesFn).toBeCalledWith(
       editor,
       { type: 'table-cell', children: [{ text: '' }], hidden: false },
-      { at: [0, 0, 0] }
+      { at: [0, 0, 0] },
     )
   })
 })

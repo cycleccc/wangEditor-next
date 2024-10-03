@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseCodeHtmlConf, parsePreHtmlConf } from '../../src/modules/code-block/parse-elem-html'
 import { preParseHtmlConf } from '../../src/modules/code-block/pre-parse-html'
@@ -12,6 +13,7 @@ describe('code block - pre parse html', () => {
   it('pre parse html', () => {
     const $pre = $('<pre></pre>')
     const $code = $('<code><xmp>var a = 100;</xmp></code>')
+
     $pre.append($code)
 
     // match selector
@@ -19,6 +21,7 @@ describe('code block - pre parse html', () => {
 
     // pre parse
     const res = preParseHtmlConf.preParseHtml($code[0])
+
     expect(res.innerHTML).toBe('var a = 100;')
   })
 })
@@ -29,6 +32,7 @@ describe('code block - parse html', () => {
   it('parse code html', () => {
     const $pre = $('<pre></pre>')
     const $code = $('<code><xmp>var a = 100;</xmp></code>')
+
     $pre.append($code)
 
     // match selector
@@ -36,6 +40,7 @@ describe('code block - parse html', () => {
 
     // parse
     const res = parseCodeHtmlConf.parseElemHtml($code[0], [], editor)
+
     expect(res).toEqual({
       type: 'code',
       language: '',
@@ -57,6 +62,7 @@ describe('code block - parse html', () => {
 
     // parse
     let res = parsePreHtmlConf.parseElemHtml($pre[0], children, editor)
+
     expect(res).toEqual({
       type: 'pre',
       children: [

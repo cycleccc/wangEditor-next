@@ -3,29 +3,32 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import {
-  Editor,
-  Transforms,
-  Location,
-  Point,
-  Element as SlateElement,
-  Descendant,
-  NodeEntry,
-  Node,
   BaseText,
+  Descendant,
+  Editor,
+  Element as SlateElement,
+  Location,
+  Node,
+  NodeEntry,
   Path,
+  Point,
+  Transforms,
 } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+
 import { withSelection } from './with-selection'
 
 // table cell 内部的删除处理
 function deleteHandler(newEditor: IDomEditor): boolean {
   const { selection } = newEditor
-  if (selection == null) return false
+
+  if (selection == null) { return false }
 
   const [cellNodeEntry] = Editor.nodes(newEditor, {
     match: n => DomEditor.checkNodeType(n, 'table-cell'),
   })
+
   if (cellNodeEntry) {
     const [, cellPath] = cellNodeEntry
     const start = Editor.start(newEditor, cellPath)
@@ -48,13 +51,13 @@ function isTableLocation(editor: IDomEditor, location: Location): boolean {
     at: location,
     match: n => {
       const type = DomEditor.getNodeType(n)
+
       return type === 'table'
     },
   })
-  let hasTable = false
-  for (const table of tables) {
-    hasTable = true // 找到了 table
-  }
+
+  const hasTable = !![...tables].find(() => true)
+
   return hasTable
 }
 
@@ -73,6 +76,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
   // 重写 insertBreak - cell 内换行，只换行文本，不拆分 node
   newEditor.insertBreak = () => {
     const selectedNode = DomEditor.getSelectedNodeByType(newEditor, 'table')
+
     if (selectedNode != null) {
       // 选中了 table ，则在 cell 内换行
       newEditor.insertText('\n')
@@ -86,15 +90,19 @@ function withTable<T extends IDomEditor>(editor: T): T {
   // 重写 delete - cell 内删除，只删除文字，不删除 node
   newEditor.deleteBackward = unit => {
     const res = deleteHandler(newEditor)
-    if (res) return // 命中 table cell ，自己处理删除
+
+    if (res) { return } // 命中 table cell ，自己处理删除
 
     // 防止从 table 后面的 p 删除时，删除最后一个 cell - issues/4221
     const { selection } = newEditor
+
     if (selection) {
       const before = Editor.before(newEditor, selection) // 前一个 location
+
       if (before) {
         const isTableOnBeforeLocation = isTableLocation(newEditor, before) // before 是否是 table
         // 如果前面是 table, 当前是 paragraph ，则不执行删除。否则会删除 table 最后一个 cell
+
         if (isTableOnBeforeLocation && DomEditor.getSelectedNodeByType(newEditor, 'paragraph')) {
           return
         }
@@ -108,6 +116,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
   // 重写 handleTab 在table内按tab时跳到下一个单元格
   newEditor.handleTab = () => {
     const selectedNode = DomEditor.getSelectedNodeByType(newEditor, 'table')
+
     if (selectedNode) {
       const above = Editor.above(editor) as NodeEntry<SlateElement>
 
@@ -117,6 +126,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
       }
 
       let next = Editor.next(editor)
+
       if (next) {
         if (next[0] && (next[0] as BaseText).text) {
           // 多个单元格同时选中按 tab 导致错位修复
@@ -127,8 +137,10 @@ function withTable<T extends IDomEditor>(editor: T): T {
         const topLevelNodes = newEditor.children || []
         const topLevelNodesLength = topLevelNodes.length
         // 在最后一个单元格按tab时table末尾如果没有p则插入p后光标切到p上
+
         if (DomEditor.checkNodeType(topLevelNodes[topLevelNodesLength - 1], 'table')) {
           const p = DomEditor.genEmptyParagraph()
+
           Transforms.insertNodes(newEditor, p, { at: [topLevelNodesLength] })
           // 在表格末尾插入p后再次执行使光标切到p上
           newEditor.handleTab()
@@ -142,7 +154,8 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
   newEditor.deleteForward = unit => {
     const res = deleteHandler(newEditor)
-    if (res) return // 命中 table cell ，自己处理删除
+
+    if (res) { return } // 命中 table cell ，自己处理删除
 
     // 执行默认的删除
     deleteForward(unit)
@@ -151,6 +164,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
   // 重新 normalize
   newEditor.normalizeNode = ([node, path]) => {
     const type = DomEditor.getNodeType(node)
+
     if (type !== 'table') {
       // 未命中 table ，执行默认的 normalizeNode
       return normalizeNode([node, path])
@@ -158,8 +172,10 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     // -------------- table 是 editor 最后一个节点，需要后面插入 p --------------
     const isLast = DomEditor.isLastNode(newEditor, node)
+
     if (isLast) {
       const p = DomEditor.genEmptyParagraph()
+
       Transforms.insertNodes(newEditor, p, { at: [path[0] + 1] })
     }
   }
@@ -167,6 +183,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
   // 重写 insertData - 粘贴文本
   newEditor.insertData = (data: DataTransfer) => {
     const tableNode = DomEditor.getSelectedNodeByType(newEditor, 'table')
+
     if (tableNode == null) {
       insertData(data) // 执行默认的 insertData
       return
@@ -187,18 +204,21 @@ function withTable<T extends IDomEditor>(editor: T): T {
   // 重写 table-cell 中的全选
   newEditor.selectAll = () => {
     const selection = newEditor.selection
+
     if (selection == null) {
       selectAll()
       return
     }
 
     const cell = DomEditor.getSelectedNodeByType(newEditor, 'table-cell')
+
     if (cell == null) {
       selectAll()
       return
     }
 
     const { anchor, focus } = selection
+
     if (!Path.equals(anchor.path.slice(0, 3), focus.path.slice(0, 3))) {
       // 选中了多个 cell ，忽略
       selectAll()
@@ -207,6 +227,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     const text = Node.string(cell)
     const textLength = text.length
+
     if (textLength === 0) {
       selectAll()
       return
@@ -219,6 +240,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
       anchor: start,
       focus: end,
     }
+
     newEditor.select(newSelection) // 选中 table-cell 内部的全部文字
   }
 

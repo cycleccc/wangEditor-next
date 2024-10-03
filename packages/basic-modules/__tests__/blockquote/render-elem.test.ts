@@ -14,6 +14,7 @@ describe('blockquote - render elem', () => {
 
     const elem = { type: 'blockquote', children: [] }
     const vnode = renderBlockQuoteConf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('blockquote')
   })
 })

@@ -22,26 +22,26 @@ import {
 } from './utils/position'
 
 export {
-  withYjs,
-  WithYjsOptions,
-  YjsEditor,
+  // Base cursor plugin
+  CursorEditor,
+  CursorState,
+  CursorStateChangeEvent,
+  relativePositionToSlatePoint,
+  // Utils
+  RelativeRange,
+  relativeRangeToSlateRange,
+  RemoteCursorChangeEventListener,
+  slateNodesToInsertDelta,
+  slatePointToRelativePosition,
+  slateRangeToRelativeRange,
+  withCursors,
+  WithCursorsOptions,
   // History plugin
   withYHistory,
   WithYHistoryOptions,
+  withYjs,
+  WithYjsOptions,
   YHistoryEditor,
-  // Base cursor plugin
-  CursorEditor,
-  WithCursorsOptions,
-  withCursors,
-  CursorState,
-  RemoteCursorChangeEventListener,
-  CursorStateChangeEvent,
-  // Utils
-  RelativeRange,
+  YjsEditor,
   yTextToSlateElement,
-  slateNodesToInsertDelta,
-  slateRangeToRelativeRange,
-  relativeRangeToSlateRange,
-  slatePointToRelativePosition,
-  relativePositionToSlatePoint,
 }

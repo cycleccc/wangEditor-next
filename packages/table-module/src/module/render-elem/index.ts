@@ -3,9 +3,9 @@
  * @author wangfupeng
  */
 
-import renderTable from './render-table'
-import renderTableRow from './render-row'
 import renderTableCell from './render-cell'
+import renderTableRow from './render-row'
+import renderTable from './render-table'
 
 export const renderTableConf = {
   type: 'table',

@@ -4,7 +4,8 @@
  */
 
 import { Descendant } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { VNode } from 'snabbdom'
+
 import { addVnodeStyle } from '../../utils/vdom'
 import { FontSizeAndFamilyText } from './custom-types'
 
@@ -16,7 +17,7 @@ import { FontSizeAndFamilyText } from './custom-types'
  */
 export function renderStyle(node: Descendant, vnode: VNode): VNode {
   const { fontSize, fontFamily } = node as FontSizeAndFamilyText
-  let styleVnode: VNode = vnode
+  const styleVnode: VNode = vnode
 
   if (fontSize) {
     addVnodeStyle(styleVnode, { fontSize })

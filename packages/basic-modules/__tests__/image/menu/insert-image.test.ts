@@ -3,16 +3,11 @@
  * @author wangfupeng
  */
 
+import { waitFor } from '@testing-library/dom'
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import InsertImage from '../../../src/modules/image/menu/InsertImage'
-import { waitFor } from '@testing-library/dom'
-import * as helper from '../../../src/modules/image/helper'
-
-// 在测试文件中
-// beforeEach(() => {
-//   jest.spyOn(helper, 'insertImageNode').mockImplementation(jest.fn())
-// })
 
 describe('insert image menu', () => {
   const menu = new InsertImage()
@@ -66,16 +61,19 @@ describe('insert image menu', () => {
 
     // Generate modal content and simulate button click
     const elem = menu.getModalContentElem(editor)
+
     expect(elem).not.toBeNull()
 
     // Non-null assertion for button
     const button = elem.querySelector(`#${(menu as any).buttonId}`) as HTMLButtonElement
+
     expect(button).not.toBeNull()
 
     // Non-null assertion for input fields
     const srcInput = elem.querySelector(`#${(menu as any).srcInputId}`) as HTMLInputElement
     const altInput = elem.querySelector(`#${(menu as any).altInputId}`) as HTMLInputElement
     const hrefInput = elem.querySelector(`#${(menu as any).hrefInputId}`) as HTMLInputElement
+
     expect(srcInput).not.toBeNull()
     expect(altInput).not.toBeNull()
     expect(hrefInput).not.toBeNull()
@@ -96,7 +94,7 @@ describe('insert image menu', () => {
       expect.any(Object),
       'https://example.com/new-image.jpg',
       'new alt text',
-      'https://example.com'
+      'https://example.com',
     )
 
     editor.select(startLocation)
@@ -106,6 +104,7 @@ describe('insert image menu', () => {
   it('focus input asynchronously', async () => {
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).srcInputId) as HTMLInputElement
+
     jest.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {

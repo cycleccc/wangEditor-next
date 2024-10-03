@@ -3,7 +3,6 @@
  * @author wangfupeng
  */
 
-import { IDomEditor } from '../../src'
 import createEditor from '../../src/create/create-editor'
 
 describe('convert to html or text', () => {
@@ -23,6 +22,7 @@ describe('convert to html or text', () => {
       return e
     }
     const editorConfig = { hoverbarKeys: {} }
+
     editorConfig.hoverbarKeys = {
       link: {
         menuKeys: ['editLink', 'unLink', 'viewLink'],
@@ -37,14 +37,16 @@ describe('convert to html or text', () => {
       plugins: [fn],
       config: editorConfig,
     })
+
     expect(editor.getHtml()).toBe('<div>hello</div>')
   })
 
   it('repeat create editor by same selector', () => {
-    let editor = createEditor({
+    const editor = createEditor({
       selector: container,
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     expect(editor.getHtml()).toBe('<div>hello</div>')
     expect(() => {
       createEditor({
@@ -59,14 +61,16 @@ describe('convert to html or text', () => {
       // 不传入 selector ，只有 content
       content: [{ type: 'paragraph', children: [{ text: 'hello' }] }],
     })
+
     expect(editor.getHtml()).toBe('<div>hello</div>')
   })
 
   it('convert to html if not give selector option', () => {
     const editor = createEditor({
       // 不传入 selector ，只有 html
-      html: `hello`,
+      html: 'hello',
     })
+
     expect(editor.getHtml()).toBe('<div>hello</div>')
   })
 
@@ -78,6 +82,7 @@ describe('convert to html or text', () => {
         { type: 'paragraph', children: [{ text: 'world' }] },
       ],
     })
+
     expect(editor.getText()).toBe('hello\nworld')
   })
 
@@ -89,6 +94,7 @@ describe('convert to html or text', () => {
         { type: 'paragraph', children: [{ text: 'world' }] },
       ],
     })
+
     expect(editor.getText()).toBe('hello\nworld')
   })
 })

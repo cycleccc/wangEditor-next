@@ -15,8 +15,9 @@ describe('todo - elem to html', () => {
       children: [{ text: '' }],
     }
     const html1 = todoToHtmlConf.elemToHtml(todoNode1, 'hello')
+
     expect(html1).toBe(
-      `<div data-w-e-type="todo"><input type="checkbox" disabled checked>hello</div>`
+      '<div data-w-e-type="todo"><input type="checkbox" disabled checked>hello</div>',
     )
 
     const todoNode2 = {
@@ -25,6 +26,7 @@ describe('todo - elem to html', () => {
       children: [{ text: '' }],
     }
     const html2 = todoToHtmlConf.elemToHtml(todoNode2, 'hello')
-    expect(html2).toBe(`<div data-w-e-type="todo"><input type="checkbox" disabled >hello</div>`)
+
+    expect(html2).toBe('<div data-w-e-type="todo"><input type="checkbox" disabled >hello</div>')
   })
 })

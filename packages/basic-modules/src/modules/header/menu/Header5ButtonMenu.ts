@@ -7,6 +7,7 @@ import HeaderButtonMenuBase from './HeaderButtonMenuBase'
 
 class Header5ButtonMenu extends HeaderButtonMenuBase {
   title = 'H5'
+
   type = 'header5'
 }
 

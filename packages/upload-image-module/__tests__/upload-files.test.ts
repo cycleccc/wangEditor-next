@@ -1,9 +1,11 @@
-import uploadImages from '../src/module/upload-images'
-import createEditor from '../../../tests/utils/create-editor'
 import * as core from '@wangeditor-next/core'
+
+import createEditor from '../../../tests/utils/create-editor'
+import uploadImages from '../src/module/upload-images'
 
 function mockFile(filename: string) {
   const file = new File(['123'], filename)
+
   return file
 }
 
@@ -11,6 +13,7 @@ describe('Upload image menu upload files util', () => {
   test('uploadImages should do nothing if give null value to fileList argument', async () => {
     const editor = createEditor()
     const res = await uploadImages(editor, null)
+
     expect(res).toBeUndefined()
   })
 
@@ -52,14 +55,13 @@ describe('Upload image menu upload files util', () => {
   })
 
   test('uploadImages should invoke core createUploader if not give customUpload to config', async () => {
-    const fn = jest.fn().mockImplementation(
-      () =>
-        // 这里需要返回一个 duck 类型的 uppy 对象，防止后面代码执行报错
-        ({
-          addFile: jest.fn(),
-          upload: jest.fn(),
-        } as any)
-    )
+    // 这里需要返回一个 duck 类型的 uppy 对象，防止后面代码执行报错
+    const fn = jest.fn().mockImplementation(() => {
+      return {
+        addFile: jest.fn(),
+        upload: jest.fn(),
+      } as any
+    })
     const editor = createEditor()
 
     jest.spyOn(core, 'createUploader').mockImplementation(fn)

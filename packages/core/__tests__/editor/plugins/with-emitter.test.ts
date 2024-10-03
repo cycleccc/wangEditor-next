@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 import { withEmitter } from '../../../src/editor/plugins/with-emitter'
+import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 function createEditor(...args) {
   return withEmitter(createCoreEditor(...args))
@@ -51,8 +51,8 @@ describe('eventBus API', () => {
 
     let n = 1
 
-    const fn1 = jest.fn(() => n++)
-    const fn2 = jest.fn(() => n++)
+    const fn1 = jest.fn(() => n += 1)
+    const fn2 = jest.fn(() => n += 1)
 
     editor.once('key1', fn1)
     editor.once('key1', fn2)

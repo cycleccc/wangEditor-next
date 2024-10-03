@@ -1,5 +1,8 @@
-import { MergeNodeOperation, Node, Path, Text } from 'slate'
+import {
+  MergeNodeOperation, Node, Path, Text,
+} from 'slate'
 import * as Y from 'yjs'
+
 import { Delta } from '../../module/custom-types'
 import { cloneInsertDeltaDeep } from '../../utils/clone'
 import { yTextToInsertDelta } from '../../utils/delta'
@@ -20,11 +23,13 @@ export function mergeNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MergeNodeO
 
   if (!prev.yTarget || !target.yTarget) {
     const { yParent: parent, textRange, slateTarget } = target
+
     if (!slateTarget) {
       throw new Error('Expected Slate target node for merge op.')
     }
 
     const prevSibling = Node.get(slateRoot, Path.previous(op.path))
+
     if (!Text.isText(prevSibling)) {
       throw new Error('Path points to Y.Text but not a Slate text node.')
     }
@@ -33,6 +38,7 @@ export function mergeNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MergeNodeO
     const prevSiblingProps = getProperties(prevSibling)
     const unsetProps = Object.keys(targetProps).reduce((acc, key) => {
       const prevSiblingHasProp = key in prevSiblingProps
+
       return prevSiblingHasProp ? acc : { ...acc, [key]: null }
     }, {})
 
@@ -50,7 +56,7 @@ export function mergeNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MergeNodeO
     sharedRoot,
     target.yTarget,
     targetDelta,
-    deltaApplyYOffset
+    deltaApplyYOffset,
   )
 
   const applyDelta: Delta = [{ retain: deltaApplyYOffset }, ...clonedDelta]
@@ -66,6 +72,6 @@ export function mergeNode(sharedRoot: Y.XmlText, slateRoot: Node, op: MergeNodeO
     prev.yTarget,
     storedPositions,
     clonedDelta,
-    deltaApplyYOffset
+    deltaApplyYOffset,
   )
 }

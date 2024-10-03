@@ -5,7 +5,7 @@
 
 export const text = 'const a = 100;'
 
-export const textNode = { text: text }
+export const textNode = { text }
 
 export const language = 'javascript'
 

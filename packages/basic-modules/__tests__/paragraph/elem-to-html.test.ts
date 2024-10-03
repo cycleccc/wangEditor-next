@@ -1,9 +1,7 @@
-import { html } from 'dom7'
 /**
  * @description paragraph - elem to html test
  * @author wangfupeng
  */
-
 import { pToHtmlConf } from '../../src/modules/paragraph/elem-to-html'
 
 describe('paragraph - elem to html', () => {
@@ -12,6 +10,7 @@ describe('paragraph - elem to html', () => {
 
     const elem = { type: 'paragraph', children: [] }
     const html = pToHtmlConf.elemToHtml(elem, 'hello')
+
     expect(html).toBe('<p>hello</p>')
   })
 
@@ -20,6 +19,7 @@ describe('paragraph - elem to html', () => {
 
     const elem = { type: 'paragraph', children: [] }
     const html = pToHtmlConf.elemToHtml(elem, '')
+
     expect(html).toBe('<p><br></p>')
   })
 })

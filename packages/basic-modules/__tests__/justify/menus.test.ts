@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import JustifyCenterMenu from '../../src/modules/justify/menu/JustifyCenterMenu'
 import JustifyJustifyMenu from '../../src/modules/justify/menu/JustifyJustifyMenu'
@@ -57,18 +58,22 @@ describe('justify menus', () => {
 
     centerMenu.exec(editor, '')
     const p1 = editor.getElemsByTypePrefix('paragraph')[0]
+
     expect(p1.textAlign).toBe('center')
 
     justifyMenu.exec(editor, '')
     const p2 = editor.getElemsByTypePrefix('paragraph')[0]
+
     expect(p2.textAlign).toBe('justify')
 
     leftMenu.exec(editor, '')
     const p3 = editor.getElemsByTypePrefix('paragraph')[0]
+
     expect(p3.textAlign).toBe('left')
 
     rightMenu.exec(editor, '')
     const p4 = editor.getElemsByTypePrefix('paragraph')[0]
+
     expect(p4.textAlign).toBe('right')
   })
 })

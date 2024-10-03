@@ -3,9 +3,9 @@
  * @author wangfupeng
  */
 
-import ColorMenu from './ColorMenu'
 import BgColorMenu from './BgColorMenu'
-import { genColors, genBgColors } from './config'
+import ColorMenu from './ColorMenu'
+import { genBgColors, genColors } from './config'
 
 export const colorMenuConf = {
   key: 'color',

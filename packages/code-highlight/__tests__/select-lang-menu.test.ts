@@ -4,9 +4,12 @@
  */
 
 import { IDomEditor } from '@wangeditor-next/core'
+
 import createEditor from '../../../tests/utils/create-editor'
-import { content, codeLocation, paragraphLocation, language } from './content'
 import SelectLangMenu from '../src/module/menu/SelectLangMenu'
+import {
+  codeLocation, content, language, paragraphLocation,
+} from './content'
 
 describe('code-highlight select lang menu', () => {
   let editor: IDomEditor | null = null
@@ -24,7 +27,7 @@ describe('code-highlight select lang menu', () => {
 
   afterAll(() => {
     // 销毁 editor
-    if (editor == null) return
+    if (editor == null) { return }
     editor.destroy()
     editor = null
 
@@ -33,7 +36,7 @@ describe('code-highlight select lang menu', () => {
   })
 
   it('get langs and selected one', () => {
-    if (editor == null || menu == null) throw new Error('editor or menu is null')
+    if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // select codeNode
     editor.select(codeLocation)
@@ -45,23 +48,26 @@ describe('code-highlight select lang menu', () => {
 
     // 其中有一个 'plain text'
     const hasPlainText = langs.some(lang => lang.text === 'plain text' && lang.value === '')
+
     expect(hasPlainText).toBeTruthy()
 
     // 选中的语言
     const selectedLangs = langs.filter(lang => lang.selected)
+
     expect(selectedLangs.length).toBe(1)
     const selectedLang: any = selectedLangs[0] || {}
+
     expect(selectedLang.value).toBe(language)
   })
 
   it('menu active is always false', () => {
-    if (editor == null || menu == null) throw new Error('editor or menu is null')
+    if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     expect(menu.isActive(editor)).toBeFalsy()
   })
 
   it('get menu value (selected lang)', () => {
-    if (editor == null || menu == null) throw new Error('editor or menu is null')
+    if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // select codeNode
     editor.select(codeLocation)
@@ -73,7 +79,7 @@ describe('code-highlight select lang menu', () => {
   })
 
   it('menu disable', () => {
-    if (editor == null || menu == null) throw new Error('editor or menu is null')
+    if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // deselect
     editor.deselect()
@@ -89,14 +95,14 @@ describe('code-highlight select lang menu', () => {
   })
 
   it('menu exec (change lang)', done => {
-    if (editor == null || menu == null) throw new Error('editor or menu is null')
+    if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // select codeNode
     editor.select(codeLocation)
     menu.exec(editor, 'html') // change lang
 
     setTimeout(() => {
-      if (editor == null || menu == null) return
+      if (editor == null || menu == null) { return }
 
       editor.select(codeLocation)
       expect(menu.getValue(editor)).toBe('html')
@@ -105,14 +111,14 @@ describe('code-highlight select lang menu', () => {
   })
 
   it('menu exec (without lang)', done => {
-    if (editor == null || menu == null) throw new Error('editor or menu is null')
+    if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // select codeNode
     editor.select(codeLocation)
     menu.exec(editor, 'hello') // change lang
 
     setTimeout(() => {
-      if (editor == null || menu == null) return
+      if (editor == null || menu == null) { return }
 
       editor.select(codeLocation)
       expect(menu.getValue(editor)).toBe('')

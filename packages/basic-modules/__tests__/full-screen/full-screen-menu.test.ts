@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
+import { t } from '@wangeditor-next/core'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { CANCEL_FULL_SCREEN_SVG, FULL_SCREEN_SVG } from '../../src/constants/icon-svg'
 import FullScreen from '../../src/modules/full-screen/menu/FullScreen'
-import { t } from '@wangeditor-next/core'
 
 describe('full screen menu', () => {
   const editor = createEditor()
@@ -39,6 +40,7 @@ describe('full screen menu', () => {
 
   it('get icon', done => {
     let svg = menu.getIcon(editor)
+
     expect(svg).toBe(FULL_SCREEN_SVG)
     menu.exec(editor, '')
     setTimeout(() => {

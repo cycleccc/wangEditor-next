@@ -4,10 +4,11 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import { renderStyle } from './render-style'
-import { styleToHtml } from './style-to-html'
+
 import { lineHeightMenuConf } from './menu/index'
 import { parseStyleHtml } from './parse-style-html'
+import { renderStyle } from './render-style'
+import { styleToHtml } from './style-to-html'
 
 const lineHeight: Partial<IModuleConf> = {
   renderStyle,

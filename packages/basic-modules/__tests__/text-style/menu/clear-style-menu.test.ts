@@ -4,11 +4,12 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import ClearStyleMenu from '../../../src/modules/text-style/menu/ClearStyleMenu'
 
 describe('clear style menu', () => {
-  let editor = createEditor()
+  const editor = createEditor()
   const startLocation = Editor.start(editor, [])
   const menu = new ClearStyleMenu()
 
@@ -41,6 +42,7 @@ describe('clear style menu', () => {
     menu.exec(editor, '') // 清空样式
 
     const marks = Editor.marks(editor) as any
+
     expect(marks.bold).toBeUndefined()
     expect(marks.italic).toBeUndefined()
   })

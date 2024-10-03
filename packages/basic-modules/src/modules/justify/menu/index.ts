@@ -3,10 +3,10 @@
  * @author wangfupeng
  */
 
-import JustifyLeftMenu from './JustifyLeftMenu'
-import JustifyRightMenu from './JustifyRightMenu'
 import JustifyCenterMenu from './JustifyCenterMenu'
 import JustifyJustifyMenu from './JustifyJustifyMenu'
+import JustifyLeftMenu from './JustifyLeftMenu'
+import JustifyRightMenu from './JustifyRightMenu'
 
 export const justifyLeftMenuConf = {
   key: 'justifyLeft',

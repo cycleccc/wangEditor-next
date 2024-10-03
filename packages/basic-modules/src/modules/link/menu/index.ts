@@ -3,11 +3,11 @@
  * @author wangfupeng
  */
 
-import InsertLink from './InsertLink'
+import { genLinkMenuConfig } from './config'
 import EditLink from './EditLink'
+import InsertLink from './InsertLink'
 import UnLink from './UnLink'
 import ViewLink from './ViewLink'
-import { genLinkMenuConfig } from './config'
 
 const config = genLinkMenuConfig() // menu config
 
@@ -44,4 +44,6 @@ const viewLinkMenuConf = {
   },
 }
 
-export { insertLinkMenuConf, editLinkMenuConf, unLinkMenuConf, viewLinkMenuConf }
+export {
+  editLinkMenuConf, insertLinkMenuConf, unLinkMenuConf, viewLinkMenuConf,
+}

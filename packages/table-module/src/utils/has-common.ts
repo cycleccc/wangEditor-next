@@ -1,6 +1,7 @@
 import { Editor, Node, Span } from 'slate'
-import { WithTableOptions } from './options'
+
 import { isOfType } from './is-of-type'
+import { WithTableOptions } from './options'
 
 /**
  * Determines whether two paths belong to the same types by checking

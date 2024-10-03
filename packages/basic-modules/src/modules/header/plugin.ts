@@ -3,11 +3,11 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Editor, Transforms } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 function withHeader<T extends IDomEditor>(editor: T): T {
-  const { insertBreak, insertNode } = editor
+  const { insertBreak } = editor
   const newEditor = editor
 
   // 重写 insertBreak - header 末尾回车时要插入 paragraph
@@ -15,6 +15,7 @@ function withHeader<T extends IDomEditor>(editor: T): T {
     const [match] = Editor.nodes(newEditor, {
       match: n => {
         const type = DomEditor.getNodeType(n)
+
         return type.startsWith('header') // 匹配 node.type 是 header 开头的 node
       },
       universal: true,
@@ -31,6 +32,7 @@ function withHeader<T extends IDomEditor>(editor: T): T {
     // 如果在行末则插入一个空 p，否则正常换行
     if (isAtLineEnd) {
       const p = { type: 'paragraph', children: [{ text: '' }] }
+
       Transforms.insertNodes(newEditor, p, { mode: 'highest' })
     } else {
       insertBreak()

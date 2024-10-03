@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import BlockquoteMenu from '../../src/modules/blockquote/menu/BlockquoteMenu'
 
@@ -46,11 +47,13 @@ describe('blockquote menu', () => {
 
     menu.exec(editor, '') // 转换为 blockquote
     const blockquotes1 = editor.getElemsByTypePrefix('blockquote')
+
     expect(blockquotes1.length).toBe(1)
     expect(menu.isActive(editor)).toBeTruthy()
 
     menu.exec(editor, '') // 取消 blockquote
     const blockquotes2 = editor.getElemsByTypePrefix('blockquote')
+
     expect(blockquotes2.length).toBe(0)
     expect(menu.isActive(editor)).toBeFalsy()
   })

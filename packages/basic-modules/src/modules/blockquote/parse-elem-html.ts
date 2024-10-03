@@ -3,21 +3,22 @@
  * @author wangfupeng
  */
 
-import { Descendant, Text } from 'slate'
-import $, { DOMElement } from '../../utils/dom'
 import { IDomEditor } from '@wangeditor-next/core'
+import { Descendant, Text } from 'slate'
+
+import $, { DOMElement } from '../../utils/dom'
 import { BlockQuoteElement } from './custom-types'
 
 function parseHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): BlockQuoteElement {
   const $elem = $(elem)
 
   children = children.filter(child => {
-    if (Text.isText(child)) return true
-    if (editor.isInline(child)) return true
+    if (Text.isText(child)) { return true }
+    if (editor.isInline(child)) { return true }
     return false
   })
 

@@ -3,10 +3,11 @@
  * @author luochao
  */
 
-import createEditor from '../../../tests/utils/create-editor'
-import withTable from '../src/module/plugin'
 import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
+
+import createEditor from '../../../tests/utils/create-editor'
+import withTable from '../src/module/plugin'
 
 describe('TableModule module', () => {
   describe('module plugin', () => {
@@ -20,6 +21,7 @@ describe('TableModule module', () => {
       } as slate.Element)
 
       const mockFn = jest.fn()
+
       newEditor.insertText = mockFn
 
       newEditor.insertBreak()
@@ -37,6 +39,7 @@ describe('TableModule module', () => {
       } as slate.Element)
 
       const mockFn = jest.fn()
+
       slate.Editor.insertText = mockFn
 
       newEditor.insertData({ getData: () => 'test' } as unknown as DataTransfer)
@@ -47,6 +50,7 @@ describe('TableModule module', () => {
     test('use withTable plugin when insertData should invoke original insertData if selection not in table node', () => {
       const editor = createEditor()
       const mockInsertDataFn = jest.fn()
+
       editor.insertData = mockInsertDataFn
 
       const newEditor = withTable(editor)

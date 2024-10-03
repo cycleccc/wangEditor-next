@@ -4,28 +4,29 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import withTable from './plugin'
-import { renderTableConf, renderTableRowConf, renderTableCellConf } from './render-elem/index'
-import { tableToHtmlConf, tableRowToHtmlConf, tableCellToHtmlConf } from './elem-to-html'
-import { preParseTableHtmlConf } from './pre-parse-html'
-import { renderStyle } from './render-style'
-import { styleToHtml } from './style-to-html'
-import { parseStyleHtml } from './parse-style-html'
-import { parseCellHtmlConf, parseRowHtmlConf, parseTableHtmlConf } from './parse-elem-html'
+
+import { tableCellToHtmlConf, tableRowToHtmlConf, tableToHtmlConf } from './elem-to-html'
 import {
-  insertTableMenuConf,
+  deleteTableColConf,
   deleteTableMenuConf,
-  insertTableRowConf,
   deleteTableRowConf,
   insertTableColConf,
-  deleteTableColConf,
-  tableHeaderMenuConf,
-  tableFullWidthMenuConf,
+  insertTableMenuConf,
+  insertTableRowConf,
   mergeTableCellConf,
-  splitTableCellConf,
-  setTablePropertyConf,
   setTableCellPropertyConf,
+  setTablePropertyConf,
+  splitTableCellConf,
+  tableFullWidthMenuConf,
+  tableHeaderMenuConf,
 } from './menu/index'
+import { parseCellHtmlConf, parseRowHtmlConf, parseTableHtmlConf } from './parse-elem-html'
+import { parseStyleHtml } from './parse-style-html'
+import withTable from './plugin'
+import { preParseTableHtmlConf } from './pre-parse-html'
+import { renderTableCellConf, renderTableConf, renderTableRowConf } from './render-elem/index'
+import { renderStyle } from './render-style'
+import { styleToHtml } from './style-to-html'
 
 const table: Partial<IModuleConf> = {
   renderStyle,

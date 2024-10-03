@@ -3,24 +3,27 @@
  * @author wangfupeng
  */
 
-import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
 import { insertImageNode, isInsertImageMenuDisabled } from '@wangeditor-next/basic-modules'
+import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+
 import { UPLOAD_IMAGE_SVG } from '../../constants/svg'
 import $ from '../../utils/dom'
-import { IUploadConfigForImage } from './config'
 import uploadImages from '../upload-images'
+import { IUploadConfigForImage } from './config'
 
 class UploadImage implements IButtonMenu {
   readonly title = t('uploadImgModule.uploadImage')
+
   readonly iconSvg = UPLOAD_IMAGE_SVG
+
   readonly tag = 'button'
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 插入菜单，不需要 value
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 任何时候，都不用激活 menu
     return false
   }
@@ -34,7 +37,7 @@ class UploadImage implements IButtonMenu {
     return editor.getMenuConfig('uploadImage') as IUploadConfigForImage
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(editor: IDomEditor, _value: string | boolean) {
     const { allowedFileTypes = [], customBrowseAndUpload } = this.getMenuConfig(editor)
 
     // 自定义选择图片，并上传，如图床
@@ -45,6 +48,7 @@ class UploadImage implements IButtonMenu {
 
     // 设置选择文件的类型
     let acceptAttr = ''
+
     if (allowedFileTypes.length > 0) {
       acceptAttr = `accept="${allowedFileTypes.join(', ')}"`
     }
@@ -52,12 +56,14 @@ class UploadImage implements IButtonMenu {
     // 添加 file input（每次重新创建 input）
     const $body = $('body')
     const $inputFile = $(`<input type="file" ${acceptAttr} multiple/>`)
+
     $inputFile.hide()
     $body.append($inputFile)
     $inputFile.click()
     // 选中文件
     $inputFile.on('change', () => {
       const files = ($inputFile[0] as HTMLInputElement).files
+
       uploadImages(editor, files) // 上传文件
     })
   }

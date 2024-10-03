@@ -1,19 +1,22 @@
-import { WebsocketProvider } from 'y-websocket'
+import '@wangeditor-next/editor/dist/css/style.css'
+
 import {
+  Boot, IDomEditor, IEditorConfig, IToolbarConfig,
+} from '@wangeditor-next/editor'
+import { Editor, Toolbar } from '@wangeditor-next/editor-for-react'
+import {
+  slateNodesToInsertDelta,
+  withCursors,
   withYHistory,
   withYjs,
-  withCursors,
   YjsEditor,
-  slateNodesToInsertDelta,
 } from '@wangeditor-next/yjs'
 import { EditorContext } from '@wangeditor-next/yjs-for-react'
 import React, { useEffect, useState } from 'react'
 import { Descendant } from 'slate'
+import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
 
-import '@wangeditor-next/editor/dist/css/style.css'
-import { Editor, Toolbar } from '@wangeditor-next/editor-for-react'
-import { IDomEditor, IEditorConfig, IToolbarConfig, Boot } from '@wangeditor-next/editor'
 import { randomCursorData } from '../../utils'
 import { RemoteCursorOverlay } from './Overlay'
 
@@ -21,11 +24,12 @@ const yDoc = new Y.Doc()
 const wsProvider = new WebsocketProvider('ws://localhost:1234', 'wangeditor-next-yjs', yDoc)
 const sharedType = yDoc.get('content', Y.XmlText)
 // console.log('🚀 ~ SimplePage ~ sharedType:', sharedType.toJSON())
+
 Boot.registerPlugin(withYjs(sharedType))
 Boot.registerPlugin(
   withCursors(wsProvider.awareness, {
     data: randomCursorData(),
-  })
+  }),
 )
 Boot.registerPlugin(withYHistory())
 
@@ -85,7 +89,7 @@ export const RemoteCursorsOverlayPage = () => {
   // 及时销毁 editor ，重要！
   useEffect(() => {
     return () => {
-      if (editor == null) return
+      if (editor == null) { return }
       setTimeout(() => {
         editor.destroy() // 组件销毁时，及时销毁编辑器
       }, 300)
@@ -108,7 +112,7 @@ export const RemoteCursorsOverlayPage = () => {
             defaultConfig={editorConfig}
             value={html}
             onCreated={setEditor}
-            onChange={editor => setHtml(editor.getHtml())}
+            onChange={innerEditor => setHtml(innerEditor.getHtml())}
             mode="default"
             style={{ height: '500px', innerWidth: '100%', overflowY: 'hidden' }}
           />

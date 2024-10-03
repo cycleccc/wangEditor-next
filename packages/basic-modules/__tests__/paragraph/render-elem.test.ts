@@ -14,6 +14,7 @@ describe('paragraph - render elem', () => {
 
     const elem = { type: 'paragraph', children: [] }
     const vnode = renderParagraphConf.renderElem(elem, null, editor)
+
     expect(vnode.sel).toBe('p')
   })
 })

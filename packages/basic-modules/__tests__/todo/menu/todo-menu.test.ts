@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import TodoMenu from '../../../src/modules/todo/menu/Todo'
 
@@ -96,6 +97,7 @@ describe('todo-menu', () => {
     menu.exec(editor, '')
 
     const todoElems = editor.getElemsByType('todo')
+
     expect(todoElems.length).toBe(1)
   })
 
@@ -106,6 +108,7 @@ describe('todo-menu', () => {
     menu.exec(editor, '')
 
     const todoElems = editor.getElemsByType('todo')
+
     expect(todoElems.length).toBe(0)
   })
 })

@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import UploadImageMenu from './UploadImageMenu'
 import { genUploadImageConfig } from './config'
+import UploadImageMenu from './UploadImageMenu'
 
 export const uploadImageMenuConf = {
   key: 'uploadImage',

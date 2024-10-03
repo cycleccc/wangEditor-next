@@ -4,13 +4,17 @@
  */
 
 import { IDomEditor, IOption, t } from '@wangeditor-next/core'
-import BaseMenu from './BaseMenu'
+
 import { FONT_FAMILY_SVG } from '../../../constants/icon-svg'
+import BaseMenu from './BaseMenu'
 
 class FontFamilyMenu extends BaseMenu {
   readonly title = t('fontFamily.title')
+
   readonly iconSvg = FONT_FAMILY_SVG
+
   readonly mark = 'fontFamily'
+
   readonly selectPanelWidth = 150
 
   getOptions(editor: IDomEditor): IOption[] {
@@ -33,6 +37,7 @@ class FontFamilyMenu extends BaseMenu {
         })
       } else if (typeof family === 'object') {
         const { name, value } = family
+
         options.push({
           text: name,
           value,
@@ -43,6 +48,7 @@ class FontFamilyMenu extends BaseMenu {
 
     // 设置 selected
     const curValue = this.getValue(editor)
+
     options.forEach(opt => {
       if (opt.value === curValue) {
         opt.selected = true

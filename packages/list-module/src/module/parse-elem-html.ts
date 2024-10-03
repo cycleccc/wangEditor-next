@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
+import { IDomEditor } from '@wangeditor-next/core'
 import { Dom7Array } from 'dom7'
 import { Descendant, Text } from 'slate'
+
 import $, { DOMElement, getTagName } from '../utils/dom'
-import { IDomEditor } from '@wangeditor-next/core'
 import { ListItemElement } from './custom-types'
 
 /**
@@ -16,7 +17,8 @@ import { ListItemElement } from './custom-types'
 function getOrdered($elem: Dom7Array): boolean {
   const $list = $elem.parent()
   const listTagName = getTagName($list)
-  if (listTagName === 'ol') return true
+
+  if (listTagName === 'ol') { return true }
   return false
 }
 
@@ -33,7 +35,7 @@ function getLevel($elem: Dom7Array): number {
   while (tagName === 'ul' || tagName === 'ol') {
     $cur = $cur.parent()
     tagName = getTagName($cur)
-    level++
+    level += 1
   }
 
   return level - 1
@@ -42,13 +44,13 @@ function getLevel($elem: Dom7Array): number {
 function parseItemHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): ListItemElement {
   const $elem = $(elem)
 
   children = children.filter(child => {
-    if (Text.isText(child)) return true
-    if (editor.isInline(child)) return true
+    if (Text.isText(child)) { return true }
+    if (editor.isInline(child)) { return true }
     return false
   })
 
@@ -75,9 +77,9 @@ export const parseItemHtmlConf = {
 }
 
 function parseListHtml(
-  elem: DOMElement,
+  _elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  _editor: IDomEditor,
 ): ListItemElement[] {
   // @ts-ignore flatten 因为可能有 ul/ol 嵌套，重要！！！
   return children.flat(Infinity)

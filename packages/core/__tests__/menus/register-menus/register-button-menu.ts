@@ -3,23 +3,28 @@
  * @author wangfupeng
  */
 
-import { registerMenu, IButtonMenu } from '../../../src/menus/index'
 import { IDomEditor } from '../../../src/editor/interface'
+import { IButtonMenu, registerMenu } from '../../../src/menus/index'
 
 class MyButtonMenu implements IButtonMenu {
   readonly title = 'My Button Menu'
+
   readonly tag = 'button'
-  getValue(editor: IDomEditor) {
+
+  getValue(_editor: IDomEditor) {
     return ''
   }
-  isActive(editor: IDomEditor) {
+
+  isActive(_editor: IDomEditor) {
     return false
   }
-  isDisabled(editor: IDomEditor) {
+
+  isDisabled(_editor: IDomEditor) {
     return false
   }
-  exec(editor: IDomEditor, value: string | boolean) {
-    console.log('do..')
+
+  exec(_editor: IDomEditor, _value: string | boolean) {
+    return false
   }
 }
 

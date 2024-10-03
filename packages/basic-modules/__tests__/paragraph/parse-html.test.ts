@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseParagraphHtmlConf } from '../../src/modules/paragraph/parse-elem-html'
 
@@ -20,6 +21,7 @@ describe('paragraph - parse html', () => {
 
     // parse
     let res = parseParagraphHtmlConf.parseElemHtml($elem[0], [], editor)
+
     expect(res).toEqual({
       type: 'paragraph',
       children: [{ text: 'hello world' }],
@@ -42,6 +44,7 @@ describe('paragraph - parse html', () => {
 
     // parse
     const res = parseParagraphHtmlConf.parseElemHtml($elem[0], children, editor)
+
     expect(res).toEqual({
       type: 'paragraph',
       children: [{ text: 'hello ' }, { text: 'world', bold: true }],

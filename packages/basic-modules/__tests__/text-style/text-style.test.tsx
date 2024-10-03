@@ -3,9 +3,11 @@
  * @author wangfupeng
  */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { jsx } from 'snabbdom'
-import { renderStyle } from '../../src/modules/text-style/render-style'
+
 import { StyledText } from '../../src/modules/text-style/custom-types'
+import { renderStyle } from '../../src/modules/text-style/render-style'
 
 describe('text style - render text style', () => {
   it('render text style', () => {

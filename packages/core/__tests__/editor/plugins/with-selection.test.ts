@@ -4,8 +4,9 @@
  */
 
 import { Editor } from 'slate'
-import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
+
 import { withSelection } from '../../../src/editor/plugins/with-selection'
+import createCoreEditor from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 function createEditor(...args) {
   return withSelection(createCoreEditor(...args))
@@ -37,6 +38,7 @@ describe('editor selection API', () => {
   it('isSelectedAll', () => {
     const p = genParagraph()
     const editor = createEditor({ content: [p] })
+
     expect(editor.isSelectedAll()).toBeFalsy()
 
     editor.select(getStartLocation(editor))

@@ -1,22 +1,29 @@
-import { Editor, Path, Transforms, Node } from 'slate'
 import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+import {
+  Editor, Node, Path, Transforms,
+} from 'slate'
+
 import { MERGE_CELL_SVG } from '../../constants/svg'
-import { EDITOR_TO_SELECTION } from '../weak-maps'
-import { TableCursor } from '../table-cursor'
-import { hasCommon, filledMatrix, isOfType, CellElement } from '../../utils'
+import {
+  CellElement, hasCommon, isOfType,
+} from '../../utils'
 import { TableCellElement } from '../custom-types'
+import { TableCursor } from '../table-cursor'
+import { EDITOR_TO_SELECTION } from '../weak-maps'
 
 class MergeCell implements IButtonMenu {
   readonly title = t('tableModule.mergeCell')
+
   readonly iconSvg = MERGE_CELL_SVG
+
   readonly tag = 'button'
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 无需获取 val
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 无需 active
     return false
   }
@@ -25,8 +32,8 @@ class MergeCell implements IButtonMenu {
     return !this.canMerge(editor)
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
-    if (this.isDisabled(editor)) return
+  exec(editor: IDomEditor, _value: string | boolean) {
+    if (this.isDisabled(editor)) { return }
 
     this.merge(editor)
     // 释放选区
@@ -48,7 +55,7 @@ class MergeCell implements IButtonMenu {
     }
 
     // prettier-ignore
-    const [[, lastPath]] = matrix[matrix.length - 1][matrix[matrix.length - 1].length - 1];
+    const [[, lastPath]] = matrix[matrix.length - 1][matrix[matrix.length - 1].length - 1]
     const [[, firstPath]] = matrix[0][0]
 
     // cannot merge when selection is not in common section
@@ -77,14 +84,13 @@ class MergeCell implements IButtonMenu {
     const [[, basePath]] = selection[0][0]
     const [[, lastPath]] = Node.children(editor, basePath, { reverse: true })
 
-    const matrix = filledMatrix(editor, { at: basePath })
-
     Editor.withoutNormalizing(editor, () => {
       let rowSpan = 0
       let colSpan = 0
-      for (let x = selection.length - 1; x >= 0; x--, rowSpan++) {
+
+      for (let x = selection.length - 1; x >= 0; x -= 1, rowSpan += 1) {
         colSpan = 0
-        for (let y = selection[x].length - 1; y >= 0; y--, colSpan++) {
+        for (let y = selection[x].length - 1; y >= 0; y -= 1, colSpan += 1) {
           const [[, path], { ttb }] = selection[x][y]
 
           // skip first cell and "fake" cells which belong to a cell with a `rowspan`
@@ -97,7 +103,7 @@ class MergeCell implements IButtonMenu {
             Transforms.moveNodes(editor, {
               to: Path.next(lastPath),
               at: childPath,
-            });
+            })
           }
 
           const [[, trPath]] = Editor.nodes(editor, {

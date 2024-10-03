@@ -3,15 +3,16 @@
  * @author wangfupeng
  */
 
-import { Node as SlateNode, Transforms } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
   DomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Node as SlateNode, Transforms } from 'slate'
+
 import $, { Dom7Array, DOMElement } from '../../utils/dom'
 import { genRandomStr } from '../../utils/util'
 import { VideoElement } from '../custom-types'
@@ -25,37 +26,45 @@ function genDomID(): string {
 
 class EditorVideoSizeMenu implements IModalMenu {
   readonly title = t('videoModule.editSize')
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 320
+
   private $content: Dom7Array | null = null
+
   private readonly widthInputId = genDomID()
+
   private readonly heightInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
   private getSelectedVideoNode(editor: IDomEditor): SlateNode | null {
     return DomEditor.getSelectedNodeByType(editor, 'video')
   }
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 插入菜单，不需要 value
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 任何时候，都不用激活 menu
     return false
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(_editor: IDomEditor, _value: string | boolean) {
     // 点击菜单时，弹出 modal 之前，不需要执行其他代码
     // 此处空着即可
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    if (editor.selection == null) return true
+    if (editor.selection == null) { return true }
 
     const videoNode = this.getSelectedVideoNode(editor)
+
     if (videoNode == null) {
       // 选区未处于 video node ，则禁用
       return true
@@ -73,16 +82,18 @@ class EditorVideoSizeMenu implements IModalMenu {
     const [widthContainerElem, inputWidthElem] = genModalInputElems(
       t('videoModule.width'),
       widthInputId,
-      'auto'
+      'auto',
     )
     const $inputWidth = $(inputWidthElem)
     const [heightContainerElem, inputHeightElem] = genModalInputElems(
       t('videoModule.height'),
       heightInputId,
-      'auto'
+      'auto',
     )
     const $inputHeight = $(inputHeightElem)
     const [buttonContainerElem] = genModalButtonElems(buttonId, t('videoModule.ok'))
+
+    const videoNode = this.getSelectedVideoNode(editor) as VideoElement
 
     if (this.$content == null) {
       // 第一次渲染
@@ -104,13 +115,13 @@ class EditorVideoSizeMenu implements IModalMenu {
         if (isPercentage(rawWidth)) {
           width = rawWidth
         } else if (isNumeric(rawWidth)) {
-          width = parseInt(rawWidth) + 'px'
+          width = `${parseInt(rawWidth, 10)}px`
         }
 
         if (isPercentage(rawHeight)) {
           height = rawHeight
         } else if (isNumeric(rawHeight)) {
-          height = parseInt(rawHeight) + 'px'
+          height = `${parseInt(rawHeight, 10)}px`
         }
 
         const { style = {} } = videoNode as VideoElement
@@ -119,11 +130,12 @@ class EditorVideoSizeMenu implements IModalMenu {
         const props: Partial<VideoElement> = {
           style: {
             ...style,
-            width: width,
-            height: height,
+            width,
+            height,
           },
         }
         // 修改尺寸
+
         Transforms.setNodes(editor, props, {
           match: n => DomEditor.checkNodeType(n, 'video'),
         })
@@ -142,12 +154,12 @@ class EditorVideoSizeMenu implements IModalMenu {
     $content.append(heightContainerElem)
     $content.append(buttonContainerElem)
 
-    const videoNode = this.getSelectedVideoNode(editor) as VideoElement
-    if (videoNode == null) return $content[0]
+    if (videoNode == null) { return $content[0] }
 
     // 初始化 input 值
     const { style = {} } = videoNode
     const { width = '', height = '' } = style
+
     $inputWidth.val(width)
     $inputHeight.val(height)
     setTimeout(() => {

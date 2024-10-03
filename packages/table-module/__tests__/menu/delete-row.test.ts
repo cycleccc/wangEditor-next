@@ -1,10 +1,11 @@
-import DeleteRow from '../../src/module/menu/DeleteRow'
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { DEL_ROW_SVG } from '../../src/constants/svg'
-import * as utils from '../../src/utils'
 import locale from '../../src/locale/zh-CN'
-import * as slate from 'slate'
-import * as core from '@wangeditor-next/core'
+import DeleteRow from '../../src/module/menu/DeleteRow'
+import * as utils from '../../src/utils'
 
 jest.mock('../../src/utils', () => ({
   filledMatrix: jest.fn(),
@@ -16,13 +17,14 @@ function setEditorSelection(
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
 describe('Table Module Delete Row Menu', () => {
   test('it should create DeleteRow object', () => {
     const deleteRowMenu = new DeleteRow()
+
     expect(typeof deleteRowMenu).toBe('object')
     expect(deleteRowMenu.tag).toBe('button')
     expect(deleteRowMenu.iconSvg).toBe(DEL_ROW_SVG)
@@ -32,18 +34,21 @@ describe('Table Module Delete Row Menu', () => {
   test('it should get empty string if invoke getValue method', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     expect(deleteRowMenu.getValue(editor)).toBe('')
   })
 
   test('it should get falsy value if invoke isActive method', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     expect(deleteRowMenu.isActive(editor)).toBeFalsy()
   })
 
   test('isDisabled should get truthy value if editor selection is null', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     editor.selection = null
     expect(deleteRowMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -51,6 +56,7 @@ describe('Table Module Delete Row Menu', () => {
   test('isDisabled should get truthy value if editor selection is collapsed', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
@@ -61,6 +67,7 @@ describe('Table Module Delete Row Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is not table cell', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -72,6 +79,7 @@ describe('Table Module Delete Row Menu', () => {
   test('isDisabled should get falsy value if editor current selected node is table cell', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -83,6 +91,7 @@ describe('Table Module Delete Row Menu', () => {
   test('exec should return directly if menu is disabled', () => {
     const deleteRowMenu = new DeleteRow()
     const editor = createEditor()
+
     setEditorSelection(editor, null)
 
     expect(deleteRowMenu.exec(editor, '')).toBeUndefined()
@@ -104,7 +113,7 @@ describe('Table Module Delete Row Menu', () => {
     }))
 
     const path = [0, 1]
-    const fn = function* a() {
+    const fn = function* () {
       yield [
         {
           type: 'table-cell',
@@ -113,8 +122,10 @@ describe('Table Module Delete Row Menu', () => {
         path,
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
     const removeNodesFn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
 
     deleteRowMenu.exec(editor, '')
@@ -141,7 +152,7 @@ describe('Table Module Delete Row Menu', () => {
     }))
 
     const path = [0, 0, 0]
-    const fn = function* a() {
+    const fn = function* () {
       yield [
         {
           type: 'table-cell',
@@ -150,32 +161,42 @@ describe('Table Module Delete Row Menu', () => {
         path,
       ] as slate.NodeEntry<slate.Element>
     }
+
     jest.spyOn(slate.Editor, 'nodes').mockImplementation(() => fn())
     mockedUtils.filledMatrix.mockImplementation(() => {
       return [
         [
           [
             [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 0]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
           [
             [{ type: 'table-cell', children: [{ text: '' }], isHeader: false }, [0, 0, 1]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
         ],
         [
           [
             [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 0]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
           [
             [{ type: 'table-cell', children: [{ text: '' }] }, [0, 1, 1]],
-            { rtl: 1, ltr: 1, ttb: 1, btt: 1 },
+            {
+              rtl: 1, ltr: 1, ttb: 1, btt: 1,
+            },
           ],
         ],
       ]
     })
     const removeNodesFn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
 
     deleteRowMenu.exec(editor, '')

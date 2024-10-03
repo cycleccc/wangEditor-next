@@ -3,18 +3,18 @@
  * @author wangfupeng
  */
 
-import InsertTable from './InsertTable'
-import DeleteTable from './DeleteTable'
-import InsertRow from './InsertRow'
-import DeleteRow from './DeleteRow'
-import InsertCol from './InsertCol'
+import CellProperty from './CellProperty'
 import DeleteCol from './DeleteCol'
-import TableHander from './TableHeader'
+import DeleteRow from './DeleteRow'
+import DeleteTable from './DeleteTable'
 import FullWidth from './FullWidth'
+import InsertCol from './InsertCol'
+import InsertRow from './InsertRow'
+import InsertTable from './InsertTable'
 import MergeCell from './MergeCell'
 import SplitCell from './SplitCell'
+import TableHander from './TableHeader'
 import TableProperty from './TableProperty'
-import CellProperty from './CellProperty'
 
 export const insertTableMenuConf = {
   key: 'insertTable',

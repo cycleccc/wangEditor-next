@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../tests/utils/create-editor'
 import videoModule from '../src'
 
@@ -20,8 +21,9 @@ describe('video - pre parse html', () => {
 
     // pre parse
     const res = preParseHtmlConf.preParseHtml($iframe[0])
+
     expect(res.outerHTML).toBe(
-      '<div data-w-e-type="video" data-w-e-is-void="" style="text-align: center;"><iframe></iframe></div>'
+      '<div data-w-e-type="video" data-w-e-is-void="" style="text-align: center;"><iframe></iframe></div>',
     )
   })
 
@@ -33,8 +35,9 @@ describe('video - pre parse html', () => {
 
     // pre parse
     const res = preParseHtmlConf.preParseHtml($video[0])
+
     expect(res.outerHTML).toBe(
-      '<div data-w-e-type="video" data-w-e-is-void="" style="text-align: center;"><video></video></div>'
+      '<div data-w-e-type="video" data-w-e-is-void="" style="text-align: center;"><video></video></div>',
     )
   })
 
@@ -46,8 +49,9 @@ describe('video - pre parse html', () => {
 
     // pre parse
     const res = preParseHtmlConf.preParseHtml($video[0])
+
     expect(res.outerHTML).toBe(
-      '<div data-w-e-type="video" data-w-e-is-void="" style="text-align: center;"><video></video></div>'
+      '<div data-w-e-type="video" data-w-e-is-void="" style="text-align: center;"><video></video></div>',
     )
   })
 })
@@ -58,7 +62,7 @@ describe('video - parse html', () => {
   it('iframe', () => {
     const iframeHtml = '<iframe src="xxx" width="500" height="300"></iframe>'
     const $container = $(
-      `<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">${iframeHtml}</div>`
+      `<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">${iframeHtml}</div>`,
     )
 
     // match selector
@@ -81,7 +85,7 @@ describe('video - parse html', () => {
     const poster = 'xxx.png'
     const videoHtml = `<video poster="${poster}"><source src="${src}"/></video>`
     const $container = $(
-      `<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">${videoHtml}</div>`
+      `<div data-w-e-type="video" data-w-e-is-void style="text-align: center;">${videoHtml}</div>`,
     )
 
     // match selector

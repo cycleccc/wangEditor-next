@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import ViewImageLink from '../../../src/modules/image/menu/ViewImageLink'
 
@@ -39,6 +40,7 @@ describe('view image link menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -56,6 +58,7 @@ describe('view image link menu', () => {
     editor.select(startLocation)
     const value = ''
     const url = 'https://github.com/cycleccc/wangEditor-next'
+
     expect(menu.exec(editor, value)).toBeUndefined()
     const elem = {
       type: 'image',
@@ -65,13 +68,14 @@ describe('view image link menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
       offset: 0,
     })
     expect(() => menu.exec(editor, value)).toThrow(
-      `View image link failed, image.href is '${value}'`
+      `View image link failed, image.href is '${value}'`,
     )
     menu.exec(editor, url)
   })

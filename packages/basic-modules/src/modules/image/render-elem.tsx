@@ -3,10 +3,12 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import throttle from 'lodash.throttle'
 import { Element as SlateElement, Transforms } from 'slate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+
 import $, { Dom7Array } from '../../utils/dom'
 import { ImageElement } from './custom-types'
 
@@ -17,6 +19,7 @@ interface IImageSize {
 
 function genContainerId(editor: IDomEditor, elemNode: SlateElement) {
   const { id } = DomEditor.findKey(editor, elemNode) // node 唯一 id
+
   return `w-e-image-container-${id}`
 }
 
@@ -27,14 +30,15 @@ function renderContainer(
   editor: IDomEditor,
   elemNode: SlateElement,
   imageVnode: VNode,
-  imageInfo: IImageSize
+  imageInfo: IImageSize,
 ): VNode {
   const { width, height } = imageInfo
 
   const style: any = {}
-  if (width) style.width = width
+
+  if (width) { style.width = width }
   /** 不强制设置高度 */
-  if (height) style.height = height
+  if (height) { style.height = height }
 
   const containerId = genContainerId(editor, elemNode)
 
@@ -52,7 +56,7 @@ function renderResizeContainer(
   editor: IDomEditor,
   elemNode: SlateElement,
   imageVnode: VNode,
-  imageInfo: IImageSize
+  imageInfo: IImageSize,
 ) {
   const $body = $('body')
   const containerId = genContainerId(editor, elemNode)
@@ -66,36 +70,12 @@ function renderResizeContainer(
   let $container: Dom7Array | null = null
 
   function getContainerElem(): Dom7Array {
-    const $container = $(`#${containerId}`)
-    if ($container.length === 0) throw new Error('Cannot find image container elem')
-    return $container
-  }
+    const $containerFromDom = $(`#${containerId}`)
 
-  /**
-   * 初始化。监听事件，记录原始数据
-   */
-  function init(clientX: number, parentNodeWidth: number) {
-    $container = getContainerElem()
-
-    // 记录当前 x 坐标值
-    originalX = clientX
-    maxWidth = parentNodeWidth
-
-    // 记录 img 原始宽高
-    const $img = $container.find('img')
-    if ($img.length === 0) throw new Error('Cannot find image elem')
-    originalWith = $img.width()
-    originalHeight = $img.height()
-
-    // 监听 mousemove
-    $body.on('mousemove', onMousemove)
-
-    // 监听 mouseup
-    $body.on('mouseup', onMouseup)
-
-    // 隐藏 hoverbar
-    const hoverbar = DomEditor.getHoverbar(editor)
-    if (hoverbar) hoverbar.hideAndClean()
+    if ($containerFromDom.length === 0) {
+      throw new Error('Cannot find image container elem')
+    }
+    return $containerFromDom
   }
 
   // mouseover callback （节流）
@@ -110,21 +90,21 @@ function renderResizeContainer(
     /**
      * 图片有左右3px margin
      */
-    if (newWidth > maxWidth - 6) return // 超过最大宽度，不处理
+    if (newWidth > maxWidth - 6) { return } // 超过最大宽度，不处理
 
     // 实时修改 img 宽高 -【注意】这里只修改 DOM ，mouseup 时再统一不修改 node
-    if ($container == null) return
-    if (newWidth <= 15 || newHeight <= 15) return // 最小就是 15px
+    if ($container == null) { return }
+    if (newWidth <= 15 || newHeight <= 15) { return } // 最小就是 15px
 
     $container.css('width', `${newWidth}px`)
     $container.css('height', `${newHeight}px`)
   }, 100)
 
-  function onMouseup(e: Event) {
+  function onMouseup(_e: Event) {
     // 取消监听 mousemove
     $body.off('mousemove', onMousemove)
 
-    if ($container == null) return
+    if ($container == null) { return }
     const newWidth = $container.width().toFixed(2)
     const newHeight = $container.height().toFixed(2)
 
@@ -136,26 +116,58 @@ function renderResizeContainer(
         height: `${newHeight}px`,
       },
     }
+
     Transforms.setNodes(editor, props, { at: DomEditor.findPath(editor, elemNode) })
 
     // 取消监听 mouseup
     $body.off('mouseup', onMouseup)
   }
 
-  const style: any = {}
-  if (width) style.width = width
-  if (height) style.height = height
-  style.boxShadow = '0 0 0 1px #B4D5FF' // 自定义 selected 样式，因为有拖拽触手
+  /**
+   * 初始化。监听事件，记录原始数据
+   */
+  function init(clientX: number, parentNodeWidth: number) {
+    $container = getContainerElem()
+
+    // 记录当前 x 坐标值
+    originalX = clientX
+    maxWidth = parentNodeWidth
+
+    // 记录 img 原始宽高
+    const $img = $container.find('img')
+
+    if ($img.length === 0) { throw new Error('Cannot find image elem') }
+    originalWith = $img.width()
+    originalHeight = $img.height()
+
+    // 监听 mousemove
+    $body.on('mousemove', onMousemove)
+
+    // 监听 mouseup
+    $body.on('mouseup', onMouseup)
+
+    // 隐藏 hoverbar
+    const hoverbar = DomEditor.getHoverbar(editor)
+
+    if (hoverbar) { hoverbar.hideAndClean() }
+  }
+
+  const divStyle: any = {}
+
+  if (width) { divStyle.width = width }
+  if (height) { divStyle.height = height }
+  divStyle.boxShadow = '0 0 0 1px #B4D5FF' // 自定义 selected 样式，因为有拖拽触手
 
   return (
     <div
       id={containerId}
-      style={style}
+      style={divStyle}
       className="w-e-image-container w-e-selected-image-container"
       on={{
         // 统一绑定拖拽触手的 mousedown 事件
         mousedown: (e: MouseEvent) => {
           const $target = $(e.target as Element)
+
           if (!$target.hasClass('w-e-image-dragger')) {
             // target 不是 .w-e-image-dragger 拖拽触手，则忽略
             return
@@ -168,7 +180,8 @@ function renderResizeContainer(
 
           // 获取 image 父容器宽度
           const parentNode = DomEditor.getParentNode(editor, elemNode)
-          if (parentNode == null) return
+
+          if (parentNode == null) { return }
           const parentNodeDom = DomEditor.toDOMNode(editor, parentNode)
           const rect = parentNodeDom.getBoundingClientRect()
           // 获取元素的计算样式
@@ -195,13 +208,16 @@ function renderResizeContainer(
 }
 
 function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: IDomEditor): VNode {
-  const { src, alt = '', href = '', style = {} } = elemNode as ImageElement
+  const {
+    src, alt = '', href = '', style = {},
+  } = elemNode as ImageElement
   const { width = '', height = '' } = style
   const selected = DomEditor.isNodeSelected(editor, elemNode) // 图片是否选中
 
   const imageStyle: any = { maxWidth: '100%' }
-  if (width) imageStyle.width = '100%'
-  if (height) imageStyle.height = '100%'
+
+  if (width) { imageStyle.width = '100%' }
+  if (height) { imageStyle.height = '100%' }
 
   // 【注意】void node 中，renderElem 不用处理 children 。core 会统一处理。
   const vnode = <img style={imageStyle} src={src} alt={alt} data-href={href} />

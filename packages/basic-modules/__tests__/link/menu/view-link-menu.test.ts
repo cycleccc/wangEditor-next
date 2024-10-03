@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import ViewLink from '../../../src/modules/link/menu/ViewLink'
 

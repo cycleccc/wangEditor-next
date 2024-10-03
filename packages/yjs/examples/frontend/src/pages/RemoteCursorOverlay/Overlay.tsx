@@ -1,10 +1,10 @@
 import {
   CursorOverlayData,
   useRemoteCursorOverlayPositions,
-  useEditorStatic,
 } from '@wangeditor-next/yjs-for-react'
 import clsx from 'clsx'
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
+
 import { CursorData } from '../../types'
 import { addAlpha } from '../../utils'
 
@@ -66,16 +66,11 @@ type RemoteCursorsProps = PropsWithChildren<{
 }>
 
 export function RemoteCursorOverlay({ className, children }: RemoteCursorsProps) {
-  const editor = useEditorStatic()
   const containerRef = useRef<HTMLDivElement>(null)
-  //   if (!editor) {
-  //     return <div>{children}</div>
-  //   }
+
   const [cursors] = useRemoteCursorOverlayPositions<CursorData>({
     containerRef,
   })
-
-  console.log('🚀 ~ RemoteCursorOverlay ~ cursors:', cursors)
 
   return (
     <div className={clsx('relative', className)} ref={containerRef}>

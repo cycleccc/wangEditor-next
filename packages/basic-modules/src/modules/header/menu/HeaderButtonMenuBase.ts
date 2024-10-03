@@ -4,11 +4,14 @@
  */
 
 import { IButtonMenu, IDomEditor } from '@wangeditor-next/core'
+
 import { getHeaderType, isMenuDisabled, setHeaderType } from '../helper'
 
 abstract class HeaderButtonMenuBase implements IButtonMenu {
   abstract readonly title: string
+
   abstract readonly type: string // 'header1' 'header2' 等
+
   readonly tag = 'button'
 
   /**
@@ -30,6 +33,7 @@ abstract class HeaderButtonMenuBase implements IButtonMenu {
   exec(editor: IDomEditor, value: string | boolean) {
     const { type } = this
     let newType
+
     if (value === type) {
       // 选中的 node.type 和当前 type 一样，则取消
       newType = 'paragraph'
