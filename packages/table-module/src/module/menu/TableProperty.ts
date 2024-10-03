@@ -3,8 +3,11 @@
  * @author hsuna
  */
 
-import { Editor, Transforms, Range } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
+import {
+  DomEditor, IButtonMenu, IDomEditor, t,
+} from '@wangeditor-next/core'
+import { Editor, Range, Transforms } from 'slate'
+
 import {
   CLEAN_SVG,
   JUSTIFY_CENTER_SVG,
@@ -18,10 +21,15 @@ import $ from '../../utils/dom'
 
 class TableProperty implements IButtonMenu {
   readonly title = t('tableModule.tableProperty')
+
   iconSvg = TABLE_PROPERTY_SVG
+
   readonly tag = 'button'
+
   readonly showModal = true
+
   readonly modalWidth = 300
+
   readonly borderStyle = [
     { value: 'none', label: t('tableModule.borderStyle.none') },
     { value: 'solid', label: t('tableModule.borderStyle.solid') },
@@ -33,6 +41,7 @@ class TableProperty implements IButtonMenu {
     { value: 'inset', label: t('tableModule.borderStyle.inset') },
     { value: 'outset', label: t('tableModule.borderStyle.outset') },
   ]
+
   readonly textAlignOptions = [
     { value: 'left', label: t('justify.left'), svg: JUSTIFY_LEFT_SVG },
     { value: 'center', label: t('justify.center'), svg: JUSTIFY_CENTER_SVG },
@@ -40,27 +49,29 @@ class TableProperty implements IButtonMenu {
     { value: 'justify', label: t('justify.justify'), svg: JUSTIFY_JUSTIFY_SVG },
   ]
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     return false
   }
 
   isDisabled(editor: IDomEditor): boolean {
     const { selection } = editor
-    if (selection == null) return true
-    if (!Range.isCollapsed(selection)) return true
+
+    if (selection == null) { return true }
+    if (!Range.isCollapsed(selection)) { return true }
 
     const tableNode = DomEditor.getSelectedNodeByType(editor, 'table')
+
     if (tableNode == null) {
       return true
     }
     return false
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(_editor: IDomEditor, _value: string | boolean) {
     // 此处空着即可
   }
 
@@ -68,16 +79,18 @@ class TableProperty implements IButtonMenu {
     const [node] = Editor.nodes(editor, {
       match: isOfType(editor, 'table'),
     })
+
     return node
   }
 
-  getModalPositionNode(editor: IDomEditor) {
+  getModalPositionNode(_editor: IDomEditor) {
     return null
   }
 
   getModalContentElem(editor: IDomEditor) {
     const node = this.getModalContentNode(editor)
-    if (!node) return null
+
+    if (!node) { return null }
 
     const [data, path] = node
     const $content = $(`<div>
@@ -86,16 +99,16 @@ class TableProperty implements IButtonMenu {
         <span class="babel-container-border">
           <select name="borderStyle">
             ${this.borderStyle
-              .map(item => `<option value="${item.value}">${item.label}</option>`)
-              .join('')}
+    .map(item => `<option value="${item.value}">${item.label}</option>`)
+    .join('')}
           </select>
           <span class="color-group" data-mark="color">
             <span class="color-group-block"></span>
             <input name="borderColor" type="hidden">
           </span>
           <input name="borderWidth" type="number" placeholder="${t(
-            'tableModule.modal.borderWidth'
-          )}">
+    'tableModule.modal.borderWidth',
+  )}">
         </span>
       </label>
       <div class="babel-container">
@@ -112,8 +125,8 @@ class TableProperty implements IButtonMenu {
         <span class="babel-container-align">
           <select name="textAlign">
             ${this.textAlignOptions
-              .map(item => `<option value="${item.value}">${item.label}</option>`)
-              .join('')}
+    .map(item => `<option value="${item.value}">${item.label}</option>`)
+    .join('')}
           </select>
         </span>
       </label>
@@ -134,14 +147,18 @@ class TableProperty implements IButtonMenu {
         $('.color-group-block', elem).css('background-color', '').html(CLEAN_SVG)
       }
     }
+
     $content.find('.color-group').each(elem => {
       const selectedColor = $('[type="hidden"]', elem).val() || ''
+
       setSelectedColor(elem, selectedColor)
 
       const $elem = $(elem)
+
       $elem.on('click', () => {
         $content.find('.color-group .w-e-drop-panel').hide()
         let $panel = $elem.data('panel')
+
         if (!$panel) {
           $panel = this.getPanelContentElem(editor, {
             mark: $elem.data('mark'),
@@ -161,11 +178,13 @@ class TableProperty implements IButtonMenu {
     })
 
     const $button = $content.find('button')
+
     $button.on('click', () => {
       const props = Array.from($content.find('[name]')).reduce((obj, elem) => {
         obj[$(elem).attr('name')] = $(elem).val()
         return obj
       }, {})
+
       Transforms.setNodes(editor, props, { at: path })
 
       setTimeout(() => {
@@ -181,12 +200,14 @@ class TableProperty implements IButtonMenu {
 
     $colorPanel.on('click', 'li', e => {
       const { target } = e
-      if (!target) return
+
+      if (!target) { return }
       e.preventDefault()
       e.stopPropagation()
 
       const $li = $(target)
       const val = $li.attr('data-value')
+
       callback(val)
     })
 
@@ -195,9 +216,11 @@ class TableProperty implements IButtonMenu {
 
     colors.forEach(color => {
       const $block = $(`<div class="color-block" data-value="${color}"></div>`)
+
       $block.css('background-color', color)
 
       const $li = $(`<li data-value="${color}"></li>`)
+
       if (selectedColor === color) {
         $li.addClass('active')
       }
@@ -207,17 +230,20 @@ class TableProperty implements IButtonMenu {
     })
 
     let clearText = ''
-    if (mark === 'color') clearText = t('tableModule.color.default')
-    if (mark === 'bgColor') clearText = t('tableModule.color.clear')
+
+    if (mark === 'color') { clearText = t('tableModule.color.default') }
+    if (mark === 'bgColor') { clearText = t('tableModule.color.clear') }
     const $clearLi = $(`
       <li data-value="" class="clear">
         ${CLEAN_SVG}
         ${clearText}
       </li>
     `)
+
     $colorPanel.prepend($clearLi)
 
     const $panel = $('<div class="w-e-drop-panel"></div>')
+
     $panel.append($colorPanel)
     return $panel
   }

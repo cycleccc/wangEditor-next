@@ -1,5 +1,5 @@
-import { BaseRange } from 'slate'
 import { DomEditor, IDomEditor } from '@wangeditor-next/editor'
+import { BaseRange } from 'slate'
 
 export function reactEditorToDomRangeSafe(editor: IDomEditor, range: BaseRange): Range | null {
   try {

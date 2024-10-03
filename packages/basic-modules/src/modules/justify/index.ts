@@ -4,15 +4,16 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import { renderStyle } from './render-style'
-import { styleToHtml } from './style-to-html'
-import { parseStyleHtml } from './parse-style-html'
+
 import {
-  justifyLeftMenuConf,
-  justifyRightMenuConf,
   justifyCenterMenuConf,
   justifyJustifyMenuConf,
+  justifyLeftMenuConf,
+  justifyRightMenuConf,
 } from './menu/index'
+import { parseStyleHtml } from './parse-style-html'
+import { renderStyle } from './render-style'
+import { styleToHtml } from './style-to-html'
 
 const justify: Partial<IModuleConf> = {
   renderStyle,

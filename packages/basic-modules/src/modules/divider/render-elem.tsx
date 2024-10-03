@@ -3,14 +3,14 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Element as SlateElement } from 'slate'
 import { h, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
 
 function renderDivider(
   elemNode: SlateElement,
   children: VNode[] | null,
-  editor: IDomEditor
+  editor: IDomEditor,
 ): VNode {
   const renderStyle: any = {}
 
@@ -32,7 +32,7 @@ function renderDivider(
         mousedown: event => event.preventDefault(),
       },
     },
-    [h('hr')]
+    [h('hr')],
   )
   // 【注意】void node 中，renderElem 不用处理 children 。core 会统一处理。
 

@@ -4,11 +4,12 @@
  */
 
 import { Editor } from 'slate'
-import createCoreEditor, { createToolbar } from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
+
 import createBasicEditor from '../../../src/create/create-editor'
 import { withDOM } from '../../../src/editor/plugins/with-dom'
-import { EDITOR_TO_SELECTION } from '../../../src/utils/weak-maps'
 import $ from '../../../src/utils/dom'
+import { EDITOR_TO_SELECTION } from '../../../src/utils/weak-maps'
+import createCoreEditor, { createToolbar } from '../../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 function createEditor(...args) {
   return withDOM(createCoreEditor(...args))
@@ -21,11 +22,13 @@ describe('editor DOM API', () => {
 
   it('editor id', () => {
     const editor = createEditor()
+
     expect(editor.id).not.toBeNull()
   })
 
   it('destroy', done => {
     const editorConfig = { hoverbarKeys: {} }
+
     editorConfig.hoverbarKeys = {
       text: {
         menuKeys: ['bold', 'insertLink'],
@@ -46,6 +49,7 @@ describe('editor DOM API', () => {
       // 其他参考 https://github.com/cycleccc/wangEditor/blob/master/packages/editor/src/init-default-config/config/hoverbar.ts
     }
     const editor = createEditor({ config: editorConfig })
+
     createToolbar(editor)
     expect(editor.isDestroyed).toBeFalsy()
 
@@ -58,6 +62,7 @@ describe('editor DOM API', () => {
 
   it('scroll to elem', () => {
     const container = document.createElement('div')
+
     container.setAttribute('id', 'editor-text-area')
     document.body.appendChild(container)
     const editor = createBasicEditor({
@@ -65,12 +70,14 @@ describe('editor DOM API', () => {
     })
     const $textarea = $('#editor-text-area')
     const id = $textarea.attr('id')
+
     editor.scrollToElem(id)
     // TODO
   })
 
   it('isFullScreen fullScreen unFullScreen', done => {
     const editor = createEditor()
+
     createToolbar(editor)
 
     expect(editor.isFullScreen).toBeFalsy()
@@ -93,6 +100,7 @@ describe('editor DOM API', () => {
 
     setTimeout(() => {
       const domNode = editor.toDOMNode(p)
+
       expect(domNode.tagName).toBe('DIV')
       done()
     })
@@ -100,6 +108,7 @@ describe('editor DOM API', () => {
 
   it('foucus', () => {
     const editor = createEditor()
+
     editor.focus()
     editor.insertText('hello')
     editor.focus()
@@ -113,6 +122,7 @@ describe('editor DOM API', () => {
       anchor: { offset: 0, path: [0, 0] },
       focus: { offset: 3, path: [0, 0] },
     }
+
     if (selection != null) {
       EDITOR_TO_SELECTION.set(editor, selection)
     }
@@ -135,6 +145,7 @@ describe('editor DOM API', () => {
 
   it('disable isDisabled enable', () => {
     const editor = createEditor()
+
     editor.select(getStartLocation(editor))
 
     expect(editor.isDisabled()).toBeFalsy()

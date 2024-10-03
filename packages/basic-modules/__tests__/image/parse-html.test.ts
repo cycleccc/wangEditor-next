@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseHtmlConf } from '../../src/modules/image/parse-elem-html'
 
@@ -12,7 +13,7 @@ describe('image - parse html', () => {
 
   it('parse html', () => {
     const $img = $(
-      '<img src="hello.png" alt="hello" data-href="http://localhost/" width="20" height="15" style="width: 10px; height: 5px;"/>'
+      '<img src="hello.png" alt="hello" data-href="http://localhost/" width="20" height="15" style="width: 10px; height: 5px;"/>',
     )
 
     // match selector
@@ -20,6 +21,7 @@ describe('image - parse html', () => {
 
     // parse
     const res = parseHtmlConf.parseElemHtml($img[0], [], editor)
+
     expect(res).toEqual({
       type: 'image',
       src: 'hello.png',

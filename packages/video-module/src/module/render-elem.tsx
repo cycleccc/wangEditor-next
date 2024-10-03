@@ -3,11 +3,13 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Element } from 'slate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { h, jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
-import { VideoElement } from './custom-types'
+
 import { genSizeStyledIframeHtml } from '../utils/dom'
+import { VideoElement } from './custom-types'
 
 function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEditor): VNode {
   const {
@@ -24,6 +26,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
   const selected = DomEditor.isNodeSelected(editor, elemNode)
 
   let vnode: VNode
+
   if (src.trim().indexOf('<iframe ') === 0) {
     // 增加尺寸样式
     const iframeHtml = genSizeStyledIframeHtml(src, width, height, style)
@@ -42,13 +45,14 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
     const videoVnode = (
       <video key={key} poster={poster} controls style={style}>
         <source src={src} type="video/mp4" />
-        {`Sorry, your browser doesn't support embedded videos.\n 抱歉，浏览器不支持 video 视频`}
+        {'Sorry, your browser doesn\'t support embedded videos.\n 抱歉，浏览器不支持 video 视频'}
       </video>
     )
     // @ts-ignore 添加尺寸
-    if (width !== 'auto') videoVnode.data.width = width
+
+    if (width !== 'auto') { videoVnode.data.width = width }
     // @ts-ignore
-    if (height !== 'auto') videoVnode.data.height = height
+    if (height !== 'auto') { videoVnode.data.height = height }
 
     vnode = (
       <div
@@ -73,7 +77,7 @@ function renderVideo(elemNode: Element, children: VNode[] | null, editor: IDomEd
         mousedown: e => e.preventDefault(),
       },
     },
-    vnode
+    vnode,
   )
 
   return containerVnode

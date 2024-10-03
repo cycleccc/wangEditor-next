@@ -4,6 +4,7 @@
  */
 
 import { $ } from 'dom7'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { parseHtmlConf } from '../../src/modules/todo/parse-elem-html'
 
@@ -18,6 +19,7 @@ describe('todo - parse html', () => {
 
     // parse
     const res = parseHtmlConf.parseElemHtml($todo[0], [], editor)
+
     expect(res).toEqual({
       type: 'todo',
       checked: true,
@@ -36,6 +38,7 @@ describe('todo - parse html', () => {
 
     // parse
     let res = parseHtmlConf.parseElemHtml($todo[0], children, editor)
+
     expect(res).toEqual({
       type: 'todo',
       checked: false,

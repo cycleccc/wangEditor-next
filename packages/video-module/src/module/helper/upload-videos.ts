@@ -4,9 +4,10 @@
  */
 
 import Uppy, { UppyFile } from '@uppy/core'
-import { IDomEditor, createUploader } from '@wangeditor-next/core'
-import insertVideo from './insert-video'
+import { createUploader, IDomEditor } from '@wangeditor-next/core'
+
 import { IUploadConfigForVideo } from '../menu/config'
+import insertVideo from './insert-video'
 
 function getMenuConfig(editor: IDomEditor): IUploadConfigForVideo {
   // 获取配置，见 `./config.js`
@@ -23,10 +24,13 @@ const EDITOR_TO_UPPY_MAP = new WeakMap<IDomEditor, Uppy>()
 function getUppy(editor: IDomEditor): Uppy {
   // 从缓存中获取
   let uppy = EDITOR_TO_UPPY_MAP.get(editor)
-  if (uppy != null) return uppy
+
+  if (uppy != null) { return uppy }
 
   const menuConfig = getMenuConfig(editor)
-  const { onSuccess, onProgress, onFailed, customInsert, onError } = menuConfig
+  const {
+    onSuccess, onProgress, onFailed, customInsert, onError,
+  } = menuConfig
 
   // 上传完成之后
   const successHandler = (file: UppyFile, res: any) => {
@@ -42,7 +46,8 @@ function getUppy(editor: IDomEditor): Uppy {
       return
     }
 
-    let { errno = 1, data = {} } = res
+    const { errno = 1, data = {} } = res
+
     if (errno !== 0) {
       // failed 回调
       onFailed(file, res)
@@ -50,6 +55,7 @@ function getUppy(editor: IDomEditor): Uppy {
     }
 
     const { url = '', poster = '' } = data
+
     insertVideo(editor, url, poster)
 
     // success 回调
@@ -61,7 +67,7 @@ function getUppy(editor: IDomEditor): Uppy {
     editor.showProgressBar(progress)
 
     // 回调函数
-    onProgress && onProgress(progress)
+    if (onProgress) { onProgress(progress) }
   }
 
   // onError 提示错误
@@ -91,6 +97,7 @@ async function uploadFile(editor: IDomEditor, file: File) {
   const uppy = getUppy(editor)
 
   const { name, type, size } = file
+
   uppy.addFile({
     name,
     type,
@@ -101,7 +108,7 @@ async function uploadFile(editor: IDomEditor, file: File) {
 }
 
 export default async function (editor: IDomEditor, files: FileList | null) {
-  if (files == null) return
+  if (files == null) { return }
   const fileList = Array.prototype.slice.call(files)
 
   // 获取菜单配置

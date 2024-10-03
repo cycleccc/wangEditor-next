@@ -5,12 +5,14 @@
 
 import { merge } from 'lodash'
 import { visualizer } from 'rollup-plugin-visualizer'
+
 import genDevConf from './config/dev'
 import genPrdConf from './config/prd'
 
 // 环境变量
 const ENV = process.env.NODE_ENV || 'production'
 const IS_SIZE_STATS = ENV.indexOf('size_stats') >= 0 // 分析包体积
+
 export const IS_DEV = ENV.indexOf('development') >= 0
 export const IS_PRD = ENV.indexOf('production') >= 0
 
@@ -23,6 +25,7 @@ export function createRollupConfig(customConfig = {}) {
   const { format } = output
 
   let baseConfig
+
   if (IS_PRD) {
     baseConfig = genPrdConf(format)
   } else {
@@ -35,11 +38,12 @@ export function createRollupConfig(customConfig = {}) {
   }
 
   const config = {
-    input: input ? input : baseConfig.input,
+    input: input || baseConfig.input,
     output,
     plugins,
   }
 
   const res = merge({}, baseConfig, config)
+
   return res
 }

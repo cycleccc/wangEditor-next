@@ -3,10 +3,11 @@
  * @author cycleccc
  */
 
+import { fireEvent, waitFor } from '@testing-library/dom'
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import EditImageSize from '../../../src/modules/image/menu/EditImageSizeMenu'
-import { fireEvent, waitFor } from '@testing-library/dom'
 
 describe('edit image size menu', () => {
   const menu = new EditImageSize()
@@ -54,6 +55,7 @@ describe('edit image size menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
@@ -74,12 +76,14 @@ describe('edit image size menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }], // void node 必须包含一个空 text
     }
+
     editor.insertNode(elem) // 插入图片
     editor.select({
       path: [0, 1, 0], // 选中图片
       offset: 0,
     })
     const imageNode = menu.getModalPositionNode(editor)
+
     expect((imageNode as any).src).toBe(src)
   })
 
@@ -102,6 +106,7 @@ describe('edit image size menu', () => {
 
     const spy = jest.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
+
     document.body.appendChild(elem)
 
     // 使用类型断言访问私有属性
@@ -139,6 +144,7 @@ describe('edit image size menu', () => {
       style: { width: '100', height: '80' },
       children: [{ text: '' }],
     }
+
     editor.select(startLocation)
     editor.insertNode(imageElem)
     editor.select({
@@ -148,6 +154,7 @@ describe('edit image size menu', () => {
 
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).widthInputId) as HTMLInputElement
+
     jest.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {

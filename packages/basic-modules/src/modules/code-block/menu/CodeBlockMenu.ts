@@ -3,22 +3,31 @@
  * @author wangfupeng
  */
 
-import { Editor, Element, Transforms, Node, Range } from 'slate'
-import { IButtonMenu, IDomEditor, DomEditor, t } from '@wangeditor-next/core'
+import {
+  DomEditor, IButtonMenu, IDomEditor, t,
+} from '@wangeditor-next/core'
+import {
+  Editor, Element, Node, Transforms,
+} from 'slate'
+
 import { CODE_BLOCK_SVG } from '../../../constants/icon-svg'
 import { CodeElement } from '../custom-types'
 
 class CodeBlockMenu implements IButtonMenu {
   readonly title = t('codeBlock.title')
+
   readonly iconSvg = CODE_BLOCK_SVG
+
   readonly tag = 'button'
 
   private getSelectCodeElem(editor: IDomEditor): CodeElement | null {
     const codeNode = DomEditor.getSelectedNodeByType(editor, 'code')
-    if (codeNode == null) return null
+
+    if (codeNode == null) { return null }
     const preNode = DomEditor.getParentNode(editor, codeNode)
-    if (preNode == null) return null
-    if (DomEditor.getNodeType(preNode) !== 'pre') return null
+
+    if (preNode == null) { return null }
+    if (DomEditor.getNodeType(preNode) !== 'pre') { return null }
 
     return codeNode as CodeElement
   }
@@ -29,34 +38,44 @@ class CodeBlockMenu implements IButtonMenu {
    */
   getValue(editor: IDomEditor): string | boolean {
     const elem = this.getSelectCodeElem(editor)
-    if (elem == null) return ''
+
+    if (elem == null) { return '' }
     return elem.language || ''
   }
 
   isActive(editor: IDomEditor): boolean {
     const elem = this.getSelectCodeElem(editor)
+
     return !!elem
   }
 
   isDisabled(editor: IDomEditor): boolean {
     const { selection } = editor
-    if (selection == null) return true
+
+    if (selection == null) { return true }
 
     const selectedElems = DomEditor.getSelectedElems(editor)
 
     const hasVoid = selectedElems.some(elem => editor.isVoid(elem))
-    if (hasVoid) return true
+
+    if (hasVoid) { return true }
 
     const isMatch = selectedElems.some(elem => {
       const type = DomEditor.getNodeType(elem)
-      if (type === 'pre' || type === 'paragraph') return true // 匹配 pre 或 paragraph
+
+      if (type === 'pre' || type === 'paragraph') {
+        return true
+      }
+      return false
     })
-    if (isMatch) return false // 匹配到，则 enable
+
+    if (isMatch) { return false } // 匹配到，则 enable
     return true // 否则 disable
   }
 
   exec(editor: IDomEditor, value: string | boolean) {
     const active = this.isActive(editor)
+
     if (active) {
       // 当前处于 code-block ，需要转换为普通文本
       this.changeToPlainText(editor)
@@ -68,7 +87,8 @@ class CodeBlockMenu implements IButtonMenu {
 
   private changeToPlainText(editor: IDomEditor) {
     const elem = this.getSelectCodeElem(editor)
-    if (elem == null) return
+
+    if (elem == null) { return }
 
     // 获取 code 文本
     const str = Node.string(elem)
@@ -80,6 +100,7 @@ class CodeBlockMenu implements IButtonMenu {
     const pList = str.split('\n').map(s => {
       return { type: 'paragraph', children: [{ text: s }] }
     })
+
     Transforms.insertNodes(editor, pList, { mode: 'highest' })
   }
 
@@ -90,9 +111,11 @@ class CodeBlockMenu implements IButtonMenu {
       match: n => editor.children.includes(n as Element), // 匹配选中的最高层级的节点
       universal: true,
     })
-    for (let nodeEntry of nodeEntries) {
+
+    for (const nodeEntry of nodeEntries) {
       const [n] = nodeEntry
-      if (n) strArr.push(Node.string(n))
+
+      if (n) { strArr.push(Node.string(n)) }
     }
 
     // 删除选中的最高层级的节点
@@ -111,6 +134,7 @@ class CodeBlockMenu implements IButtonMenu {
         },
       ],
     }
+
     Transforms.insertNodes(editor, newPreNode, { mode: 'highest' })
   }
 }

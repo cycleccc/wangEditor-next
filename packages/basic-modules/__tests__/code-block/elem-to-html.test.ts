@@ -10,6 +10,7 @@ describe('code-block - elem to html', () => {
     expect(codeToHtmlConf.type).toBe('code')
     const elem = { type: 'code', children: [] }
     const html = codeToHtmlConf.elemToHtml(elem, 'hello')
+
     expect(html).toBe('<code>hello</code>')
   })
 
@@ -17,6 +18,7 @@ describe('code-block - elem to html', () => {
     expect(preToHtmlConf.type).toBe('pre')
     const elem = { type: 'pre', children: [] }
     const html = preToHtmlConf.elemToHtml(elem, 'hello')
+
     expect(html).toBe('<pre>hello</pre>')
   })
 })

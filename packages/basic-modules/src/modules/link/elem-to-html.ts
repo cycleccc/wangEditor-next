@@ -4,6 +4,7 @@
  */
 
 import { Element } from 'slate'
+
 import { LinkElement } from './custom-types'
 
 function linkToHtml(elem: Element, childrenHtml: string): string {

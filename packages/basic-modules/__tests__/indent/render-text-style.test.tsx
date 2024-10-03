@@ -3,7 +3,9 @@
  * @author wangfupeng
  */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { jsx } from 'snabbdom'
+
 import { renderStyle } from '../../src/modules/indent/render-style'
 
 describe('indent - render text style', () => {
@@ -15,6 +17,7 @@ describe('indent - render text style', () => {
     // @ts-ignore
     const newVnode = renderStyle(elem, vnode)
     // @ts-ignore
+
     expect(newVnode.data.style.textIndent).toBe(indent)
   })
 })

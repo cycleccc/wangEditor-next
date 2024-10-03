@@ -4,6 +4,7 @@
  */
 
 import { IUploadConfig } from '@wangeditor-next/core'
+
 import { VideoElement } from '../custom-types'
 
 type InsertFn = (src: string, poster: string) => void
@@ -40,10 +41,10 @@ export function genUploadVideoMenuConfig(): IUploadConfigForVideo {
     timeout: 30 * 1000, // 30s
 
     onBeforeUpload: (files: any) => files, // 返回 false 则终止上传
-    onProgress: (progress: number) => {
+    onProgress: (_progress: number) => {
       /* on progress */
     },
-    onSuccess: (file: any, res: any) => {
+    onSuccess: (_file: any, _res: any) => {
       /* on success */
     },
     onFailed: (file: any, res: any) => {
@@ -72,7 +73,7 @@ export function genUploadVideoMenuConfig(): IUploadConfigForVideo {
  */
 export function genInsertVideoMenuConfig() {
   return {
-    onInsertedVideo(node: VideoElement) {
+    onInsertedVideo(_node: VideoElement) {
       // 插入视频之后的 callback
     },
 
@@ -81,7 +82,7 @@ export function genInsertVideoMenuConfig() {
      * @param src src
      * @param poster poster
      */
-    checkVideo(src: string, poster: string): boolean | string | undefined {
+    checkVideo(_src: string, _poster: string): boolean | string | undefined {
       // 1. 返回 true ，说明检查通过
       // 2. 返回一个字符串，说明检查未通过，编辑器会阻止插入。会 alert 出错误信息（即返回的字符串）
       // 3. 返回 undefined（即没有任何返回），说明检查未通过，编辑器会阻止插入

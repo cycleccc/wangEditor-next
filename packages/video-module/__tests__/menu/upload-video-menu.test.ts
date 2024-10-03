@@ -3,10 +3,11 @@
  * @author luochao
  */
 
-import createEditor from '../../../../tests/utils/create-editor'
-import UploadVideoMenu from '../../src/module/menu/UploadVideoMenu'
 import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
+
+import createEditor from '../../../../tests/utils/create-editor'
+import UploadVideoMenu from '../../src/module/menu/UploadVideoMenu'
 import $ from '../../src/utils/dom'
 
 function setEditorSelection(
@@ -14,7 +15,7 @@ function setEditorSelection(
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
@@ -22,33 +23,33 @@ function setEditorSelection(
 describe('videoModule module', () => {
   describe('module UploadVideoMenu', () => {
     const uploadVideoMenu = new UploadVideoMenu()
-    const editor = createEditor()
+    const baseEditor = createEditor()
 
     test('UploadVideoMenu invoke getValue function should be empty string', () => {
-      expect(uploadVideoMenu.getValue(editor)).toBe('')
+      expect(uploadVideoMenu.getValue(baseEditor)).toBe('')
     })
 
     test('UploadVideoMenu invoke isActive function should be false', () => {
-      expect(uploadVideoMenu.isActive(editor)).toBe(false)
+      expect(uploadVideoMenu.isActive(baseEditor)).toBe(false)
     })
 
     test('UploadVideoMenu invoke isDisabled if editor selection is null that the function return true', () => {
-      setEditorSelection(editor, null)
-      expect(uploadVideoMenu.isDisabled(editor)).toBe(true)
+      setEditorSelection(baseEditor, null)
+      expect(uploadVideoMenu.isDisabled(baseEditor)).toBe(true)
     })
 
     test('UploadVideoMenu invoke isDisabled if editor selection is not collapsed that the function return true', () => {
-      setEditorSelection(editor)
+      setEditorSelection(baseEditor)
 
       jest.spyOn(slate.Range, 'isCollapsed').mockReturnValue(false)
-      expect(uploadVideoMenu.isDisabled(editor)).toBe(true)
+      expect(uploadVideoMenu.isDisabled(baseEditor)).toBe(true)
     })
 
     test('UploadVideoMenu invoke isDisabled if editor selection is not null and collapsed that the function return false', () => {
-      setEditorSelection(editor)
+      setEditorSelection(baseEditor)
 
       jest.spyOn(slate.Range, 'isCollapsed').mockReturnValue(true)
-      expect(uploadVideoMenu.isDisabled(editor)).toBe(false)
+      expect(uploadVideoMenu.isDisabled(baseEditor)).toBe(false)
     })
 
     test('UploadVideoMenu invoke customBrowseAndUpload if editor give customBrowseAndUpload option', () => {

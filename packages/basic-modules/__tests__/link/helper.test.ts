@@ -4,8 +4,9 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
-import { isMenuDisabled, insertLink, updateLink } from '../../src/modules/link/helper'
+import { insertLink, isMenuDisabled, updateLink } from '../../src/modules/link/helper'
 
 describe('link module helper', () => {
   let editor: any
@@ -30,8 +31,9 @@ describe('link module helper', () => {
     return url
   }
 
-  const editorConfig = { MENU_CONF: {}, maxLength: 20 }
-  editorConfig.MENU_CONF['insertLink'] = {
+  const editorConfig = { MENU_CONF: { insertLink: {} }, maxLength: 20 }
+
+  editorConfig.MENU_CONF.insertLink = {
     checkLink: customCheckLinkFn,
     parseLinkUrl: customParseLinkUrl,
   }
@@ -86,8 +88,10 @@ describe('link module helper', () => {
     await insertLink(editor, 'hello', inValidUrl)
 
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(1)
     const linkElem = links[0]
+
     expect(linkElem.url).toBe(url)
   })
 
@@ -101,8 +105,10 @@ describe('link module helper', () => {
     await insertLink(editor, 'https://cycleccc.github.io/docs/', url)
     await insertLink(editor, 'hello', url)
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(1)
     const linkElem = links[0]
+
     expect(linkElem.url).toBe(url)
   })
 
@@ -115,6 +121,7 @@ describe('link module helper', () => {
 
     await insertLink(editor, 'hello', url)
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(0)
   })
 
@@ -128,11 +135,14 @@ describe('link module helper', () => {
     editor.select([]) // 全选
 
     const url = 'https://cycleccc.github.io/docs/'
+
     await insertLink(editor, 'hello', url)
 
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(1)
     const linkElem = links[0]
+
     expect(linkElem.url).toBe(url)
   })
 
@@ -146,11 +156,14 @@ describe('link module helper', () => {
     editor.select([]) // 全选
 
     const url = 'https://cycleccc.github.io/docs/'
+
     await insertLink(editor, 'hello', url)
 
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(1)
     const linkElem = links[0]
+
     expect(linkElem.url).toBe(url)
   })
 
@@ -163,10 +176,13 @@ describe('link module helper', () => {
     })
     editor.select([])
     const url = 'https://cycleccc.github.io/docs/'
+
     await insertLink(editor, 'hello', url)
-    let links = editor.getElemsByTypePrefix('link')
+    const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(1)
-    let linkElem = links[0]
+    const linkElem = links[0]
+
     expect(linkElem.url).toBe(url)
   })
 
@@ -175,23 +191,28 @@ describe('link module helper', () => {
     editor.insertText('123445678901234567890')
     editor.select([])
     const url = 'https://cycleccc.github.io/docs/'
+
     await insertLink(editor, 'hello', url)
-    let links = editor.getElemsByTypePrefix('link')
+    const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(0)
   })
 
   it('parse link', async () => {
     const url = 'https://cycleccc.github.io/docs/'
-    const editorConfig = { MENU_CONF: {} }
-    editorConfig.MENU_CONF['insertLink'] = {
+    const linkEditorConfig = { MENU_CONF: { insertLink: {} } }
+
+    linkEditorConfig.MENU_CONF.insertLink = {
       parseLinkUrl: false,
     }
-    const editor = createEditor({
-      config: editorConfig,
+    const linkEditor = createEditor({
+      config: linkEditorConfig,
     })
-    editor.select(startLocation)
-    await insertLink(editor, 'hello', url)
-    const images = editor.getElemsByTypePrefix('image')
+
+    linkEditor.select(startLocation)
+    await insertLink(linkEditor, 'hello', url)
+    const images = linkEditor.getElemsByTypePrefix('image')
+
     expect(images.length).toBe(0)
   })
 
@@ -199,6 +220,7 @@ describe('link module helper', () => {
     editor.select(startLocation)
 
     const url = 'https://cycleccc.github.io/docs/'
+
     await insertLink(editor, 'hello', url)
 
     // 选区移动到 link 内部
@@ -209,11 +231,14 @@ describe('link module helper', () => {
 
     // 更新链接
     const newUrl = 'https://cycleccc.github.io/docs/index.html'
+
     await updateLink(editor, '', newUrl)
 
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(1)
     const linkElem = links[0]
+
     expect(linkElem.url).toBe(newUrl)
   })
 })

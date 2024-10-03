@@ -3,7 +3,8 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms } from 'slate'
+import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import FontFamilyMenu from '../../../src/modules/font-size-family/menu/FontFamilyMenu'
 
@@ -26,6 +27,7 @@ describe('font family menu', () => {
     editor.select(startLocation)
     const options1 = menu.getOptions(editor)
     const selectedDefault = options1.some(opt => opt.selected && opt.value === '')
+
     expect(selectedDefault).toBeTruthy() // 空白 p ，选中“默认”
 
     editor.insertText('hello')
@@ -33,6 +35,7 @@ describe('font family menu', () => {
     editor.addMark('fontFamily', '黑体') // 设置字体
     const options2 = menu.getOptions(editor)
     const selectedHeiti = options2.some(opt => opt.selected && opt.value === '黑体')
+
     expect(selectedHeiti).toBeTruthy()
   })
 

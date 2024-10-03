@@ -3,9 +3,10 @@
  * @author wangfupeng
  */
 
-import { Element as SlateElement } from 'slate'
-import { jsx, VNode } from 'snabbdom'
 import { IDomEditor } from '@wangeditor-next/core'
+import { Element as SlateElement } from 'slate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { jsx, VNode } from 'snabbdom'
 
 function genRenderElem(level: number) {
   /**
@@ -18,10 +19,11 @@ function genRenderElem(level: number) {
   function renderHeader(
     elemNode: SlateElement,
     children: VNode[] | null,
-    editor: IDomEditor
+    _editor: IDomEditor,
   ): VNode {
     const Tag = `h${level}`
     const vnode = <Tag>{children}</Tag>
+
     return vnode
   }
 

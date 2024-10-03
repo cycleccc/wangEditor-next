@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import { Element, Descendant } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { Descendant, Element } from 'slate'
+import { VNode } from 'snabbdom'
+
 import { addVnodeStyle } from '../../utils/vdom'
 import { LineHeightElement } from './custom-types'
 
@@ -15,10 +16,10 @@ import { LineHeightElement } from './custom-types'
  * @returns vnode
  */
 export function renderStyle(node: Descendant, vnode: VNode): VNode {
-  if (!Element.isElement(node)) return vnode
+  if (!Element.isElement(node)) { return vnode }
 
   const { lineHeight } = node as LineHeightElement // 如 '1' '1.5'
-  let styleVnode: VNode = vnode
+  const styleVnode: VNode = vnode
 
   if (lineHeight) {
     addVnodeStyle(styleVnode, { lineHeight })

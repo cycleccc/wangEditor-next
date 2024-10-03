@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import DecreaseIndentMenu from '../../../src/modules/indent/menu/DecreaseIndentMenu'
 

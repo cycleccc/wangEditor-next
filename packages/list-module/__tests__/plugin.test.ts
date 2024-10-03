@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import withList from '../src/module/plugin'
 import createEditor from '../../../tests/utils/create-editor'
+import withList from '../src/module/plugin'
 
 describe('list plugin test', () => {
   it('insert tab - increase level', () => {
@@ -16,6 +16,7 @@ describe('list plugin test', () => {
     let textEditor = createEditor({
       content: [textItem],
     })
+
     editor = withList(editor) // 使用插件
     textEditor = withList(textEditor) // 使用插件
 
@@ -26,13 +27,15 @@ describe('list plugin test', () => {
     textEditor.select({ path: [0, 0], offset: 0 })
     textEditor.handleTab() // tab
     const textChildren = textEditor.children
+
     expect(textChildren).toEqual([{ type: 'paragraph', children: [{ text: '    ' }] }])
 
     editor.select({ path: [1, 0], offset: 0 }) // 选中 list-item 开头
 
     editor.handleTab() // tab
 
-    let children = editor.children
+    const children = editor.children
+
     expect(children[1]).toEqual({
       ...listItem,
       level: 1, // 增加 level
@@ -45,10 +48,12 @@ describe('list plugin test', () => {
     let editor = createEditor({
       content: [listItem],
     })
+
     editor = withList(editor) // 使用插件
     editor.select([]) // 全选
     editor.handleTab() // tab
     const children = editor.children
+
     expect(children).toEqual([{ children: [{ text: '    ' }], type: 'list-item' }])
   })
   it('insert tab - select all and other item', () => {
@@ -58,10 +63,12 @@ describe('list plugin test', () => {
     let editor = createEditor({
       content: [textItem, listItem],
     })
+
     editor = withList(editor) // 使用插件
     editor.select([]) // 全选
     editor.handleTab() // tab
     const children = editor.children
+
     expect(children).toEqual([{ children: [{ text: '    ' }], type: 'list-item' }])
   })
 
@@ -71,10 +78,12 @@ describe('list plugin test', () => {
     let editor = createEditor({
       content: [listItem, listItem1],
     })
+
     editor = withList(editor) // 使用插件
     editor.select([]) // 全选
     editor.handleTab() // tab
     const children = editor.children
+
     expect(children).toEqual([
       { children: [{ text: 'hello' }], level: 1, type: 'list-item' },
       { children: [{ text: 'world' }], level: 1, type: 'list-item' },
@@ -84,20 +93,22 @@ describe('list plugin test', () => {
   it('insert delete - decrease level', () => {
     // 测试没有选区
     let emptyEditor = createEditor()
+
     emptyEditor = withList(emptyEditor) // 使用插件
     emptyEditor.deleteBackward('character')
     expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
 
-    //没有 list
+    // 没有 list
     emptyEditor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
     emptyEditor.deleteBackward('character')
     expect(emptyEditor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
 
-    //单个 list
+    // 单个 list
     const listItem = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
     let editor = createEditor({
       content: [listItem],
     })
+
     editor = withList(editor) // 使用插件
     editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
     editor.deleteBackward('character') // delete
@@ -125,8 +136,9 @@ describe('list plugin test', () => {
   })
 
   it('insert enter - empty', () => {
-    //没有 list
-    let emptyEditor = createEditor()
+    // 没有 list
+    const emptyEditor = createEditor()
+
     emptyEditor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
     emptyEditor.insertBreak()
     expect(emptyEditor.children).toEqual([
@@ -136,13 +148,14 @@ describe('list plugin test', () => {
   })
 
   it('insert delete - decrease level multi list', () => {
-    //测试没有同级 list
+    // 测试没有同级 list
     const textItem = { type: 'paragraph', children: [{ text: '' }] }
     const listItem = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
     const listItem1 = { type: 'list-item', children: [{ text: 'hello' }], level: 1 }
     let editor = createEditor({
       content: [textItem, listItem, listItem1],
     })
+
     editor = withList(editor) // 使用插件
     editor.select({ path: [2, 0], offset: 0 }) // 选中 list-item 开头
     editor.deleteBackward('character') // delete
@@ -151,7 +164,7 @@ describe('list plugin test', () => {
       level: 0, // 减少 level
     })
 
-    //测试有同级 list
+    // 测试有同级 list
     const listOrderedItem = { type: 'list-item', ordered: true, children: [{ text: '' }] }
     const listUnOrderedItem = {
       type: 'list-item',
@@ -159,6 +172,7 @@ describe('list plugin test', () => {
       ordered: false,
       level: 1,
     }
+
     editor = createEditor({
       content: [listOrderedItem, listUnOrderedItem],
     })
@@ -177,6 +191,7 @@ describe('list plugin test', () => {
     let editor = createEditor({
       content: [listItem],
     })
+
     editor = withList(editor) // 使用插件
     editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
 
@@ -189,6 +204,7 @@ describe('list plugin test', () => {
     let editor = createEditor({
       content: [listItem],
     })
+
     editor = withList(editor) // 使用插件
     editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
 
@@ -204,6 +220,7 @@ describe('list plugin test', () => {
     let editor = createEditor({
       content: [listItem],
     })
+
     editor = withList(editor) // 使用插件
     editor.select({ path: [0, 0], offset: 0 }) // 选中 list-item 开头
 
@@ -223,6 +240,7 @@ describe('list plugin test', () => {
       ],
     })
     const bulletedList = { type: 'bulleted-list', children: [listItem] }
+
     editor = withList(editor) // 使用插件
     editor.insertNode(bulletedList)
 

@@ -1,4 +1,6 @@
-import type { Descendant, Editor, Element, Node } from 'slate'
+import type {
+  Descendant, Editor, Element, Node,
+} from 'slate'
 import type Y from 'yjs'
 
 export type DeltaAttributes = {

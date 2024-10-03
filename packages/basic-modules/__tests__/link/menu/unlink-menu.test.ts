@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import UnLink from '../../../src/modules/link/menu/UnLink'
 
@@ -58,6 +59,7 @@ describe('unlink menu test', () => {
 
     menu.exec(editor, '')
     const links = editor.getElemsByTypePrefix('link')
+
     expect(links.length).toBe(0)
   })
 })

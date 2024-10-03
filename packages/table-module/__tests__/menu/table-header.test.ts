@@ -1,22 +1,24 @@
-import TableHeader from '../../src/module/menu/TableHeader'
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { TABLE_HEADER_SVG } from '../../src/constants/svg'
 import locale from '../../src/locale/zh-CN'
-import * as slate from 'slate'
-import * as core from '@wangeditor-next/core'
+import TableHeader from '../../src/module/menu/TableHeader'
 
 function setEditorSelection(
   editor: core.IDomEditor,
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }
 describe('Table Module Table Header Menu', () => {
   test('it should create TableHeader object', () => {
     const tableHeaderMenu = new TableHeader()
+
     expect(typeof tableHeaderMenu).toBe('object')
     expect(tableHeaderMenu.tag).toBe('button')
     expect(tableHeaderMenu.iconSvg).toBe(TABLE_HEADER_SVG)
@@ -44,6 +46,7 @@ describe('Table Module Table Header Menu', () => {
   test('isDisabled should get truthy value if editor selection is null', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
+
     editor.selection = null
     expect(tableHeaderMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -51,6 +54,7 @@ describe('Table Module Table Header Menu', () => {
   test('isDisabled should get truthy value if editor selection is collapsed', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
@@ -61,6 +65,7 @@ describe('Table Module Table Header Menu', () => {
   test('isDisabled should get truthy value if editor current selected node is not table cell', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -72,6 +77,7 @@ describe('Table Module Table Header Menu', () => {
   test('isDisabled should get falsy value if editor current selected node is table cell', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
+
     setEditorSelection(editor)
 
     jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
@@ -83,6 +89,7 @@ describe('Table Module Table Header Menu', () => {
   test('exec should return directly if menu is disabled', () => {
     const tableHeaderMenu = new TableHeader()
     const editor = createEditor()
+
     setEditorSelection(editor, null)
 
     expect(tableHeaderMenu.exec(editor, '')).toBeUndefined()
@@ -124,6 +131,7 @@ describe('Table Module Table Header Menu', () => {
     }))
 
     const fn = jest.fn()
+
     jest.spyOn(slate.Transforms, 'setNodes').mockImplementation(fn)
     jest.spyOn(core.DomEditor, 'findPath').mockImplementation(() => [0, 1])
 

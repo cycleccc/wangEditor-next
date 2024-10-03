@@ -3,14 +3,15 @@
  * @author wangfupeng
  */
 
-import BulletedListMenu from '../../src/module/menu/BulletedListMenu'
 import createEditor from '../../../../tests/utils/create-editor'
+import BulletedListMenu from '../../src/module/menu/BulletedListMenu'
 
 describe('list BulletedListMenu', () => {
   const menu = new BulletedListMenu()
 
   it('getValue', () => {
     const editor = createEditor()
+
     expect(menu.getValue(editor)).toBe('')
   })
 
@@ -75,6 +76,7 @@ describe('list BulletedListMenu', () => {
     const editor = createEditor({
       content: [pElem],
     })
+
     editor.select({ path: [0, 0], offset: 0 }) // 选中 p
 
     menu.exec(editor, '') // p 转 li

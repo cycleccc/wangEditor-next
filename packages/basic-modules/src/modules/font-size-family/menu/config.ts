@@ -24,7 +24,7 @@ export function genFontSizeConfig() {
 }
 
 export function getFontFamilyConfig() {
-  let fontFamilyList: Array<string | { name: string; value: string }> = [
+  const fontFamilyList: Array<string | { name: string; value: string }> = [
     // 元素支持两种形式：1. 字符串；2. { name: 'xxx', value: 'xxx' }
     '黑体',
     { name: '仿宋', value: '仿宋' },

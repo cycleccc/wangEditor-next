@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import { Path, Editor } from 'slate'
 import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import { Editor, Path } from 'slate'
+
 import { ListItemElement } from './custom-types'
 
 /**
@@ -15,7 +16,7 @@ import { ListItemElement } from './custom-types'
 export function getBrotherListNodeByLevel(
   editor: IDomEditor,
   elem: ListItemElement,
-  level?: number
+  level?: number,
 ): ListItemElement | null {
   const { type, ...otherProps } = elem
   // level 可能是 退格前的值,所以这里需要判断
@@ -53,8 +54,9 @@ export function getBrotherListNodeByLevel(
 export function hasSameOrderWithBrother(
   editor: IDomEditor,
   elem: ListItemElement,
-  level?: number
+  level?: number,
 ): boolean {
   const brotherElem = getBrotherListNodeByLevel(editor, elem, level)
+
   return brotherElem ? brotherElem.ordered === elem.ordered : false
 }

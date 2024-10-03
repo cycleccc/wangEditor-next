@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import LineHeightMenu from '../../src/modules/line-height/menu/LineHeightMenu'
 
@@ -26,10 +27,12 @@ describe('line-height menu', () => {
     editor.select(startLocation)
 
     const options = menu.getOptions(editor)
+
     expect(options.length).toBeGreaterThan(0)
 
     // 默认选中 空
     const selectedEmptyOne = options.some(opt => opt.value === '' && opt.selected)
+
     expect(selectedEmptyOne).toBe(true)
   })
 

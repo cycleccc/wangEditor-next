@@ -4,6 +4,7 @@
  */
 
 import { Editor, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import { getHeaderType, isMenuDisabled, setHeaderType } from '../../src/modules/header/helper'
 
@@ -46,6 +47,7 @@ describe('header helper', () => {
     setHeaderType(editor, 'header1')
 
     const headers = editor.getElemsByTypePrefix('header1')
+
     expect(headers.length).toBe(1)
   })
 })

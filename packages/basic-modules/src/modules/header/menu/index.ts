@@ -3,13 +3,13 @@
  * @author wangfupeng
  */
 
-import HeaderSelectMenu from './HeaderSelectMenu'
 import Header1ButtonMenu from './Header1ButtonMenu'
 import Header2ButtonMenu from './Header2ButtonMenu'
 import Header3ButtonMenu from './Header3ButtonMenu'
 import Header4ButtonMenu from './Header4ButtonMenu'
 import Header5ButtonMenu from './Header5ButtonMenu'
 import Header6ButtonMenu from './Header6ButtonMenu'
+import HeaderSelectMenu from './HeaderSelectMenu'
 
 export const HeaderSelectMenuConf = {
   key: 'headerSelect',

@@ -3,18 +3,19 @@
  * @author luochao
  */
 
+import * as core from '@wangeditor-next/core'
+import * as slate from 'slate'
+
 import { isHTMLElememt } from '../../../../packages/core/src/utils/dom'
 import createEditor from '../../../../tests/utils/create-editor'
 import InsertVideoMenu from '../../src/module/menu/InsertVideoMenu'
-import * as core from '@wangeditor-next/core'
-import * as slate from 'slate'
 
 function setEditorSelection(
   editor: core.IDomEditor,
   selection: slate.Selection = {
     anchor: { path: [0, 0], offset: 0 },
     focus: { path: [0, 0], offset: 0 },
-  }
+  },
 ) {
   editor.selection = selection
 }

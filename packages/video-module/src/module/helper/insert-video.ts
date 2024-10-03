@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Transforms } from 'slate'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+
 import { replaceSymbols } from '../../utils/util'
 import { VideoElement } from '../custom-types'
 
@@ -19,9 +20,9 @@ export default async function (
   src: string,
   poster = '',
   width = '',
-  height = ''
+  height = '',
 ) {
-  if (!src) return
+  if (!src) { return }
 
   // 还原选区
   editor.restoreSelection()
@@ -29,6 +30,7 @@ export default async function (
   // 校验
   const { onInsertedVideo, checkVideo, parseVideoSrc } = editor.getMenuConfig('insertVideo')
   const checkRes = await checkVideo(src, poster)
+
   if (typeof checkRes === 'string') {
     // 校验失败，给出提示
     editor.alert(checkRes, 'error')

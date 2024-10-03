@@ -3,8 +3,8 @@
  * @author luochao
  */
 
-import withVideo from '../src/module/plugin'
 import createEditor from '../../../tests/utils/create-editor'
+import withVideo from '../src/module/plugin'
 
 describe('videoModule module', () => {
   describe('module plugin', () => {
@@ -27,12 +27,14 @@ describe('videoModule module', () => {
         src: 'test.mp4',
         children: [],
       }
+
       expect(newEditor.isVoid(videoElem)).toBeTruthy()
     })
 
     test('使用 withVideo 插件后，对于非 video 元素，直接调用 original isVoid 方法', () => {
       const editor = createEditor()
       const fn = jest.fn()
+
       editor.isVoid = fn
 
       const newEditor = withVideo(editor)
@@ -40,6 +42,7 @@ describe('videoModule module', () => {
         type: 'paragraph',
         children: [{ text: '' }],
       }
+
       newEditor.isVoid(videoElem)
 
       expect(fn).toBeCalled()

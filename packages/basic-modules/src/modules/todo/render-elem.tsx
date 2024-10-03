@@ -3,9 +3,11 @@
  * @author wangfupeng
  */
 
+import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import { Element as SlateElement, Transforms } from 'slate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { jsx, VNode } from 'snabbdom'
-import { IDomEditor, DomEditor } from '@wangeditor-next/core'
+
 import { TodoElement } from './custom-types'
 
 /**
@@ -18,7 +20,8 @@ import { TodoElement } from './custom-types'
 function renderTodo(elemNode: SlateElement, children: VNode[] | null, editor: IDomEditor): VNode {
   // 判断 disabled
   let disabled = false
-  if (editor.isDisabled()) disabled = true
+
+  if (editor.isDisabled()) { disabled = true }
 
   const { checked } = elemNode as TodoElement
   const vnode = (
@@ -35,6 +38,7 @@ function renderTodo(elemNode: SlateElement, children: VNode[] | null, editor: ID
                 // @ts-ignore
                 checked: event.target.checked,
               }
+
               Transforms.setNodes(editor, newProps, { at: path })
             },
           }}

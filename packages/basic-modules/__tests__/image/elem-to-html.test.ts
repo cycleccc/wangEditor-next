@@ -22,7 +22,7 @@ describe('image to html', () => {
     const html = imageToHtmlConf.elemToHtml(elem, '')
 
     expect(html).toBe(
-      `<img src="${src}" alt="logo" data-href="${href}" width="" height="" style="width: 100;height: 80;"/>`
+      `<img src="${src}" alt="logo" data-href="${href}" width="" height="" style="width: 100;height: 80;"/>`,
     )
   })
 })

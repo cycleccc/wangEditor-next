@@ -1,7 +1,12 @@
-import { Editor, Element, Operation, Path, Range } from 'slate'
+import {
+  Editor, Element, Operation, Path, Range,
+} from 'slate'
+
+import {
+  filledMatrix, hasCommon, isOfType, NodeEntryWithContext, Point,
+} from '../utils'
 import { TableCursor } from './table-cursor'
 import { EDITOR_TO_SELECTION, EDITOR_TO_SELECTION_SET } from './weak-maps'
-import { Point, filledMatrix, hasCommon, isOfType, NodeEntryWithContext } from '../utils'
 
 export function withSelection<T extends Editor>(editor: T) {
   const { apply } = editor
@@ -52,8 +57,9 @@ export function withSelection<T extends Editor>(editor: T) {
     // find initial bounds
     const from = Point.valueOf(0, 0)
     const to = Point.valueOf(0, 0)
-    outer: for (let x = 0; x < filled.length; x++) {
-      for (let y = 0; y < filled[x].length; y++) {
+
+    for (let x = 0; x < filled.length; x += 1) {
+      for (let y = 0; y < filled[x].length; y += 1) {
         const [[, path]] = filled[x][y]
 
         if (Path.equals(fromPath, path)) {
@@ -64,7 +70,7 @@ export function withSelection<T extends Editor>(editor: T) {
         if (Path.equals(toPath, path)) {
           to.x = x
           to.y = y
-          break outer
+          break
         }
       }
     }
@@ -77,9 +83,11 @@ export function withSelection<T extends Editor>(editor: T) {
       const nextStart = Point.valueOf(start.x, start.y)
       const nextEnd = Point.valueOf(end.x, end.y)
 
-      for (let x = nextStart.x; x <= nextEnd.x; x++) {
-        for (let y = nextStart.y; y <= nextEnd.y; y++) {
-          const [, { rtl, ltr, btt, ttb }] = filled[x][y]
+      for (let x = nextStart.x; x <= nextEnd.x; x += 1) {
+        for (let y = nextStart.y; y <= nextEnd.y; y += 1) {
+          const [, {
+            rtl, ltr, btt, ttb,
+          }] = filled[x][y]
 
           nextStart.x = Math.min(nextStart.x, x - (ttb - 1))
           nextStart.y = Math.min(nextStart.y, y - (rtl - 1))
@@ -100,10 +108,12 @@ export function withSelection<T extends Editor>(editor: T) {
     const selected: NodeEntryWithContext[][] = []
     const selectedSet = new WeakSet<Element>()
 
-    for (let x = start.x; x <= end.x; x++) {
+    for (let x = start.x; x <= end.x; x += 1) {
       const cells: NodeEntryWithContext[] = []
-      for (let y = start.y; y <= end.y; y++) {
+
+      for (let y = start.y; y <= end.y; y += 1) {
         const [[element]] = filled[x][y]
+
         selectedSet.add(element)
         cells.push(filled[x][y])
       }

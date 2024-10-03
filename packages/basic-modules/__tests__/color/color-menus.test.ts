@@ -3,11 +3,12 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms } from 'slate'
-import createEditor from '../../../../tests/utils/create-editor'
-import ColorMenu from '../../src/modules/color/menu/ColorMenu'
-import BgColorMenu from '../../src/modules/color/menu/BgColorMenu'
+import { Editor } from 'slate'
+
 import { isHTMLElememt } from '../../../../packages/core/src/utils/dom'
+import createEditor from '../../../../tests/utils/create-editor'
+import BgColorMenu from '../../src/modules/color/menu/BgColorMenu'
+import ColorMenu from '../../src/modules/color/menu/ColorMenu'
 
 describe('color menus', () => {
   let editor: any
@@ -69,6 +70,7 @@ describe('color menus', () => {
   it('get panel content elem', () => {
     menus.forEach(({ menu }) => {
       const elem = menu.getPanelContentElem(editor)
+
       expect(isHTMLElememt(elem)).toBeTruthy()
     })
   })
@@ -78,14 +80,17 @@ describe('color menus', () => {
       content: [{ type: 'paragraph', children: [{ text: 'hello', color: '#000' }] }],
     })
     const panelContent = menu.getPanelContentElem(textEditor)
+
     document.body.appendChild(panelContent)
 
     const li = panelContent.querySelector('li[data-value="rgb(120, 6, 80)"]') as HTMLLIElement
+
     textEditor.select([])
     li.click()
 
     const text: any = textEditor.children[0]
-    var color = text.children[0].color
+    const color = text.children[0].color
+
     expect(color).toBe('rgb(120, 6, 80)')
   })
 
@@ -98,6 +103,7 @@ describe('color menus', () => {
     textEditor.select([])
     editor.addMark('color', 'rgb(120, 6, 80)')
     const panelContent = menu.getPanelContentElem(textEditor)
+
     document.body.appendChild(panelContent)
 
     const li = panelContent.querySelector('li[data-value="0"]') as HTMLLIElement
@@ -106,7 +112,8 @@ describe('color menus', () => {
     li.click()
 
     const text: any = textEditor.children[0]
-    var color = text.children[0].color
+    const color = text.children[0].color
+
     expect(color).toBeUndefined()
   })
 })

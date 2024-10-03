@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import RedoMenu from '../../src/modules/undo-redo/menu/RedoMenu'
 
@@ -45,6 +46,7 @@ describe('redo menu', () => {
     menu.exec(editor, '')
 
     const newText = editor.getText()
-    expect(newText).toBe(text + 'xxx')
+
+    expect(newText).toBe(`${text}xxx`)
   })
 })

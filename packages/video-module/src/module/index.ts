@@ -4,17 +4,18 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import withVideo from './plugin'
-import { renderVideoConf } from './render-elem'
+
 import { videoToHtmlConf } from './elem-to-html'
-import { preParseHtmlConf } from './pre-parse-html'
-import { parseHtmlConf } from './parse-elem-html'
 import {
-  insertVideoMenuConf,
-  uploadVideoMenuConf,
   editorVideoSizeMenuConf,
   editorVideoSrcMenuConf,
+  insertVideoMenuConf,
+  uploadVideoMenuConf,
 } from './menu/index'
+import { parseHtmlConf } from './parse-elem-html'
+import withVideo from './plugin'
+import { preParseHtmlConf } from './pre-parse-html'
+import { renderVideoConf } from './render-elem'
 
 const video: Partial<IModuleConf> = {
   renderElems: [renderVideoConf],

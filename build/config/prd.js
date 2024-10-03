@@ -4,20 +4,22 @@
  */
 
 import babel from '@rollup/plugin-babel'
-import postcss from 'rollup-plugin-postcss'
+import terser from '@rollup/plugin-terser'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
-import terser from '@rollup/plugin-terser'
 import cleanup from 'rollup-plugin-cleanup'
-import genCommonConf from './common'
-import { extensions } from './common'
+import postcss from 'rollup-plugin-postcss'
+
+import genCommonConf, { extensions } from './common'
 
 /**
  * 生成 prd config
  * @param {string} format 'umd' 'esm'
  */
 function genPrdConf(format) {
-  const { input, output = {}, plugins = [], external } = genCommonConf(format)
+  const {
+    input, output = {}, plugins = [], external,
+  } = genCommonConf(format)
 
   const finalPlugins = [
     ...plugins,

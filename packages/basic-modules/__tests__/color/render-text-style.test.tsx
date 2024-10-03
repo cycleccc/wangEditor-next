@@ -3,7 +3,9 @@
  * @author wangfupeng
  */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { jsx } from 'snabbdom'
+
 import { renderStyle } from '../../src/modules/color/render-style'
 
 describe('color - render text style', () => {
@@ -15,6 +17,7 @@ describe('color - render text style', () => {
 
     // @ts-ignore
     const newVnode = renderStyle(textNode, vnode) as any
+
     expect(newVnode.sel).toBe('span')
     expect(newVnode.data.style.color).toBe(color)
     expect(newVnode.data.style.backgroundColor).toBe(bgColor)

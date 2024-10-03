@@ -3,7 +3,8 @@
  * @author wangfupeng
  */
 
-import { Editor, Transforms, Element } from 'slate'
+import { Editor, Element, Transforms } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import CodeBlockMenu from '../../src/modules/code-block/menu/CodeBlockMenu'
 
@@ -66,8 +67,10 @@ describe('code-block menu', () => {
 
     menu.exec(editor, 'javascript') // 生成 code-block
     const preList = editor.getElemsByTypePrefix('pre')
+
     expect(preList.length).toBe(1)
     const codeLis = editor.getElemsByTypePrefix('code')
+
     expect(codeLis.length).toBe(1)
   })
 
@@ -81,8 +84,10 @@ describe('code-block menu', () => {
 
     menu.exec(editor, '') // 取消 code-block
     const preList = editor.getElemsByTypePrefix('pre')
+
     expect(preList.length).toBe(0)
     const codeLis = editor.getElemsByTypePrefix('code')
+
     expect(codeLis.length).toBe(0)
   })
 })

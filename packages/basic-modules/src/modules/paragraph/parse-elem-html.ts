@@ -3,21 +3,22 @@
  * @author wangfupeng
  */
 
-import { Descendant, Text } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { ParagraphElement } from './custom-types'
+import { Descendant, Text } from 'slate'
+
 import $, { DOMElement } from '../../utils/dom'
+import { ParagraphElement } from './custom-types'
 
 function parseParagraphHtml(
   elem: DOMElement,
   children: Descendant[],
-  editor: IDomEditor
+  editor: IDomEditor,
 ): ParagraphElement {
   const $elem = $(elem)
 
   children = children.filter(child => {
-    if (Text.isText(child)) return true
-    if (editor.isInline(child)) return true
+    if (Text.isText(child)) { return true }
+    if (editor.isInline(child)) { return true }
     return false
   })
 

@@ -3,7 +3,7 @@
  * @author wangfupeng
  */
 
-import { VNode, VNodeStyle, Dataset } from 'snabbdom'
+import { VNode, VNodeStyle } from 'snabbdom'
 
 // /**
 //  * 给 vnode 添加 dataset
@@ -24,9 +24,10 @@ import { VNode, VNodeStyle, Dataset } from 'snabbdom'
  * @param newStyle { key: val }
  */
 export function addVnodeStyle(vnode: VNode, newStyle: VNodeStyle) {
-  if (vnode.data == null) vnode.data = {}
+  if (vnode.data == null) { vnode.data = {} }
   const data = vnode.data
-  if (data.style == null) data.style = {}
+
+  if (data.style == null) { data.style = {} }
 
   Object.assign(data.style, newStyle)
 }

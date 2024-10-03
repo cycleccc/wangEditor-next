@@ -3,7 +3,8 @@
  * @author cycleccc
  */
 
-import { Editor, Transforms } from 'slate'
+import { Editor } from 'slate'
+
 import createEditor from '../../../../tests/utils/create-editor'
 import EnterMenu from '../../src/modules/common/menu/EnterMenu'
 

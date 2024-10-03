@@ -3,15 +3,15 @@
  * @author wangfupeng
  */
 
-import InsertImage from './InsertImage'
+import { genImageMenuConfig } from './config'
 import DeleteImage from './DeleteImage'
 import EditImage from './EditImage'
+import EditorImageSizeMenu from './EditImageSizeMenu'
+import InsertImage from './InsertImage'
 import ViewImageLink from './ViewImageLink'
 import ImageWidth30 from './Width30'
 import ImageWidth50 from './Width50'
 import ImageWidth100 from './Width100'
-import EditorImageSizeMenu from './EditImageSizeMenu'
-import { genImageMenuConfig } from './config'
 
 const config = genImageMenuConfig() // menu config
 

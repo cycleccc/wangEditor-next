@@ -4,11 +4,12 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
+
+import { dividerToHtmlConf } from './elem-to-html'
+import { insertDividerMenuConf } from './menu/index'
+import { parseHtmlConf } from './parse-elem-html'
 import withDivider from './plugin'
 import { renderDividerConf } from './render-elem'
-import { dividerToHtmlConf } from './elem-to-html'
-import { parseHtmlConf } from './parse-elem-html'
-import { insertDividerMenuConf } from './menu/index'
 
 const image: Partial<IModuleConf> = {
   renderElems: [renderDividerConf],

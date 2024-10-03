@@ -14,9 +14,12 @@ describe('link render elem', () => {
 
     const url = 'https://www.wangeditor.com/'
     const target = '_blank'
-    const elem = { type: 'link', url, target, children: [] }
+    const elem = {
+      type: 'link', url, target, children: [],
+    }
 
     const vnode = renderLinkConf.renderElem(elem, null, editor) as any
+
     expect(vnode.sel).toBe('a')
     expect(vnode.data.href).toBe(url)
     expect(vnode.data.target).toBe(target)

@@ -4,16 +4,17 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
-import withLink from './plugin'
-import { renderLinkConf } from './render-elem'
+
 import { linkToHtmlConf } from './elem-to-html'
-import { parseHtmlConf } from './parse-elem-html'
 import {
-  insertLinkMenuConf,
   editLinkMenuConf,
+  insertLinkMenuConf,
   unLinkMenuConf,
   viewLinkMenuConf,
 } from './menu/index'
+import { parseHtmlConf } from './parse-elem-html'
+import withLink from './plugin'
+import { renderLinkConf } from './render-elem'
 
 const link: Partial<IModuleConf> = {
   renderElems: [renderLinkConf],

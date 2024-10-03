@@ -3,16 +3,22 @@
  * @author wangfupeng
  */
 
-import { Editor } from 'slate'
 import { IButtonMenu, IDomEditor } from '@wangeditor-next/core'
+import { Editor } from 'slate'
+
 import { isMenuDisabled } from '../helper'
 
 abstract class BaseMenu implements IButtonMenu {
   abstract readonly mark: string
+
   protected readonly marksNeedToRemove: string[] = [] // 增加 mark 的同时，需要移除哪些 mark （互斥，不能共存的）
+
   abstract readonly title: string
+
   abstract readonly iconSvg: string
+
   abstract readonly hotkey: string
+
   readonly tag = 'button'
 
   /**
@@ -26,17 +32,19 @@ abstract class BaseMenu implements IButtonMenu {
     // 当 curMarks 存在时，说明用户手动设置，以 curMarks 为准
     if (curMarks) {
       return curMarks[mark]
-    } else {
-      const [match] = Editor.nodes(editor, {
-        // @ts-ignore
-        match: n => n[mark] === true,
-      })
-      return !!match
     }
+    const [match] = Editor.nodes(editor, {
+      // @ts-ignore
+      match: n => n[mark] === true,
+    })
+
+    return !!match
+
   }
 
   isActive(editor: IDomEditor): boolean {
     const isMark = this.getValue(editor)
+
     return !!isMark
   }
 
@@ -51,6 +59,7 @@ abstract class BaseMenu implements IButtonMenu {
    */
   exec(editor: IDomEditor, value: string | boolean) {
     const { mark, marksNeedToRemove } = this
+
     if (value) {
       // 已，则取消
       editor.removeMark(mark)

@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import EmotionMenu from './EmotionMenu'
 import { genConfig } from './config'
+import EmotionMenu from './EmotionMenu'
 
 export const emotionMenuConf = {
   key: 'emotion',

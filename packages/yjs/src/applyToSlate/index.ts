@@ -1,5 +1,6 @@
 import { Editor, Operation } from 'slate'
 import * as Y from 'yjs'
+
 import { translateYTextEvent } from './textEvent'
 
 /**
@@ -12,7 +13,7 @@ import { translateYTextEvent } from './textEvent'
 export function translateYjsEvent(
   sharedRoot: Y.XmlText,
   editor: Editor,
-  event: Y.YEvent<Y.XmlText>
+  event: Y.YEvent<Y.XmlText>,
 ): Operation[] {
   if (event instanceof Y.YTextEvent) {
     return translateYTextEvent(sharedRoot, editor, event)
@@ -32,7 +33,7 @@ export function translateYjsEvent(
 export function applyYjsEvents(
   sharedRoot: Y.XmlText,
   editor: Editor,
-  events: Y.YEvent<Y.XmlText>[]
+  events: Y.YEvent<Y.XmlText>[],
 ) {
   Editor.withoutNormalizing(editor, () => {
     events.forEach(event => {

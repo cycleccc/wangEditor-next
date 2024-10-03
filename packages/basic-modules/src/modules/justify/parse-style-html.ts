@@ -3,18 +3,21 @@
  * @author wangfupeng
  */
 
-import { Descendant, Element } from 'slate'
 import { IDomEditor } from '@wangeditor-next/core'
-import { JustifyElement } from './custom-types'
-import $, { DOMElement, getStyleValue } from '../../utils/dom'
+import { Descendant, Element } from 'slate'
 
-export function parseStyleHtml(elem: DOMElement, node: Descendant, editor: IDomEditor): Descendant {
+import $, { DOMElement, getStyleValue } from '../../utils/dom'
+import { JustifyElement } from './custom-types'
+
+export function parseStyleHtml(elem: DOMElement, node: Descendant, _editor: IDomEditor): Descendant {
   const $elem = $(elem)
-  if (!Element.isElement(node)) return node
+
+  if (!Element.isElement(node)) { return node }
 
   const elemNode = node as JustifyElement
 
   const textAlign = getStyleValue($elem, 'text-align')
+
   if (textAlign) {
     elemNode.textAlign = textAlign
   }

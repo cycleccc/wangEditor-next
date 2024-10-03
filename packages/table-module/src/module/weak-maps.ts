@@ -1,4 +1,5 @@
 import { Editor, Element } from 'slate'
+
 import { NodeEntryWithContext } from '../utils'
 
 /** Weak reference between the `Editor` and the selected elements */

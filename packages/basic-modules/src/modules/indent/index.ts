@@ -4,11 +4,12 @@
  */
 
 import { IModuleConf } from '@wangeditor-next/core'
+
+import { delIndentMenuConf, indentMenuConf } from './menu/index'
+import { parseStyleHtml } from './parse-style-html'
+import { preParseHtmlConf } from './pre-parse-html'
 import { renderStyle } from './render-style'
 import { styleToHtml } from './style-to-html'
-import { preParseHtmlConf } from './pre-parse-html'
-import { parseStyleHtml } from './parse-style-html'
-import { indentMenuConf, delIndentMenuConf } from './menu/index'
 
 const indent: Partial<IModuleConf> = {
   renderStyle,

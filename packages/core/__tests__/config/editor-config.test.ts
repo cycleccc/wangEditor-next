@@ -4,6 +4,7 @@
  */
 
 import { Editor } from 'slate'
+
 import createCoreEditor from '../create-core-editor' // packages/core 不依赖 packages/editor ，不能使用后者的 createEditor
 
 describe('editor config', () => {
@@ -13,6 +14,7 @@ describe('editor config', () => {
 
   it('if set placeholder option, it will show placeholder element when editor content is empty', () => {
     const container = document.createElement('div')
+
     createCoreEditor({
       selector: container,
       config: {
@@ -20,11 +22,13 @@ describe('editor config', () => {
       },
     })
     const el = container.querySelector('.w-e-text-placeholder')
+
     expect(el!.textContent).toBe('editor placeholder')
   })
 
   it('if set placeholder option, it will hide placeholder element when editor content is not empty', () => {
     const container = document.createElement('div')
+
     createCoreEditor({
       selector: container,
       config: {
@@ -33,6 +37,7 @@ describe('editor config', () => {
       content: [{ type: 'paragraph', children: [{ text: '123' }] }],
     })
     const el = container.querySelector('.w-e-text-placeholder')
+
     expect(el).toBeNull()
   })
 
@@ -42,6 +47,7 @@ describe('editor config', () => {
         readOnly: true,
       },
     })
+
     expect(editor.isDisabled()).toBeTruthy()
   })
 
@@ -66,6 +72,7 @@ describe('editor config', () => {
         },
       },
     })
+
     editor.select(getStartLocation(editor))
 
     // 插入 9 个字符，小于 maxLength

@@ -5,7 +5,7 @@
 
 import { Text } from 'slate'
 
-//【注意】需要把自定义的 Element 引入到最外层的 custom-types.d.ts
+// 【注意】需要把自定义的 Element 引入到最外层的 custom-types.d.ts
 export type TableCellProperty = {
   /** 用于设置单元格属性 */
   backgroundColor?: string // 背景色

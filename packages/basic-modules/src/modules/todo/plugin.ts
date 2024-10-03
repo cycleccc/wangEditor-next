@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-import { Node, Transforms, Range } from 'slate'
 import { DomEditor, IDomEditor } from '@wangeditor-next/core'
+import { Node, Range, Transforms } from 'slate'
 
 function withTodo<T extends IDomEditor>(editor: T): T {
   const { deleteBackward } = editor
@@ -19,6 +19,7 @@ function withTodo<T extends IDomEditor>(editor: T): T {
     if (selection && Range.isCollapsed(selection)) {
       // 获取选中的 todo
       const selectedTodo = DomEditor.getSelectedNodeByType(editor, 'todo')
+
       if (selectedTodo) {
         if (Node.string(selectedTodo).length === 0) {
           // 当前 todo 已经没有文字，则转换为 paragraph

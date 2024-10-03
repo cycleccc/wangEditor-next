@@ -3,18 +3,19 @@
  * @author wangfupeng
  */
 
-import { Editor, Range, Node } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Editor, Node, Range } from 'slate'
+
+import { LINK_SVG } from '../../../constants/icon-svg'
 import $, { Dom7Array, DOMElement } from '../../../utils/dom'
 import { genRandomStr } from '../../../utils/util'
-import { LINK_SVG } from '../../../constants/icon-svg'
-import { isMenuDisabled, insertLink } from '../helper'
+import { insertLink, isMenuDisabled } from '../helper'
 
 /**
  * 生成唯一的 DOM ID
@@ -25,26 +26,34 @@ function genDomID(): string {
 
 class InsertLinkMenu implements IModalMenu {
   readonly title = t('link.insert')
+
   readonly iconSvg = LINK_SVG
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 300
+
   private $content: Dom7Array | null = null
+
   private readonly textInputId = genDomID()
+
   private readonly urlInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 插入菜单，不需要 value
     return ''
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 任何时候，都不用激活 menu
     return false
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(_editor: IDomEditor, _value: string | boolean) {
     // 点击菜单时，弹出 modal 之前，不需要执行其他代码
     // 此处空着即可
   }
@@ -53,7 +62,7 @@ class InsertLinkMenu implements IModalMenu {
     return isMenuDisabled(editor)
   }
 
-  getModalPositionNode(editor: IDomEditor): Node | null {
+  getModalPositionNode(_editor: IDomEditor): Node | null {
     return null // modal 依据选区定位
   }
 
@@ -77,6 +86,7 @@ class InsertLinkMenu implements IModalMenu {
         e.preventDefault()
         const text = $content.find(`#${textInputId}`).val()
         const url = $content.find(`#${urlInputId}`).val()
+
         insertLink(editor, text, url) // 插入链接
         editor.hidePanelOrModal() // 隐藏 modal
       })
@@ -86,6 +96,7 @@ class InsertLinkMenu implements IModalMenu {
     }
 
     const $content = this.$content
+
     $content.empty() // 先清空内容
 
     // append inputs and button
@@ -100,6 +111,7 @@ class InsertLinkMenu implements IModalMenu {
     } else {
       // 选区有内容
       const selectionText = Editor.string(editor, selection)
+
       $inputText.val(selectionText)
     }
     $inputUrl.val('')

@@ -1,16 +1,16 @@
 import { IDomEditor } from '../../../packages/editor/src'
-import UploadImageMenu from '../src/module/menu/UploadImageMenu'
 import createEditor from '../../../tests/utils/create-editor'
+import UploadImageMenu from '../src/module/menu/UploadImageMenu'
 import uploadImages from '../src/module/upload-images'
 
-let editor: IDomEditor
+let baseEditor: IDomEditor
 let menu: UploadImageMenu
 
 jest.mock('../src/module/upload-images', () => jest.fn())
 
 describe('Upload image menu', () => {
   beforeEach(() => {
-    editor = createEditor()
+    baseEditor = createEditor()
     menu = new UploadImageMenu()
   })
 
@@ -19,15 +19,15 @@ describe('Upload image menu', () => {
   })
 
   test('UploadImageMenu invoke getValue return ""', () => {
-    expect(menu.getValue(editor)).toBe('')
+    expect(menu.getValue(baseEditor)).toBe('')
   })
 
   test('UploadImageMenu invoke isActive always return false', () => {
-    expect(menu.isActive(editor)).toBe(false)
+    expect(menu.isActive(baseEditor)).toBe(false)
   })
 
   test('UploadImageMenu invoke isDisabled return true', () => {
-    expect(menu.isDisabled(editor)).toBe(true)
+    expect(menu.isDisabled(baseEditor)).toBe(true)
   })
 
   test('UploadImageMenu invoke exec should exec customBrowseAndUpload if config has customBrowseAndUpload option', () => {
@@ -41,6 +41,7 @@ describe('Upload image menu', () => {
         },
       },
     })
+
     menu.exec(editor, 'test.jpg')
     expect(jestFn).toBeCalled()
   })

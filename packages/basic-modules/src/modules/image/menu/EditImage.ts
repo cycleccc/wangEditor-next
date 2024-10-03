@@ -3,20 +3,21 @@
  * @author wangfupeng
  */
 
-import { Node, Range } from 'slate'
 import {
-  IModalMenu,
-  IDomEditor,
   DomEditor,
-  genModalInputElems,
   genModalButtonElems,
+  genModalInputElems,
+  IDomEditor,
+  IModalMenu,
   t,
 } from '@wangeditor-next/core'
+import { Node, Range } from 'slate'
+
+import { PENCIL_SVG } from '../../../constants/icon-svg'
 import $, { Dom7Array, DOMElement } from '../../../utils/dom'
 import { genRandomStr } from '../../../utils/util'
-import { PENCIL_SVG } from '../../../constants/icon-svg'
-import { updateImageNode } from '../helper'
 import { ImageElement, ImageStyle } from '../custom-types'
+import { updateImageNode } from '../helper'
 
 /**
  * 生成唯一的 DOM ID
@@ -27,17 +28,26 @@ function genDomID(): string {
 
 class EditImage implements IModalMenu {
   readonly title = t('image.edit')
+
   readonly iconSvg = PENCIL_SVG
+
   readonly tag = 'button'
+
   readonly showModal = true // 点击 button 时显示 modal
+
   readonly modalWidth = 300
+
   private $content: Dom7Array | null = null
+
   private readonly srcInputId = genDomID()
+
   private readonly altInputId = genDomID()
+
   private readonly hrefInputId = genDomID()
+
   private readonly buttonId = genDomID()
 
-  getValue(editor: IDomEditor): string | boolean {
+  getValue(_editor: IDomEditor): string | boolean {
     // 编辑图片，用不到 getValue
     return ''
   }
@@ -46,25 +56,26 @@ class EditImage implements IModalMenu {
     return DomEditor.getSelectedNodeByType(editor, 'image')
   }
 
-  isActive(editor: IDomEditor): boolean {
+  isActive(_editor: IDomEditor): boolean {
     // 无需 active
     return false
   }
 
-  exec(editor: IDomEditor, value: string | boolean) {
+  exec(_editor: IDomEditor, _value: string | boolean) {
     // 点击菜单时，弹出 modal 之前，不需要执行其他代码
     // 此处空着即可
   }
 
   isDisabled(editor: IDomEditor): boolean {
     const { selection } = editor
-    if (selection == null) return true
-    if (!Range.isCollapsed(selection)) return true // 选区非折叠，禁用
+
+    if (selection == null) { return true }
+    if (!Range.isCollapsed(selection)) { return true } // 选区非折叠，禁用
 
     const imageNode = DomEditor.getSelectedNodeByType(editor, 'image')
 
     // 未匹配到 image node 则禁用
-    if (imageNode == null) return true
+    if (imageNode == null) { return true }
     return false
   }
 
@@ -73,9 +84,12 @@ class EditImage implements IModalMenu {
   }
 
   getModalContentElem(editor: IDomEditor): DOMElement {
-    const { srcInputId, altInputId, hrefInputId, buttonId } = this
+    const {
+      srcInputId, altInputId, hrefInputId, buttonId,
+    } = this
 
     const selectedImageNode = this.getImageNode(editor)
+
     if (selectedImageNode == null) {
       throw new Error('Not found selected image node')
     }
@@ -100,6 +114,7 @@ class EditImage implements IModalMenu {
         const src = $content.find(`#${srcInputId}`).val()
         const alt = $content.find(`#${altInputId}`).val()
         const href = $content.find(`#${hrefInputId}`).val()
+
         this.updateImage(editor, src, alt, href)
         editor.hidePanelOrModal() // 隐藏 modal
       })
@@ -109,6 +124,7 @@ class EditImage implements IModalMenu {
     }
 
     const $content = this.$content
+
     $content.empty() // 先清空内容
 
     // append inputs and button
@@ -119,6 +135,7 @@ class EditImage implements IModalMenu {
 
     // 设置 input val
     const { src, alt = '', href = '' } = selectedImageNode as ImageElement
+
     $inputSrc.val(src)
     $inputAlt.val(alt)
     $inputHref.val(href)
@@ -134,16 +151,16 @@ class EditImage implements IModalMenu {
   private updateImage(
     editor: IDomEditor,
     src: string,
-    alt: string = '',
-    href: string = '',
-    style: ImageStyle = {}
+    alt = '',
+    href = '',
+    style: ImageStyle = {},
   ) {
-    if (!src) return
+    if (!src) { return }
 
     // 还原选区
     editor.restoreSelection()
 
-    if (this.isDisabled(editor)) return
+    if (this.isDisabled(editor)) { return }
 
     // 修改图片信息
     updateImageNode(editor, src, alt, href, style)

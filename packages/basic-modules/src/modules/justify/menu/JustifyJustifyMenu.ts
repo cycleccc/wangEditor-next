@@ -3,22 +3,24 @@
  * @author wangfupeng
  */
 
-import { Transforms, Element } from 'slate'
 import { IDomEditor, t } from '@wangeditor-next/core'
-import BaseMenu from './BaseMenu'
+import { Element, Transforms } from 'slate'
+
 import { JUSTIFY_JUSTIFY_SVG } from '../../../constants/icon-svg'
+import BaseMenu from './BaseMenu'
 
 class JustifyJustifyMenu extends BaseMenu {
   readonly title = t('justify.justify')
+
   readonly iconSvg = JUSTIFY_JUSTIFY_SVG
 
-  exec(editor: IDomEditor, value: string | boolean): void {
+  exec(editor: IDomEditor, _value: string | boolean): void {
     Transforms.setNodes(
       editor,
       {
         textAlign: 'justify',
       },
-      { match: n => Element.isElement(n) && !editor.isInline(n) }
+      { match: n => Element.isElement(n) && !editor.isInline(n) },
     )
   }
 }

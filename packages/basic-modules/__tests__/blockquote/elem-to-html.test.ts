@@ -11,6 +11,7 @@ describe('blockquote elem to html', () => {
 
     const elem = { type: 'blockquote', children: [] }
     const html = quoteToHtmlConf.elemToHtml(elem, 'hello')
+
     expect(html).toBe('<blockquote>hello</blockquote>')
   })
 })

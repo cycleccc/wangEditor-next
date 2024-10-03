@@ -3,10 +3,11 @@
  * @author wangfupeng
  */
 
+import { waitFor } from '@testing-library/dom'
 import { Editor } from 'slate'
+
 import createEditor from '../../../../../tests/utils/create-editor'
 import InsertLinkMenu from '../../../src/modules/link/menu/InsertLink'
-import { waitFor } from '@testing-library/dom'
 
 describe('insert link menu', () => {
   let editor: any
@@ -48,6 +49,7 @@ describe('insert link menu', () => {
   it('get modal content elem', () => {
     const spy = jest.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
+
     editor.select(startLocation)
     editor.insertText('test')
     document.body.appendChild(elem)
@@ -56,6 +58,7 @@ describe('insert link menu', () => {
     const urlInputId = document.getElementById((menu as any).urlInputId) as HTMLInputElement
     const button = document.getElementById((menu as any).buttonId) as HTMLButtonElement
     // 模拟用户输入
+
     textInputId.value = 'hello'
     urlInputId.value = 'https://cycleccc.github.io/docs/'
     editor.select(startLocation)
@@ -72,6 +75,7 @@ describe('insert link menu', () => {
 
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).textInputId) as HTMLInputElement
+
     jest.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {
