@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.5
+
+### Patch Changes
+
+- c7ef2d0: refactor by new eslint rule
+- Updated dependencies [c7ef2d0]
+  - @wangeditor-next/core@1.7.6
+
 ## 1.5.4
 
 ### Patch Changes
