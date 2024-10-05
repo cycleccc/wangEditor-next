@@ -1161,7 +1161,7 @@
     core-js-pure "^3.30.2"
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.12.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.14.6", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.14.6", "@babel/runtime@^7.23.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4":
   version "7.25.7"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.25.7.tgz#7ffb53c37a8f247c8c4d335e89cdf16a2e0d0fb6"
   integrity sha512-FjoyLe754PMiYsFaN5C94ttGiOmBNYTf6pLr4xXHAT5uctHb092PBszndLDR5XA/jghQvn4n7JMHl7dmTgbm9w==
@@ -5301,12 +5301,12 @@ husky@^9.1.6:
   resolved "https://registry.npmmirror.com/husky/-/husky-9.1.6.tgz#e23aa996b6203ab33534bdc82306b0cf2cb07d6c"
   integrity sha512-sqbjZKK7kf44hfdE94EoX8MZNk0n7HeW37O4YrVGCF4wzgQjp+akPAkfUK5LZ6KuR/6sqeAVuXHji+RzQgOn5A==
 
-i18next@^20.4.0:
-  version "20.6.1"
-  resolved "https://registry.npmmirror.com/i18next/download/i18next-20.6.1.tgz#535e5f6e5baeb685c7d25df70db63bf3cc0aa345"
-  integrity sha1-U15fbluutoXH0l33DbY788wKo0U=
+i18next@^23.0.0:
+  version "23.15.1"
+  resolved "https://registry.npmjs.org/i18next/-/i18next-23.15.1.tgz#c50de337bf12ca5195e697cc0fbe5f32304871d9"
+  integrity sha512-wB4abZ3uK7EWodYisHl/asf8UYEhrI/vj/8aoSsrj/ZDxj4/UXPOa1KvFt1Fq5hkUHquNqwFlDprmjZ8iySgYA==
   dependencies:
-    "@babel/runtime" "^7.12.0"
+    "@babel/runtime" "^7.23.2"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
