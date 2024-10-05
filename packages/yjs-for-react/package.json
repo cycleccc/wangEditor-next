@@ -53,7 +53,10 @@
   },
   "dependencies": {
     "use-sync-external-store": "^1.2.0",
-    "y-protocols": "^1.0.5"
+    "y-protocols": "^1.0.5",
+    "@wangeditor-next/core": "1.7.6",
+    "@wangeditor-next/editor": "5.5.7",
+    "@wangeditor-next/yjs": "^0.1.4"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
