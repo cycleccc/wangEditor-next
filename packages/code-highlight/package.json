@@ -46,6 +46,7 @@
     "snabbdom": "^3.1.0"
   },
   "dependencies": {
+    "@wangeditor-next/core": "1.7.6",
     "prismjs": "^1.23.0"
   },
   "devDependencies": {

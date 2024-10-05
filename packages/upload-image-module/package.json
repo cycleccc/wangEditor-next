@@ -39,6 +39,10 @@
   "bugs": {
     "url": "https://github.com/cycleccc/wangEditor/issues"
   },
+  "dependencies": {
+    "@wangeditor-next/basic-modules": "1.5.5",
+    "@wangeditor-next/core": "1.7.6"
+  },
   "peerDependencies": {
     "@uppy/core": "^2.0.3",
     "@uppy/xhr-upload": "^2.0.3",

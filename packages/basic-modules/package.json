@@ -48,6 +48,7 @@
     "snabbdom": "^3.1.0"
   },
   "dependencies": {
+    "@wangeditor-next/core": "1.7.6",
     "is-url": "^1.2.4"
   },
   "devDependencies": {
