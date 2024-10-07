@@ -31,6 +31,7 @@ module.exports = {
       },
       globals: {
         globalThis:'readonly',
+        vi: "readonly"
       },
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',

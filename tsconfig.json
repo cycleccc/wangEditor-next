@@ -23,7 +23,6 @@
     "baseUrl": ".",
     "paths": {
       "@wangeditor-next/*": [
-        "packages/*/dist",
         "packages/*/src"
       ]
     },

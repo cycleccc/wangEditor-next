@@ -14,9 +14,9 @@ describe('eventBus API', () => {
   it('bind and emit', () => {
     const editor = createEditor()
 
-    const fn1 = jest.fn() // jest mock function
-    const fn2 = jest.fn()
-    const fn3 = jest.fn()
+    const fn1 = vi.fn() // vi mock function
+    const fn2 = vi.fn()
+    const fn3 = vi.fn()
 
     editor.on('key1', fn1)
     editor.on('key1', fn2)
@@ -32,8 +32,8 @@ describe('eventBus API', () => {
   it('off single event', () => {
     const editor = createEditor()
 
-    const fn1 = jest.fn()
-    const fn2 = jest.fn()
+    const fn1 = vi.fn()
+    const fn2 = vi.fn()
 
     editor.on('key1', fn1)
     editor.on('key1', fn2)
@@ -51,8 +51,8 @@ describe('eventBus API', () => {
 
     let n = 1
 
-    const fn1 = jest.fn(() => n += 1)
-    const fn2 = jest.fn(() => n += 1)
+    const fn1 = vi.fn(() => n += 1)
+    const fn2 = vi.fn(() => n += 1)
 
     editor.once('key1', fn1)
     editor.once('key1', fn2)

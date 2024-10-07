@@ -26,7 +26,7 @@ describe('editor DOM API', () => {
     expect(editor.id).not.toBeNull()
   })
 
-  it('destroy', done => {
+  it('destroy', async () => {
     const editorConfig = { hoverbarKeys: {} }
 
     editorConfig.hoverbarKeys = {
@@ -56,7 +56,6 @@ describe('editor DOM API', () => {
     setTimeout(() => {
       editor.destroy()
       expect(editor.isDestroyed).toBeTruthy()
-      done()
     })
   })
 
@@ -75,7 +74,7 @@ describe('editor DOM API', () => {
     // TODO
   })
 
-  it('isFullScreen fullScreen unFullScreen', done => {
+  it('isFullScreen fullScreen unFullScreen', async () => {
     const editor = createEditor()
 
     createToolbar(editor)
@@ -88,11 +87,10 @@ describe('editor DOM API', () => {
     editor.unFullScreen()
     setTimeout(() => {
       expect(editor.isFullScreen).toBeFalsy()
-      done()
     }, 1000)
   })
 
-  it('toDOMNode', done => {
+  it('toDOMNode', async () => {
     const p = { type: 'paragraph', children: [{ text: 'hello' }] }
     const editor = createEditor({
       content: [p],
@@ -102,7 +100,6 @@ describe('editor DOM API', () => {
       const domNode = editor.toDOMNode(p)
 
       expect(domNode.tagName).toBe('DIV')
-      done()
     })
   })
 
@@ -141,7 +138,7 @@ describe('editor DOM API', () => {
     })
   })
 
-  // TODO blur isFocused 用 jest 测试异常，以及 editor-config.test.ts 中的 `onFocus` `onBlur`
+  // TODO blur isFocused 用 vi 测试异常，以及 editor-config.test.ts 中的 `onFocus` `onBlur`
 
   it('disable isDisabled enable', () => {
     const editor = createEditor()

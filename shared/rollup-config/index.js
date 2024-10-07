@@ -6,8 +6,10 @@
 import pkg from 'lodash'
 import { visualizer } from 'rollup-plugin-visualizer'
 
-import genDevConf from './config/dev'
-import genPrdConf from './config/prd'
+// eslint-disable-next-line import/extensions
+import genDevConf from './config/dev.js'
+// eslint-disable-next-line import/extensions
+import genPrdConf from './config/prd.js'
 
 const { merge } = pkg
 

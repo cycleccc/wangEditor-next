@@ -29,7 +29,7 @@ describe('Video module helper', () => {
           },
         },
       })
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       editor.alert = fn
 
@@ -52,21 +52,20 @@ describe('Video module helper', () => {
       expect(await insertVideo(editor, 'test.mp4', 'xxx.png')).toBeUndefined()
     })
 
-    test('it should invoke slate insertNodes method if give right src', done => {
-      const fn = jest.fn()
+    test('it should invoke slate insertNodes method if give right src', async () => {
+      const fn = vi.fn()
 
-      jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
+      vi.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
 
       insertVideo(baseEditor, 'test.mp4', 'xxx.png').then(() => {
         setTimeout(() => {
           expect(fn).toBeCalled()
-          done()
         })
       })
     })
 
-    test('it should invoke onInsertedVideo callback if pass the option when create editor', done => {
-      const fn = jest.fn()
+    test('it should invoke onInsertedVideo callback if pass the option when create editor', async () => {
+      const fn = vi.fn()
 
       const editor = createEditor({
         config: {
@@ -80,19 +79,17 @@ describe('Video module helper', () => {
 
       insertVideo(editor, 'test.mp4', 'xxx.png').then(() => {
         expect(fn).toBeCalled()
-        done()
       })
     })
 
-    test('it should parse iframe if give iframe element', done => {
-      const fn = jest.fn()
+    test('it should parse iframe if give iframe element', async () => {
+      const fn = vi.fn()
 
-      jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
+      vi.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
 
       insertVideo(baseEditor, '<iframe src="test.mp4"></iframe>').then(() => {
         setTimeout(() => {
           expect(fn).toBeCalled()
-          done()
         })
       })
     })
@@ -104,7 +101,7 @@ describe('Video module helper', () => {
     })
 
     test('it should invoke customUpload if give the option when create editor', async () => {
-      const fn = jest.fn()
+      const fn = vi.fn()
       const editor = createEditor({
         config: {
           MENU_CONF: {
@@ -121,7 +118,7 @@ describe('Video module helper', () => {
     })
 
     test('it should invoke onSuccess callback if give the option when create editor', async () => {
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       nock(server)
         .defaultReplyHeaders({
@@ -150,7 +147,7 @@ describe('Video module helper', () => {
     })
 
     test('it should invoke onProgress callback and show progress bar if uploading', async () => {
-      const mockOnProgress = jest.fn()
+      const mockOnProgress = vi.fn()
 
       nock(server)
         .defaultReplyHeaders({
@@ -173,7 +170,7 @@ describe('Video module helper', () => {
         },
       })
 
-      const mockShowProgressBar = jest.fn()
+      const mockShowProgressBar = vi.fn()
 
       editor.showProgressBar = mockShowProgressBar
 
@@ -184,7 +181,7 @@ describe('Video module helper', () => {
     })
 
     test('it should invoke onError callback if upload failed', () => {
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       nock(server)
         .defaultReplyHeaders({
@@ -213,7 +210,7 @@ describe('Video module helper', () => {
     })
 
     test('it should invoke onFail callback if upload result with error', async () => {
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       nock(server)
         .defaultReplyHeaders({
@@ -242,7 +239,7 @@ describe('Video module helper', () => {
     })
 
     test('it should invoke customInsert callback if upload successfully', async () => {
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       nock(server)
         .defaultReplyHeaders({

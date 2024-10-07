@@ -15,12 +15,12 @@ describe('TableModule module', () => {
       const editor = createEditor()
       const newEditor = withTable(editor)
 
-      jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue({
+      vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue({
         type: 'table',
         children: [{ text: '' }],
       } as slate.Element)
 
-      const mockFn = jest.fn()
+      const mockFn = vi.fn()
 
       newEditor.insertText = mockFn
 
@@ -33,12 +33,12 @@ describe('TableModule module', () => {
       const editor = createEditor()
       const newEditor = withTable(editor)
 
-      jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue({
+      vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue({
         type: 'table',
         children: [{ text: '' }],
       } as slate.Element)
 
-      const mockFn = jest.fn()
+      const mockFn = vi.fn()
 
       slate.Editor.insertText = mockFn
 
@@ -49,13 +49,13 @@ describe('TableModule module', () => {
 
     test('use withTable plugin when insertData should invoke original insertData if selection not in table node', () => {
       const editor = createEditor()
-      const mockInsertDataFn = jest.fn()
+      const mockInsertDataFn = vi.fn()
 
       editor.insertData = mockInsertDataFn
 
       const newEditor = withTable(editor)
 
-      jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue(null)
+      vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue(null)
 
       newEditor.insertData({} as DataTransfer)
 
