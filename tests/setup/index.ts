@@ -11,6 +11,10 @@ global.crypto = {
     return nodeCrypto.randomFillSync(buffer)
   },
 }
+jest.mock('nanoid', () => ({
+  nanoid: () => { Math.random() },
+}))
+
 jest.spyOn(global.console, 'warn').mockImplementation(() => jest.fn())
 jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn())
 

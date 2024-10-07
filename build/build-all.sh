@@ -4,7 +4,7 @@
 
 # 获取 yarn dev/build 类型
 buildType=build
-if [ -n "$1" ]; then  
+if [ -n "$1" ]; then
   buildType=$1
 fi
 
@@ -46,10 +46,10 @@ cd ../editor
 rm -rf dist # 清空 dist 目录
 yarn "$buildType"
 
-cd ../yjs
-rm -rf dist
-yarn "$buildType"
+# cd ../yjs
+# rm -rf dist
+# yarn "$buildType"
 
-cd ../yjs-for-react
-rm -rf dist
-yarn "$buildType"
+# cd ../yjs-for-react
+# rm -rf dist
+# yarn "$buildType"

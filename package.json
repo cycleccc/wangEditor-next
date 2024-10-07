@@ -1,7 +1,7 @@
 {
   "name": "@wangeditor-next/wangeditor",
   "private": true,
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "yarn@4.4.1",
   "browserslist": [
     "defaults",
     "not IE 11"
@@ -25,20 +25,20 @@
     "e2e:dev": "concurrently \"yarn example\" \"yarn run cypress:open\"",
     "e2e": "concurrently \"yarn example\" \"yarn run cypress:run\"",
     "prepare": "husky install",
-    "turbo": "turbo",
     "changeset": "changeset",
     "example": "turbo run example --filter=@wangeditor-next/editor"
   },
   "workspaces": [
+    "shared/*",
     "packages/*"
   ],
   "devDependencies": {
     "@babel/core": "^7.24.7",
+    "@babel/helper-function-name": "^7.22.5",
+    "@babel/helper-hoist-variables": "^7.22.5",
+    "@babel/helper-split-export-declaration": "^7.22.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
-    "@babel/helper-split-export-declaration": "^7.22.6",
-    "@babel/helper-hoist-variables": "^7.22.5",
-    "@babel/helper-function-name": "^7.22.5",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
@@ -54,9 +54,9 @@
     "@rollup/plugin-terser": "^0.4.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.0.0",
-    "@types/jest": "^25.2.1",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
+    "@types/jest": "^27.0.6",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
     "autoprefixer": "^10.2.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^27.0.6",
@@ -79,6 +79,7 @@
     "http-server": "^14.0.0",
     "husky": "^9.1.6",
     "jest": "^27.0.6",
+    "jest-environment-jsdom": "^27.0.0",
     "less": "^4.0.0",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
