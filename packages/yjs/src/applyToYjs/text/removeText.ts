@@ -1,5 +1,5 @@
 import { Node, RemoveTextOperation } from 'slate'
-import type Y from 'yjs'
+import * as Y from 'yjs'
 
 import { getYTarget } from '../../utils/location'
 
