@@ -10,15 +10,18 @@
     "编辑器"
   ],
   "author": "cycleccc <29912005548@qq.com>",
-  "contributors": [],
+  "type": "module",
   "homepage": "https://github.com/cycleccc/wangEditor#readme",
   "license": "MIT",
   "types": "dist/editor/src/index.d.ts",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "browser": {
-    "./dist/index.js": "./dist/index.js",
-    "./dist/index.esm.js": "./dist/index.esm.js"
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/editor/src/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
   "directories": {
     "lib": "dist",

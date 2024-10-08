@@ -3,6 +3,6 @@
   "extends": "../../tsconfig.json",
   "include": [
     "./src/**/*",
-    // "../custom-types.d.ts"
+    "../custom-types.d.ts"
   ]
 }

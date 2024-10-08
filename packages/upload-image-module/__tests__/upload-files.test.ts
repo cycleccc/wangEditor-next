@@ -18,7 +18,7 @@ describe('Upload image menu upload files util', () => {
   })
 
   test('uploadImages should invoke customUpload if give customUpload to config', async () => {
-    const fn = jest.fn()
+    const fn = vi.fn()
     const editor = createEditor({
       config: {
         MENU_CONF: {
@@ -35,7 +35,7 @@ describe('Upload image menu upload files util', () => {
   })
 
   test('uploadImages should insert image with base64 string if file size less than base64LimitSize config', async () => {
-    const fn = jest.fn()
+    const fn = vi.fn()
     const editor = createEditor({
       config: {
         MENU_CONF: {
@@ -47,7 +47,7 @@ describe('Upload image menu upload files util', () => {
       },
     })
 
-    const mockReadAsDataURL = jest.spyOn(FileReader.prototype, 'readAsDataURL')
+    const mockReadAsDataURL = vi.spyOn(FileReader.prototype, 'readAsDataURL')
 
     await uploadImages(editor, [mockFile('test.jpg')] as unknown as FileList)
 
@@ -55,16 +55,14 @@ describe('Upload image menu upload files util', () => {
   })
 
   test('uploadImages should invoke core createUploader if not give customUpload to config', async () => {
-    // 这里需要返回一个 duck 类型的 uppy 对象，防止后面代码执行报错
-    const fn = jest.fn().mockImplementation(() => {
-      return {
-        addFile: jest.fn(),
-        upload: jest.fn(),
-      } as any
-    })
+    const fn = vi.fn().mockImplementation(() => ({
+      // 这里需要返回一个 duck 类型的 uppy 对象，防止后面代码执行报错
+      addFile: vi.fn(),
+      upload: vi.fn(),
+    }) as any)
     const editor = createEditor()
 
-    jest.spyOn(core, 'createUploader').mockImplementation(fn)
+    vi.spyOn(core, 'createUploader').mockImplementation(fn)
 
     await uploadImages(editor, [mockFile('test.jpg')] as unknown as FileList)
 

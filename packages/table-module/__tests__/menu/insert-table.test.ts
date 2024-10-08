@@ -55,7 +55,7 @@ describe('Table Module Insert Table Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
 
     expect(insertTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -66,10 +66,10 @@ describe('Table Module Insert Table Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest
-      .spyOn(core.DomEditor, 'getSelectedElems')
-      .mockImplementation(() => [{ type: 'pre', children: [] }])
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedElems').mockImplementation(() => [
+      { type: 'pre', children: [] },
+    ])
 
     expect(insertTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -80,10 +80,10 @@ describe('Table Module Insert Table Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest
-      .spyOn(core.DomEditor, 'getSelectedElems')
-      .mockImplementation(() => [{ type: 'table', children: [] }])
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedElems').mockImplementation(() => [
+      { type: 'table', children: [] },
+    ])
 
     expect(insertTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -94,12 +94,12 @@ describe('Table Module Insert Table Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest
-      .spyOn(core.DomEditor, 'getSelectedElems')
-      .mockImplementation(() => [{ type: 'image', children: [] }])
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedElems').mockImplementation(() => [
+      { type: 'image', children: [] },
+    ])
 
-    jest.spyOn(editor, 'isVoid').mockImplementation(() => true)
+    vi.spyOn(editor, 'isVoid').mockImplementation(() => true)
 
     expect(insertTableMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -110,10 +110,10 @@ describe('Table Module Insert Table Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest
-      .spyOn(core.DomEditor, 'getSelectedElems')
-      .mockImplementation(() => [{ type: 'paragraph', children: [] }])
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedElems').mockImplementation(() => [
+      { type: 'paragraph', children: [] },
+    ])
 
     expect(insertTableMenu.isDisabled(editor)).toBeFalsy()
   })
@@ -133,13 +133,12 @@ describe('Table Module Insert Table Menu', () => {
     const tablePanel = insertTableMenu.getPanelContentElem(editor)
     const tdEl = $(tablePanel).find('td')[0]
 
-    const fn = jest.fn()
+    const fn = vi.fn()
 
-    jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
+    vi.spyOn(slate.Transforms, 'insertNodes').mockImplementation(fn)
 
     tdEl.dispatchEvent(
       new MouseEvent('click', {
-        view: window,
         bubbles: true,
         cancelable: true,
       }),
@@ -159,7 +158,6 @@ describe('Table Module Insert Table Menu', () => {
 
     tdEl.dispatchEvent(
       new MouseEvent('mouseenter', {
-        view: window,
         bubbles: true,
         cancelable: true,
       }),

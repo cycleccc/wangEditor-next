@@ -33,7 +33,7 @@ describe('videoModule module', () => {
 
     test('使用 withVideo 插件后，对于非 video 元素，直接调用 original isVoid 方法', () => {
       const editor = createEditor()
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       editor.isVoid = fn
 

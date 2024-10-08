@@ -63,12 +63,12 @@ describe('editor config', () => {
     expect(editor.getText()).toBe('')
   })
 
-  it('if set maxLength option, the editor can not update content when text length is equal to maxLength', done => {
+  it('if set maxLength option, the editor can not update content when text length is equal to maxLength', async () => {
     const editor = createCoreEditor({
       config: {
         maxLength: 10,
         onMaxLength: () => {
-          done() // 触发回调，才能完成该测试
+          // 触发回调，才能完成该测试
         },
       },
     })
@@ -84,8 +84,8 @@ describe('editor config', () => {
     expect(editor.getText()).toBe('123456789a')
   })
 
-  it('if set onCreated option, it will be called when created editor', done => {
-    const fn = jest.fn()
+  it('if set onCreated option, it will be called when created editor', async () => {
+    const fn = vi.fn()
 
     createCoreEditor({
       config: {
@@ -95,12 +95,11 @@ describe('editor config', () => {
 
     setTimeout(() => {
       expect(fn).toHaveBeenCalled()
-      done()
     })
   })
 
-  it('if set onChange option, it will be called when change editor selection', done => {
-    const fn = jest.fn()
+  it('if set onChange option, it will be called when change editor selection', async () => {
+    const fn = vi.fn()
 
     const editor = createCoreEditor({
       config: {
@@ -111,12 +110,11 @@ describe('editor config', () => {
     editor.select(getStartLocation(editor)) // 选区变化，触发 onchange
     setTimeout(() => {
       expect(fn).toHaveBeenCalledWith(editor)
-      done()
     })
   })
 
-  it('if set onChange option, it will be called when change editor content', done => {
-    const fn = jest.fn()
+  it('if set onChange option, it will be called when change editor content', async () => {
+    const fn = vi.fn()
 
     const editor = createCoreEditor({
       config: {
@@ -132,12 +130,11 @@ describe('editor config', () => {
     }, 50)
     setTimeout(() => {
       expect(fn).toHaveBeenCalledTimes(2)
-      done()
     }, 80)
   })
 
-  it('if set onDestroyed option, it will be called when destroy editor', done => {
-    const fn = jest.fn()
+  it('if set onDestroyed option, it will be called when destroy editor', async () => {
+    const fn = vi.fn()
     const editor = createCoreEditor({
       config: {
         onDestroyed: fn,
@@ -150,7 +147,6 @@ describe('editor config', () => {
 
     setTimeout(() => {
       expect(fn).toHaveBeenCalledWith(editor)
-      done()
     }, 20)
   })
 })

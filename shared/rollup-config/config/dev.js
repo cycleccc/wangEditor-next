@@ -1,12 +1,13 @@
 /**
  * @description rollup dev config
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import autoprefixer from 'autoprefixer'
 import postcss from 'rollup-plugin-postcss'
 
-import genCommonConf from './common'
+// eslint-disable-next-line import/extensions
+import genCommonConf from './common.js'
 
 /**
  * 生成 dev config

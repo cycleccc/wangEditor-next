@@ -3,9 +3,10 @@
  * @author wangfupeng
  */
 
+import nock from 'nock'
+
 import createUploader from '../../src/upload/createUploader'
 import { IUploadConfig } from '../../src/upload/interface'
-import nock from 'nock'
 
 const server = 'https://fake-endpoint.wangeditor-v5.com'
 
@@ -18,10 +19,11 @@ describe('uploader', () => {
       meta: {
         token: 'xxx',
       },
-      onSuccess: (file, res) => {},
-      onFailed: (file, res) => {},
-      onError: (file, err, res) => {},
+      onSuccess: (_file, _res) => { return undefined },
+      onFailed: (_file, _res) => { return undefined },
+      onError: (_file, _err, _res) => { return undefined },
     })
+
     expect(uppy).not.toBeNull()
   })
 
@@ -30,9 +32,9 @@ describe('uploader', () => {
       createUploader({
         fieldName: 'file1',
         metaWithUrl: false,
-        onSuccess: (file, res) => {},
-        onFailed: (file, res) => {},
-        onError: (file, err, res) => {},
+        onSuccess: (_file, _res) => { return undefined },
+        onFailed: (_file, _res) => { return undefined },
+        onError: (_file, _err, _res) => { return undefined },
       } as IUploadConfig)
     } catch (err: unknown) {
       expect((err as Error).message).toBe('Cannot get upload server address\n没有配置上传地址')
@@ -44,9 +46,9 @@ describe('uploader', () => {
       createUploader({
         server: '/upload',
         metaWithUrl: false,
-        onSuccess: (file, res) => {},
-        onFailed: (file, res) => {},
-        onError: (file, err, res) => {},
+        onSuccess: (_file, _res) => { return undefined },
+        onFailed: (_file, _res) => { return undefined },
+        onError: (_file, _err, _res) => { return undefined },
       } as IUploadConfig)
     } catch (err: unknown) {
       expect((err as Error).message).toBe('Cannot get fieldName\n没有配置 fieldName')
@@ -64,19 +66,19 @@ describe('uploader', () => {
       .post('/')
       .reply(200, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: fn,
-      onFailed: (file, res) => {},
-      onError: (file, err, res) => {},
+      onFailed: (_file, _res) => { return undefined },
+      onError: (_file, _err, _res) => { return undefined },
     })
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -98,29 +100,30 @@ describe('uploader', () => {
       .post('/')
       .reply(200, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
+
     console.error = fn
 
-    let uppy = createUploader({
+    const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {
         throw new Error('test onSuccess error')
       },
-      onFailed: (file, res) => {},
-      onError: (file, err, res) => {},
+      onFailed: (_file, _res) => { return undefined },
+      onError: (_file, _err, _res) => { return undefined },
     })
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
     })
 
-    return uppy.upload().catch(err => {
+    return uppy.upload().catch(_err => {
       expect(fn).toBeCalled()
     })
   })
@@ -136,20 +139,20 @@ describe('uploader', () => {
       .post('/')
       .reply(200, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {},
       onProgress: fn,
-      onFailed: (file, res) => {},
-      onError: (file, err, res) => {},
+      onFailed: (_file, _res) => { return undefined },
+      onError: (_file, _err, _res) => { return undefined },
     })
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -171,19 +174,19 @@ describe('uploader', () => {
       .post('/')
       .reply(400, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
     const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {},
-      onFailed: (file, res) => {},
+      onFailed: (_file, _res) => { return undefined },
       onError: fn,
     })
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -205,19 +208,20 @@ describe('uploader', () => {
       .post('/')
       .reply(400, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
+
     console.error = fn
     const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {},
-      onFailed: (file, res) => {},
+      onFailed: (_file, _res) => { return undefined },
     } as any)
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
@@ -239,14 +243,15 @@ describe('uploader', () => {
       .post('/')
       .reply(400, {})
 
-    const fn = jest.fn()
+    const fn = vi.fn()
+
     console.error = fn
     const uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {},
-      onFailed: (file, res) => {},
+      onFailed: (_file, _res) => { return undefined },
       onError: () => {
         throw new Error('test onError error')
       },
@@ -254,39 +259,40 @@ describe('uploader', () => {
 
     // reference https://github.com/transloadit/uppy/blob/main/packages/%40uppy/xhr-upload/src/index.test.js
     uppy.addFile({
-      source: 'jest',
+      source: 'vi',
       name: 'foo.jpg',
       type: 'image/jpeg',
       data: new Blob([Buffer.alloc(8192)]),
     })
 
-    return uppy.upload().catch(err => {
+    return uppy.upload().catch(_err => {
       expect(fn).toBeCalled()
     })
   })
 
   test('it should invoke error callback if file size over max size', () => {
-    const fn = jest.fn()
-    const consoleFn = jest.fn()
+    const fn = vi.fn()
+    const consoleFn = vi.fn()
+
     console.error = consoleFn
     let uppy = createUploader({
       server,
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {},
-      onFailed: (file, res) => {},
+      onFailed: (_file, _res) => { return undefined },
       onError: fn,
       maxFileSize: 5,
     })
 
     try {
       uppy.addFile({
-        source: 'jest',
+        source: 'vi',
         name: 'foo.jpg',
         type: 'image/jpeg',
         data: new Blob([Buffer.alloc(8192)]),
       })
-    } catch (err) {
+    } catch {
       expect(fn).toBeCalled()
     }
 
@@ -295,7 +301,7 @@ describe('uploader', () => {
       fieldName: 'file1',
       metaWithUrl: false,
       onSuccess: () => {},
-      onFailed: (file, res) => {},
+      onFailed: (_file, _res) => { return undefined },
       onError: () => {
         throw new Error('test onError error')
       },
@@ -304,12 +310,12 @@ describe('uploader', () => {
 
     try {
       uppy.addFile({
-        source: 'jest',
+        source: 'vi',
         name: 'foo.jpg',
         type: 'image/jpeg',
         data: new Blob([Buffer.alloc(8192)]),
       })
-    } catch (err) {
+    } catch {
       expect(consoleFn).toBeCalled()
     }
   })

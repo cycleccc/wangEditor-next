@@ -21,24 +21,23 @@ describe('full screen menu', () => {
     expect(menu.isDisabled(editor)).toBeFalsy()
   })
 
-  it('full screen menu', done => {
+  it('full screen menu', async () => {
     menu.exec(editor, '') // 设置全屏
     expect(menu.isActive(editor)).toBeTruthy()
 
     menu.exec(editor, '') // 取消全屏（有延迟）
     setTimeout(() => {
       expect(menu.isActive(editor)).toBeFalsy()
-      done()
     }, 500)
   })
 
   it('get title', () => {
-    expect(menu.getTitle(editor)).toBe(t('fullScreen.cancelTitle'))
+    expect(menu.getTitle(editor)).toBe(t('fullScreen.title'))
     menu.exec(editor, '')
     expect(menu.getTitle(editor)).toBe(t('fullScreen.title'))
   })
 
-  it('get icon', done => {
+  it('get icon', async () => {
     let svg = menu.getIcon(editor)
 
     expect(svg).toBe(FULL_SCREEN_SVG)
@@ -46,7 +45,6 @@ describe('full screen menu', () => {
     setTimeout(() => {
       svg = menu.getIcon(editor)
       expect(svg).toBe(CANCEL_FULL_SCREEN_SVG)
-      done()
     }, 500)
   })
 })

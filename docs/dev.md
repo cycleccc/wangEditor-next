@@ -12,7 +12,30 @@
 ### 打包
 
 - 下载代码到本地，进入 `wangEditor` 目录
-- 打包所有模块 `yarn dev` 或者 `yarn build`（调试使用 yarn dev 即可）
+- 安装 yarn 4.x (node 18.x 以上)
+~~~ shell
+# 启用 Corepack
+corepack enable
+
+# 安装并激活 Yarn 4.x
+corepack prepare yarn@stable --activate
+
+# 安装完成后检查版本
+yarn -v
+~~~
+- 安装依赖
+~~~  shell
+yarn
+# 或者
+yarn install
+~~~
+- 打包所有模块
+~~~ shell
+ # （调试使用 yarn dev 即可）
+yarn dev
+# 正式包使用 yarn build
+yarn build
+~~~
 
 ### 运行 demo
 

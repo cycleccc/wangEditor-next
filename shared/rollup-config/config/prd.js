@@ -1,6 +1,6 @@
 /**
  * @description rollup prd config
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import babel from '@rollup/plugin-babel'
@@ -10,7 +10,8 @@ import cssnano from 'cssnano'
 import cleanup from 'rollup-plugin-cleanup'
 import postcss from 'rollup-plugin-postcss'
 
-import genCommonConf, { extensions } from './common'
+// eslint-disable-next-line import/extensions
+import genCommonConf, { extensions } from './common.js'
 
 /**
  * 生成 prd config

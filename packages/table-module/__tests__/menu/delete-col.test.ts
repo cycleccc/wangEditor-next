@@ -7,10 +7,10 @@ import locale from '../../src/locale/zh-CN'
 import DeleteCol from '../../src/module/menu/DeleteCol'
 import * as utils from '../../src/utils'
 
-jest.mock('../../src/utils', () => ({
-  filledMatrix: jest.fn(),
+vi.mock('../../src/utils', () => ({
+  filledMatrix: vi.fn(),
 }))
-const mockedUtils = utils as jest.Mocked<typeof utils>
+const mockedUtils = utils as vi.Mocked<typeof utils>
 
 function setEditorSelection(
   editor: core.IDomEditor,
@@ -59,7 +59,7 @@ describe('Table Module Delete Col Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
 
     expect(deleteColMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -70,8 +70,8 @@ describe('Table Module Delete Col Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(deleteColMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -82,8 +82,8 @@ describe('Table Module Delete Col Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({} as any))
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({}) as any)
 
     expect(deleteColMenu.isDisabled(editor)).toBeFalsy()
   })
@@ -101,8 +101,8 @@ describe('Table Module Delete Col Menu', () => {
     const deleteColMenu = new DeleteCol()
     const editor = createEditor()
 
-    jest.spyOn(deleteColMenu, 'isDisabled').mockImplementation(() => false)
-    jest.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
+    vi.spyOn(deleteColMenu, 'isDisabled').mockImplementation(() => false)
+    vi.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
       type: 'table-col',
       children: [],
     }))
@@ -117,10 +117,10 @@ describe('Table Module Delete Col Menu', () => {
       ] as slate.NodeEntry<slate.Element>
     }
 
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    const removeNodesFn = jest.fn()
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    const removeNodesFn = vi.fn()
 
-    jest.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
+    vi.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
 
     deleteColMenu.exec(editor, '')
     expect(removeNodesFn).toBeCalled()
@@ -130,8 +130,8 @@ describe('Table Module Delete Col Menu', () => {
     const deleteColMenu = new DeleteCol()
     const editor = createEditor()
 
-    jest.spyOn(deleteColMenu, 'isDisabled').mockImplementation(() => false)
-    jest.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
+    vi.spyOn(deleteColMenu, 'isDisabled').mockImplementation(() => false)
+    vi.spyOn(core.DomEditor, 'getParentNode').mockImplementation(() => ({
       type: 'table-row',
       children: [
         {
@@ -155,8 +155,8 @@ describe('Table Module Delete Col Menu', () => {
       ] as slate.NodeEntry<slate.Element>
     }
 
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    jest.spyOn(core.DomEditor, 'findPath').mockImplementation(() => [0, 1] as slate.Path)
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    vi.spyOn(core.DomEditor, 'findPath').mockImplementation(() => [0, 1] as slate.Path)
 
     mockedUtils.filledMatrix.mockImplementation(() => {
       return [
@@ -190,9 +190,9 @@ describe('Table Module Delete Col Menu', () => {
         ],
       ]
     })
-    const removeNodesFn = jest.fn()
+    const removeNodesFn = vi.fn()
 
-    jest.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
+    vi.spyOn(slate.Transforms, 'removeNodes').mockImplementation(removeNodesFn)
 
     deleteColMenu.exec(editor, '')
     expect(removeNodesFn).toBeCalledTimes(2)

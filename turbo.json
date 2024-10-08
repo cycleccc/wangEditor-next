@@ -1,88 +1,28 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "dev": {
+      "inputs": [
+        "src/**",
+        "rollup.config.js"
+      ],
+      "dependsOn": [
+        "^dev"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "build": {
       "inputs": [
         "src/**",
         "rollup.config.js"
       ],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
         "dist/**"
-      ],
-      "dependsOn": [
-        "core:build",
-        "basic-modules:build",
-        "code-highlight:build",
-        "list-module:build",
-        "table-module:build",
-        "upload-image-module:build",
-        "video-module:build",
-        "editor:build"
-      ]
-    },
-    "core:build": {
-      "outputs": [
-        "packages/core/dist/**"
-      ]
-    },
-    "basic-modules:build": {
-      "outputs": [
-        "packages/basic-modules/dist/**"
-      ]
-    },
-    "code-highlight:build": {
-      "dependsOn": [
-        "basic-modules:build"
-      ],
-      "outputs": [
-        "packages/code-highlight/dist/**"
-      ]
-    },
-    "list-module:build": {
-      "outputs": [
-        "packages/list-module/dist/**"
-      ]
-    },
-    "table-module:build": {
-      "outputs": [
-        "packages/table-module/dist/**"
-      ]
-    },
-    "upload-image-module:build": {
-      "dependsOn": [
-        "basic-modules:build"
-      ],
-      "outputs": [
-        "packages/upload-image-module/dist/**"
-      ]
-    },
-    "video-module:build": {
-      "outputs": [
-        "packages/video-module/dist/**"
-      ]
-    },
-    "editor:build": {
-      "dependsOn": [
-        "core:build",
-        "basic-modules:build",
-        "code-highlight:build",
-        "list-module:build",
-        "table-module:build",
-        "upload-image-module:build",
-        "video-module:build"
-      ],
-      "outputs": [
-        "packages/editor/dist/**"
-      ]
-    },
-    "yjs:build": {
-      "outputs": [
-        "packages/yjs/dist/**"
-      ]
-    },
-    "yjs-for-react:build": {
-      "outputs": [
-        "packages/yjs-react/dist/**"
       ]
     },
     "example": {

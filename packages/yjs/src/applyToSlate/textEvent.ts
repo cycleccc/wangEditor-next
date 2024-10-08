@@ -253,7 +253,7 @@ export function translateYTextEvent(
   }
 
   if (delta.length > 0) {
-    ops.push(...applyDelta(targetElement, slatePath, delta))
+    ops.push(...applyDelta(targetElement as Element, slatePath, delta))
   }
 
   return ops

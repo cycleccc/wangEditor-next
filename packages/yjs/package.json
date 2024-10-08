@@ -2,7 +2,7 @@
   "name": "@wangeditor-next/yjs",
   "version": "0.1.4",
   "author": "cycleccc <2991205548@qq.com>",
-  "contributors": [],
+  "type": "module",
   "description": "Yjs binding for wangeditor-next.",
   "homepage": "https://github.com/cycleccc/wangEditor#readme",
   "keywords": [
@@ -14,15 +14,14 @@
   "license": "MIT",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "unpkg": "dist/index.global.js",
   "exports": {
-    "require": "./dist/index.js",
-    "default": "./dist/index.esm.js"
-  },
-  "browser": {
-    "./dist/index.js": "./dist/index.js",
-    "./dist/index.esm.js": "./dist/index.esm.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
   "directories": {
     "lib": "dist",

@@ -42,7 +42,7 @@ describe('videoModule module', () => {
     })
 
     test('DeleteVideoMenu invoke isDisabled function if editor do not selected video element should be true', () => {
-      jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue(null)
+      vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue(null)
 
       setEditorSelection(editor)
 
@@ -50,8 +50,8 @@ describe('videoModule module', () => {
     })
 
     test('DeleteVideoMenu invoke exec function if video menu is disabled should return directly', () => {
-      jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue(null)
-      const fn = jest.spyOn(slate.Transforms, 'removeNodes')
+      vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockReturnValue(null)
+      const fn = vi.spyOn(slate.Transforms, 'removeNodes')
 
       setEditorSelection(editor)
 
@@ -65,7 +65,7 @@ describe('videoModule module', () => {
         .spyOn(core.DomEditor, 'getSelectedNodeByType')
         .mockReturnValue({ type: 'video', children: [{ text: '' }] } as any)
 
-      const fn = jest.spyOn(slate.Transforms, 'removeNodes')
+      const fn = vi.spyOn(slate.Transforms, 'removeNodes')
 
       setEditorSelection(editor)
 

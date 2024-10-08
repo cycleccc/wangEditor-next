@@ -1,5 +1,6 @@
-import { createRollupConfig, IS_PRD } from '../../build/create-rollup-config'
-import pkg from './package.json'
+import { createRollupConfig } from '@wangeditor-next-shared/rollup-config'
+
+import pkg from './package.json' assert { type: 'json' }
 
 const name = 'WangEditorYjsModule'
 
@@ -13,6 +14,7 @@ const esmConf = createRollupConfig({
     name,
   },
 })
+
 configList.push(esmConf)
 
 // umd
@@ -23,6 +25,7 @@ const umdConf = createRollupConfig({
     name,
   },
 })
+
 configList.push(umdConf)
 
 export default configList

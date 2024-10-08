@@ -74,7 +74,7 @@ describe('edit link menu', () => {
   })
 
   it('get modal content elem', () => {
-    const spy = jest.spyOn(editor, 'hidePanelOrModal')
+    const spy = vi.spyOn(editor, 'hidePanelOrModal')
     const elem = menu.getModalContentElem(editor)
 
     editor.select(startLocation)
@@ -100,7 +100,7 @@ describe('edit link menu', () => {
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).urlInputId) as HTMLInputElement
 
-    jest.spyOn(inputSrc, 'focus')
+    vi.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {
       expect(inputSrc.focus).toHaveBeenCalled()

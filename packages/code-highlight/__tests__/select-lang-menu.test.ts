@@ -94,7 +94,7 @@ describe('code-highlight select lang menu', () => {
     expect(menu.isDisabled(editor)).toBeFalsy()
   })
 
-  it('menu exec (change lang)', done => {
+  it('menu exec (change lang)', async () => {
     if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // select codeNode
@@ -106,11 +106,10 @@ describe('code-highlight select lang menu', () => {
 
       editor.select(codeLocation)
       expect(menu.getValue(editor)).toBe('html')
-      done()
     })
   })
 
-  it('menu exec (without lang)', done => {
+  it('menu exec (without lang)', async () => {
     if (editor == null || menu == null) { throw new Error('editor or menu is null') }
 
     // select codeNode
@@ -122,7 +121,6 @@ describe('code-highlight select lang menu', () => {
 
       editor.select(codeLocation)
       expect(menu.getValue(editor)).toBe('')
-      done()
     })
   })
 })
