@@ -8,8 +8,8 @@ describe('format painter plugin', () => {
   beforeEach(() => {
     editor = withFormatPainter(createEditor())
 
-    jest.spyOn(document, 'addEventListener')
-    jest.spyOn(document, 'removeEventListener')
+    vi.spyOn(document, 'addEventListener')
+    vi.spyOn(document, 'removeEventListener')
 
     editor.focus()
     editor.insertText('Hello World')
@@ -20,7 +20,7 @@ describe('format painter plugin', () => {
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('format painter change', () => {
@@ -28,7 +28,7 @@ describe('format painter plugin', () => {
     FormatPainter.attrs.isSelect = true
 
     // 监控静态方法 setFormatHtml
-    const setFormatHtmlSpy = jest.spyOn(FormatPainter.prototype, 'setFormatHtml')
+    const setFormatHtmlSpy = vi.spyOn(FormatPainter.prototype, 'setFormatHtml')
 
     // 模拟 onChange 的调用
     editor.onChange()

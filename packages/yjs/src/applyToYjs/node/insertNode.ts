@@ -1,3 +1,4 @@
+import { CustomElement } from 'packages/custom-types'
 import { InsertNodeOperation, Node, Text } from 'slate'
 import * as Y from 'yjs'
 
@@ -12,5 +13,5 @@ export function insertNode(sharedRoot: Y.XmlText, slateRoot: Node, op: InsertNod
     return yParent.insert(textRange.start, op.node.text, getProperties(op.node))
   }
 
-  yParent.insertEmbed(textRange.start, slateElementToYText(op.node))
+  yParent.insertEmbed(textRange.start, slateElementToYText(op.node as CustomElement))
 }

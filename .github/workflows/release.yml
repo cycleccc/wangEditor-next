@@ -26,18 +26,28 @@ jobs:
         node-version: [18]
 
     steps:
+      # 检出代码库
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # 设置 Node.js 版本
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v4
-
         with:
           node-version:  ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org/'
 
+      # 启用 Corepack 以支持 Yarn 4
+      - name: Enable Corepack
+        run: corepack enable
+
+      # 准备 Yarn 4.x
+      - name: Prepare Yarn
+        run: corepack prepare yarn@4.4.1 --activate
+
+      # 加载依赖缓存
       - name: Load cached dependencies
         uses: actions/cache@v4.1.0
         id: cache
@@ -48,25 +58,19 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
 
+      # 安装依赖
       - name: Install dependencies
         run: yarn install
 
-      # - name: Load cached dependencies
-      #   uses: actions/cache@v4.0.2
-      #   id: cache
-      #   with:
-      #     path: |
-      #       **/node_modules
-      #       **/.turbo
-      #       /home/runner/.cache/Cypress
-      #     key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install Dependencies
+      # 构建项目
+      - name: Build packages
         run: yarn build
 
+      # 运行单元测试
       - name: Unit test
-        run: yarn run test 
+        run: yarn run test
 
+      # 运行 E2E 测试
       - name: E2E test
         uses: cypress-io/github-action@v6
         with:
@@ -74,6 +78,7 @@ jobs:
           start: yarn run example
           wait-on: 'http://localhost:8881/examples/default-mode.html'
 
+      # 创建 Release PR 或发布稳定版本到 npm
       - name: Create Release PR or publish stable version to npm
         id: changesets
         uses: changesets/action@v1
@@ -85,4 +90,4 @@ jobs:
             ${{ github.ref_name == 'master' && 'chore(release): publish a new release version'  || 'chore(release): publish a new pre-release version' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

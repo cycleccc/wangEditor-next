@@ -11,8 +11,9 @@ global.crypto = {
     return nodeCrypto.randomFillSync(buffer)
   },
 }
-jest.spyOn(global.console, 'warn').mockImplementation(() => jest.fn())
-jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn())
+
+vi.spyOn(global.console, 'warn').mockImplementation(() => vi.fn())
+vi.spyOn(global.console, 'error').mockImplementation(() => vi.fn())
 
 // Jest environment not contains DataTransfer object, so mock a DataTransfer class
 // @ts-ignore

@@ -48,6 +48,7 @@ export function splitNode(sharedRoot: Y.XmlText, slateRoot: Node, op: SplitNodeO
     .slice(0, op.position)
     .reduce((length, child) => length + getSlateNodeYLength(child), 0)
 
+  // @ts-ignore
   const length = target.slateTarget.children.reduce(
     (current, child) => current + getSlateNodeYLength(child),
     0,

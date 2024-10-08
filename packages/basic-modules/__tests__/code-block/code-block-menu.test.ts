@@ -33,7 +33,7 @@ describe('code-block menu', () => {
     startLocation = null
   })
 
-  it('getValue and isActive', done => {
+  it('getValue and isActive', async () => {
     editor.select(startLocation)
     expect(menu.isActive(editor)).toBeFalsy()
     expect(menu.getValue(editor)).toBe('')
@@ -46,7 +46,6 @@ describe('code-block menu', () => {
     setTimeout(() => {
       expect(menu.isActive(editor)).toBeTruthy()
       expect(menu.getValue(editor)).toBe('javascript')
-      done()
     })
   })
 

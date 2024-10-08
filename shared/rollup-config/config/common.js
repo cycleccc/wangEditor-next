@@ -1,19 +1,17 @@
 /**
  * @description rollup common config
- * @author wangfupeng
+ * @author cycleccc
  */
 
-import path from 'path'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import nodeResolve from '@rollup/plugin-node-resolve'
-import typescript from 'rollup-plugin-typescript2'
 import replace from '@rollup/plugin-replace'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
+import typescript from 'rollup-plugin-typescript2'
 // import del from 'rollup-plugin-delete'
 
 export const extensions = ['.js', '.jsx', '.ts', '.tsx']
-const isProd = process.env.NODE_ENV === 'production'
 
 /**
  * 生成 common conf
@@ -22,7 +20,7 @@ const isProd = process.env.NODE_ENV === 'production'
  */
 function genCommonConf(format) {
   return {
-    input: path.resolve(__dirname, './src/index.ts'),
+    input: 'src/index.ts',
     output: {
       // 属性有 file format name sourcemap 等
       // https://www.rollupjs.com/guide/big-list-of-options
@@ -36,7 +34,7 @@ function genCommonConf(format) {
       }),
       typescript({
         clean: true,
-        tsconfig: path.resolve(__dirname, './tsconfig.json'),
+        tsconfig: './tsconfig.json',
       }),
       nodeResolve({
         browser: true, // 重要

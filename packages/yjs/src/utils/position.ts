@@ -1,5 +1,5 @@
 import {
-  BasePoint, BaseRange, Node, Text,
+  BasePoint, BaseRange, Element, Node, Text,
 } from 'slate'
 import * as Y from 'yjs'
 
@@ -38,8 +38,8 @@ export function absolutePositionToSlatePoint(
   const parentPath = getSlatePath(sharedRoot, slateRoot, type)
   const parent = Node.get(slateRoot, parentPath)
 
-  if (Text.isText(parent)) {
-    throw new Error("Absolute position doesn't match slateRoot, cannot descent into text")
+  if (Text.isText(parent) || !Element.isElement(parent)) {
+    throw new Error("Absolute position doesn't match slateRoot, cannot descent into text and EditorRoot")
   }
 
   const [pathOffset, textOffset] = yOffsetToSlateOffsets(parent, index, {

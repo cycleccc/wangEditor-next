@@ -31,7 +31,7 @@ describe('link plugin', () => {
     expect(editor.isInline(elem)).toBeTruthy()
   })
 
-  it('link insert data', done => {
+  it('link insert data', () => {
     const url = 'https://cycleccc.github.io/docs/'
 
     const data = new MyDataTransfer()
@@ -49,10 +49,9 @@ describe('link plugin', () => {
       const linkElem = links[0] as any
 
       expect(linkElem.url).toBe(url)
-      done()
     })
   })
-  it('should insert an image correctly when dragging and dropping an image', done => {
+  it('should insert an image correctly when dragging and dropping an image', () => {
     const imgHtml = '<img src="https://www.wangeditor.com/img.jpg" />'
     const imgUrl = 'https://cycleccc.github.io/docs/image/logo.png'
 
@@ -72,11 +71,10 @@ describe('link plugin', () => {
       const imgElem = images[0] as any
 
       expect(imgElem.src).toBe('https://www.wangeditor.com/img.jpg')
-      done()
     })
   })
 
-  it('should insert non-link data correctly', done => {
+  it('should insert non-link data correctly', async () => {
     const text = 'This is a test text.'
 
     const data = new MyDataTransfer()
@@ -91,7 +89,6 @@ describe('link plugin', () => {
       const content = Editor.string(editor, [])
 
       expect(content).toContain(text)
-      done()
     })
   })
 })

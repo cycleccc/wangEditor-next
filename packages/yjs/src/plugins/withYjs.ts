@@ -252,6 +252,7 @@ export function withYjs(sharedRoot: Y.XmlText, options: WithYjsOptions = {}) {
         e.sharedRoot.doc.transact(() => {
           txGroup.forEach(change => {
             assertDocumentAttachment(e.sharedRoot)
+            // @ts-ignore
             applySlateOp(e.sharedRoot, { children: change.doc }, change.op)
           })
         }, txGroup[0].origin)

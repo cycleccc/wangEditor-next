@@ -35,21 +35,51 @@ import DOMStaticRange = globalThis.StaticRange
 
 export { Dom7Array } from 'dom7'
 
-if (append) { $.fn.append = append }
-if (on) { $.fn.on = on }
-if (focus) { $.fn.focus = focus }
-if (attr) { $.fn.attr = attr }
-if (val) { $.fn.val = val }
-if (html) { $.fn.html = html }
-if (dataset) { $.fn.dataset = dataset }
-if (addClass) { $.fn.addClass = addClass }
-if (removeClass) { $.fn.removeClass = removeClass }
-if (children) { $.fn.children = children }
-if (each) { $.fn.each = each }
-if (find) { $.fn.find = find }
-if (data) { $.fn.data = data }
-if (hide) { $.fn.hide = hide }
-if (show) { $.fn.show = show }
+if (append && $.fn) {
+  $.fn.append = append
+}
+if (on && $.fn) {
+  $.fn.on = on
+}
+if (focus && $.fn) {
+  $.fn.focus = focus
+}
+if (attr && $.fn) {
+  $.fn.attr = attr
+}
+if (val && $.fn) {
+  $.fn.val = val
+}
+if (html && $.fn) {
+  $.fn.html = html
+}
+if (dataset && $.fn) {
+  $.fn.dataset = dataset
+}
+if (addClass && $.fn) {
+  $.fn.addClass = addClass
+}
+if (removeClass && $.fn) {
+  $.fn.removeClass = removeClass
+}
+if (children && $.fn) {
+  $.fn.children = children
+}
+if (each && $.fn) {
+  $.fn.each = each
+}
+if (find && $.fn) {
+  $.fn.find = find
+}
+if (data && $.fn) {
+  $.fn.data = data
+}
+if (hide && $.fn) {
+  $.fn.hide = hide
+}
+if (show && $.fn) {
+  $.fn.show = show
+}
 
 export default $
 

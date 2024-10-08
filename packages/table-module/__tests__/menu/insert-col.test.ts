@@ -7,10 +7,10 @@ import locale from '../../src/locale/zh-CN'
 import InsertCol from '../../src/module/menu/InsertCol'
 import * as utils from '../../src/utils'
 
-jest.mock('../../src/utils', () => ({
-  filledMatrix: jest.fn(),
+vi.mock('../../src/utils', () => ({
+  filledMatrix: vi.fn(),
 }))
-const mockedUtils = utils as jest.Mocked<typeof utils>
+const mockedUtils = utils as vi.Mocked<typeof utils>
 
 function setEditorSelection(
   editor: core.IDomEditor,
@@ -59,7 +59,7 @@ describe('Table Module Insert Col Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => false)
 
     expect(insertColMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -70,8 +70,8 @@ describe('Table Module Insert Col Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => null)
 
     expect(insertColMenu.isDisabled(editor)).toBeTruthy()
   })
@@ -82,8 +82,8 @@ describe('Table Module Insert Col Menu', () => {
 
     setEditorSelection(editor)
 
-    jest.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
-    jest.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({} as any))
+    vi.spyOn(slate.Range, 'isCollapsed').mockImplementation(() => true)
+    vi.spyOn(core.DomEditor, 'getSelectedNodeByType').mockImplementation(() => ({}) as any)
 
     expect(insertColMenu.isDisabled(editor)).toBeFalsy()
   })
@@ -101,7 +101,7 @@ describe('Table Module Insert Col Menu', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
 
-    jest.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
 
     const fn = function* () {
       yield [
@@ -113,8 +113,8 @@ describe('Table Module Insert Col Menu', () => {
       ] as slate.NodeEntry<slate.Element>
     }
 
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    jest.spyOn(core.DomEditor, 'getParentNode').mockReturnValue(null)
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    vi.spyOn(core.DomEditor, 'getParentNode').mockReturnValue(null)
 
     expect(insertColMenu.exec(editor, '')).toBeUndefined()
   })
@@ -123,7 +123,7 @@ describe('Table Module Insert Col Menu', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
 
-    jest.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
 
     const fn = function* () {
       yield [
@@ -135,9 +135,8 @@ describe('Table Module Insert Col Menu', () => {
       ] as slate.NodeEntry<slate.Element>
     }
 
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    jest
-      .spyOn(core.DomEditor, 'getParentNode')
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    vi.spyOn(core.DomEditor, 'getParentNode')
       .mockReturnValue({} as any)
       .mockReturnValue(null)
 
@@ -148,7 +147,7 @@ describe('Table Module Insert Col Menu', () => {
     const insertColMenu = new InsertCol()
     const editor = createEditor()
 
-    jest.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
+    vi.spyOn(insertColMenu, 'isDisabled').mockReturnValue(false)
 
     const fn = function* () {
       yield [
@@ -160,9 +159,8 @@ describe('Table Module Insert Col Menu', () => {
       ] as slate.NodeEntry<slate.Element>
     }
 
-    jest.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
-    jest
-      .spyOn(core.DomEditor, 'getParentNode')
+    vi.spyOn(slate.Editor, 'nodes').mockReturnValue(fn())
+    vi.spyOn(core.DomEditor, 'getParentNode')
       .mockReturnValue({} as any)
       .mockReturnValue({
         type: 'table',
@@ -196,10 +194,10 @@ describe('Table Module Insert Col Menu', () => {
         ],
       } as any)
 
-    jest.spyOn(core.DomEditor, 'findPath').mockReturnValue([0, 1])
-    const insertNodesFn = jest.fn()
+    vi.spyOn(core.DomEditor, 'findPath').mockReturnValue([0, 1])
+    const insertNodesFn = vi.fn()
 
-    jest.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
+    vi.spyOn(slate.Transforms, 'insertNodes').mockImplementation(insertNodesFn)
     mockedUtils.filledMatrix.mockImplementation(() => {
       return [
         [

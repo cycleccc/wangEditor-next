@@ -9,6 +9,11 @@ import { Editor, Transforms } from 'slate'
 import createEditor from '../../../../../tests/utils/create-editor'
 import InsertImage from '../../../src/modules/image/menu/InsertImage'
 
+// 在测试文件中
+// beforeEach(() => {
+//   jest.spyOn(helper, 'insertImageNode').mockImplementation(jest.fn())
+// })
+
 describe('insert image menu', () => {
   const menu = new InsertImage()
   let editor: any
@@ -57,7 +62,7 @@ describe('insert image menu', () => {
   })
 
   it('get modal content elem', () => {
-    const spy = jest.spyOn(menu as any, 'insertImage')
+    const spy = vi.spyOn(menu as any, 'insertImage')
 
     // Generate modal content and simulate button click
     const elem = menu.getModalContentElem(editor)
@@ -105,7 +110,7 @@ describe('insert image menu', () => {
     menu.getModalContentElem(editor)
     const inputSrc = document.getElementById((menu as any).srcInputId) as HTMLInputElement
 
-    jest.spyOn(inputSrc, 'focus')
+    vi.spyOn(inputSrc, 'focus')
 
     await waitFor(() => {
       expect(inputSrc.focus).toHaveBeenCalled()
