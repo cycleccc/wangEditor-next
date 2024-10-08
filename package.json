@@ -55,7 +55,7 @@
     "@testing-library/jest-dom": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
-    "@vitest/coverage-istanbul": "2.1.2",
+    "@vitest/coverage-v8": "2.1.2",
     "autoprefixer": "^10.2.5",
     "babel-core": "^7.0.0-bridge.0",
     "concurrently": "^9.0.0",
