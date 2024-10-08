@@ -41,6 +41,7 @@ function withList<T extends IDomEditor>(editor: T): T {
     if (listElem.children[0].text === '') {
       Transforms.setNodes(newEditor, {
         type: 'paragraph',
+        // @ts-ignore
         ordered: undefined,
         level: undefined,
       })
@@ -90,6 +91,7 @@ function withList<T extends IDomEditor>(editor: T): T {
         // 转换为 p 元素
         Transforms.setNodes(newEditor, {
           type: 'paragraph',
+          // @ts-ignore
           ordered: undefined,
           level: undefined,
         })

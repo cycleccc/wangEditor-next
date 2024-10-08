@@ -65,6 +65,7 @@ abstract class BaseMenu implements IButtonMenu {
       // 如果当前 active ，则转换为 p 标签
       Transforms.setNodes(editor, {
         type: 'paragraph',
+        // @ts-ignore
         ordered: undefined,
         level: undefined,
       })
