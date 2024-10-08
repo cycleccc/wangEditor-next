@@ -1,6 +1,6 @@
 /**
  * @description 创建 rollup 配置
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import pkg from 'lodash'

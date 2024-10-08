@@ -1,6 +1,6 @@
 /**
  * @description rollup common config
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import commonjs from '@rollup/plugin-commonjs'

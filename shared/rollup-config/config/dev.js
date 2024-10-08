@@ -1,6 +1,6 @@
 /**
  * @description rollup dev config
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import autoprefixer from 'autoprefixer'

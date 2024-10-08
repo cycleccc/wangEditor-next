@@ -1,6 +1,18 @@
 import { defineConfig } from 'vitest/config'
 import path from 'path'
 
+// 抽取重复的模块路径
+const modulePaths = [
+  '@wangeditor-next/core',
+  '@wangeditor-next/basic-modules',
+  '@wangeditor-next/code-highlight',
+  '@wangeditor-next/editor',
+  '@wangeditor-next/list-module',
+  '@wangeditor-next/table-module',
+  '@wangeditor-next/upload-image-module',
+  '@wangeditor-next/video-module',
+]
+
 export default defineConfig({
   test: {
     environment: 'jsdom', // Vitest 默认使用 jsdom
@@ -11,7 +23,7 @@ export default defineConfig({
       provider: 'istanbul', // 可以选择使用 'c8' 或 'istanbul'
       reporter: ['text', 'json', 'html'], // 覆盖率报告格式
       include: [
-        'packages/{basic-modules,code-highlight,core,editor,list-module,table-module,upload-image-module,video-module}/src/**/*.{ts,tsx}',
+        `packages/{${modulePaths.map(p => p.split('/')[1]).join(',')}}/src/**/*.{ts,tsx}`,
       ],
       exclude: [
         'dist',
@@ -27,19 +39,17 @@ export default defineConfig({
     alias: {
       // 对于样式文件 mock
       '^.+\\.(css|less)$': path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/core/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/basic-modules/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/code-highlight/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/editor/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/list-module/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/table-module/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/upload-image-module/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
-        '@wangeditor-next/video-module/dist/css/style.css':path.resolve(__dirname, 'tests/utils/stylesMock.js'),
+      ...Object.fromEntries(
+        modulePaths.map(p => [
+          `${p}/dist/css/style.css`,
+          path.resolve(__dirname, 'tests/utils/stylesMock.js')
+        ])
+      ),
     },
   },
   esbuild: {
     // 如果需要特定的转译处理
-    jsx:'transform',
+    jsx: 'transform',
     jsxFactory: 'jsx',
   },
 })

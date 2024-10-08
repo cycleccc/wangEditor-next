@@ -1,6 +1,6 @@
 /**
  * @description rollup prd config
- * @author wangfupeng
+ * @author cycleccc
  */
 
 import babel from '@rollup/plugin-babel'
