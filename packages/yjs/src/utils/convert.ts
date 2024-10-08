@@ -1,3 +1,4 @@
+import { BaseElement } from 'packages/custom-types'
 import { Element, Node, Text } from 'slate'
 import * as Y from 'yjs'
 
@@ -11,6 +12,7 @@ export function yTextToSlateElement(yText: Y.XmlText): Element {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const children = delta.length > 0 ? delta.map(deltaInsertToSlateNode) : [{ text: '' }]
 
+  // @ts-ignore
   return { ...yText.getAttributes(), children }
 }
 
@@ -29,7 +31,7 @@ export function slateNodesToInsertDelta(nodes: Node[]): InsertDelta {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    return { insert: slateElementToYText(node) }
+    return { insert: slateElementToYText(node as BaseElement) }
   })
 }
 

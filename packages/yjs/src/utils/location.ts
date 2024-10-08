@@ -31,7 +31,7 @@ export function getYTarget(yRoot: Y.XmlText, slateRoot: Node, path: Path): YTarg
 
   const [pathOffset, ...childPath] = path
 
-  const yOffset = slatePathOffsetToYOffset(slateRoot, pathOffset)
+  const yOffset = slatePathOffsetToYOffset(slateRoot as Element, pathOffset)
   const targetNode = slateRoot.children[pathOffset]
 
   const delta = yTextToInsertDelta(yRoot)
@@ -149,7 +149,7 @@ export function getSlatePath(sharedRoot: Y.XmlText, slateRoot: Node, yText: Y.Xm
       throw new Error('Cannot descent into slate text')
     }
 
-    const [pathOffset] = yOffsetToSlateOffsets(slateParent, yOffset)
+    const [pathOffset] = yOffsetToSlateOffsets(slateParent as Element, yOffset)
 
     slateParent = slateParent.children[pathOffset]
     return path.concat(pathOffset)
