@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.6.6
+
+### Patch Changes
+
+- 75c7366: fix table text align
+- Updated dependencies [f111276]
+  - @wangeditor-next/core@1.7.8
+
 ## 1.6.5
 
 ### Patch Changes

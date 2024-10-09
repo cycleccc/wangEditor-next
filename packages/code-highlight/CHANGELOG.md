@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.3.5
+
+### Patch Changes
+
+- f111276: Fix test error
+- Updated dependencies [f111276]
+  - @wangeditor-next/core@1.7.8
+
 ## 1.3.4
 
 ### Patch Changes
