@@ -43,8 +43,8 @@
     "url": "https://github.com/cycleccc/wangEditor/issues"
   },
   "peerDependencies": {
-    "@uppy/core": "^2.1.4",
-    "@uppy/xhr-upload": "^2.0.7",
+    "@uppy/core": "^2.1.4 || ^4.0.0",
+    "@uppy/xhr-upload": "^2.0.7 || ^4.0.0",
     "@wangeditor-next/core": "1.7.8",
     "dom7": "^3.0.0",
     "nanoid": "^5.0.0",

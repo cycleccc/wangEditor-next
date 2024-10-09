@@ -33,7 +33,7 @@ function getUppy(editor: IDomEditor): Uppy {
   } = menuConfig
 
   // 上传完成之后
-  const successHandler = (file: UppyFile, res: any) => {
+  const successHandler = (file: UppyFile<{}, {}>, res: any) => {
     // 预期 res 格式：
     // 成功：{ errno: 0, data: { url, poster } }
     // 失败：{ errno: !0, message: '失败信息' }

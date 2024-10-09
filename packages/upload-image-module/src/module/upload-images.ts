@@ -31,7 +31,7 @@ function getUppy(editor: IDomEditor): Uppy {
   } = menuConfig
 
   // 上传完成之后
-  const successHandler = (file: UppyFile, res: any) => {
+  const successHandler = (file: UppyFile<{}, {}>, res: any) => {
     // 预期 res 格式：
     // 成功：{ errno: 0, data: { url, alt, href } } —— 注意，旧版的 data 是数组，要兼容一下
     // 失败：{ errno: !0, message: '失败信息' }
