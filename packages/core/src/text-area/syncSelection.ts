@@ -3,16 +3,16 @@
  * @author wangfupeng
  */
 
-import { Range, Transforms } from 'slate'
 import scrollIntoView from 'scroll-into-view-if-needed'
+import { Range, Transforms } from 'slate'
 
-import { IDomEditor } from '../editor/interface'
 import { DomEditor } from '../editor/dom-editor'
-import TextArea from './TextArea'
-import { EDITOR_TO_ELEMENT, IS_FOCUSED } from '../utils/weak-maps'
-import { IS_FIREFOX } from '../utils/ua'
-import { hasEditableTarget, isTargetInsideNonReadonlyVoid } from './helpers'
+import { IDomEditor } from '../editor/interface'
 import { DOMElement } from '../utils/dom'
+import { IS_FIREFOX } from '../utils/ua'
+import { EDITOR_TO_ELEMENT, IS_FOCUSED } from '../utils/weak-maps'
+import { hasEditableTarget, isTargetInsideNonReadonlyVoid } from './helpers'
+import TextArea from './TextArea'
 
 /**
  * editor onchange 时，将 editor selection 同步给 DOM
@@ -26,21 +26,22 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
   const root = DomEditor.findDocumentOrShadowRoot(editor)
   const domSelection = root.getSelection()
 
-  if (!domSelection) return
-  if (textarea.isComposing && !focus) return
-  if (!editor.isFocused()) return
+  if (!domSelection) { return }
+  if (textarea.isComposing && !focus) { return }
+  if (!editor.isFocused()) { return }
 
   const hasDomSelection = domSelection.type !== 'None'
 
   // If the DOM selection is properly unset, we're done.
-  if (!selection && !hasDomSelection) return
+  if (!selection && !hasDomSelection) { return }
 
   // verify that the dom selection is in the editor
   const editorElement = EDITOR_TO_ELEMENT.get(editor)!
   let hasDomSelectionInEditor = false
+
   if (
-    editorElement.contains(domSelection.anchorNode) &&
-    editorElement.contains(domSelection.focusNode)
+    editorElement.contains(domSelection.anchorNode)
+    && editorElement.contains(domSelection.focusNode)
   ) {
     hasDomSelectionInEditor = true
   }
@@ -54,12 +55,14 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
       // (e.g. when clicking on contentEditable:false element)
       suppressThrow: true,
     })
+
     if (slateRange && Range.equals(slateRange, selection)) {
       let canReturn = true
 
       // 选区在 table 时，需要特殊处理
       if (Range.isCollapsed(selection)) {
         const { anchorNode, anchorOffset } = domSelection
+
         if (anchorNode === editorElement) {
           const childNodes = editorElement.childNodes
           let tableElem
@@ -79,7 +82,7 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
       }
 
       // 其他情况，就此结束
-      if (canReturn) return
+      if (canReturn) { return }
     }
   }
 
@@ -99,31 +102,33 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
   textarea.isUpdatingSelection = true
 
   const newDomRange = selection && DomEditor.toDOMRange(editor, selection)
+
   if (newDomRange) {
     if (Range.isBackward(selection!)) {
       domSelection.setBaseAndExtent(
         newDomRange.endContainer,
         newDomRange.endOffset,
         newDomRange.startContainer,
-        newDomRange.startOffset
+        newDomRange.startOffset,
       )
     } else {
       domSelection.setBaseAndExtent(
         newDomRange.startContainer,
         newDomRange.startOffset,
         newDomRange.endContainer,
-        newDomRange.endOffset
+        newDomRange.endOffset,
       )
     }
 
     // 滚动到选区
-    let leafEl = newDomRange.startContainer.parentElement! as Element
+    const leafEl = newDomRange.startContainer.parentElement! as Element
     const spacer = leafEl.closest('[data-slate-spacer]')
 
     // 这个 if 防止选中图片时发生滚动
     if (!spacer) {
       leafEl.getBoundingClientRect = newDomRange.getBoundingClientRect.bind(newDomRange)
       const body = document.body
+
       scrollIntoView(leafEl, {
         scrollMode: 'if-needed',
         boundary: config.scroll ? editorElement.parentElement : body, // issue 4215
@@ -157,10 +162,10 @@ export function DOMSelectionToEditor(textarea: TextArea, editor: IDomEditor) {
   const { isComposing, isUpdatingSelection, isDraggingInternally } = textarea
   const config = editor.getConfig()
 
-  if (config.readOnly) return
-  if (isComposing) return
-  if (isUpdatingSelection) return
-  if (isDraggingInternally) return
+  if (config.readOnly) { return }
+  if (isComposing) { return }
+  if (isUpdatingSelection) { return }
+  if (isDraggingInternally) { return }
 
   const root = DomEditor.findDocumentOrShadowRoot(editor)
   const { activeElement } = root
@@ -182,16 +187,15 @@ export function DOMSelectionToEditor(textarea: TextArea, editor: IDomEditor) {
 
   const { anchorNode, focusNode } = domSelection
 
-  const anchorNodeSelectable =
-    hasEditableTarget(editor, anchorNode) || isTargetInsideNonReadonlyVoid(editor, anchorNode)
-  const focusNodeSelectable =
-    hasEditableTarget(editor, focusNode) || isTargetInsideNonReadonlyVoid(editor, focusNode)
+  const anchorNodeSelectable = hasEditableTarget(editor, anchorNode) || isTargetInsideNonReadonlyVoid(editor, anchorNode)
+  const focusNodeSelectable = hasEditableTarget(editor, focusNode) || isTargetInsideNonReadonlyVoid(editor, focusNode)
 
   if (anchorNodeSelectable && focusNodeSelectable) {
     const range = DomEditor.toSlateRange(editor, domSelection, {
       exactMatch: false,
       suppressThrow: false,
     })
+
     Transforms.select(editor, range)
   } else {
     // 禁用此行，让光标选区继续生效
