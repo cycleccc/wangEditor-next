@@ -183,7 +183,7 @@ function renderResizeContainer(
 
           if (parentNode == null) { return }
           const parentNodeDom = DomEditor.toDOMNode(editor, parentNode)
-          const rect = parentNodeDom.getBoundingClientRect()
+          const rect = parentNodeDom.getBoundingClientRect ? parentNodeDom.getBoundingClientRect() : { width: 0 }
           // 获取元素的计算样式
           const style = window.getComputedStyle(parentNodeDom)
           // 获取左右 padding 和 border 的宽度

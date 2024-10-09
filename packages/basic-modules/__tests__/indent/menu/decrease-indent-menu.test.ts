@@ -31,7 +31,7 @@ describe('decrease indent menu', () => {
     Transforms.setNodes(editor, { type: 'header1', children: [] })
     expect(menu.isDisabled(editor)).toBeTruthy() // 没有 indent 则 disabled
 
-    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
+    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }], language: '' }] })
     expect(menu.isDisabled(editor)).toBeTruthy() // 除了 p header 之外，其他 type 不可用 indent
     // Transforms.removeNodes(editor, { mode: 'highest' }) // 移除 pre/code
   })

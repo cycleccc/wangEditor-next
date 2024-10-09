@@ -7,6 +7,7 @@ import { Editor } from 'slate'
 
 import { isHTMLElememt } from '../../../../packages/core/src/utils/dom'
 import createEditor from '../../../../tests/utils/create-editor'
+import { preNode } from '../../../code-highlight/__tests__/content'
 import BgColorMenu from '../../src/modules/color/menu/BgColorMenu'
 import ColorMenu from '../../src/modules/color/menu/ColorMenu'
 
@@ -60,7 +61,7 @@ describe('color menus', () => {
       expect(menu.isDisabled(editor)).toBeFalsy()
     })
 
-    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
+    editor.insertNode(preNode)
     menus.forEach(({ menu }) => {
       expect(menu.isDisabled(editor)).toBeTruthy()
     })

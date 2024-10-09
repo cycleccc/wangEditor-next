@@ -520,9 +520,11 @@ export const DomEditor = {
 
       // Calculate how far into the text node the `nearestNode` is, so that we
       // can determine what the offset relative to the text node is.
-      if (leafNode) {
+      const window = DomEditor.getWindow(editor)
+
+      if (leafNode && window.document.createRange) {
         textNode = leafNode.closest('[data-slate-node="text"]')!
-        const window = DomEditor.getWindow(editor)
+
         const range = window.document.createRange()
 
         range.setStart(textNode, 0)

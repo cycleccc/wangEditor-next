@@ -28,6 +28,7 @@ describe('code-block plugin', () => {
   const codeElem = {
     type: 'code',
     children: [{ text: ' var' }],
+    language: '',
   }
   const preElem = {
     type: 'pre',
@@ -81,6 +82,7 @@ describe('code-block plugin', () => {
     const codeElem = {
       type: 'code',
       children: [{ text: 'var' }],
+      language: '',
     }
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const preElem = {
@@ -137,7 +139,7 @@ describe('code-block plugin', () => {
 
   it('normalizeNode - pre node 不能是第一个节点，否则前面插入 p', () => {
     editor.select(startLocation)
-    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
+    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }], language: '' }] })
 
     const pList = editor.getElemsByTypePrefix('paragraph')
 

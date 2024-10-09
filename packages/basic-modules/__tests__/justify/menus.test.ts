@@ -45,7 +45,7 @@ describe('justify menus', () => {
     editor.select(startLocation)
     expect(centerMenu.isDisabled(editor)).toBeFalsy()
 
-    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
+    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }], language: '' }] })
     expect(centerMenu.isDisabled(editor)).toBeTruthy()
     Transforms.removeNodes(editor, { mode: 'highest' })
 

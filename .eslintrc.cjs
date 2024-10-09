@@ -30,8 +30,9 @@ module.exports = {
         'cypress/globals': true,
       },
       globals: {
-        globalThis:'readonly',
-        vi: "readonly"
+        globalThis: 'readonly',
+        vi: 'readonly',
+        expect: 'readonly',
       },
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',

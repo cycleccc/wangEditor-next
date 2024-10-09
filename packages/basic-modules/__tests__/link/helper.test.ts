@@ -71,6 +71,7 @@ describe('link module helper', () => {
         {
           type: 'code',
           children: [{ text: 'var' }],
+          language: 'javascript',
         },
       ],
     })

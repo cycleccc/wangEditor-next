@@ -104,10 +104,10 @@ describe('editor DOM API', () => {
   })
 
   it('foucus', () => {
-    const editor = createEditor()
+    const editor = createEditor(
+      { content: [{ type: 'paragraph', children: [{ text: 'Hello' }] }] },
+    )
 
-    editor.focus()
-    editor.insertText('hello')
     editor.focus()
     // 测试选区定位到开始
     expect(editor.selection).toStrictEqual({

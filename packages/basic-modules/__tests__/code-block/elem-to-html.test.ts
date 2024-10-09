@@ -8,7 +8,7 @@ import { codeToHtmlConf, preToHtmlConf } from '../../src/modules/code-block/elem
 describe('code-block - elem to html', () => {
   it('code to html', () => {
     expect(codeToHtmlConf.type).toBe('code')
-    const elem = { type: 'code', children: [] }
+    const elem = { type: 'code', children: [], language: '' }
     const html = codeToHtmlConf.elemToHtml(elem, 'hello')
 
     expect(html).toBe('<code>hello</code>')
