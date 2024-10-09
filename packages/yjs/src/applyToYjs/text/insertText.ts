@@ -1,5 +1,5 @@
 import { InsertTextOperation, Node, Text } from 'slate'
-import type Y from 'yjs'
+import * as Y from 'yjs'
 
 import { getYTarget } from '../../utils/location'
 import { getProperties } from '../../utils/slate'

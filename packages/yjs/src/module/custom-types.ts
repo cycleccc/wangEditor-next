@@ -1,7 +1,7 @@
 import type {
   Descendant, Editor, Element, Node,
 } from 'slate'
-import type Y from 'yjs'
+import * as Y from 'yjs'
 
 export type DeltaAttributes = {
   retain: number

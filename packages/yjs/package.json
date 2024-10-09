@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "slate": "^0.72.0",
-    "typescript": "^4.6.3",
+    "typescript": "^5.0.0",
     "yjs": "^13.5.29"
   }
 }
