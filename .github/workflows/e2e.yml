@@ -47,6 +47,18 @@ jobs:
       - name: Prepare Yarn
         run: corepack prepare yarn@4.4.1 --activate
 
+      # 加载依赖缓存
+      - name: Load cached dependencies
+        uses: actions/cache@v4.1.0
+        id: cache
+        with:
+          path: |
+            **/node_modules
+            **/.turbo
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+
+
       # 安装项目依赖
       - name: Install dependencies
         run: yarn install
