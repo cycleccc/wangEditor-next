@@ -31,7 +31,7 @@ describe('increase indent menu', () => {
     Transforms.setNodes(editor, { type: 'header1', children: [] })
     expect(menu.isDisabled(editor)).toBeFalsy()
 
-    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
+    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }], language: '' }] })
     expect(menu.isDisabled(editor)).toBeTruthy() // 除了 p header 之外，其他 type 不可用 indent
     Transforms.setNodes(editor, { type: 'header1', children: [{ text: 'hello' }] })
     menu.exec(editor, '')

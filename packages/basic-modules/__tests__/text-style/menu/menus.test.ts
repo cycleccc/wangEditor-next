@@ -67,6 +67,7 @@ describe('text style menus', () => {
           {
             type: 'code',
             children: [{ text: 'var' }],
+            language: '',
           } as Element,
         ],
       } as Element)

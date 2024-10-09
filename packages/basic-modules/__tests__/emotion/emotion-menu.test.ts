@@ -36,7 +36,7 @@ describe('font family menu', () => {
     editor.select(startLocation)
     expect(menu.isDisabled(editor)).toBeFalsy()
 
-    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }] }] })
+    editor.insertNode({ type: 'pre', children: [{ type: 'code', children: [{ text: 'var' }], language: '' }] })
     expect(menu.isDisabled(editor)).toBeTruthy()
     // Transforms.removeNodes(editor, { mode: 'highest' }) // 移除 pre/code
   })

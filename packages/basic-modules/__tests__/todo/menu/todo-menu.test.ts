@@ -86,6 +86,7 @@ describe('todo-menu', () => {
         {
           type: 'code',
           children: [{ text: 'hello' }],
+          language: '',
         },
       ],
     })

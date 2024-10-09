@@ -12,7 +12,7 @@ describe('code-block render elem', () => {
   it('render code elem', () => {
     expect(renderCodeConf.type).toBe('code')
 
-    const elem = { type: 'code', children: [] }
+    const elem = { type: 'code', children: [], language: '' }
     const vnode = renderCodeConf.renderElem(elem, null, editor)
 
     expect(vnode.sel).toBe('code')

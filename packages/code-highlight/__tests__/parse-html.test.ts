@@ -13,7 +13,7 @@ describe('code highlight - parse style html', () => {
 
   it('v5 format', () => {
     const $code = $('<code class="language-javascript"></code>') // v5 html format
-    const code = { type: 'code', children: [{ text: 'var a = 100;' }] }
+    const code = { type: 'code', children: [{ text: 'var a = 100;' }], language: '' }
 
     const res = parseCodeStyleHtml($code[0], code, editor)
 
@@ -26,7 +26,7 @@ describe('code highlight - parse style html', () => {
 
   it('v4 format', () => {
     const $code = $('<code class="Javascript"></code>') // v4 html format
-    const code = { type: 'code', children: [{ text: 'var a = 100;' }] }
+    const code = { type: 'code', children: [{ text: 'var a = 100;' }], language: '' }
 
     const res = parseCodeStyleHtml($code[0], code, editor)
 
