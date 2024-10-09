@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.3.4
+
+### Patch Changes
+
+- ac57da1: refactor test and build depts
+- Updated dependencies [ac57da1]
+  - @wangeditor-next/core@1.7.7
+
 ## 1.3.3
 
 ### Patch Changes
