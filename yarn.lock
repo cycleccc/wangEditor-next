@@ -3424,11 +3424,11 @@ __metadata:
     "@types/is-url": "npm:^1.2.29"
     is-url: "npm:^1.2.4"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     dom7: ^3.0.0
     lodash.throttle: ^4.1.1
     nanoid: ^5.0.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3440,9 +3440,9 @@ __metadata:
     "@types/prismjs": "npm:^1.16.5"
     prismjs: "npm:^1.23.0"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     dom7: ^3.0.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3471,7 +3471,7 @@ __metadata:
     lodash.throttle: ^4.1.1
     lodash.toarray: ^4.4.0
     nanoid: ^5.0.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3499,7 +3499,7 @@ __metadata:
     lodash.throttle: "npm:^4.1.1"
     lodash.toarray: "npm:^4.4.0"
     nanoid: "npm:^5.0.0"
-    slate: "npm:^0.72.0"
+    slate: "npm:^0.103.0"
     snabbdom: "npm:^3.1.0"
   languageName: unknown
   linkType: soft
@@ -3508,9 +3508,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/list-module@workspace:packages/list-module"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     dom7: ^3.0.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3519,13 +3519,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/table-module@workspace:packages/table-module"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     dom7: ^3.0.0
     lodash.debounce: ^4.0.8
     lodash.isequal: ^4.5.0
     lodash.throttle: ^4.1.1
     nanoid: ^5.0.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3536,11 +3536,11 @@ __metadata:
   peerDependencies:
     "@uppy/core": ^2.0.3
     "@uppy/xhr-upload": ^2.0.3
-    "@wangeditor-next/basic-modules": 1.5.6
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/basic-modules": 1.5.7
+    "@wangeditor-next/core": 1.7.8
     dom7: ^3.0.0
     lodash.foreach: ^4.5.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3551,10 +3551,10 @@ __metadata:
   peerDependencies:
     "@uppy/core": ^2.1.4
     "@uppy/xhr-upload": ^2.0.7
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     dom7: ^3.0.0
     nanoid: ^5.0.0
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -3643,11 +3643,11 @@ __metadata:
     use-sync-external-store: "npm:^1.2.0"
     y-protocols: "npm:^1.0.5"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     "@wangeditor-next/editor": 5.5.8
-    "@wangeditor-next/yjs": ^0.1.5
+    "@wangeditor-next/yjs": ^0.1.6
     react: ">=16.8.0"
-    slate: ^0.72.0
+    slate: ^0.72.0 || ^0.103.0
     yjs: ^13.5.29
   languageName: unknown
   linkType: soft
@@ -3656,12 +3656,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/yjs@workspace:packages/yjs"
   dependencies:
-    slate: "npm:^0.72.0"
+    slate: "npm:^0.103.0"
     typescript: "npm:^5.0.0"
     y-protocols: "npm:^1.0.5"
     yjs: "npm:^13.5.29"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.7
+    "@wangeditor-next/core": 1.7.8
     slate: ^0.72.0
     yjs: ^13.5.29
   languageName: unknown
@@ -7504,10 +7504,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immer@npm:^9.0.6":
-  version: 9.0.7
-  resolution: "immer@npm:9.0.7"
-  checksum: 10c0/80740aede86e89eb3a1de5f97f9045a971fa41a45488a9471c930579ce49a268a001df757be3609af9133157dd6fefb45000f61fbc3ff24e853aaa0163c7a6b0
+"immer@npm:^10.0.3":
+  version: 10.1.1
+  resolution: "immer@npm:10.1.1"
+  checksum: 10c0/b749e10d137ccae91788f41bd57e9387f32ea6d6ea8fd7eb47b23fd7766681575efc7f86ceef7fe24c3bc9d61e38ff5d2f49c2663b2b0c056e280a4510923653
   languageName: node
   linkType: hard
 
@@ -11622,14 +11622,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slate@npm:^0.72.0":
-  version: 0.72.0
-  resolution: "slate@npm:0.72.0"
+"slate@npm:^0.103.0":
+  version: 0.103.0
+  resolution: "slate@npm:0.103.0"
   dependencies:
-    immer: "npm:^9.0.6"
+    immer: "npm:^10.0.3"
     is-plain-object: "npm:^5.0.0"
     tiny-warning: "npm:^1.0.3"
-  checksum: 10c0/9e22107270909ab616669273920dbccea25bc145a3b5d4c3b91b144d307c726f577ae4f3afe684fe9974ad3534287a64a1e66fafa35530e6ebfb8f53f4c44c3f
+  checksum: 10c0/5cde24650d71fb449382305c082310404560a73135510fc3d83bae680c5fc6e1db18347a58186f63efbc3342fd4ff4e447c134301f48683cdef312c87988ce0c
   languageName: node
   linkType: hard
 
