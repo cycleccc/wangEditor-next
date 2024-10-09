@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.1.8
+
+### Patch Changes
+
+- ac57da1: refactor test and build depts
+- Updated dependencies [ac57da1]
+  - @wangeditor-next/basic-modules@1.5.6
+  - @wangeditor-next/core@1.7.7
+
 ## 1.1.7
 
 ### Patch Changes
