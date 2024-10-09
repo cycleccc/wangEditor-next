@@ -209,7 +209,8 @@ export const hasShadowRoot = () => {
 export const getElementById = (id: string): null | HTMLElement => {
   return (
     window.document.getElementById(id)
-    ?? (window.document.activeElement?.shadowRoot?.getElementById(id) || null)
+    ?? (window.document.activeElement?.shadowRoot?.getElementById(id) || null)(window && window.document.getElementById(id))
+    ?? ((window && window.document.activeElement?.shadowRoot?.getElementById(id)) || null)
   )
 }
 

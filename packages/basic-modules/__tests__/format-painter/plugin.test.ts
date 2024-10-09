@@ -6,13 +6,14 @@ describe('format painter plugin', () => {
   let editor: any
 
   beforeEach(() => {
-    editor = withFormatPainter(createEditor())
+    editor = withFormatPainter(createEditor(
+      { content: [{ type: 'paragraph', children: [{ text: 'Hello World' }] }] },
+    ))
 
     vi.spyOn(document, 'addEventListener')
     vi.spyOn(document, 'removeEventListener')
 
     editor.focus()
-    editor.insertText('Hello World')
     editor.select({
       anchor: { path: [0, 0], offset: 0 },
       focus: { path: [0, 0], offset: 5 },

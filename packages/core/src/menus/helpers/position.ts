@@ -60,7 +60,7 @@ export function getPositionBySelection(editor: IDomEditor): Partial<IPositionSty
 
   // 获取当前选区的 rect
   const range = DomEditor.toDOMRange(editor, selection)
-  const rangeRect = range.getClientRects()[0]
+  const rangeRect = range.getClientRects ? range.getClientRects()[0] : null
 
   if (rangeRect == null) { return defaultStyle } // 默认 position
   const {

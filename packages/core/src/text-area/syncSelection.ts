@@ -125,7 +125,7 @@ export function editorSelectionToDOM(textarea: TextArea, editor: IDomEditor, foc
     const spacer = leafEl.closest('[data-slate-spacer]')
 
     // 这个 if 防止选中图片时发生滚动
-    if (!spacer) {
+    if (!spacer && newDomRange.getBoundingClientRect) {
       leafEl.getBoundingClientRect = newDomRange.getBoundingClientRect.bind(newDomRange)
       const body = document.body
 

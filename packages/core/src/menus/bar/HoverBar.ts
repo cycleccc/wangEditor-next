@@ -129,7 +129,7 @@ class HoverBar {
     const $elem = this.$elem
 
     let isBottom = false
-    const { innerHeight } = window
+    const innerHeight = typeof window !== 'undefined' ? window.innerHeight : null
     const minDistance = 360 // 距离底部最小 360px
 
     if (innerHeight && innerHeight >= minDistance) {
