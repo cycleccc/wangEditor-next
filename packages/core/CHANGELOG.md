@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.7
+
+### Patch Changes
+
+- ac57da1: refactor test and build depts
+
 ## 1.7.6
 
 ### Patch Changes

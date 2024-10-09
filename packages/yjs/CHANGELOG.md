@@ -1,5 +1,13 @@
 # @wangeditor-next/yjs
 
+## 0.1.5
+
+### Patch Changes
+
+- ac57da1: refactor test and build depts
+- Updated dependencies [ac57da1]
+  - @wangeditor-next/core@1.7.7
+
 ## 0.1.4
 
 ### Patch Changes
