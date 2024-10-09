@@ -70,6 +70,11 @@ function createUploader(config: IUploadConfig): Uppy {
   uppy.on('upload-success', (file, response) => {
     const { body = {} } = response
 
+    if (!file) {
+      console.error('wangEditor upload file - onSuccess error', 'file is null')
+      return
+    }
+
     try {
       // 有用户传入的第三方代码，得用 try catch 包裹
       onSuccess(file, body)
@@ -90,6 +95,12 @@ function createUploader(config: IUploadConfig): Uppy {
   // })
 
   uppy.on('upload-error', (file, error, response) => {
+
+    if (!file) {
+      console.error('wangEditor upload file - onSuccess error', 'file is null')
+      return
+    }
+
     try {
       // 有用户传入的第三方代码，得用 try catch 包裹
       onError(file, error, response)
@@ -100,6 +111,12 @@ function createUploader(config: IUploadConfig): Uppy {
   })
 
   uppy.on('restriction-failed', (file, error) => {
+
+    if (!file) {
+      console.error('wangEditor upload file - onSuccess error', 'file is null')
+      return
+    }
+
     try {
       // 有用户传入的第三方代码，得用 try catch 包裹
       // @ts-ignore
