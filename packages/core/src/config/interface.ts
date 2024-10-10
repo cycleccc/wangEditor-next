@@ -3,6 +3,7 @@
  * @author wangfupeng
  */
 
+import { ImageElement } from 'packages/basic-modules/src/modules/image/custom-types'
 import { VideoElement } from 'packages/video-module/src/module/custom-types'
 import { Node, NodeEntry, Range } from 'slate'
 
@@ -50,25 +51,72 @@ interface ILineHeightConfig {
   lineHeightList: string[];
 }
 
+interface IImageMenuBaseConfig {
+    checkImage?: (src: string, alt: string, url: string) => boolean | undefined | string;
+    parseImageSrc?: (src: string) => string;
+}
+
+interface IInsertImageConfig extends IImageMenuBaseConfig {
+    onInsertedImage?: (imageNode: ImageElement | null) => void;
+}
+
+interface IEditImageConfig extends IImageMenuBaseConfig {
+    onUpdatedImage?: (imageNode: ImageElement | null) => void;
+}
 interface IEmotionConfig {
   emotions: string[];
 }
 
-interface IInsertVideoConfig {
-  onInsertVideo: (videoNode: VideoElement) => NodeEntry | Range;
+interface IInsertTableConfig {
+  minWidth: number;
+  tableHeader: {
+    selected: boolean;
+  };
+  tableFullWidth: {
+    selected: boolean;
+  }
 }
 
+interface ILinkConfig {
+  checkLink: (text:string, url:string)=> string | boolean | undefined
+  parseLinkUrl: (url: string) => string
+}
+
+interface IInsertVideoConfig {
+  onInsertedVideo: (videoNode: VideoElement) => NodeEntry | Range;
+  checkVideo: (src:string, poster:string)=> string | boolean | undefined
+  parseVideoSrc: (url: string) => string
+}
+
+type InsertFnType = (url: string, alt: string, href: string) => void
+
 interface IUploadConfig {
-  server: string;
-  fieldName: string;
-  maxFileSize: number;
-  maxNumberOfFiles: number;
-  allowedFileTypes: string[];
-  meta: Record<string, any>;
-  metaWithUrl: boolean;
-  withCredentials: boolean;
-  timeout: number;
-  base64LimitSize?: number;
+    server?: string;
+    fieldName?: string;
+    maxFileSize?: number;
+    maxNumberOfFiles?: number;
+    allowedFileTypes?: string[];
+    meta?: Record<string, string>;
+    metaWithUrl?: boolean;
+    headers?: Record<string, string>;
+    withCredentials?: boolean;
+    timeout?: number;
+    onBeforeUpload?: (file: File) => File | boolean;
+    onProgress?: (progress: number) => void;
+    onSuccess?: (file: File, res: any) => void;
+    onFailed?: (file: File, res: any) => void;
+    onError?: (file: File, err: any, res: any) => void;
+    customInsert?: (res: any, insertFn: InsertFnType) => void;
+    customUpload?: (file: File, insertFn: InsertFnType) => Promise<void>;
+    customBrowseAndUpload?: (insertFn: InsertFnType) => void;
+}
+
+interface IUploadVideoConfig extends IUploadConfig {
+    // 视频专属配置
+}
+
+interface IUploadImageConfig extends IUploadConfig {
+    base64LimitSize?: number;
 }
 
 interface ICodeLangConfig {
@@ -95,9 +143,9 @@ export interface IMenuConfig {
   justifyCenter: ISingleMenuConfig;
   justifyJustify: ISingleMenuConfig;
   lineHeight: ILineHeightConfig;
-  insertImage: ISingleMenuConfig;
+  insertImage: IInsertImageConfig;
   deleteImage: ISingleMenuConfig;
-  editImage: ISingleMenuConfig;
+  editImage: IEditImageConfig;
   viewImageLink: ISingleMenuConfig;
   imageWidth30: ISingleMenuConfig;
   imageWidth50: ISingleMenuConfig;
@@ -105,8 +153,8 @@ export interface IMenuConfig {
   editorImageSizeMenu: ISingleMenuConfig;
   divider: ISingleMenuConfig;
   emotion: IEmotionConfig;
-  insertLink: ISingleMenuConfig;
-  editLink: ISingleMenuConfig;
+  insertLink: ILinkConfig;
+  editLink: ILinkConfig;
   unLink: ISingleMenuConfig;
   viewLink: ISingleMenuConfig;
   codeBlock: ISingleMenuConfig;
@@ -128,7 +176,7 @@ export interface IMenuConfig {
   numberedList: ISingleMenuConfig;
   insertTable: ISingleMenuConfig;
   deleteTable: ISingleMenuConfig;
-  insertTableRow: ISingleMenuConfig;
+  insertTableRow: IInsertTableConfig;
   deleteTableRow: ISingleMenuConfig;
   insertTableCol: ISingleMenuConfig;
   deleteTableCol: ISingleMenuConfig;
@@ -139,10 +187,10 @@ export interface IMenuConfig {
   setTableProperty: ISingleMenuConfig;
   setTableCellProperty: ISingleMenuConfig;
   insertVideo: IInsertVideoConfig;
-  uploadVideo: IUploadConfig;
+  uploadVideo: IUploadVideoConfig;
   editVideoSize: ISingleMenuConfig;
   editVideoSrc: ISingleMenuConfig;
-  uploadImage: IUploadConfig;
+  uploadImage: IUploadImageConfig;
   codeSelectLang: ICodeLangConfig;
 }
 
