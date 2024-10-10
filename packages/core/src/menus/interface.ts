@@ -4,6 +4,8 @@
  */
 
 import { Node } from 'slate'
+
+import { ISingleMenuConfig } from '../config/interface'
 import { IDomEditor } from '../editor/interface'
 import { DOMElement } from '../utils/dom'
 
@@ -72,5 +74,5 @@ export type MenuFactoryType = () => IButtonMenu | ISelectMenu | IDropPanelMenu |
 export interface IRegisterMenuConf {
   key: string
   factory: MenuFactoryType
-  config?: { [key: string]: any }
+  config?: ISingleMenuConfig
 }

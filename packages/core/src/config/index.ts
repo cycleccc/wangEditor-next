@@ -3,8 +3,9 @@
  * @author wangfupeng
  */
 
-import forEach from 'lodash.foreach'
 import cloneDeep from 'lodash.clonedeep'
+import forEach from 'lodash.foreach'
+
 import { IEditorConfig, IMenuConfig, IToolbarConfig } from './interface'
 import { GLOBAL_MENU_CONF } from './register'
 
@@ -13,10 +14,11 @@ import { GLOBAL_MENU_CONF } from './register'
  */
 export function genEditorConfig(userConfig: Partial<IEditorConfig> = {}): IEditorConfig {
   const defaultMenuConf = cloneDeep(GLOBAL_MENU_CONF)
-  const newMenuConf: IMenuConfig = {}
+  const newMenuConf: Partial<IMenuConfig> = {}
 
   // 单独处理 menuConf
   const { MENU_CONF: userMenuConf = {} } = userConfig
+
   forEach(defaultMenuConf, (menuConf, menuKey) => {
     // 生成新的 menu config
     newMenuConf[menuKey] = {

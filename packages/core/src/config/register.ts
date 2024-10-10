@@ -6,7 +6,7 @@
 import { IMenuConfig, ISingleMenuConfig } from '../config/interface'
 
 // 全局的菜单配置
-export const GLOBAL_MENU_CONF: IMenuConfig = {}
+export const GLOBAL_MENU_CONF: Partial<IMenuConfig> = {}
 
 /**
  * 注册全局菜单配置
@@ -14,6 +14,6 @@ export const GLOBAL_MENU_CONF: IMenuConfig = {}
  * @param config config
  */
 export function registerGlobalMenuConf(key: string, config?: ISingleMenuConfig) {
-  if (config == null) return
+  if (config == null) { return }
   GLOBAL_MENU_CONF[key] = config
 }
