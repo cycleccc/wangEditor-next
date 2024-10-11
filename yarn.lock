@@ -3644,7 +3644,7 @@ __metadata:
     y-protocols: "npm:^1.0.5"
   peerDependencies:
     "@wangeditor-next/core": 1.7.8
-    "@wangeditor-next/editor": 5.5.8
+    "@wangeditor-next/editor": 5.6.0
     "@wangeditor-next/yjs": ^0.1.6
     react: ">=16.8.0"
     slate: ^0.72.0
