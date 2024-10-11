@@ -155,5 +155,5 @@ export async function updateImageNode(
   const imageNode = DomEditor.getSelectedNodeByType(editor, 'image')
   const { onUpdatedImage } = editor.getMenuConfig('editImage')
 
-  if (onUpdatedImage) { onUpdatedImage(imageNode) }
+  if (onUpdatedImage) { onUpdatedImage(imageNode as ImageElement) }
 }

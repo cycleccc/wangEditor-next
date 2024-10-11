@@ -9,6 +9,7 @@ import { Node, NodeEntry, Range } from 'slate'
 
 import { IDomEditor } from '../editor/interface'
 import { IMenuGroup } from '../menus/interface'
+import { IUploadConfig } from '../upload'
 
 interface IHoverbarConf {
   // key 即 element type
@@ -86,29 +87,6 @@ interface IInsertVideoConfig {
   onInsertedVideo: (videoNode: VideoElement) => NodeEntry | Range;
   checkVideo: (src:string, poster:string)=> string | boolean | undefined
   parseVideoSrc: (url: string) => string
-}
-
-type InsertFnType = (url: string, alt: string, href: string) => void
-
-interface IUploadConfig {
-    server?: string;
-    fieldName?: string;
-    maxFileSize?: number;
-    maxNumberOfFiles?: number;
-    allowedFileTypes?: string[];
-    meta?: Record<string, string>;
-    metaWithUrl?: boolean;
-    headers?: Record<string, string>;
-    withCredentials?: boolean;
-    timeout?: number;
-    onBeforeUpload?: (file: File) => File | boolean;
-    onProgress?: (progress: number) => void;
-    onSuccess?: (file: File, res: any) => void;
-    onFailed?: (file: File, res: any) => void;
-    onError?: (file: File, err: any, res: any) => void;
-    customInsert?: (res: any, insertFn: InsertFnType) => void;
-    customUpload?: (file: File, insertFn: InsertFnType) => Promise<void>;
-    customBrowseAndUpload?: (insertFn: InsertFnType) => void;
 }
 
 interface IUploadVideoConfig extends IUploadConfig {
