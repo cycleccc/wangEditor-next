@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.6.0
+
+### Minor Changes
+
+- 739f925: refactor test\style\build
+
 ## 5.5.8
 
 ### Patch Changes
