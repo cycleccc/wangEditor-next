@@ -3,13 +3,20 @@
  * @author wangfupeng
  */
 
-import { Editor, Location, Node, Ancestor, Element } from 'slate'
 import ee from 'event-emitter'
-import { IEditorConfig, AlertType, ISingleMenuConfig } from '../config/interface'
+import {
+  Ancestor, Editor, Element, Location, Node,
+} from 'slate'
+
+import {
+  AlertType, IEditorConfig, IMenuConfig, ISingleMenuConfig,
+} from '../config/interface'
 import { IPositionStyle } from '../menus/interface'
 import { DOMElement } from '../utils/dom'
 
 export type ElementWithId = Element & { id: string }
+
+export type getMenuConfigReturnType<K> = K extends keyof IMenuConfig ? IMenuConfig[K] : ISingleMenuConfig
 
 /**
  * 扩展 slate Editor 接口
@@ -21,7 +28,7 @@ export interface IDomEditor extends Editor {
 
   // config
   getConfig: () => IEditorConfig
-  getMenuConfig: (menuKey: string) => ISingleMenuConfig
+  getMenuConfig: <K extends string>(menuKey: K) => getMenuConfigReturnType<K>
   getAllMenuKeys: () => string[]
   alert: (info: string, type: AlertType) => void
 

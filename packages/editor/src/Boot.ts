@@ -5,37 +5,33 @@
 
 import {
   IDomEditor,
-
   // 配置
   IEditorConfig,
-  IToolbarConfig,
-  IModuleConf,
-
-  // 注册菜单
-  IRegisterMenuConf,
-  registerMenu,
-
-  // 渲染 modal -> view
-  IRenderElemConf,
-  RenderStyleFnType,
-  registerStyleHandler,
-  registerRenderElemConf,
-
   // to html
   IElemToHtmlConf,
-  styleToHtmlFnType,
-  registerStyleToHtmlHandler,
-  registerElemToHtmlConf,
-
-  // parseHtml
-  PreParseHtmlFnType,
-  IPreParseHtmlConf,
-  registerPreParseHtmlConf,
-  ParseStyleHtmlFnType,
+  IModuleConf,
   IParseElemHtmlConf,
+  IPreParseHtmlConf,
+  // 注册菜单
+  IRegisterMenuConf,
+  // 渲染 modal -> view
+  IRenderElemConf,
+  IToolbarConfig,
+  ParseStyleHtmlFnType,
+  // parseHtml
+  registerElemToHtmlConf,
+  registerMenu,
   registerParseElemHtmlConf,
   registerParseStyleHtmlHandler,
+  registerPreParseHtmlConf,
+  registerRenderElemConf,
+  registerStyleHandler,
+  registerStyleToHtmlHandler,
+  RenderStyleFnType,
+  styleToHtmlFnType,
 } from '@wangeditor-next/core'
+import { ISingleMenuConfig } from 'packages/core/src/config/interface'
+
 import registerModule from './register-builtin-modules/register'
 
 type PluginType = <T extends IDomEditor>(editor: T) => T
@@ -47,13 +43,16 @@ class Boot {
 
   // editor 配置
   static editorConfig: Partial<IEditorConfig> = {}
+
   static setEditorConfig(newConfig: Partial<IEditorConfig> = {}) {
     this.editorConfig = {
       ...this.editorConfig,
       ...newConfig,
     }
   }
+
   static simpleEditorConfig: Partial<IEditorConfig> = {}
+
   static setSimpleEditorConfig(newConfig: Partial<IEditorConfig> = {}) {
     this.simpleEditorConfig = {
       ...this.simpleEditorConfig,
@@ -61,15 +60,18 @@ class Boot {
     }
   }
 
-  //toolbar 配置
+  // toolbar 配置
   static toolbarConfig: Partial<IToolbarConfig> = {}
+
   static setToolbarConfig(newConfig: Partial<IToolbarConfig> = {}) {
     this.toolbarConfig = {
       ...this.toolbarConfig,
       ...newConfig,
     }
   }
+
   static simpleToolbarConfig: Partial<IToolbarConfig> = {}
+
   static setSimpleToolbarConfig(newConfig: Partial<IToolbarConfig> = {}) {
     this.simpleToolbarConfig = {
       ...this.simpleToolbarConfig,
@@ -79,13 +81,14 @@ class Boot {
 
   // 注册插件
   static plugins: PluginType[] = []
+
   static registerPlugin(plugin: PluginType) {
     this.plugins.push(plugin)
   }
 
   // 注册 menu
   // TODO 可在注册时传入配置，在开发文档中说明
-  static registerMenu(menuConf: IRegisterMenuConf, customConfig?: { [key: string]: any }) {
+  static registerMenu(menuConf: IRegisterMenuConf, customConfig?: ISingleMenuConfig) {
     registerMenu(menuConf, customConfig)
   }
 
