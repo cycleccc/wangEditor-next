@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.8
+
+### Patch Changes
+
+- eea16b2: perf: added menu config ts type
+- Updated dependencies [eea16b2]
+  - @wangeditor-next/core@1.7.9
+
 ## 1.5.7
 
 ### Patch Changes
