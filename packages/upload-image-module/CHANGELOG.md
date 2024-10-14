@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.11
+
+### Patch Changes
+
+- c6fa96e: fix: upload multi files with maxNumberofFiles
+
 ## 1.1.10
 
 ### Patch Changes
