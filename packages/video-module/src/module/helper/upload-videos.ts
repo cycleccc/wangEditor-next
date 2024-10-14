@@ -93,17 +93,16 @@ function getUppy(editor: IDomEditor): Uppy {
  * @param editor editor
  * @param file file
  */
-async function uploadFile(editor: IDomEditor, file: File) {
+async function uploadFile(editor: IDomEditor, files: File[]) {
   const uppy = getUppy(editor)
-
-  const { name, type, size } = file
-
-  uppy.addFile({
-    name,
-    type,
-    size,
+  const uploadList = files.map(file => ({
+    name: file.name,
+    type: file.type,
+    size: file.size,
     data: file,
-  })
+  }))
+
+  uppy.addFiles(uploadList)
   await uppy.upload()
 }
 
@@ -111,6 +110,7 @@ export default async function (editor: IDomEditor, files: FileList | null) {
   if (files == null) { return }
   const fileList = Array.prototype.slice.call(files)
 
+  const uploadFileList : File[] = []
   // 获取菜单配置
   const { customUpload } = getMenuConfig(editor)
 
@@ -121,8 +121,9 @@ export default async function (editor: IDomEditor, files: FileList | null) {
       // 自定义上传
       await customUpload(file, (src, poster) => insertVideo(editor, src, poster))
     } else {
-      // 默认上传
-      await uploadFile(editor, file)
+      uploadFileList.push(file)
     }
   }
+  // 默认上传
+  if (uploadFileList.length > 0) { await uploadFile(editor, uploadFileList) }
 }

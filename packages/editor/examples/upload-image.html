@@ -16,7 +16,7 @@
     Upload image
   </p>
   <p>
-    本地下载、启动 <a href="https://github.com/wangeditor-team/server" target="_blank">server</a> 服务端
+    本地下载、启动 <a href="https://github.com/cycleccc/server" target="_blank">server</a> 服务端
     <code style="background-color: #f1f1f1;">http://127.0.0.1:3000/api/upload-img</code>
   </p>
 
@@ -50,6 +50,7 @@
       headers: { Accept: 'text/x-json' },
 
       maxFileSize: 10 * 1024 * 1024, // 10M
+      // maxNumberOfFiles: 2,
 
       base64LimitSize: 5 * 1024, // insert base64 format, if file's size less than 5kb
 
