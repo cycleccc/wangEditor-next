@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.9
+
+### Patch Changes
+
+- eea16b2: perf: added menu config ts type
+
 ## 1.7.8
 
 ### Patch Changes

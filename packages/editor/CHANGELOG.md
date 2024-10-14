@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.1
+
+### Patch Changes
+
+- eea16b2: perf: added menu config ts type
+- Updated dependencies [eea16b2]
+  - @wangeditor-next/basic-modules@1.5.8
+  - @wangeditor-next/core@1.7.9
+  - @wangeditor-next/upload-image-module@1.1.10
+  - @wangeditor-next/code-highlight@1.3.6
+  - @wangeditor-next/list-module@1.1.14
+  - @wangeditor-next/table-module@1.6.7
+  - @wangeditor-next/video-module@1.3.13
+
 ## 5.6.0
 
 ### Minor Changes
