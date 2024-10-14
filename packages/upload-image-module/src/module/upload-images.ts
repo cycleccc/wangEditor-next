@@ -127,17 +127,16 @@ async function insertBase64(editor: IDomEditor, file: File) {
  * @param editor editor
  * @param file file
  */
-async function uploadFile(editor: IDomEditor, file: File) {
+async function uploadFile(editor: IDomEditor, files: File[]) {
   const uppy = getUppy(editor)
-
-  const { name, type, size } = file
-
-  uppy.addFile({
-    name,
-    type,
-    size,
+  const uploadList = files.map(file => ({
+    name: file.name,
+    type: file.type,
+    size: file.size,
     data: file,
-  })
+  }))
+
+  uppy.addFiles(uploadList)
   await uppy.upload()
 }
 
@@ -153,7 +152,9 @@ export default async function (editor: IDomEditor, files: FileList | null) {
   // 获取菜单配置
   const { customUpload, base64LimitSize } = getMenuConfig(editor)
 
+  const uploadFileList : File[] = []
   // 按顺序上传
+
   for await (const file of fileList) {
     const size = file.size // size kb
 
@@ -165,8 +166,9 @@ export default async function (editor: IDomEditor, files: FileList | null) {
       await customUpload(file, (src, alt, href) => insertImageNode(editor, src, alt, href))
     } else {
       // 默认上传
-      await uploadFile(editor, file)
+      uploadFileList.push(file)
     }
   }
-
+  // 默认上传
+  if (uploadFileList.length > 0) { await uploadFile(editor, uploadFileList) }
 }

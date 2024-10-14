@@ -58,6 +58,7 @@ describe('Upload image menu upload files util', () => {
     const fn = vi.fn().mockImplementation(() => ({
       // 这里需要返回一个 duck 类型的 uppy 对象，防止后面代码执行报错
       addFile: vi.fn(),
+      addFiles: vi.fn(),
       upload: vi.fn(),
     }) as any)
     const editor = createEditor()
