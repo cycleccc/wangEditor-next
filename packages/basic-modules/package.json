@@ -1,6 +1,6 @@
 {
   "name": "@wangeditor-next/basic-modules",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "wangEditor basic modules",
   "author": "cycleccc <2991205548@qq.com>",
   "type": "module",
@@ -43,7 +43,7 @@
     "url": "https://github.com/cycleccc/wangEditor/issues"
   },
   "peerDependencies": {
-    "@wangeditor-next/core": "1.7.9",
+    "@wangeditor-next/core": "1.7.10",
     "dom7": "^3.0.0",
     "lodash.throttle": "^4.1.1",
     "nanoid": "^5.0.0",
