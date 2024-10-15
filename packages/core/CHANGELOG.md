@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.10
+
+### Patch Changes
+
+- 3dbff77: 163 bug只读模式下无法复制文本内容
+
 ## 1.7.9
 
 ### Patch Changes
