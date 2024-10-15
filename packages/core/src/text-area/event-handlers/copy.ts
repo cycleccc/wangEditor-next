@@ -11,7 +11,9 @@ function handleOnCopy(e: Event, _textarea: TextArea, editor: IDomEditor) {
   const event = e as ClipboardEvent
 
   if (!hasEditableTarget(editor, event.target)) { return }
-  event.preventDefault()
+  const { readOnly } = editor.getConfig()
+
+  if (!readOnly) { event.preventDefault() }
 
   const data = event.clipboardData
 
