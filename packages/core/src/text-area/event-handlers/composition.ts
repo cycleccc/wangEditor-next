@@ -69,9 +69,9 @@ export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDo
     })
   }
 
-  if (selection && (Range.isExpanded(selection) || Range.isCollapsed(selection))) {
+  if (editor.selection && (Range.isExpanded(editor.selection) || Range.isCollapsed(editor.selection))) {
     // 记录下 dom text ，以便触发 maxLength 时使用
-    const domRange = DomEditor.toDOMRange(editor, selection)
+    const domRange = DomEditor.toDOMRange(editor, editor.selection)
     const startContainer = domRange.startContainer
     const curText = startContainer.textContent || ''
 
