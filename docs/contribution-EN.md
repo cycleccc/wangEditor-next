@@ -17,7 +17,7 @@ If you find a bug or have an idea for a new feature, please create a new issue i
 We warmly welcome Pull Requests!
 
 - **Fork the Repository**: Fork and clone the project to your local machine.
-- **Create a Branch**: Create a new branch based on the `develop` branch.
+- **Create a Branch**: Create a new branch based on the `master` branch.
 - **Write Code**: Ensure your code follows the project's coding standards.
 - **Commit Changes**: Commit your changes, and make sure the commit messages are clear and descriptive.
 - **Pull Request**: Push your branch to the remote repository and initiate a Pull Request on GitHub.
