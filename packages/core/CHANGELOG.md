@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.11
+
+### Patch Changes
+
+- ceeb138: fix path resolve warning
+
 ## 1.7.10
 
 ### Patch Changes

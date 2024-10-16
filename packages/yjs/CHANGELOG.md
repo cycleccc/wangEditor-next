@@ -1,5 +1,13 @@
 # @wangeditor-next/yjs
 
+## 0.1.9
+
+### Patch Changes
+
+- ceeb138: fix path resolve warning
+- Updated dependencies [ceeb138]
+  - @wangeditor-next/core@1.7.11
+
 ## 0.1.8
 
 ### Patch Changes

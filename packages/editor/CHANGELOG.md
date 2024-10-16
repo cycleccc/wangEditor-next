@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.2
+
+### Patch Changes
+
+- ceeb138: fix path resolve warning
+- Updated dependencies [ceeb138]
+  - @wangeditor-next/upload-image-module@1.1.13
+  - @wangeditor-next/code-highlight@1.3.8
+  - @wangeditor-next/basic-modules@1.5.10
+  - @wangeditor-next/table-module@1.6.9
+  - @wangeditor-next/video-module@1.3.16
+  - @wangeditor-next/list-module@1.1.16
+  - @wangeditor-next/core@1.7.11
+
 ## 5.6.1
 
 ### Patch Changes

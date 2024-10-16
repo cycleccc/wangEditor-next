@@ -1,6 +1,6 @@
 {
   "name": "@wangeditor-next/core",
-  "version": "1.7.10",
+  "version": "1.7.11",
   "description": "wangEditor core",
   "author": "cycleccc <2991205548@qq.com>",
   "type": "module",
@@ -12,7 +12,6 @@
   "exports": {
     ".": {
       "types": "./dist/core/src/index.d.ts",
-
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },

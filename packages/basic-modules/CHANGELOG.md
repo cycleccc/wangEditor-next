@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.10
+
+### Patch Changes
+
+- ceeb138: fix path resolve warning
+- Updated dependencies [ceeb138]
+  - @wangeditor-next/core@1.7.11
+
 ## 1.5.9
 
 ### Patch Changes
