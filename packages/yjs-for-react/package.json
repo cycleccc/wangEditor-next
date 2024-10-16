@@ -20,9 +20,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./dist/css/style.css": "./dist/css/style.css"
   },
   "files": [
     "dist"
