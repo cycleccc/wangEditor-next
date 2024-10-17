@@ -42,6 +42,23 @@ function deleteHandler(newEditor: IDomEditor): boolean {
   return false
 }
 
+// #region 删除 cell 内的换行
+/**
+ * 判断光标是否在换行符中间 \n|\r
+ * @param newEditor
+ * @param location
+ */
+function isHalfBreak(newEditor: IDomEditor, location: Point): boolean {
+  const node = Editor.node(newEditor, location)
+
+  if (!Text.isText(node[0])) { return false }
+
+  const text = node[0].text
+  const offset = location.offset
+
+  return text[offset - 1] === '\n' && text[offset] === '\r'
+}
+
 /**
  * 删除 cell 内的换行，光标首尾在同一个位置的情况
  * @param newEditor
@@ -78,6 +95,8 @@ function deleteCellBreak(newEditor: IDomEditor, unit: Parameters<IDomEditor['del
   const targetNode = Editor.node(newEditor, targetPoint)
 
   if (!Text.isText(targetNode[0]) || targetNode[0].text.length < 2) { return false } // 如果存在\n\r，那长度必定大于2
+
+  // 处理光标在换行符首/尾的情况,|表示光标  |\n\r   \n\r|
   const parameters: Parameters<typeof String.prototype.slice> = direction === 'backward'
     ? [targetPoint.offset - 2, targetPoint.offset]
     : [targetPoint.offset, targetPoint.offset + 2]
@@ -95,8 +114,20 @@ function deleteCellBreak(newEditor: IDomEditor, unit: Parameters<IDomEditor['del
     return true
   }
 
+  // 处理光标在换行符中间的情况
+  if (isHalfBreak(newEditor, targetPoint)) {
+    Transforms.insertText(newEditor, nodeText.slice(0, selection.anchor.offset - 1) + nodeText.slice(selection.anchor.offset + 1), {
+      at: {
+        anchor: Editor.start(newEditor, targetPoint.path),
+        focus: Editor.end(newEditor, targetPoint.path),
+      },
+    })
+    return true
+  }
+
   return false
 }
+// #endregion
 
 /**
  * 判断该 location 有没有命中 table
