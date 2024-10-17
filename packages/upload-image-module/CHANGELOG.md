@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.1.14
+
+### Patch Changes
+
+- c0cfd9c: 254 在windows上搭建webview2或者electron客户端使用wangeditor和搜狗输入法执行特定步骤会出现异常
+- Updated dependencies [c0cfd9c]
+  - @wangeditor-next/basic-modules@1.5.11
+  - @wangeditor-next/core@1.7.12
+
 ## 1.1.13
 
 ### Patch Changes
