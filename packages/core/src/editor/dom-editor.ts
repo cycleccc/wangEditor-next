@@ -713,7 +713,7 @@ export const DomEditor = {
     // 未设置 maxLength ，则返回 number 最大值
     if (typeof maxLength !== 'number' || maxLength <= 0) { return Infinity }
 
-    const editorText = editor.getText().replace(/\r|\n|(\r\n)/g, '') // 去掉换行
+    const editorText = editor.getText().replace(/\r|\n|(\r\n)|(\n\r)/g, '') // 去掉换行
     const curLength = editorText.length
     const leftLength = maxLength - curLength
 
