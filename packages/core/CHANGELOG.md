@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.12
+
+### Patch Changes
+
+- c0cfd9c: 254 在windows上搭建webview2或者electron客户端使用wangeditor和搜狗输入法执行特定步骤会出现异常
+
 ## 1.7.11
 
 ### Patch Changes
