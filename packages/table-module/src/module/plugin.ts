@@ -16,6 +16,7 @@ import {
   Point,
   Text,
   Transforms,
+  Selection,
 } from 'slate'
 
 import { withSelection } from './with-selection'
@@ -154,6 +155,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
     insertBreak,
     deleteBackward,
     deleteForward,
+    deleteFragment,
     normalizeNode,
     insertData,
     handleTab,
@@ -251,6 +253,31 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     // 执行默认的删除
     deleteForward(unit)
+  }
+
+  // 重写区域选中的删除，修正可能半选的换行符
+  newEditor.deleteFragment = (unit) => {
+    const { selection } = newEditor
+    if (!selection) return
+    let hasChange = false
+    const newSelection: Selection = {
+      anchor: selection.anchor,
+      focus: selection.focus
+    }
+    // 是否是从左到右的选区
+    const isLeftToRight = Point.isBefore(newSelection.anchor, newSelection.focus)
+    if (isHalfBreak(newEditor, selection.anchor)) {
+      newSelection.anchor = Editor[isLeftToRight ? 'before' : 'after'](newEditor, selection.anchor)! // 如果一定是半选，那必定不为空
+      hasChange = true;
+    }
+    if (isHalfBreak(newEditor, selection.focus)) {
+      newSelection.focus = Editor[isLeftToRight ? 'after' : 'before'](newEditor, selection.focus)!
+      hasChange = true;
+    }
+    if (hasChange) {
+      Transforms.setSelection(newEditor, newSelection)
+    }
+    deleteFragment(unit)
   }
 
   // 重新 normalize
