@@ -3,11 +3,13 @@
  * @author wangfupeng
  */
 
-import { Editor, Node, Transforms, Range } from 'slate'
-import { DomEditor } from '../dom-editor'
-import { IDomEditor } from '../..'
+import {
+  Editor, Node, Range, Transforms,
+} from 'slate'
 
-import { isDOMText, getPlainText } from '../../utils/dom'
+import { IDomEditor } from '../..'
+import { getPlainText, isDOMText } from '../../utils/dom'
+import { DomEditor } from '../dom-editor'
 
 export const withEventData = <T extends Editor>(editor: T) => {
   const e = editor as T & IDomEditor
@@ -49,6 +51,7 @@ export const withEventData = <T extends Editor>(editor: T) => {
       const [voidNode] = endVoid
       const r = domRange.cloneRange()
       const domNode = DomEditor.toDOMNode(e, voidNode)
+
       r.setEndAfter(domNode)
       contents = r.cloneContents()
     }
@@ -65,6 +68,7 @@ export const withEventData = <T extends Editor>(editor: T) => {
     // show up elsewhere when pasted.
     Array.from(contents.querySelectorAll('[data-slate-zero-width]')).forEach(zw => {
       const isNewline = zw.getAttribute('data-slate-zero-width') === 'n'
+
       zw.textContent = isNewline ? '\n' : ''
     })
 
@@ -75,6 +79,7 @@ export const withEventData = <T extends Editor>(editor: T) => {
       const span = attach.ownerDocument.createElement('span')
       // COMPAT: In Chrome and Safari, if we don't add the `white-space` style
       // then leading and trailing spaces will be ignored. (2017/09/21)
+
       span.style.whiteSpace = 'pre'
       span.appendChild(attach)
       contents.appendChild(span)
@@ -84,11 +89,13 @@ export const withEventData = <T extends Editor>(editor: T) => {
     const fragment = e.getFragment()
     const string = JSON.stringify(fragment)
     const encoded = window.btoa(encodeURIComponent(string))
+
     attach.setAttribute('data-slate-fragment', encoded)
     data.setData('application/x-slate-fragment', encoded)
 
     // Add the content to a <div> so that we can get its inner HTML.
     const div = contents.ownerDocument.createElement('div')
+
     div.appendChild(contents)
     div.setAttribute('hidden', 'true')
     contents.ownerDocument.body.appendChild(div)
@@ -102,9 +109,11 @@ export const withEventData = <T extends Editor>(editor: T) => {
   e.insertData = (data: DataTransfer) => {
     const fragment = data.getData('application/x-slate-fragment')
     // 只有从编辑器中内复制的内容，才会获取 fragment，从其他地方粘贴到编辑器中，不会获取 fragment
+
     if (fragment) {
       const decoded = decodeURIComponent(window.atob(fragment))
       const parsed = JSON.parse(decoded) as Node[]
+
       e.insertFragment(parsed)
       return
     }
@@ -119,8 +128,9 @@ export const withEventData = <T extends Editor>(editor: T) => {
     }
 
     const leftLength = DomEditor.getLeftLengthOfMaxLength(e)
+
     if (text) {
-      const lines = text.split(/\r\n|\r|\n/)
+      const lines = text.split(/\n\r|\r\n|\r|\n/)
       let split = false
 
       for (const line of lines) {
@@ -132,7 +142,7 @@ export const withEventData = <T extends Editor>(editor: T) => {
         e.insertText(line)
         split = true
       }
-      return
+
     }
   }
 
