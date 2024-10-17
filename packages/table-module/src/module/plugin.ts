@@ -50,12 +50,15 @@ function deleteHandler(newEditor: IDomEditor): boolean {
  * @param location
  */
 function isHalfBreak(newEditor: IDomEditor, location: Point): boolean {
+  const offset = location.offset
+  if (offset === 0) { return false }
   const node = Editor.node(newEditor, location)
 
   if (!Text.isText(node[0])) { return false }
 
-  const text = node[0].text
-  const offset = location.offset
+  const text = Node.string((node[0]))
+
+  if (offset >= text.length) { return false }
 
   return text[offset - 1] === '\n' && text[offset] === '\r'
 }
@@ -267,11 +270,17 @@ function withTable<T extends IDomEditor>(editor: T): T {
     // 是否是从左到右的选区
     const isLeftToRight = Point.isBefore(newSelection.anchor, newSelection.focus)
     if (isHalfBreak(newEditor, selection.anchor)) {
-      newSelection.anchor = Editor[isLeftToRight ? 'before' : 'after'](newEditor, selection.anchor)! // 如果一定是半选，那必定不为空
+      const nv = Editor[isLeftToRight ? 'before' : 'after'](newEditor, selection.anchor)
+      if (nv) {
+        newSelection.anchor = nv
+      }
       hasChange = true;
     }
     if (isHalfBreak(newEditor, selection.focus)) {
-      newSelection.focus = Editor[isLeftToRight ? 'after' : 'before'](newEditor, selection.focus)!
+      const nv = Editor[isLeftToRight ? 'after' : 'before'](newEditor, selection.focus)
+      if (nv) {
+        newSelection.focus = nv
+      }
       hasChange = true;
     }
     if (hasChange) {
