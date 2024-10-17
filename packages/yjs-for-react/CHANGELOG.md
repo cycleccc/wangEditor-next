@@ -1,5 +1,15 @@
 # @wangeditor-next/yjs-for-react
 
+## 0.1.11
+
+### Patch Changes
+
+- c0cfd9c: 254 在windows上搭建webview2或者electron客户端使用wangeditor和搜狗输入法执行特定步骤会出现异常
+- Updated dependencies [c0cfd9c]
+  - @wangeditor-next/editor@5.6.3
+  - @wangeditor-next/core@1.7.12
+  - @wangeditor-next/yjs@0.1.10
+
 ## 0.1.10
 
 ### Patch Changes

@@ -4,7 +4,7 @@
 
 - 了解 slate.js
 - 了解 vdom 和 snabbdom.js
-- 了解 lerna
+- 了解 turbo 和 changeset
 - 已安装 yarn
 
 ## 本地启动

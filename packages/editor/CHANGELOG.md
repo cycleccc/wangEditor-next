@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.3
+
+### Patch Changes
+
+- c0cfd9c: 254 在windows上搭建webview2或者electron客户端使用wangeditor和搜狗输入法执行特定步骤会出现异常
+- Updated dependencies [c0cfd9c]
+  - @wangeditor-next/upload-image-module@1.1.14
+  - @wangeditor-next/code-highlight@1.3.9
+  - @wangeditor-next/basic-modules@1.5.11
+  - @wangeditor-next/table-module@1.6.10
+  - @wangeditor-next/video-module@1.3.17
+  - @wangeditor-next/list-module@1.1.17
+  - @wangeditor-next/core@1.7.12
+
 ## 5.6.2
 
 ### Patch Changes
