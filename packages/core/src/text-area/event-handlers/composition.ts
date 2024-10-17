@@ -151,7 +151,9 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
     if (leftLengthOfMaxLength < data.length) {
       const domRange = DomEditor.toDOMRange(editor, selection)
 
-      domRange.startContainer.textContent = EDITOR_TO_TEXT.get(editor) || ''
+      if (domRange.startContainer.nodeType === Node.TEXT_NODE) {
+        domRange.startContainer.textContent = EDITOR_TO_TEXT.get(editor) || ''
+      }
       if (leftLengthOfMaxLength > 0) {
         // 剩余长度 >0 ，但小于 data 长度，截取一部分插入
         Editor.insertText(editor, data.slice(0, leftLengthOfMaxLength))
