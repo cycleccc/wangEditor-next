@@ -26,7 +26,7 @@ function areBothTextNodes(editor, selection) {
     if (
       anchor.path.length === 2
       && focus.path.length === 2
-      && (anchor.offset === 0 || focus.path.offset === 0)
+      && (anchor.offset === 0 || focus.offset === 0)
     ) {
       const nowEntry = Editor.node(editor, anchor.path)
       const nowPath = anchor.offset === 0 ? anchor.path : focus.path
@@ -69,7 +69,7 @@ export function handleCompositionStart(e: Event, textarea: TextArea, editor: IDo
     })
   }
 
-  if (editor.selection && (Range.isExpanded(editor.selection) || Range.isCollapsed(editor.selection))) {
+  if (editor.selection) {
     // 记录下 dom text ，以便触发 maxLength 时使用
     const domRange = DomEditor.toDOMRange(editor, editor.selection)
     const startContainer = domRange.startContainer
@@ -179,13 +179,13 @@ export function handleCompositionEnd(e: Event, textarea: TextArea, editor: IDomE
   // 检查拼音输入是否夸 DOM 节点了，解决 wangEditor-v5/issues/47
   if (!IS_SAFARI) {
     setTimeout(() => {
-      const { selection: setTImeoutSelection } = editor
+      const { selection: setTimeoutSelection } = editor
 
-      if (setTImeoutSelection == null) { return }
+      if (setTimeoutSelection == null) { return }
       const oldStartContainer = EDITOR_TO_START_CONTAINER.get(editor) // 拼音输入开始时的 text node
 
       if (oldStartContainer == null) { return }
-      const curStartContainer = DomEditor.toDOMRange(editor, setTImeoutSelection).startContainer // 拼音输入结束时的 text node
+      const curStartContainer = DomEditor.toDOMRange(editor, setTimeoutSelection).startContainer // 拼音输入结束时的 text node
 
       if (curStartContainer === oldStartContainer) {
         // 拼音输入的开始和结束，都在同一个 text node ，则不做处理
