@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.4
+
+### Patch Changes
+
+- c18aa53: fix: 修复单元格内的换行在编辑模式下的视觉错误
+- Updated dependencies [c18aa53]
+  - @wangeditor-next/core@1.7.13
+  - @wangeditor-next/table-module@1.6.11
+  - @wangeditor-next/basic-modules@1.5.12
+  - @wangeditor-next/code-highlight@1.3.10
+  - @wangeditor-next/list-module@1.1.18
+  - @wangeditor-next/upload-image-module@1.1.15
+  - @wangeditor-next/video-module@1.3.18
+
 ## 5.6.3
 
 ### Patch Changes
