@@ -61,7 +61,7 @@
     "@wangeditor-next/table-module": "~1.6.11",
     "@wangeditor-next/upload-image-module": "~1.1.15",
     "@wangeditor-next/video-module": "~1.3.18",
-    "dom7": "^3.0.0",
+    "dom7": "^4.0.0",
     "is-hotkey": "^0.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
