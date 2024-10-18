@@ -7,3 +7,5 @@
 - [table-module](./packages/table-module/CHANGELOG.md)
 - [upload-image-module](./packages/upload-image-module/CHANGELOG.md)
 - [video-module](./packages/video-module/CHANGELOG.md)
+- [yjs](./packages/yjs/CHANGELOG.md)
+- [yjs-for-react](./packages/yjs-for-react/CHANGELOG.md)
