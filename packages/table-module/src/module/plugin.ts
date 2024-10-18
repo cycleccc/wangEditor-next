@@ -14,9 +14,9 @@ import {
   NodeEntry,
   Path,
   Point,
+  Selection,
   Text,
   Transforms,
-  Selection,
 } from 'slate'
 
 import { withSelection } from './with-selection'
@@ -51,6 +51,7 @@ function deleteHandler(newEditor: IDomEditor): boolean {
  */
 function isHalfBreak(newEditor: IDomEditor, location: Point): boolean {
   const offset = location.offset
+
   if (offset === 0) { return false }
   const node = Editor.node(newEditor, location)
 
@@ -259,29 +260,33 @@ function withTable<T extends IDomEditor>(editor: T): T {
   }
 
   // 重写区域选中的删除，修正可能半选的换行符
-  newEditor.deleteFragment = (unit) => {
+  newEditor.deleteFragment = unit => {
     const { selection } = newEditor
-    if (!selection) return
+
+    if (!selection) { return }
     let hasChange = false
     const newSelection: Selection = {
       anchor: selection.anchor,
-      focus: selection.focus
+      focus: selection.focus,
     }
     // 是否是从左到右的选区
     const isLeftToRight = Point.isBefore(newSelection.anchor, newSelection.focus)
+
     if (isHalfBreak(newEditor, selection.anchor)) {
       const nv = Editor[isLeftToRight ? 'before' : 'after'](newEditor, selection.anchor)
+
       if (nv) {
         newSelection.anchor = nv
       }
-      hasChange = true;
+      hasChange = true
     }
     if (isHalfBreak(newEditor, selection.focus)) {
       const nv = Editor[isLeftToRight ? 'after' : 'before'](newEditor, selection.focus)
+
       if (nv) {
         newSelection.focus = nv
       }
-      hasChange = true;
+      hasChange = true
     }
     if (hasChange) {
       Transforms.setSelection(newEditor, newSelection)
