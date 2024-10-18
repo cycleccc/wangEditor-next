@@ -14,7 +14,9 @@ import {
   NodeEntry,
   Path,
   Point,
+  Text,
   Transforms,
+  Selection,
 } from 'slate'
 
 import { withSelection } from './with-selection'
@@ -41,6 +43,96 @@ function deleteHandler(newEditor: IDomEditor): boolean {
   return false
 }
 
+// #region 删除 cell 内的换行
+/**
+ * 判断光标是否在换行符中间 \n|\r
+ * @param newEditor
+ * @param location
+ */
+function isHalfBreak(newEditor: IDomEditor, location: Point): boolean {
+  const offset = location.offset
+  if (offset === 0) { return false }
+  const node = Editor.node(newEditor, location)
+
+  if (!Text.isText(node[0])) { return false }
+
+  const text = Node.string((node[0]))
+
+  if (offset >= text.length) { return false }
+
+  return text[offset - 1] === '\n' && text[offset] === '\r'
+}
+
+/**
+ * 删除 cell 内的换行，光标首尾在同一个位置的情况
+ * @param newEditor
+ * @returns 是否在内部处理了删除
+ */
+function deleteCellBreak(newEditor: IDomEditor, unit: Parameters<IDomEditor['deleteBackward']>[0], direction: 'forward' | 'backward'): boolean {
+  const { selection } = newEditor
+
+  if (selection == null || unit === 'line') { return false }
+
+  // 判断目标位置是否在同一个 cell 内，不在同一个 cell 内不处理
+  const [cellNodeEntry] = Editor.nodes(newEditor, {
+    match: n => DomEditor.checkNodeType(n, 'table-cell'),
+  })
+
+  // 根据删除的方向及当前的光标位置，获取到真实的删除位置
+  let targetPoint: Point | undefined = selection.anchor
+
+  if (direction === 'backward' && selection.anchor.offset === 0) {
+    targetPoint = Editor.before(newEditor, selection)
+  }
+
+  if (direction === 'forward' && Editor.isEnd(newEditor, selection.anchor, selection.anchor.path)) {
+    targetPoint = Editor.after(newEditor, selection)
+  }
+
+  if (targetPoint == null) { return false }
+  const aboveCell = Editor.above(newEditor, {
+    at: targetPoint,
+    match: n => DomEditor.checkNodeType(n, 'table-cell'),
+  })
+
+  if (aboveCell == null || !Path.equals(aboveCell[1], cellNodeEntry[1])) { return false }
+  const targetNode = Editor.node(newEditor, targetPoint)
+
+  if (!Text.isText(targetNode[0]) || targetNode[0].text.length < 2) { return false } // 如果存在\n\r，那长度必定大于2
+
+  // 处理光标在换行符首/尾的情况,|表示光标  |\n\r   \n\r|
+  const parameters: Parameters<typeof String.prototype.slice> = direction === 'backward'
+    ? [targetPoint.offset - 2, targetPoint.offset]
+    : [targetPoint.offset, targetPoint.offset + 2]
+
+  const nodeText = Node.string(targetNode[0])
+  const isBreak = nodeText.slice(...parameters) === '\n\r'
+
+  if (isBreak) {
+    Transforms.insertText(newEditor, nodeText.slice(0, parameters[0]) + nodeText.slice(parameters[1]), {
+      at: {
+        anchor: Editor.start(newEditor, targetPoint.path),
+        focus: Editor.end(newEditor, targetPoint.path),
+      },
+    })
+    return true
+  }
+
+  // 处理光标在换行符中间的情况
+  if (isHalfBreak(newEditor, targetPoint)) {
+    Transforms.insertText(newEditor, nodeText.slice(0, selection.anchor.offset - 1) + nodeText.slice(selection.anchor.offset + 1), {
+      at: {
+        anchor: Editor.start(newEditor, targetPoint.path),
+        focus: Editor.end(newEditor, targetPoint.path),
+      },
+    })
+    return true
+  }
+
+  return false
+}
+// #endregion
+
 /**
  * 判断该 location 有没有命中 table
  * @param editor editor
@@ -66,6 +158,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
     insertBreak,
     deleteBackward,
     deleteForward,
+    deleteFragment,
     normalizeNode,
     insertData,
     handleTab,
@@ -79,7 +172,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     if (selectedNode != null) {
       // 选中了 table ，则在 cell 内换行
-      newEditor.insertText('\n')
+      newEditor.insertText('\n\r')
       return
     }
 
@@ -92,6 +185,8 @@ function withTable<T extends IDomEditor>(editor: T): T {
     const res = deleteHandler(newEditor)
 
     if (res) { return } // 命中 table cell ，自己处理删除
+
+    if (deleteCellBreak(newEditor, unit, 'backward')) { return } // 命中了 cell 内删除换行符，自行处理删除
 
     // 防止从 table 后面的 p 删除时，删除最后一个 cell - issues/4221
     const { selection } = newEditor
@@ -157,8 +252,41 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     if (res) { return } // 命中 table cell ，自己处理删除
 
+    if (deleteCellBreak(newEditor, unit, 'forward')) { return } // 命中了 cell 内删除换行符，自行处理删除
+
     // 执行默认的删除
     deleteForward(unit)
+  }
+
+  // 重写区域选中的删除，修正可能半选的换行符
+  newEditor.deleteFragment = (unit) => {
+    const { selection } = newEditor
+    if (!selection) return
+    let hasChange = false
+    const newSelection: Selection = {
+      anchor: selection.anchor,
+      focus: selection.focus
+    }
+    // 是否是从左到右的选区
+    const isLeftToRight = Point.isBefore(newSelection.anchor, newSelection.focus)
+    if (isHalfBreak(newEditor, selection.anchor)) {
+      const nv = Editor[isLeftToRight ? 'before' : 'after'](newEditor, selection.anchor)
+      if (nv) {
+        newSelection.anchor = nv
+      }
+      hasChange = true;
+    }
+    if (isHalfBreak(newEditor, selection.focus)) {
+      const nv = Editor[isLeftToRight ? 'after' : 'before'](newEditor, selection.focus)
+      if (nv) {
+        newSelection.focus = nv
+      }
+      hasChange = true;
+    }
+    if (hasChange) {
+      Transforms.setSelection(newEditor, newSelection)
+    }
+    deleteFragment(unit)
   }
 
   // 重新 normalize
