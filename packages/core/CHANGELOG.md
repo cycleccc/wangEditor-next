@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.13
+
+### Patch Changes
+
+- c18aa53: fix: 修复单元格内的换行在编辑模式下的视觉错误
+
 ## 1.7.12
 
 ### Patch Changes

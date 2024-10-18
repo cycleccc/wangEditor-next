@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.6.11
+
+### Patch Changes
+
+- c18aa53: fix: 修复单元格内的换行在编辑模式下的视觉错误
+- Updated dependencies [c18aa53]
+  - @wangeditor-next/core@1.7.13
+
 ## 1.6.10
 
 ### Patch Changes
