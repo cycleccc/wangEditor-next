@@ -21,7 +21,7 @@ export function renderStyle(node: Descendant, vnode: VNode): VNode {
 
   if (backgroundColor) { props.backgroundColor = backgroundColor }
   if (borderWidth) { props.borderWidth = `${borderWidth}px` }
-  if (borderStyle) { props.borderStyle = borderStyle }
+  if (borderStyle) { props.borderStyle = borderStyle === 'none' ? '' : borderStyle }
   if (borderColor) { props.borderColor = borderColor }
   if (textAlign) { props.textAlign = textAlign }
 

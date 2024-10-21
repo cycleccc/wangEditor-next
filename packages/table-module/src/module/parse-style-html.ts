@@ -42,7 +42,7 @@ export function parseStyleHtml(elem: DOMElement, node: Descendant, _editor: IDom
   }
   borderStyle = getStyleValue($elem, 'border-style') || borderStyle // border 样式
   if (borderStyle) {
-    tableNode.borderStyle = borderStyle
+    tableNode.borderStyle = borderStyle === 'none' ? '' : borderStyle
   }
   borderColor = getStyleValue($elem, 'border-color') || borderColor // border 颜色
   if (borderColor) {
