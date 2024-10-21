@@ -19,7 +19,7 @@ export function styleToHtml(node, elemHtml) {
 
   if (backgroundColor) { $elem.css('background-color', backgroundColor) }
   if (borderWidth) { $elem.css('border-width', `${borderWidth}px`) }
-  if (borderStyle) { $elem.css('border-style', borderStyle) }
+  if (borderStyle) { $elem.css('border-style', borderStyle === 'none' ? '' : borderStyle) }
   if (borderColor) { $elem.css('border-color', borderColor) }
   if (textAlign) { $elem.css('text-align', textAlign) }
 
