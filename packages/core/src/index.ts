@@ -5,21 +5,23 @@
 
 import './assets/index.less'
 
-import { RenderStyleFnType, IRenderElemConf } from './render/index'
-import { styleToHtmlFnType, IElemToHtmlConf } from './to-html/index'
-import { IPreParseHtmlConf, ParseStyleHtmlFnType, IParseElemHtmlConf } from './parse-html/index'
-import { IRegisterMenuConf } from './menus/index'
 import { IDomEditor } from './editor/interface'
+import { IRegisterMenuConf } from './menus/index'
+import { IParseElemHtmlConf, IPreParseHtmlConf, ParseStyleHtmlFnType } from './parse-html/index'
+import { IRenderElemConf, RenderStyleFnType } from './render/index'
+import { IElemToHtmlConf, styleToHtmlFnType } from './to-html/index'
 
 // 创建
 export * from './create/index'
 
 // config
-export { IEditorConfig, IToolbarConfig } from './config/interface'
+export {
+  IEditorConfig, IToolbarConfig, IUploadImageConfig, IUploadVideoConfig,
+} from './config/interface'
 
 // editor 接口和 command
-export * from './editor/interface'
 export * from './editor/dom-editor'
+export * from './editor/interface'
 
 // 注册 render
 export * from './render/index'

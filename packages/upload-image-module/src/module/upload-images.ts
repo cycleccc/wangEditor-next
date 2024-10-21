@@ -7,13 +7,11 @@ import Uppy, { UppyFile } from '@uppy/core'
 import { insertImageNode } from '@wangeditor-next/basic-modules'
 import { createUploader, IDomEditor } from '@wangeditor-next/core'
 
-import { IUploadConfigForImage } from './menu/config'
-
 // 存储 editor uppy 的关系 - 缓存 uppy ，不重复创建
 const EDITOR_TO_UPPY_MAP = new WeakMap<IDomEditor, Uppy>()
 
 function getMenuConfig(editor: IDomEditor) {
-  return editor.getMenuConfig('uploadImage') as IUploadConfigForImage
+  return editor.getMenuConfig('uploadImage')
 }
 /**
  * 获取 uppy 实例（并通过 editor 缓存）

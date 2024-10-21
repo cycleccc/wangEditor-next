@@ -6,12 +6,11 @@
 import Uppy, { UppyFile } from '@uppy/core'
 import { createUploader, IDomEditor } from '@wangeditor-next/core'
 
-import { IUploadConfigForVideo } from '../menu/config'
 import insertVideo from './insert-video'
 
-function getMenuConfig(editor: IDomEditor): IUploadConfigForVideo {
+function getMenuConfig(editor: IDomEditor) {
   // 获取配置，见 `./config.js`
-  return editor.getMenuConfig('uploadVideo') as IUploadConfigForVideo
+  return editor.getMenuConfig('uploadVideo')
 }
 
 // 存储 editor uppy 的关系 - 缓存 uppy ，不重复创建

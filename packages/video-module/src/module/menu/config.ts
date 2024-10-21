@@ -3,24 +3,11 @@
  * @author wangfupeng
  */
 
-import { IUploadConfig } from '@wangeditor-next/core'
+import { IUploadVideoConfig } from '@wangeditor-next/core'
 
 import { VideoElement } from '../custom-types'
 
-type InsertFn = (src: string, poster: string) => void
-
-// 在通用 uploadConfig 上，扩展 video 相关配置
-export type IUploadConfigForVideo = IUploadConfig & {
-  allowedFileTypes?: string[]
-  // 用户自定义插入视频
-  customInsert?: (res: any, insertFn: InsertFn) => void
-  // 用户自定义上传视频
-  customUpload?: (files: File, insertFn: InsertFn) => void
-  // 自定义选择视频，如图床
-  customBrowseAndUpload?: (insertFn: InsertFn) => void
-}
-
-export function genUploadVideoMenuConfig(): IUploadConfigForVideo {
+export function genUploadVideoMenuConfig(): IUploadVideoConfig {
   return {
     server: '', // server API 地址，需用户配置
 
