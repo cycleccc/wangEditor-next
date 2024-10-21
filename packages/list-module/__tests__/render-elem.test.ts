@@ -50,7 +50,11 @@ describe('list module - render elem', () => {
     const vnode: any = renderListItemConf.renderElem(leveledItem, null, baseEditor)
     const style = vnode.data.style
 
-    expect(style).toEqual({ margin: '5px 0 5px 60px' }) // margin-left 60px
+    expect(style).toEqual({
+      margin: '5px 0 5px 60px',
+      alignItems: 'flex-start',
+      display: 'flex',
+    }) // margin-left 60px
   })
 
   it('render one leveled orderd list item elem', () => {

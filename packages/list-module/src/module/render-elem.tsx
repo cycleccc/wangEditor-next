@@ -91,7 +91,11 @@ function renderListElem(
   const { level = 0, ordered = false } = elemNode as ListItemElement
 
   // 根据 level 增加 margin-left
-  const listStyle = { margin: `5px 0 5px ${level * 20}px` }
+  const listStyle = {
+    margin: `5px 0 5px ${level * 20}px`,
+    display: 'flex',
+    alignItems: 'flex-start',
+  }
 
   // list-item 前缀
   let prefix = ''
@@ -118,7 +122,10 @@ function renderListElem(
       >
         {prefix}
       </span>
-      <span>{children}</span>
+      <span style={{
+        flex: '1',
+        wordBreak: 'break-word',
+      }}>{children}</span>
     </div>
   )
 
