@@ -4,12 +4,13 @@
  */
 
 import { insertImageNode, isInsertImageMenuDisabled } from '@wangeditor-next/basic-modules'
-import { IButtonMenu, IDomEditor, t } from '@wangeditor-next/core'
+import {
+  IButtonMenu, IDomEditor, t,
+} from '@wangeditor-next/core'
 
 import { UPLOAD_IMAGE_SVG } from '../../constants/svg'
 import $ from '../../utils/dom'
 import uploadImages from '../upload-images'
-import { IUploadConfigForImage } from './config'
 
 class UploadImage implements IButtonMenu {
   readonly title = t('uploadImgModule.uploadImage')
@@ -32,9 +33,9 @@ class UploadImage implements IButtonMenu {
     return isInsertImageMenuDisabled(editor)
   }
 
-  private getMenuConfig(editor: IDomEditor): IUploadConfigForImage {
+  private getMenuConfig(editor: IDomEditor) {
     // 获取配置，见 `./config.js`
-    return editor.getMenuConfig('uploadImage') as IUploadConfigForImage
+    return editor.getMenuConfig('uploadImage')
   }
 
   exec(editor: IDomEditor, _value: string | boolean) {

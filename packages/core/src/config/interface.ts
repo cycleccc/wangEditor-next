@@ -89,12 +89,11 @@ interface IInsertVideoConfig {
   parseVideoSrc: (url: string) => string
 }
 
-interface IUploadVideoConfig extends IUploadConfig {
-    // 视频专属配置
-}
+export interface IUploadVideoConfig extends IUploadConfig { }
 
-interface IUploadImageConfig extends IUploadConfig {
-    base64LimitSize?: number;
+export interface IUploadImageConfig extends IUploadConfig {
+  // base64 限制（单位 kb） - 小于 xxx 就插入 base64 格式
+  base64LimitSize: number
 }
 
 interface ICodeLangConfig {

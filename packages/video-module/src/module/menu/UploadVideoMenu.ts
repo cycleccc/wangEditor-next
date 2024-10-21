@@ -12,7 +12,6 @@ import { UPLOAD_VIDEO_SVG } from '../../constants/svg'
 import $ from '../../utils/dom'
 import insertVideo from '../helper/insert-video'
 import uploadVideos from '../helper/upload-videos'
-import { IUploadConfigForVideo } from './config'
 
 class UploadVideoMenu implements IButtonMenu {
   readonly title = t('videoModule.uploadVideo')
@@ -83,9 +82,9 @@ class UploadVideoMenu implements IButtonMenu {
     return false
   }
 
-  private getMenuConfig(editor: IDomEditor): IUploadConfigForVideo {
+  private getMenuConfig(editor: IDomEditor) {
     // 获取配置，见 `./config.js`
-    return editor.getMenuConfig('uploadVideo') as IUploadConfigForVideo
+    return editor.getMenuConfig('uploadVideo')
   }
 }
 
