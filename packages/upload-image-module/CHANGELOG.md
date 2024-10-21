@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.1.16
+
+### Patch Changes
+
+- 3ed8ab9: perf: refactor upload type
+- Updated dependencies [3ed8ab9]
+  - @wangeditor-next/core@1.7.14
+  - @wangeditor-next/basic-modules@1.5.13
+
 ## 1.1.15
 
 ### Patch Changes

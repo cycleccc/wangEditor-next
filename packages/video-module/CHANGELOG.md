@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.3.19
+
+### Patch Changes
+
+- 3ed8ab9: perf: refactor upload type
+- Updated dependencies [3ed8ab9]
+  - @wangeditor-next/core@1.7.14
+
 ## 1.3.18
 
 ### Patch Changes
