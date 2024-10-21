@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.14
+
+### Patch Changes
+
+- 3ed8ab9: perf: refactor upload type
+
 ## 1.7.13
 
 ### Patch Changes
