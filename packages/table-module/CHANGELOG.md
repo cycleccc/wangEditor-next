@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.13
+
+### Patch Changes
+
+- 912c374: fix: setting cell width causes border to be lost
+
 ## 1.6.12
 
 ### Patch Changes
