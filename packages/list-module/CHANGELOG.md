@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.20
+
+### Patch Changes
+
+- 4ed7b28: fix(list): unified list editing and display UI
+
 ## 1.1.19
 
 ### Patch Changes
