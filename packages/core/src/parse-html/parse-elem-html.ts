@@ -8,7 +8,7 @@ import { Descendant } from 'slate'
 
 import { IDomEditor } from '../editor/interface'
 import { PRE_PARSE_HTML_CONF_LIST, TEXT_TAGS } from '../index'
-import { getTagName } from '../utils/dom'
+import { getTagName, NodeType } from '../utils/dom'
 import parseCommonElemHtml from './parse-common-elem-html'
 import parseTextElemHtml from './parse-text-elem-html'
 
@@ -41,6 +41,7 @@ function parseElemHtml($elem: Dom7Array, editor: IDomEditor): Descendant | Desce
       return Array.from(childNodes).map(child => {
         const $childElem = $(child)
 
+        if ($childElem[0].nodeType === NodeType.TEXT_NODE) { return { text: $childElem[0].textContent || '' } }
         return parseTextElemHtml($childElem, editor)
       })
     }

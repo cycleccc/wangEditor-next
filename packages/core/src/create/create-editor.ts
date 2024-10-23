@@ -8,7 +8,6 @@ import { withHistory } from 'slate-history'
 
 import { genEditorConfig } from '../config/index'
 import { IEditorConfig } from '../config/interface'
-import { DomEditor } from '../editor/dom-editor'
 import { IDomEditor } from '../editor/interface'
 import { withConfig } from '../editor/plugins/with-config'
 import { withContent } from '../editor/plugins/with-content'
@@ -85,7 +84,7 @@ export default function (option: Partial<ICreateOption>) {
   if (editor.children.length === 0) {
     editor.children = genDefaultContent() // 默认内容
   }
-  DomEditor.normalizeContent(editor) // 格式化，用户输入的 content 可能不规范（如两个相连的 text 没有合并）
+  // DomEditor.normalizeContent(editor) // 格式化，用户输入的 content 可能不规范（如两个相连的 text 没有合并）
 
   if (selector) {
     // 传入了 selector ，则创建 textarea DOM

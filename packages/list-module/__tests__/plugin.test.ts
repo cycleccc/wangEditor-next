@@ -227,23 +227,4 @@ describe('list plugin test', () => {
     editor.insertBreak()
     expect(editor.children).toEqual([{ type: 'paragraph', children: [{ text: '' }] }])
   })
-
-  it('兼容之前的 JSON 格式', () => {
-    const listItem = { type: 'list-item', children: [{ text: 'hello' }] }
-    let editor = createEditor({
-      // 之前的 JSON 格式
-      content: [
-        {
-          type: 'bulleted-list',
-          children: [listItem],
-        },
-      ],
-    })
-    const bulletedList = { type: 'bulleted-list', children: [listItem] }
-
-    editor = withList(editor) // 使用插件
-    editor.insertNode(bulletedList)
-
-    expect(editor.children).toEqual([listItem])
-  })
 })

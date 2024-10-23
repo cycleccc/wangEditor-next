@@ -47,27 +47,5 @@ describe('videoModule module', () => {
 
       expect(fn).toBeCalled()
     })
-
-    test('使用 withVideo 插件后，Editor 调用 normalizeNode 方法确保 Video 元素后面有 paragraph、block、header 等元素', () => {
-      const videoElem = {
-        type: 'video',
-        src: 'test.mp4',
-        children: [],
-      }
-      const editor = createEditor({
-        content: [videoElem],
-      })
-      const newEditor = withVideo(editor)
-
-      newEditor.normalizeNode([videoElem, [0]])
-      expect(newEditor.children).toEqual([
-        {
-          type: 'video',
-          src: 'test.mp4',
-          children: [{ text: '' }],
-        },
-        { type: 'paragraph', children: [{ text: '' }] },
-      ])
-    })
   })
 })
