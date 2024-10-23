@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.14
+
+### Patch Changes
+
+- 3e84fb5: fix(table): when the selection is a div reselect
+
 ## 1.6.13
 
 ### Patch Changes
