@@ -103,8 +103,10 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
           const { path } = selection.anchor
 
           if (path[0] === tablePath[0]) { return } // 当前选区，就在 table 内部
-
-          editor.select(tableStart) // 选中 table 内部
+          // @ts-ignore
+          if (e.target.tagName === 'DIV') {
+            editor.select(tableStart)
+          } // 选中 table 内部
         },
       }}
     >
