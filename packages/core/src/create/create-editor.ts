@@ -40,6 +40,23 @@ interface ICreateOption {
   plugins: PluginFnType[]
 }
 
+export const EditorEvents = {
+  CREATED: 'created',
+  DESTROYED: 'destroyed',
+  CHANGE: 'change',
+  SCROLL: 'scroll',
+  FULLSCREEN: 'fullscreen',
+  UNFULLSCREEN: 'unFullScreen',
+} as const
+
+const MIN_TEXTAREA_HEIGHT = 300
+const MESSAGES = {
+  heightWarning: {
+    en: 'Textarea height < 300px. This may cause modal and hoverbar position error',
+    zh: '编辑区域高度 < 300px 这可能会导致 modal hoverbar 定位异常',
+  },
+}
+
 /**
  * 创建编辑器
  */
@@ -49,11 +66,23 @@ export default function (option: Partial<ICreateOption>) {
   } = option
 
   // 创建实例 - 使用插件
-  let editor = withHistory(
-    withMaxLength(
-      withEmitter(withSelection(withContent(withConfig(withDOM(withEventData(createEditor())))))),
-    ),
-  )
+
+  const createBaseEditor = () => createEditor() as IDomEditor
+
+  const applyPlugins = (editor: IDomEditor) => {
+    return [
+      withEventData,
+      withDOM,
+      withConfig,
+      withContent,
+      withSelection,
+      withEmitter,
+      withMaxLength,
+      withHistory,
+    ].reduce((ed, plugin) => plugin(ed), editor)
+  }
+
+  let editor = applyPlugins(createBaseEditor())
 
   if (selector) {
     // 检查是否对同一个 DOM 重复创建
@@ -84,6 +113,7 @@ export default function (option: Partial<ICreateOption>) {
   if (editor.children.length === 0) {
     editor.children = genDefaultContent() // 默认内容
   }
+  // 兼容了更多格式，normalizeContent 以不在适合于初始化 content
   // DomEditor.normalizeContent(editor) // 格式化，用户输入的 content 可能不规范（如两个相连的 text 没有合并）
 
   if (selector) {
@@ -99,11 +129,11 @@ export default function (option: Partial<ICreateOption>) {
       const $scroll = textarea.$scroll
 
       if ($scroll == null) { return }
-      if ($scroll.height() < 300) {
-        let info = '编辑区域高度 < 300px 这可能会导致 modal hoverbar 定位异常'
-
-        info += '\nTextarea height < 300px . This may be cause modal and hoverbar position error'
-        console.warn(info, $scroll)
+      if ($scroll.height() < MIN_TEXTAREA_HEIGHT) {
+        console.warn(
+          `${MESSAGES.heightWarning.zh}\n${MESSAGES.heightWarning.en}`,
+          { element: $scroll, height: $scroll.height() },
+        )
       }
     })
 
@@ -117,10 +147,10 @@ export default function (option: Partial<ICreateOption>) {
     }
 
     // 隐藏 panel and modal
-    editor.on('change', () => {
+    editor.on(EditorEvents.CHANGE, () => {
       editor.hidePanelOrModal()
     })
-    editor.on('scroll', () => {
+    editor.on(EditorEvents.SCROLL, () => {
       editor.hidePanelOrModal()
     })
   } else {
@@ -132,10 +162,10 @@ export default function (option: Partial<ICreateOption>) {
   const { onCreated, onDestroyed } = editorConfig
 
   if (onCreated) {
-    editor.on('created', () => onCreated(editor))
+    editor.on(EditorEvents.CREATED, () => onCreated(editor))
   }
   if (onDestroyed) {
-    editor.on('destroyed', () => onDestroyed(editor))
+    editor.on(EditorEvents.DESTROYED, () => onDestroyed(editor))
   }
 
   // 创建完毕，异步触发 created
