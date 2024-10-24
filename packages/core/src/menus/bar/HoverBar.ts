@@ -9,6 +9,7 @@ import {
 } from 'slate'
 
 import { CustomElement } from '../../../../custom-types'
+import { EditorEvents } from '../../config/interface'
 import { DomEditor } from '../../editor/dom-editor'
 import { IDomEditor } from '../../editor/interface'
 import { i18nListenLanguage } from '../../i18n'
@@ -80,16 +81,16 @@ class HoverBar {
       textarea.$textAreaContainer.append($elem)
 
       // 绑定 editor onchange
-      editor.on('change', this.changeHoverbarState)
+      editor.on(EditorEvents.CHANGE, this.changeHoverbarState)
 
       // 滚动时隐藏
       const hideAndClean = this.hideAndClean.bind(this)
 
-      editor.on('scroll', hideAndClean)
+      editor.on(EditorEvents.SCROLL, hideAndClean)
 
       // fullScreen 时隐藏
-      editor.on('fullScreen', hideAndClean)
-      editor.on('unFullScreen', hideAndClean)
+      editor.on(EditorEvents.FULLSCREEN, hideAndClean)
+      editor.on(EditorEvents.UNFULLSCREEN, hideAndClean)
     })
 
     // 监听语言变更

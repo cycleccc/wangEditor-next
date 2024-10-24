@@ -3,56 +3,69 @@
  * @author wangfupeng
  */
 
-import { createEditor, Descendant } from 'slate'
+import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
-import { withDOM } from '../editor/plugins/with-dom'
+
+import { genEditorConfig } from '../config/index'
+import { EditorEvents, ICreateOption } from '../config/interface'
+import { IDomEditor } from '../editor/interface'
 import { withConfig } from '../editor/plugins/with-config'
 import { withContent } from '../editor/plugins/with-content'
-import { withEventData } from '../editor/plugins/with-event-data'
+import { withDOM } from '../editor/plugins/with-dom'
 import { withEmitter } from '../editor/plugins/with-emitter'
-import { withSelection } from '../editor/plugins/with-selection'
+import { withEventData } from '../editor/plugins/with-event-data'
 import { withMaxLength } from '../editor/plugins/with-max-length'
-import TextArea from '../text-area/TextArea'
+import { withSelection } from '../editor/plugins/with-selection'
 import HoverBar from '../menus/bar/HoverBar'
-import { genEditorConfig } from '../config/index'
-import { IDomEditor } from '../editor/interface'
-import { DomEditor } from '../editor/dom-editor'
-import { IEditorConfig } from '../config/interface'
+import TextArea from '../text-area/TextArea'
 import { promiseResolveThen } from '../utils/util'
-import { isRepeatedCreateTextarea, genDefaultContent, htmlToContent } from './helper'
-import type { DOMElement } from '../utils/dom'
 import {
-  EDITOR_TO_TEXTAREA,
-  TEXTAREA_TO_EDITOR,
   EDITOR_TO_CONFIG,
-  HOVER_BAR_TO_EDITOR,
   EDITOR_TO_HOVER_BAR,
+  EDITOR_TO_TEXTAREA,
+  HOVER_BAR_TO_EDITOR,
+  TEXTAREA_TO_EDITOR,
 } from '../utils/weak-maps'
 import bindNodeRelation from './bind-node-relation'
-import $ from '../utils/dom'
+import {
+  initializeContent, isRepeatedCreateTextarea,
+} from './helper'
 
-type PluginFnType = <T extends IDomEditor>(editor: T) => T
-
-interface ICreateOption {
-  selector: string | DOMElement
-  config: Partial<IEditorConfig>
-  content?: Descendant[]
-  html?: string
-  plugins: PluginFnType[]
+const MIN_TEXTAREA_HEIGHT = 300
+const MESSAGES = {
+  heightWarning: {
+    en: 'Textarea height < 300px. This may cause modal and hoverbar position error',
+    zh: '编辑区域高度 < 300px 这可能会导致 modal hoverbar 定位异常',
+  },
 }
 
 /**
  * 创建编辑器
  */
 export default function (option: Partial<ICreateOption>) {
-  const { selector = '', config = {}, content, html, plugins = [] } = option
+  const {
+    selector = '', config = {}, content, html, plugins = [],
+  } = option
 
   // 创建实例 - 使用插件
-  let editor = withHistory(
-    withMaxLength(
-      withEmitter(withSelection(withContent(withConfig(withDOM(withEventData(createEditor()))))))
-    )
-  )
+
+  const createBaseEditor = () => createEditor() as IDomEditor
+
+  const applyPlugins = (editor: IDomEditor) => {
+    return [
+      withEventData,
+      withDOM,
+      withConfig,
+      withContent,
+      withSelection,
+      withEmitter,
+      withMaxLength,
+      withHistory,
+    ].reduce((ed, plugin) => plugin(ed), editor)
+  }
+
+  let editor = applyPlugins(createBaseEditor())
+
   if (selector) {
     // 检查是否对同一个 DOM 重复创建
     if (isRepeatedCreateTextarea(editor, selector)) {
@@ -62,6 +75,7 @@ export default function (option: Partial<ICreateOption>) {
 
   // 处理配置
   const editorConfig = genEditorConfig(config)
+
   EDITOR_TO_CONFIG.set(editor, editorConfig)
   const { hoverbarKeys = {} } = editorConfig
 
@@ -70,22 +84,17 @@ export default function (option: Partial<ICreateOption>) {
     editor = plugin(editor)
   })
 
-  // 初始化内容（要在 config 和 plugins 后面）
-  if (html != null) {
-    // 传入 html ，转换为 JSON content
-    editor.children = htmlToContent(editor, html)
-  }
-  if (content && content.length) {
-    editor.children = content // 传入 JSON content
-  }
-  if (editor.children.length === 0) {
-    editor.children = genDefaultContent() // 默认内容
-  }
-  DomEditor.normalizeContent(editor) // 格式化，用户输入的 content 可能不规范（如两个相连的 text 没有合并）
+  editor.children = initializeContent(editor, { html, content })
+  // 兼容了更多格式，normalizeContent 以不在适合于初始化 content
+  // Content normalization is disabled to support more formats.
+  // Note: This may result in non-normalized content (e.g., adjacent text nodes won't be merged).
+  // TODO: Document specific formats that would break with normalization
+  // DomEditor.normalizeContent(editor)
 
   if (selector) {
     // 传入了 selector ，则创建 textarea DOM
     const textarea = new TextArea(selector)
+
     EDITOR_TO_TEXTAREA.set(editor, textarea)
     TEXTAREA_TO_EDITOR.set(textarea, editor)
     textarea.changeViewState() // 初始化时触发一次，以便能初始化 textarea DOM 和 selection
@@ -93,16 +102,19 @@ export default function (option: Partial<ICreateOption>) {
     // 判断 textarea 最小高度，并给出提示
     promiseResolveThen(() => {
       const $scroll = textarea.$scroll
-      if ($scroll == null) return
-      if ($scroll.height() < 300) {
-        let info = '编辑区域高度 < 300px 这可能会导致 modal hoverbar 定位异常'
-        info += '\nTextarea height < 300px . This may be cause modal and hoverbar position error'
-        console.warn(info, $scroll)
+
+      if ($scroll == null) { return }
+      if ($scroll.height() < MIN_TEXTAREA_HEIGHT) {
+        console.warn(
+          `${MESSAGES.heightWarning.zh}\n${MESSAGES.heightWarning.en}`,
+          { element: $scroll, height: $scroll.height() },
+        )
       }
     })
 
     // 创建 hoverbar DOM
     let hoverbar: HoverBar | null
+
     if (Object.keys(hoverbarKeys).length > 0) {
       hoverbar = new HoverBar()
       HOVER_BAR_TO_EDITOR.set(hoverbar, editor)
@@ -110,10 +122,10 @@ export default function (option: Partial<ICreateOption>) {
     }
 
     // 隐藏 panel and modal
-    editor.on('change', () => {
+    editor.on(EditorEvents.CHANGE, () => {
       editor.hidePanelOrModal()
     })
-    editor.on('scroll', () => {
+    editor.on(EditorEvents.SCROLL, () => {
       editor.hidePanelOrModal()
     })
   } else {
@@ -123,11 +135,12 @@ export default function (option: Partial<ICreateOption>) {
 
   // 触发生命周期
   const { onCreated, onDestroyed } = editorConfig
+
   if (onCreated) {
-    editor.on('created', () => onCreated(editor))
+    editor.on(EditorEvents.CREATED, () => onCreated(editor))
   }
   if (onDestroyed) {
-    editor.on('destroyed', () => onDestroyed(editor))
+    editor.on(EditorEvents.DESTROYED, () => onDestroyed(editor))
   }
 
   // 创建完毕，异步触发 created

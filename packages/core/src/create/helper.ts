@@ -4,6 +4,8 @@
  */
 
 import { Descendant } from 'slate'
+
+import { EditorEvents } from '../config/interface'
 import { IDomEditor } from '../editor/interface'
 import parseElemHtml from '../parse-html/parse-elem-html'
 import $, { DOMElement } from '../utils/dom'
@@ -11,10 +13,11 @@ import $, { DOMElement } from '../utils/dom'
 function isRepeatedCreate(
   editor: IDomEditor,
   attrKey: string,
-  selector: string | DOMElement
+  selector: string | DOMElement,
 ): boolean {
   // @ts-ignore
   const $elem = $(selector)
+
   if ($elem.attr(attrKey)) {
     return true // 有属性，说明已经创建过
   }
@@ -23,7 +26,7 @@ function isRepeatedCreate(
   $elem.attr(attrKey, 'true')
 
   // 销毁时删除属性
-  editor.on('destroyed', () => {
+  editor.on(EditorEvents.DESTROYED, () => {
     $elem.removeAttr(attrKey)
   })
 
@@ -35,7 +38,7 @@ function isRepeatedCreate(
  */
 export function isRepeatedCreateTextarea(
   editor: IDomEditor,
-  selector: string | DOMElement
+  selector: string | DOMElement,
 ): boolean {
   return isRepeatedCreate(editor, 'data-w-e-textarea', selector)
 }
@@ -45,7 +48,7 @@ export function isRepeatedCreateTextarea(
  */
 export function isRepeatedCreateToolbar(
   editor: IDomEditor,
-  selector: string | DOMElement
+  selector: string | DOMElement,
 ): boolean {
   return isRepeatedCreate(editor, 'data-w-e-toolbar', selector)
 }
@@ -71,7 +74,7 @@ export function htmlToContent(editor: IDomEditor, html: string = ''): Descendant
   const res: Descendant[] = []
 
   // 空白内容
-  if (html === '') html = '<p><br></p>'
+  if (html === '') { html = '<p><br></p>' }
 
   // 非 HTML 格式，文本格式，用 <p> 包裹
   if (html.indexOf('<') !== 0) {
@@ -83,6 +86,7 @@ export function htmlToContent(editor: IDomEditor, html: string = ''): Descendant
 
   const $content = $(`<div>${html}</div>`)
   const list = Array.from($content.children())
+
   list.forEach(child => {
     const $child = $(child)
     const parsedRes = parseElemHtml($child, editor)
@@ -95,4 +99,20 @@ export function htmlToContent(editor: IDomEditor, html: string = ''): Descendant
   })
 
   return res
+}
+
+/**
+ * 初始化内容（要在 config 和 plugins 后面）
+ */
+export function initializeContent(editor: IDomEditor, options: { html?: string, content?: Descendant[] }) {
+  // 传入 html ，转换为 JSON content
+  if (options.html != null) {
+    return htmlToContent(editor, options.html)
+  }
+  // 传入 JSON content
+  if (options.content?.length) {
+    return options.content
+  }
+  // 默认内容
+  return genDefaultContent()
 }

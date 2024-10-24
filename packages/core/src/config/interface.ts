@@ -5,11 +5,14 @@
 
 import { ImageElement } from 'packages/basic-modules/src/modules/image/custom-types'
 import { VideoElement } from 'packages/video-module/src/module/custom-types'
-import { Node, NodeEntry, Range } from 'slate'
+import {
+  Descendant, Node, NodeEntry, Range,
+} from 'slate'
 
 import { IDomEditor } from '../editor/interface'
 import { IMenuGroup } from '../menus/interface'
 import { IUploadConfig } from '../upload'
+import { DOMElement } from '../utils/dom'
 
 interface IHoverbarConf {
   // key 即 element type
@@ -20,6 +23,27 @@ interface IHoverbarConf {
 }
 
 export type AlertType = 'success' | 'info' | 'warning' | 'error'
+
+/**
+ * EditorEvents 包含所有编辑器的生命周期事件。
+ *
+ * @property {string} CREATED - 编辑器创建后触发，用于初始化操作。
+ * @property {string} DESTROYED - 编辑器销毁时触发，用于清理操作。
+ * @property {string} CHANGE - 编辑器内容发生变化时触发，通常用于监听输入或变动。
+ * @property {string} SCROLL - 编辑器滚动时触发，用于同步滚动状态或执行相关操作。
+ * @property {string} FULLSCREEN - 编辑器进入全屏时触发，通常用于调整布局或容器尺寸。
+ * @property {string} UNFULLSCREEN - 编辑器退出全屏时触发，恢复原始布局状态。
+ */
+export const EditorEvents = {
+  CREATED: 'created',
+  DESTROYED: 'destroyed',
+  CHANGE: 'change',
+  SCROLL: 'scroll',
+  FULLSCREEN: 'fullscreen',
+  UNFULLSCREEN: 'unFullScreen',
+} as const
+
+export type EditorEventType = typeof EditorEvents[keyof typeof EditorEvents]
 
 export interface ISingleMenuConfig {
   [key: string]: any;
@@ -217,4 +241,14 @@ export interface IToolbarConfig {
   insertKeys: { index: number; keys: string | Array<string | IMenuGroup> }
   excludeKeys: Array<string> // 排除哪些菜单
   modalAppendToBody: boolean // modal append 到 body ，而非 $textAreaContainer 内
+}
+
+type PluginFnType = <T extends IDomEditor>(editor: T) => T
+
+export interface ICreateOption {
+  selector: string | DOMElement
+  config: Partial<IEditorConfig>
+  content?: Descendant[]
+  html?: string
+  plugins: PluginFnType[]
 }

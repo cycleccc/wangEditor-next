@@ -3,28 +3,36 @@
  * @author wangfupeng
  */
 
-import debounce from 'lodash.debounce'
 import clonedeep from 'lodash.clonedeep'
-import $, { Dom7Array, DOMElement } from '../../utils/dom'
-import { MENU_ITEM_FACTORIES } from '../register'
-import { promiseResolveThen } from '../../utils/util'
-import { TOOLBAR_TO_EDITOR, BAR_ITEM_TO_EDITOR } from '../../utils/weak-maps'
+import debounce from 'lodash.debounce'
+
+import { EditorEvents, IToolbarConfig } from '../../config/interface'
 import { IDomEditor } from '../../editor/interface'
-import { IBarItem, createBarItem, createBarItemGroup } from '../bar-item/index'
-import { gen$barItemDivider } from '../helpers/helpers'
-import { IMenuGroup, IButtonMenu, ISelectMenu, IDropPanelMenu, IModalMenu } from '../interface'
-import GroupButton from '../bar-item/GroupButton'
-import { IToolbarConfig } from '../../config/interface'
 import { i18nListenLanguage } from '../../i18n'
+import $, { Dom7Array, DOMElement } from '../../utils/dom'
+import { promiseResolveThen } from '../../utils/util'
+import { BAR_ITEM_TO_EDITOR, TOOLBAR_TO_EDITOR } from '../../utils/weak-maps'
+import GroupButton from '../bar-item/GroupButton'
+import { createBarItem, createBarItemGroup, IBarItem } from '../bar-item/index'
+import { gen$barItemDivider } from '../helpers/helpers'
+import {
+  IButtonMenu, IDropPanelMenu, IMenuGroup, IModalMenu, ISelectMenu,
+} from '../interface'
+import { MENU_ITEM_FACTORIES } from '../register'
 
 type MenuType = IButtonMenu | ISelectMenu | IDropPanelMenu | IModalMenu
 
 class Toolbar {
   $box: Dom7Array
-  private readonly $toolbar: Dom7Array = $(`<div class="w-e-bar w-e-bar-show w-e-toolbar"></div>`)
+
+  private readonly $toolbar: Dom7Array = $('<div class="w-e-bar w-e-bar-show w-e-toolbar"></div>')
+
   private menus: { [key: string]: MenuType } = {}
+
   private toolbarItems: IBarItem[] = []
+
   private config: Partial<IToolbarConfig> = {}
+
   private lngListen: () => void = () => {}
 
   constructor(boxSelector: string | DOMElement, config: Partial<IToolbarConfig>) {
@@ -32,12 +40,14 @@ class Toolbar {
 
     // @ts-ignore 初始化 DOM
     const $box = $(boxSelector)
+
     if ($box.length === 0) {
       throw new Error(`Cannot find toolbar DOM by selector '${boxSelector}'`)
     }
     this.$box = $box
     const $toolbar = this.$toolbar
     // @ts-ignore
+
     $toolbar.on('mousedown', e => e.preventDefault(), { passive: false }) // 防止点击失焦
     $box.append($toolbar)
 
@@ -51,7 +61,8 @@ class Toolbar {
 
       // 监听 editor onchange
       const editor = this.getEditorInstance()
-      editor.on('change', this.changeToolbarState)
+
+      editor.on(EditorEvents.CHANGE, this.changeToolbarState)
     })
   }
 
@@ -69,6 +80,7 @@ class Toolbar {
     this.menus = {}
     // 清空elem
     const $toolbar = this.$toolbar
+
     $toolbar?.empty()
 
     // 注册 items
@@ -86,6 +98,7 @@ class Toolbar {
 
     // 新插入菜单
     const toolbarKeysWithInsertedKeys = clonedeep(toolbarKeys)
+
     if (insertKeys.keys.length > 0) {
       if (typeof insertKeys.keys === 'string') {
         insertKeys.keys = [insertKeys.keys]
@@ -98,14 +111,9 @@ class Toolbar {
 
     // 排除某些菜单
     const filteredKeys = toolbarKeysWithInsertedKeys.filter(key => {
-      if (typeof key === 'string') {
-        // 普通菜单
-        if (excludeKeys.includes(key)) return false
-      } else {
-        // group
-        if (excludeKeys.includes(key.key)) return false
-      }
-      return true
+      const keyToCheck = typeof key === 'string' ? key : key.key
+
+      return !excludeKeys.includes(keyToCheck)
     })
     const filteredKeysLength = filteredKeys.length
 
@@ -113,16 +121,17 @@ class Toolbar {
     filteredKeys.forEach((key, index) => {
       if (key === '|') {
         // 第一个就是 `|` ，忽略
-        if (index === 0) return
+        if (index === 0) { return }
 
         // 最后一个是 `|` ，忽略
-        if (index + 1 === filteredKeysLength) return
+        if (index + 1 === filteredKeysLength) { return }
 
         // 多个紧挨着的 `|` ，只显示一个
-        if (prevKey === '|') return
+        if (prevKey === '|') { return }
 
         // 分割线
         const $divider = gen$barItemDivider()
+
         $toolbar.append($divider)
         prevKey = key
         return
@@ -150,10 +159,10 @@ class Toolbar {
 
     // 注册子菜单
     menuKeys.forEach(key => {
-      if (excludeKeys.includes(key)) return
+      if (excludeKeys.includes(key)) { return }
       this.registerSingleItem(
         key,
-        group // 将子菜单，添加到 group
+        group, // 将子菜单，添加到 group
       )
     })
 
@@ -173,6 +182,7 @@ class Toolbar {
     if (menu == null) {
       // 缓存中没有，则创建
       const factory = MENU_ITEM_FACTORIES[key]
+
       if (factory == null) {
         throw new Error(`Not found menu item factory by key '${key}'`)
       }
@@ -189,11 +199,13 @@ class Toolbar {
 
     // 替换 icon svg
     const menuConf = editor.getMenuConfig(key)
+
     if (menuConf && menuConf.iconSvg !== undefined) {
       menu.iconSvg = menuConf.iconSvg
     }
 
     const toolbarItem = createBarItem(key, menu, inGroup)
+
     this.toolbarItems.push(toolbarItem)
 
     // 保存 toolbarItem 和 editor 的关系
@@ -203,17 +215,20 @@ class Toolbar {
     if (inGroup) {
       // barItem 是 groupButton
       const group = container as GroupButton
+
       group.appendBarItem(toolbarItem)
     } else {
       // barItem 添加到 toolbar
       const toolbar = container as Toolbar
+
       toolbar.$toolbar.append(toolbarItem.$elem)
     }
   }
 
   private getEditorInstance(): IDomEditor {
     const editor = TOOLBAR_TO_EDITOR.get(this)
-    if (editor == null) throw new Error('Can not get editor instance')
+
+    if (editor == null) { throw new Error('Can not get editor instance') }
     return editor
   }
 
