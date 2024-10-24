@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.6.5
+
+### Patch Changes
+
+- 5e1d59a: update editor module version
+
 ## 5.6.4
 
 ### Patch Changes

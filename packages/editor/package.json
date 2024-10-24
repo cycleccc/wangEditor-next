@@ -1,6 +1,6 @@
 {
   "name": "@wangeditor-next/editor",
-  "version": "5.6.4",
+  "version": "5.6.5",
   "description": "Web rich text editor, Web 富文本编辑器",
   "keywords": [
     "wangeditor",
@@ -54,13 +54,13 @@
   "dependencies": {
     "@uppy/core": "^2.1.1",
     "@uppy/xhr-upload": "^2.0.3",
-    "@wangeditor-next/basic-modules": "~1.5.12",
-    "@wangeditor-next/code-highlight": "~1.3.10",
-    "@wangeditor-next/core": "~1.7.13",
-    "@wangeditor-next/list-module": "~1.1.18",
-    "@wangeditor-next/table-module": "~1.6.11",
-    "@wangeditor-next/upload-image-module": "~1.1.15",
-    "@wangeditor-next/video-module": "~1.3.18",
+    "@wangeditor-next/basic-modules": "~1.5.14",
+    "@wangeditor-next/code-highlight": "~1.3.12",
+    "@wangeditor-next/core": "~1.7.15",
+    "@wangeditor-next/list-module": "~1.1.21",
+    "@wangeditor-next/table-module": "~1.6.15",
+    "@wangeditor-next/upload-image-module": "~1.1.17",
+    "@wangeditor-next/video-module": "~1.3.20",
     "dom7": "^3.0.0",
     "is-hotkey": "^0.2.0",
     "lodash.camelcase": "^4.3.0",
