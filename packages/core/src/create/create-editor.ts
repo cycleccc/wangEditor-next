@@ -106,7 +106,10 @@ export default function (option: Partial<ICreateOption>) {
 
   editor.children = initializeContent(editor, { html, content })
   // 兼容了更多格式，normalizeContent 以不在适合于初始化 content
-  // DomEditor.normalizeContent(editor) // 格式化，用户输入的 content 可能不规范（如两个相连的 text 没有合并）
+  // Content normalization is disabled to support more formats.
+  // Note: This may result in non-normalized content (e.g., adjacent text nodes won't be merged).
+  // TODO: Document specific formats that would break with normalization
+  // DomEditor.normalizeContent(editor)
 
   if (selector) {
     // 传入了 selector ，则创建 textarea DOM
