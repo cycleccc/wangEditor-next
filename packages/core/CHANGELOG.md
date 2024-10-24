@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.15
+
+### Patch Changes
+
+- dc5dea1: 253 图片无法回显行内元素包含行内元素无法解析
+
 ## 1.7.14
 
 ### Patch Changes
