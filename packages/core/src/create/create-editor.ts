@@ -28,7 +28,9 @@ import {
   TEXTAREA_TO_EDITOR,
 } from '../utils/weak-maps'
 import bindNodeRelation from './bind-node-relation'
-import { genDefaultContent, htmlToContent, isRepeatedCreateTextarea } from './helper'
+import {
+  initializeContent, isRepeatedCreateTextarea,
+} from './helper'
 
 type PluginFnType = <T extends IDomEditor>(editor: T) => T
 
@@ -102,17 +104,7 @@ export default function (option: Partial<ICreateOption>) {
     editor = plugin(editor)
   })
 
-  // 初始化内容（要在 config 和 plugins 后面）
-  if (html != null) {
-    // 传入 html ，转换为 JSON content
-    editor.children = htmlToContent(editor, html)
-  }
-  if (content && content.length) {
-    editor.children = content // 传入 JSON content
-  }
-  if (editor.children.length === 0) {
-    editor.children = genDefaultContent() // 默认内容
-  }
+  editor.children = initializeContent(editor, { html, content })
   // 兼容了更多格式，normalizeContent 以不在适合于初始化 content
   // DomEditor.normalizeContent(editor) // 格式化，用户输入的 content 可能不规范（如两个相连的 text 没有合并）
 
