@@ -46,7 +46,7 @@
   "peerDependencies": {
     "@uppy/core": "^2.1.1",
     "@uppy/xhr-upload": "^2.0.3",
-    "dom7": "^3.0.0",
+    "dom7": "^3.0.0 || ^4.0.0",
     "is-hotkey": "^0.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
