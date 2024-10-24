@@ -112,13 +112,9 @@ class Toolbar {
 
     // 排除某些菜单
     const filteredKeys = toolbarKeysWithInsertedKeys.filter(key => {
-      if (typeof key === 'string') {
-        // 普通菜单
-        if (excludeKeys.includes(key)) { return false }
-        // group
-      } else if (excludeKeys.includes(key.key)) { return false }
+      const keyToCheck = typeof key === 'string' ? key : key.key
 
-      return true
+      return !excludeKeys.includes(keyToCheck)
     })
     const filteredKeysLength = filteredKeys.length
 
