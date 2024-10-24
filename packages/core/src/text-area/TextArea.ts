@@ -7,7 +7,7 @@ import forEach from 'lodash.foreach'
 import throttle from 'lodash.throttle'
 import { Range } from 'slate'
 
-import { EditorEvents } from '../create/create-editor'
+import { EditorEvents } from '../config/interface'
 import { DomEditor } from '../editor/dom-editor'
 import { IDomEditor } from '../editor/interface'
 import $, { Dom7Array, DOMElement } from '../utils/dom'

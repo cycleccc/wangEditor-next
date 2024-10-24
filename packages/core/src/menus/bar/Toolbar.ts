@@ -6,8 +6,7 @@
 import clonedeep from 'lodash.clonedeep'
 import debounce from 'lodash.debounce'
 
-import { IToolbarConfig } from '../../config/interface'
-import { EditorEvents } from '../../create/create-editor'
+import { EditorEvents, IToolbarConfig } from '../../config/interface'
 import { IDomEditor } from '../../editor/interface'
 import { i18nListenLanguage } from '../../i18n'
 import $, { Dom7Array, DOMElement } from '../../utils/dom'

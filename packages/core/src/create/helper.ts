@@ -5,10 +5,10 @@
 
 import { Descendant } from 'slate'
 
+import { EditorEvents } from '../config/interface'
 import { IDomEditor } from '../editor/interface'
 import parseElemHtml from '../parse-html/parse-elem-html'
 import $, { DOMElement } from '../utils/dom'
-import { EditorEvents } from './create-editor'
 
 function isRepeatedCreate(
   editor: IDomEditor,

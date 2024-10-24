@@ -3,11 +3,11 @@
  * @author wangfupeng
  */
 
-import { createEditor, Descendant } from 'slate'
+import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
 
 import { genEditorConfig } from '../config/index'
-import { IEditorConfig } from '../config/interface'
+import { EditorEvents, ICreateOption } from '../config/interface'
 import { IDomEditor } from '../editor/interface'
 import { withConfig } from '../editor/plugins/with-config'
 import { withContent } from '../editor/plugins/with-content'
@@ -18,7 +18,6 @@ import { withMaxLength } from '../editor/plugins/with-max-length'
 import { withSelection } from '../editor/plugins/with-selection'
 import HoverBar from '../menus/bar/HoverBar'
 import TextArea from '../text-area/TextArea'
-import type { DOMElement } from '../utils/dom'
 import { promiseResolveThen } from '../utils/util'
 import {
   EDITOR_TO_CONFIG,
@@ -31,25 +30,6 @@ import bindNodeRelation from './bind-node-relation'
 import {
   initializeContent, isRepeatedCreateTextarea,
 } from './helper'
-
-type PluginFnType = <T extends IDomEditor>(editor: T) => T
-
-interface ICreateOption {
-  selector: string | DOMElement
-  config: Partial<IEditorConfig>
-  content?: Descendant[]
-  html?: string
-  plugins: PluginFnType[]
-}
-
-export const EditorEvents = {
-  CREATED: 'created',
-  DESTROYED: 'destroyed',
-  CHANGE: 'change',
-  SCROLL: 'scroll',
-  FULLSCREEN: 'fullscreen',
-  UNFULLSCREEN: 'unFullScreen',
-} as const
 
 const MIN_TEXTAREA_HEIGHT = 300
 const MESSAGES = {
