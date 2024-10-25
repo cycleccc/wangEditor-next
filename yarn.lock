@@ -3515,6 +3515,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@wangeditor-next/plugin-float-image@workspace:packages/plugin-float-image":
+  version: 0.0.0-use.local
+  resolution: "@wangeditor-next/plugin-float-image@workspace:packages/plugin-float-image"
+  peerDependencies:
+    "@wangeditor-next/editor": ^5.6.5
+    dom7: ^3.0.0
+    slate: ^0.72.0
+    snabbdom: ^3.1.0
+  languageName: unknown
+  linkType: soft
+
 "@wangeditor-next/table-module@npm:~1.6.15, @wangeditor-next/table-module@workspace:packages/table-module":
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/table-module@workspace:packages/table-module"
