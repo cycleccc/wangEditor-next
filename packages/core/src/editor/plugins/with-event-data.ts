@@ -132,6 +132,8 @@ export const withEventData = <T extends Editor>(editor: T) => {
 
         if (base64Data) {
           html = `<img src="${base64Data}" alt="image.png">`
+
+          URL.revokeObjectURL(blobUrl)
         }
       }
     }
