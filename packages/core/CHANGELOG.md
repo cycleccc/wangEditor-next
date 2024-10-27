@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.16
+
+### Patch Changes
+
+- a9982a5: fix: safari img src not base64
+
 ## 1.7.15
 
 ### Patch Changes
