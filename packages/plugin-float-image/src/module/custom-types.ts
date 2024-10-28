@@ -20,6 +20,8 @@ export type ImageElement = {
   src: string
   alt?: string
   href?: string
+  width?: string
+  height?: string
   style?: ImageStyle
-  children: EmptyText[] // void 元素必须有一个空 text
+  children: EmptyText[]
 }

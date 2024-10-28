@@ -10,6 +10,7 @@ import $, {
   children,
   css,
   dataset,
+  Dom7Array,
   empty,
   filter,
   find,
@@ -69,6 +70,28 @@ if (width) { $.fn.width = width }
 if (height) { $.fn.height = height }
 if (filter) { $.fn.filter = filter }
 if (empty) { $.fn.empty = empty }
+
+export function getStyleValue($elem: Dom7Array, styleKey: string): string {
+  let res = ''
+
+  const styleStr = $elem.attr('style') || ''
+  const styleArr = styleStr.split(';')
+  const length = styleArr.length
+
+  for (let i = 0; i < length; i += 1) {
+    const styleItemStr = styleArr[i]
+
+    if (styleItemStr) {
+      const arr = styleItemStr.split(':')
+
+      if (arr[0].trim() === styleKey) {
+        res = arr[1].trim()
+      }
+    }
+  }
+
+  return res
+}
 
 export default $
 export {
