@@ -16,6 +16,7 @@ import { genElemId } from '../../render/helper'
 import node2html from '../../to-html/node2html'
 import $, {
   DOMElement, isDOMElement, isDOMText,
+  isUnprocessedListElement,
 } from '../../utils/dom'
 import { Key } from '../../utils/key'
 import { findCurrentLineRange } from '../../utils/line'
@@ -381,10 +382,7 @@ export const withContent = <T extends Editor>(editor: T) => {
             const prevEl = domNodes[index - 1] as DOMElement
             // 如果是 list 列表需要多插入一个回车,模拟双回车删除空 list
 
-            if (
-              'matches' in prevEl
-              && prevEl.matches('ul:not([data-w-e-type]),ol:not([data-w-e-type])')
-            ) {
+            if (isUnprocessedListElement(prevEl)) {
               e.insertBreak()
             }
           }
