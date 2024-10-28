@@ -226,19 +226,13 @@ export const withContent = <T extends Editor>(editor: T) => {
 
     if (firstNode == null) { return true } // editor.children 空数组
 
-    if (Element.isElement(firstNode) && firstNode.type === 'paragraph') {
-      const { children: texts = [] } = firstNode
+    if (!Element.isElement(firstNode) || firstNode.type !== 'paragraph') { return false }
+    const { children: texts = [] } = firstNode
 
-      if (texts.length > 1) { return false } // >1 text node
+    if (texts.length > 1) { return false } // >1 text node
+    const t = texts[0]
 
-      const t = texts[0]
-
-      if (t == null) { return true } // 无 text 节点
-
-      if (Text.isText(t) && t.text === '') { return true } // 只有一个 text 且是空字符串
-    }
-
-    return false
+    return t == null || (Text.isText(t) && t.text === '') // 无 text 节点 or 只有一个 text 且是空字符串
   }
 
   /**
