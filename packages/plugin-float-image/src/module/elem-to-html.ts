@@ -1,6 +1,6 @@
 /**
  * @description elem to html
- * @author Yanghc
+ * @author cycleccc
  */
 
 import { SlateElement } from '@wangeditor-next/editor'

@@ -1,6 +1,6 @@
 /**
  * @description module entry
- * @author Yanghc
+ * @author cycleccc
  */
 
 import './local' // 多语言

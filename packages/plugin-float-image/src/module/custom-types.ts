@@ -1,6 +1,6 @@
 /**
  * @description float-image element
- * @author Yanghc
+ * @author cycleccc
  */
 
 // 【注意】需要把自定义的 Element 引入到最外层的 custom-types.d.ts

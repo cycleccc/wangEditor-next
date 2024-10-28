@@ -1,6 +1,6 @@
 /**
  * @description image float base class
- * @author Yanghc
+ * @author cycleccc
  */
 
 import {

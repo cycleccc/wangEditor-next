@@ -1,6 +1,6 @@
 /**
  * @description float image right
- * @author Yanghc
+ * @author cycleccc
  */
 
 import { t } from '@wangeditor-next/editor'

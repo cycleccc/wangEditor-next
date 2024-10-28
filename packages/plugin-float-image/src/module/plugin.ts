@@ -1,6 +1,6 @@
 /**
  * @description editor 插件，重写 editor API
- * @author Yanghc
+ * @author cycleccc
  */
 
 import { DomEditor, IDomEditor } from '@wangeditor-next/editor'

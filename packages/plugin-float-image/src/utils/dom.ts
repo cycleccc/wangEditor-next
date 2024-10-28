@@ -1,6 +1,6 @@
 /**
  * @description DOM 操作
- * @author Yanghc
+ * @author cycleccc
  */
 
 import $, {

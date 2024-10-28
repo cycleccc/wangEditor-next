@@ -1,6 +1,6 @@
 /**
  * @description 多语言
- * @author Yanghc
+ * @author cycleccc
  */
 
 import { i18nAddResources } from '@wangeditor-next/editor'

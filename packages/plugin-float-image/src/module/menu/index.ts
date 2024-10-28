@@ -1,6 +1,6 @@
 /**
  * @description menu index
- * @author Yanghc
+ * @author cycleccc
  */
 
 import ImageFloatLeft from './FloatLeft'

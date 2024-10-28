@@ -1,6 +1,6 @@
 /**
  * @description parse elem html
- * @author Yanghc
+ * @author cycleccc
  */
 
 import { IDomEditor, SlateDescendant } from '@wangeditor-next/editor'

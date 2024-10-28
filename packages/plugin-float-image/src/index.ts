@@ -1,6 +1,6 @@
 /**
  * @description src entry
- * @author Yanghc
+ * @author cycleccc
  */
 
 import './asserts/index.less'
