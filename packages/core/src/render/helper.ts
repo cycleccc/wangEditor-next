@@ -3,8 +3,8 @@
  * @author wangfupeng
  */
 
-export function genElemId(id: string) {
-  return `w-e-element-${id}`
+export function genElemId(type:string, id: string) {
+  return `w-e-element-${type}-${id}`
 }
 
 export function genTextId(id: string) {
