@@ -391,10 +391,10 @@ export function walkTextNodes(
     const node = nodes[i]
     const nodeType = node.nodeType
 
-    if (nodeType === NodeType.TEXT_NODE) {
+    if (isDOMText(node)) {
       // 匹配到 text node ，执行函数
       handler(node, elem)
-    } else if (nodeType === NodeType.ELEMENT_NODE || nodeType === NodeType.DOCUMENT_NODE || nodeType === NodeType.DOCUMENT_FRAGMENT_NODE) {
+    } else if ([NodeType.ELEMENT_NODE, NodeType.DOCUMENT_NODE, NodeType.DOCUMENT_FRAGMENT_NODE].includes(nodeType)) {
       // 继续遍历子节点
       walkTextNodes(node as DOMElement, handler)
     }
