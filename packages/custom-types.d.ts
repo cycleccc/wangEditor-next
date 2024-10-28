@@ -65,6 +65,8 @@ type CustomElement =
   | TableElement
   | ListItemElement
 
+type ElementType = CustomElement['type'];
+
 declare global {
   interface Window {
     MSStream: boolean

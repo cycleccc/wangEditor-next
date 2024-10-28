@@ -3,7 +3,9 @@
  * @author wangfupeng
  */
 
-export function genElemId(type:string, id: string) {
+import { ElementType } from 'packages/custom-types'
+
+export function genElemId(type:ElementType, id: string) {
   return `w-e-element-${type}-${id}`
 }
 
