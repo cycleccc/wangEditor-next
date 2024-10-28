@@ -14,7 +14,9 @@ import { PARSE_ELEM_HTML_CONF, TEXT_TAGS } from '../../parse-html/index'
 import parseElemHtml from '../../parse-html/parse-elem-html'
 import { genElemId } from '../../render/helper'
 import node2html from '../../to-html/node2html'
-import $, { DOMElement, NodeType } from '../../utils/dom'
+import $, {
+  DOMElement, isDOMElement, isDOMText,
+} from '../../utils/dom'
 import { Key } from '../../utils/key'
 import { findCurrentLineRange } from '../../utils/line'
 import { EDITOR_TO_SELECTION, NODE_TO_KEY } from '../../utils/weak-maps'
@@ -278,13 +280,13 @@ export const withContent = <T extends Editor>(editor: T) => {
 
     // 过滤一下，只保留 elem 和 text ，并却掉一些无用标签（如 style script 等）
     domNodes = domNodes.filter(n => {
-      const { nodeType, nodeName } = n
+      const { nodeName } = n
       // Text Node
 
-      if (nodeType === NodeType.TEXT_NODE) { return true }
+      if (isDOMText(n)) { return true }
 
       // Element Node
-      if (nodeType === NodeType.ELEMENT_NODE) {
+      if (isDOMElement(n)) {
         // 过滤掉忽略的 tag
         if (IGNORE_TAGS.has(nodeName.toLowerCase())) { return false }
         return true
@@ -314,10 +316,10 @@ export const withContent = <T extends Editor>(editor: T) => {
     let insertedElemNum = 0 // 记录插入 elem 的数量 ( textNode 不算 )
 
     domNodes.forEach((n, index) => {
-      const { nodeType, nodeName, textContent = '' } = n
+      const { nodeName, textContent = '' } = n
 
       // ------ Text node ------
-      if (nodeType === NodeType.TEXT_NODE) {
+      if (isDOMText(n)) {
         if (!textContent || !textContent.trim()) { return } // 无内容的 Text
 
         // 插入文本

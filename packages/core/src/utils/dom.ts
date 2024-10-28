@@ -84,6 +84,17 @@ if (empty) { $.fn.empty = empty }
 
 export default $
 
+export enum NodeType {
+  ELEMENT_NODE = 1,
+  TEXT_NODE = 3,
+  CDATA_SECTION_NODE = 4,
+  PROCESSING_INSTRUCTION_NODE = 7,
+  COMMENT_NODE = 8,
+  DOCUMENT_NODE = 9,
+  DOCUMENT_TYPE_NODE = 10,
+  DOCUMENT_FRAGMENT_NODE = 11,
+}
+
 export const isDocument = (value: any): value is Document => {
   return toString(value) === '[object HTMLDocument]'
 }
@@ -125,14 +136,14 @@ export const isDOMNode = (value: any): value is DOMNode => {
  * Check if a DOM node is a comment node.
  */
 export const isDOMComment = (value: any): value is DOMComment => {
-  return isDOMNode(value) && value.nodeType === 8
+  return isDOMNode(value) && value.nodeType === NodeType.COMMENT_NODE
 }
 
 /**
  * Check if a DOM node is an element node.
  */
 export const isDOMElement = (value: any): value is DOMElement => {
-  return isDOMNode(value) && value.nodeType === 1
+  return isDOMNode(value) && value.nodeType === NodeType.ELEMENT_NODE
 }
 
 /**
@@ -146,7 +157,7 @@ export const isDOMSelection = (value: any): value is DOMSelection => {
  * Check if a DOM node is an element node.
  */
 export const isDOMText = (value: any): value is DOMText => {
-  return isDOMNode(value) && value.nodeType === 3
+  return isDOMNode(value) && value.nodeType === NodeType.TEXT_NODE
 }
 
 /**
@@ -331,7 +342,7 @@ export function getFirstVoidChild(elem: DOMElement): DOMElement | null {
 
     const { nodeName, nodeType } = curElem
 
-    if (nodeType === 1) {
+    if (nodeType === NodeType.ELEMENT_NODE) {
       const name = nodeName.toLowerCase()
 
       if (
@@ -377,25 +388,14 @@ export function walkTextNodes(
     const node = nodes[i]
     const nodeType = node.nodeType
 
-    if (nodeType === 3) {
+    if (nodeType === NodeType.TEXT_NODE) {
       // 匹配到 text node ，执行函数
       handler(node, elem)
-    } else if (nodeType === 1 || nodeType === 9 || nodeType === 11) {
+    } else if (nodeType === NodeType.ELEMENT_NODE || nodeType === NodeType.DOCUMENT_NODE || nodeType === NodeType.DOCUMENT_FRAGMENT_NODE) {
       // 继续遍历子节点
       walkTextNodes(node as DOMElement, handler)
     }
   }
-}
-
-export enum NodeType {
-  ELEMENT_NODE = 1,
-  TEXT_NODE = 3,
-  CDATA_SECTION_NODE = 4,
-  PROCESSING_INSTRUCTION_NODE = 7,
-  COMMENT_NODE = 8,
-  DOCUMENT_NODE = 9,
-  DOCUMENT_TYPE_NODE = 10,
-  DOCUMENT_FRAGMENT_NODE = 11,
 }
 
 /**
