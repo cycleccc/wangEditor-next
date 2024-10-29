@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.6
+
+### Patch Changes
+
+- f1848d5: feat: elem id add type
+- Updated dependencies [f1848d5]
+  - @wangeditor-next/core@1.7.17
+  - @wangeditor-next/basic-modules@1.5.16
+  - @wangeditor-next/code-highlight@1.3.14
+  - @wangeditor-next/list-module@1.1.23
+  - @wangeditor-next/table-module@1.6.17
+  - @wangeditor-next/upload-image-module@1.1.19
+  - @wangeditor-next/video-module@1.3.22
+
 ## 5.6.5
 
 ### Patch Changes

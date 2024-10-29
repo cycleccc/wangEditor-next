@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.17
+
+### Patch Changes
+
+- f1848d5: feat: elem id add type
+
 ## 1.7.16
 
 ### Patch Changes
