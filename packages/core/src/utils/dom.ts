@@ -110,7 +110,7 @@ export const isDataTransfer = (value: any): value is DataTransfer => {
 const HTML_ELEMENT_STR_REG_EXP = /\[object HTML([A-Z][a-z]*)*Element\]/
 
 export const isUnprocessedListElement = (el: Element): boolean => {
-  return 'matches' in el && el.matches('ul:not([data-w-e-type]),ol:not([data-w-e-type])')
+  return 'matches' in el && /^[ou]l$/i.test(el.tagName) && !el.hasAttribute('data-w-e-type')
 }
 export const isHTMLElememt = (value: any): value is HTMLElement => {
   return HTML_ELEMENT_STR_REG_EXP.test(toString(value))
