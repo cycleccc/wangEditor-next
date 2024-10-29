@@ -1,14 +1,15 @@
 #!/bin/bash
 
-## 一键打包所有 package
+## One-click build script for all packages
 
 # 获取 yarn dev/build 类型
 buildType=build
-if [ -n "$1" ]; then
-  if [ "$1" != "dev" ] && [ "$1" != "build" ]; then
-    echo "Error: Build type must be either 'dev' or 'build'"
-    exit 1
-  fi
+if [ -z "$1" ]; then
+  echo "No build type specified, defaulting to 'build'"
+elif [ "$1" != "dev" ] && [ "$1" != "build" ]; then
+  echo "Error: Build type must be either 'dev' or 'build'"
+  exit 1
+else
   buildType=$1
 fi
 
@@ -47,15 +48,28 @@ print_summary() {
 # Update build_package function
 build_package() {
     local package_name=$1
+    local timeout=1800  # 30 minutes timeout
     echo "Building package: $package_name"
-    if cd "$package_name" && \
-       rm -rf dist && \
-       yarn "$buildType"; then
+    if cd "$package_name"; then
+        rm -rf dist
+        if timeout $timeout yarn "$buildType" 2> build_error.log; then
+            rm -f build_error.log
+            log_status "$package_name" "success"
+        else
+            if [ -f build_error.log ]; then
+                echo "Build failed for $package_name. Error:"
+                cat build_error.log
+                rm -f build_error.log
+            fi
+            log_status "$package_name" "failed"
+            cd ..
+            return 1
+        fi
         log_status "$package_name" "success"
         cd ..
     else
+        echo "Failed to enter directory: $package_name"
         log_status "$package_name" "failed"
-        cd ..
         return 1
     fi
 }
