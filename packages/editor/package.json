@@ -22,6 +22,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./package.json": "./package.json",
     "./dist/css/style.css": "./dist/css/style.css"
   },
   "directories": {
