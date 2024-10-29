@@ -5,6 +5,7 @@
 
 import { Editor, Range as SlateRange } from 'slate'
 
+import { CustomElement } from '../../../custom-types'
 import { DomEditor } from '../../src/editor/dom-editor'
 import { IDomEditor } from '../../src/editor/interface'
 import { Key } from '../../src/utils/key'
@@ -148,14 +149,14 @@ describe('Core DomEditor', () => {
   })
 
   test('toDOMNode', () => {
-    const p = editor.children[0]
+    const p = editor.children[0] as CustomElement
 
     const key = DomEditor.findKey(editor, p)
 
     const domNode = DomEditor.toDOMNode(editor, p)
 
     expect(domNode.tagName).toBe('DIV')
-    expect(domNode.id).toBe(`w-e-element-${key.id}`)
+    expect(domNode.id).toBe(`w-e-element-${p.type}-${key.id}`)
   })
 
   test('hasDOMNode', () => {

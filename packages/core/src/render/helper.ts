@@ -3,8 +3,10 @@
  * @author wangfupeng
  */
 
-export function genElemId(id: string) {
-  return `w-e-element-${id}`
+import { ElementType } from 'packages/custom-types'
+
+export function genElemId(type:ElementType, id: string) {
+  return `w-e-element-${type}-${id}`
 }
 
 export function genTextId(id: string) {

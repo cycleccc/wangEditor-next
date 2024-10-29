@@ -22,6 +22,7 @@ import $, {
   isDocument,
   isDOMElement,
   isDOMSelection,
+  isDOMText,
   isShadowRoot,
   normalizeDOMPoint,
   walkTextNodes,
@@ -733,7 +734,7 @@ export const DomEditor = {
 
     if (childNodes) {
       for (const node of Array.from(childNodes)) {
-        if (node.nodeType === 3) {
+        if (isDOMText(node)) {
           node.remove()
         } else {
           break
