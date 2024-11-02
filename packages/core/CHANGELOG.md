@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.18
+
+### Patch Changes
+
+- 1e70838: fix(composition): reinput when cursor in link fornt
+
 ## 1.7.17
 
 ### Patch Changes
