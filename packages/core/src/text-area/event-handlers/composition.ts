@@ -24,8 +24,8 @@ function areBothTextNodes(editor, selection) {
     const { anchor, focus } = selection
 
     if (
-      anchor.path.length === 2
-      && focus.path.length === 2
+      [2, 3].includes(anchor.path.length)
+      && [2, 3].includes(focus.path.length)
       && (anchor.offset === 0 || focus.offset === 0)
     ) {
       const nowEntry = Editor.node(editor, anchor.path)
