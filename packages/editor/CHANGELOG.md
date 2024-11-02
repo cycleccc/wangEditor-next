@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.7
+
+### Patch Changes
+
+- 1e70838: fix(composition): reinput when cursor in link fornt
+- Updated dependencies [1e70838]
+  - @wangeditor-next/core@1.7.18
+  - @wangeditor-next/basic-modules@1.5.17
+  - @wangeditor-next/code-highlight@1.3.15
+  - @wangeditor-next/list-module@1.1.24
+  - @wangeditor-next/table-module@1.6.18
+  - @wangeditor-next/upload-image-module@1.1.20
+  - @wangeditor-next/video-module@1.3.23
+
 ## 5.6.6
 
 ### Patch Changes
