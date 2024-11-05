@@ -144,7 +144,7 @@ function renderTable(elemNode: SlateElement, children: VNode[] | null, editor: I
         <tbody>{children}</tbody>
       </table>
 
-      <div className="column-resizer" contenteditable="false">
+      <div className="column-resizer" contentEditable={false}>
         {columnWidths.map((width, index) => {
           let minWidth = width
           /**
