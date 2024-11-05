@@ -96,7 +96,7 @@ function deleteCellBreak(newEditor: IDomEditor, unit: Parameters<IDomEditor['del
     match: n => DomEditor.checkNodeType(n, 'table-cell'),
   })
 
-  if (aboveCell == null || !Path.equals(aboveCell[1], cellNodeEntry[1])) { return false }
+  if (aboveCell == null || cellNodeEntry == null || !Path.equals(aboveCell[1], cellNodeEntry[1])) { return false }
   const targetNode = Editor.node(newEditor, targetPoint)
 
   if (!Text.isText(targetNode[0]) || targetNode[0].text.length < 2) { return false } // 如果存在\n\r，那长度必定大于2
