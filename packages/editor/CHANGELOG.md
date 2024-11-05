@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.8
+
+### Patch Changes
+
+- 85c2579: 278 bug选中区域同时选中了有序无序列表与表格单元格时进行删除操作后报错
+- Updated dependencies [85c2579]
+  - @wangeditor-next/table-module@1.6.19
+  - @wangeditor-next/core@1.7.19
+  - @wangeditor-next/basic-modules@1.5.18
+  - @wangeditor-next/code-highlight@1.3.16
+  - @wangeditor-next/list-module@1.1.25
+  - @wangeditor-next/upload-image-module@1.1.21
+  - @wangeditor-next/video-module@1.3.24
+
 ## 5.6.7
 
 ### Patch Changes
