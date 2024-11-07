@@ -66,7 +66,10 @@ function handleBeforeInput(e: Event, textarea: TextArea, editor: IDomEditor) {
   if (selection && Range.isExpanded(selection) && type.startsWith('delete')) {
     const selectedElems = DomEditor.getSelectedElems(editor)
 
-    if (!(selectedElems.length > 0 && selectedElems[0].type === 'table')) {
+    const isTableSelected = selectedElems[0].type === 'table'
+    const isLastNotTableCell = selectedElems[selectedElems.length - 1].type !== 'table-cell'
+
+    if (!(isTableSelected && isLastNotTableCell)) {
       const direction = type.endsWith('Backward') ? 'backward' : 'forward'
 
       Editor.deleteFragment(editor, { direction })
