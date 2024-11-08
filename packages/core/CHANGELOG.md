@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.20
+
+### Patch Changes
+
+- 58022b2: 319 bug 表格单元格内多选内容删除事件没有执行
+
 ## 1.7.19
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @wangeditor-next/yjs-for-react
 
+## 0.1.20
+
+### Patch Changes
+
+- Updated dependencies [58022b2]
+  - @wangeditor-next/editor@5.6.9
+  - @wangeditor-next/core@1.7.20
+  - @wangeditor-next/yjs@0.1.18
+
 ## 0.1.19
 
 ### Patch Changes
