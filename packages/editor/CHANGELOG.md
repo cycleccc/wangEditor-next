@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.9
+
+### Patch Changes
+
+- 58022b2: 319 bug 表格单元格内多选内容删除事件没有执行
+- Updated dependencies [58022b2]
+  - @wangeditor-next/core@1.7.20
+  - @wangeditor-next/basic-modules@1.5.19
+  - @wangeditor-next/code-highlight@1.3.17
+  - @wangeditor-next/list-module@1.1.26
+  - @wangeditor-next/table-module@1.6.20
+  - @wangeditor-next/upload-image-module@1.1.22
+  - @wangeditor-next/video-module@1.3.25
+
 ## 5.6.8
 
 ### Patch Changes
