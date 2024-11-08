@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.9
+
+### Patch Changes
+
+- 5ac0278: 319 bug 表格单元格内多选内容删除事件没有执行
+- Updated dependencies [5ac0278]
+  - @wangeditor-next/table-module@1.6.20
+
 ## 5.6.8
 
 ### Patch Changes
