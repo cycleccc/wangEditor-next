@@ -61,15 +61,19 @@ function handleBeforeInput(e: Event, textarea: TextArea, editor: IDomEditor) {
     }
   }
 
-  // COMPAT: If the selection is expanded, even if the command seems like
-  // a delete forward/backward command it should delete the selection.
-  if (selection && Range.isExpanded(selection) && type.startsWith('delete')) {
+  if (selection && Range.isExpanded(selection)) {
     const selectedElems = DomEditor.getSelectedElems(editor)
 
     const isTableSelected = selectedElems[0].type === 'table'
     const isLastNotTableCell = selectedElems[selectedElems.length - 1].type !== 'table-cell'
 
-    if (!(isTableSelected && isLastNotTableCell)) {
+    // 如果选中的是开头表格，并且最后不是 table-cell ，则不处理，防止选区包含部分 table 时误删 table 单元格
+    if (isTableSelected && isLastNotTableCell) { return }
+
+    // COMPAT: If the selection is expanded, even if the command seems like
+    // a delete forward/backward command it should delete the selection.
+    if (type.startsWith('delete')) {
+
       const direction = type.endsWith('Backward') ? 'backward' : 'forward'
 
       Editor.deleteFragment(editor, { direction })
