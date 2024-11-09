@@ -49,13 +49,23 @@ function parseElemHtml($elem: Dom7Array, editor: IDomEditor): Descendant | Desce
         if (isDOMElement(childNode)) {
           const elem = parseElemHtml($childElem, editor)
 
-          return Array.isArray(elem) ? [...descendants, ...elem] : [...descendants, elem]
-        }
-        const text = isDOMText(childNode) ? { text: (childNode as Text).textContent || '' } : parseTextElemHtml($childElem, editor)
+          if (Array.isArray(elem)) {
+            descendants.push(...elem)
+          } else {
+            descendants.push(elem)
+          }
+        } else {
+          const text = isDOMText(childNode)
+            ? { text: (childNode as Text).textContent || '' }
+            : parseTextElemHtml($childElem, editor)
 
-        return [...descendants, text]
+          descendants.push(text)
+        }
+
+        return descendants
       }, [] as Descendant[])
     }
+
     return parseTextElemHtml($elem, editor)
 
   }
