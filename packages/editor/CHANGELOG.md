@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.10
+
+### Patch Changes
+
+- 258e365: fix: show microsoft world img
+- Updated dependencies [258e365]
+  - @wangeditor-next/core@1.7.21
+  - @wangeditor-next/basic-modules@1.5.20
+  - @wangeditor-next/code-highlight@1.3.18
+  - @wangeditor-next/list-module@1.1.27
+  - @wangeditor-next/table-module@1.6.21
+  - @wangeditor-next/upload-image-module@1.1.23
+  - @wangeditor-next/video-module@1.3.26
+
 ## 5.6.9
 
 ### Patch Changes
