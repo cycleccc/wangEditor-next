@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cycleccc/wangEditor.git"
+    "url": "git+https://github.com/cycleccc/wangEditor-next.git"
   },
   "scripts": {
     "test": "jest",
