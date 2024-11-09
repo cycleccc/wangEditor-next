@@ -8,7 +8,9 @@ import { Descendant } from 'slate'
 
 import { IDomEditor } from '../editor/interface'
 import { PRE_PARSE_HTML_CONF_LIST, TEXT_TAGS } from '../index'
-import { getTagName, isDOMText } from '../utils/dom'
+import {
+  getTagName, isDOMComment, isDOMElement, isDOMText,
+} from '../utils/dom'
 import parseCommonElemHtml from './parse-common-elem-html'
 import parseTextElemHtml from './parse-text-elem-html'
 
@@ -38,12 +40,21 @@ function parseElemHtml($elem: Dom7Array, editor: IDomEditor): Descendant | Desce
     if ($elem[0].childNodes.length > 1) {
       const childNodes = $elem[0].childNodes
 
-      return Array.from(childNodes).map(child => {
+      return Array.from(childNodes).reduce((descendants, child) => {
         const $childElem = $(child)
+        const childNode = $childElem[0]
 
-        if (isDOMText($childElem[0])) { return { text: $childElem[0].textContent || '' } }
-        return parseTextElemHtml($childElem, editor)
-      })
+        if (isDOMComment(childNode)) { return descendants } // 过滤掉注释节点
+
+        if (isDOMElement(childNode)) {
+          const elem = parseElemHtml($childElem, editor)
+
+          return Array.isArray(elem) ? [...descendants, ...elem] : [...descendants, elem]
+        }
+        const text = isDOMText(childNode) ? { text: (childNode as Text).textContent || '' } : parseTextElemHtml($childElem, editor)
+
+        return [...descendants, text]
+      }, [] as Descendant[])
     }
     return parseTextElemHtml($elem, editor)
 
