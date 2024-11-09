@@ -3526,6 +3526,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@wangeditor-next/plugin-formula@workspace:packages/plugin-formula":
+  version: 0.0.0-use.local
+  resolution: "@wangeditor-next/plugin-formula@workspace:packages/plugin-formula"
+  dependencies:
+    dom7: "npm:^3.0.0"
+    katex: "npm:^0.15.2"
+    nanoid: "npm:^3.2.0"
+    rollup-plugin-string: "npm:^3.0.0"
+  peerDependencies:
+    "@wangeditor-next/editor": 5.6.10
+    katex: ^0.15.2
+    snabbdom: ^3.1.0
+  languageName: unknown
+  linkType: soft
+
 "@wangeditor-next/plugin-markdown@workspace:packages/plugin-markdown":
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/plugin-markdown@workspace:packages/plugin-markdown"
@@ -4682,6 +4697,13 @@ __metadata:
   version: 7.2.0
   resolution: "commander@npm:7.2.0"
   checksum: 10c0/8d690ff13b0356df7e0ebbe6c59b4712f754f4b724d4f473d3cc5b3fdcf978e3a5dc3078717858a2ceb50b0f84d0660a7f22a96cdc50fb877d0c9bb31593d23a
+  languageName: node
+  linkType: hard
+
+"commander@npm:^8.0.0":
+  version: 8.3.0
+  resolution: "commander@npm:8.3.0"
+  checksum: 10c0/8b043bb8322ea1c39664a1598a95e0495bfe4ca2fad0d84a92d7d1d8d213e2a155b441d2470c8e08de7c4a28cf2bc6e169211c49e1b21d9f7edc6ae4d9356060
   languageName: node
   linkType: hard
 
@@ -8432,6 +8454,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"katex@npm:^0.15.2":
+  version: 0.15.6
+  resolution: "katex@npm:0.15.6"
+  dependencies:
+    commander: "npm:^8.0.0"
+  bin:
+    katex: cli.js
+  checksum: 10c0/722db3b0442138f76d76017a384acd45ae0cbe67d730f20cbbfed0bf519c3640aa5352ba19e813743a63aead6065082bd225d21c04a16f58abb1d52684f95333
+  languageName: node
+  linkType: hard
+
 "klaw-sync@npm:^6.0.0":
   version: 6.0.0
   resolution: "klaw-sync@npm:6.0.0"
@@ -9247,7 +9280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.7":
+"nanoid@npm:^3.2.0, nanoid@npm:^3.3.7":
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
   bin:
@@ -11253,6 +11286,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-string@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rollup-plugin-string@npm:3.0.0"
+  dependencies:
+    rollup-pluginutils: "npm:^2.4.1"
+  checksum: 10c0/83bbc2230d5271bc014739d52320b66cd4071fc4f7181369533809e4a3f0269b6cb4873caa96426396b36f694023a9f68f5de7a94254e1f2764ca6bacff61995
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-typescript2@npm:^0.36.0":
   version: 0.36.0
   resolution: "rollup-plugin-typescript2@npm:0.36.0"
@@ -11288,7 +11330,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-pluginutils@npm:^2.8.2":
+"rollup-pluginutils@npm:^2.4.1, rollup-pluginutils@npm:^2.8.2":
   version: 2.8.2
   resolution: "rollup-pluginutils@npm:2.8.2"
   dependencies:
