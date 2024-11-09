@@ -3665,7 +3665,6 @@ __metadata:
     use-sync-external-store: "npm:^1.2.0"
     y-protocols: "npm:^1.0.5"
   peerDependencies:
-    "@wangeditor-next/core": 1.7.21
     "@wangeditor-next/editor": 5.6.10
     "@wangeditor-next/yjs": ^0.1.19
     react: ">=16.8.0"
