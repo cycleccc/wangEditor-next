@@ -3531,12 +3531,12 @@ __metadata:
   resolution: "@wangeditor-next/plugin-formula@workspace:packages/plugin-formula"
   dependencies:
     dom7: "npm:^3.0.0"
-    katex: "npm:^0.15.2"
+    katex: "npm:^0.16.0"
     nanoid: "npm:^3.2.0"
     rollup-plugin-string: "npm:^3.0.0"
   peerDependencies:
     "@wangeditor-next/editor": 5.6.10
-    katex: ^0.15.2
+    katex: ^0.16.0
     snabbdom: ^3.1.0
   languageName: unknown
   linkType: soft
@@ -4700,7 +4700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^8.0.0":
+"commander@npm:^8.3.0":
   version: 8.3.0
   resolution: "commander@npm:8.3.0"
   checksum: 10c0/8b043bb8322ea1c39664a1598a95e0495bfe4ca2fad0d84a92d7d1d8d213e2a155b441d2470c8e08de7c4a28cf2bc6e169211c49e1b21d9f7edc6ae4d9356060
@@ -8454,14 +8454,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.15.2":
-  version: 0.15.6
-  resolution: "katex@npm:0.15.6"
+"katex@npm:^0.16.0":
+  version: 0.16.11
+  resolution: "katex@npm:0.16.11"
   dependencies:
-    commander: "npm:^8.0.0"
+    commander: "npm:^8.3.0"
   bin:
     katex: cli.js
-  checksum: 10c0/722db3b0442138f76d76017a384acd45ae0cbe67d730f20cbbfed0bf519c3640aa5352ba19e813743a63aead6065082bd225d21c04a16f58abb1d52684f95333
+  checksum: 10c0/be405d45d7228bbfeecd491e0f74d9da0066b5e7b457e3f1dc833de5b63f9e98e40d2ef6b46e1cbe577490a43338c043851da032c45aeec0cc03ad431ef6fd83
   languageName: node
   linkType: hard
 

@@ -41,12 +41,12 @@
     "url": "https://github.com/cycleccc/wangEditor/issues"
   },
   "devDependencies": {
-    "katex": "^0.15.2",
+    "katex": "^0.16.0",
     "rollup-plugin-string": "^3.0.0"
   },
   "peerDependencies": {
     "@wangeditor-next/editor": "5.6.10",
-    "katex": "^0.15.2",
+    "katex": "^0.16.0",
     "snabbdom": "^3.1.0"
   },
   "dependencies": {
