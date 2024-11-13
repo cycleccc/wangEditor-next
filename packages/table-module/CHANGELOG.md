@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.23
+
+### Patch Changes
+
+- 51f9221: fix(table): fill in the hidden table cell
+
 ## 1.6.22
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.11
+
+### Patch Changes
+
+- 51f9221: fix(table): fill in the hidden table cell
+- Updated dependencies [51f9221]
+  - @wangeditor-next/table-module@1.6.23
+
 ## 5.6.10
 
 ### Patch Changes
