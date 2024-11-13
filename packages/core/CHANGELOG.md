@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.22
+
+### Patch Changes
+
+- fa8b969: fix(table): compatible with table style nesting
+
 ## 1.7.21
 
 ### Patch Changes
