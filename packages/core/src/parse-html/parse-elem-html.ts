@@ -12,7 +12,28 @@ import {
   getTagName, isDOMComment, isDOMElement, isDOMText,
 } from '../utils/dom'
 import parseCommonElemHtml from './parse-common-elem-html'
-import parseTextElemHtml from './parse-text-elem-html'
+import parseTextElemHtml, { parseTextElemHtmlToStyle } from './parse-text-elem-html'
+
+function parseChildNode($childElem, parentStyle, editor) {
+  const childNode = $childElem[0]
+
+  if (isDOMElement(childNode)) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    const elem = parseElemHtml($childElem, editor)
+
+    return Array.isArray(elem)
+      ? elem.map(v => ({ ...parentStyle, ...v }))
+      : [{ ...parentStyle, ...elem }]
+  }
+
+  if (isDOMComment(childNode)) { return null } // 过滤掉注释节点
+
+  const text = isDOMText(childNode)
+    ? { text: childNode.textContent || '' }
+    : parseTextElemHtml($childElem, editor)
+
+  return [{ ...parentStyle, ...text }]
+}
 
 /**
  * 处理 DOM Elem html
@@ -39,31 +60,14 @@ function parseElemHtml($elem: Dom7Array, editor: IDomEditor): Descendant | Desce
     }
     if ($elem[0].childNodes.length > 1) {
       const childNodes = $elem[0].childNodes
+      const parentStyle = parseTextElemHtmlToStyle($($elem[0]), editor)
 
-      return Array.from(childNodes).reduce((descendants, child) => {
-        const $childElem = $(child)
-        const childNode = $childElem[0]
+      return Array.from(childNodes).flatMap(child => {
+        const parsed = parseChildNode($(child), parentStyle, editor)
 
-        if (isDOMComment(childNode)) { return descendants } // 过滤掉注释节点
+        return parsed || []
+      })
 
-        if (isDOMElement(childNode)) {
-          const elem = parseElemHtml($childElem, editor)
-
-          if (Array.isArray(elem)) {
-            descendants.push(...elem)
-          } else {
-            descendants.push(elem)
-          }
-        } else {
-          const text = isDOMText(childNode)
-            ? { text: (childNode as Text).textContent || '' }
-            : parseTextElemHtml($childElem, editor)
-
-          descendants.push(text)
-        }
-
-        return descendants
-      }, [] as Descendant[])
     }
 
     return parseTextElemHtml($elem, editor)
