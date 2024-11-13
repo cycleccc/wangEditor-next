@@ -55,10 +55,45 @@ function parseRowHtml(
   children: Descendant[],
   _editor: IDomEditor,
 ): TableRowElement {
+  const tableCellChildren: TableCellElement[] = []
+
+  for (let i = 0; i < children.length; i += 1) {
+    const child = children[i]
+
+    // 确保是 table-cell 类型
+    if (DomEditor.getNodeType(child) === 'table-cell') {
+      // @ts-ignore
+      const colSpan = child.colSpan || 1
+
+      tableCellChildren.push(child as TableCellElement) // 先添加当前单元格
+
+      // 如果 colSpan > 1，检查是否存在足够的隐藏 table-cell
+      for (let j = 1; j < colSpan; j += 1) {
+        const nextChild = children[i + j]
+
+        if (
+          nextChild
+          && DomEditor.getNodeType(nextChild) === 'table-cell'
+          // @ts-ignore
+          && nextChild.style?.display === 'none'
+        ) {
+          // 已有隐藏的 table-cell，无需补充
+          continue
+        } else {
+          // 补齐缺少的隐藏 table-cell
+          tableCellChildren.push({
+            type: 'table-cell',
+            children: [{ text: '' }],
+            hidden: true,
+          })
+        }
+      }
+    }
+  }
+
   return {
     type: 'table-row',
-    // @ts-ignore
-    children: children.filter(child => DomEditor.getNodeType(child) === 'table-cell'),
+    children: tableCellChildren,
   }
 }
 
@@ -101,11 +136,11 @@ function parseTableHtml(
     const columnWidths: number[] = []
 
     Array.from(tdList).forEach(td => {
-      const colspan = parseInt($(td).attr('colspan') || '1', 10) // 获取 colspan，默认为 1
+      const colSpan = parseInt($(td).attr('colSpan') || '1', 10) // 获取 colSpan，默认为 1
       const width = parseInt(getStyleValue($(td), 'width') || '180', 10) // 获取 width，默认为 180
 
-      // 根据 colspan 的值来填充 columnWidths 数组
-      for (let i = 0; i < colspan; i += 1) {
+      // 根据 colSpan 的值来填充 columnWidths 数组
+      for (let i = 0; i < colSpan; i += 1) {
         columnWidths.push(width)
       }
     })
