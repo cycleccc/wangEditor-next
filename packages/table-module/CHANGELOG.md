@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.6.24
+
+### Patch Changes
+
+- 11135d9: - Fix incorrect nesting of tables within paragraph tags
+  - Improve table cell interaction handling
+  - Prevent node splitting on new lines
+  - Handle deletion without affecting table structure
+  - Enhance tab navigation between cells
+  - Maintain document structure with proper paragraph placement
+
 ## 1.6.23
 
 ### Patch Changes
