@@ -1,5 +1,18 @@
 # Change Log
 
+## 5.6.12
+
+### Patch Changes
+
+- 11135d9: - Fix incorrect nesting of tables within paragraph tags
+  - Improve table cell interaction handling
+  - Prevent node splitting on new lines
+  - Handle deletion without affecting table structure
+  - Enhance tab navigation between cells
+  - Maintain document structure with proper paragraph placement
+- Updated dependencies [11135d9]
+  - @wangeditor-next/table-module@1.6.24
+
 ## 5.6.11
 
 ### Patch Changes
