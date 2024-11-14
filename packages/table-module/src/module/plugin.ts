@@ -194,12 +194,17 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     if (selection) {
       const before = Editor.before(newEditor, selection) // 前一个 location
+      const tableCell = Editor.above(newEditor, {
+        at: selection,
+        match: n => DomEditor.checkNodeType(n, 'table-cell'),
+      })
 
       if (before) {
         const isTableOnBeforeLocation = isTableLocation(newEditor, before) // before 是否是 table
         // 如果前面是 table, 当前是 paragraph ，则不执行删除。否则会删除 table 最后一个 cell
+        // 兼容了 table 嵌套 p标签元素 selection数组五层的情况 - issues/342
 
-        if (isTableOnBeforeLocation && DomEditor.getSelectedNodeByType(newEditor, 'paragraph')) {
+        if (!tableCell && isTableOnBeforeLocation && DomEditor.getSelectedNodeByType(newEditor, 'paragraph')) {
           return
         }
       }
