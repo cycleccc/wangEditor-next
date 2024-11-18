@@ -1,5 +1,11 @@
 # @wangeditor-next/plugin-float-image
 
+## 0.1.10
+
+### Patch Changes
+
+- 08fbf75: upgrade stable version
+
 ## 0.1.9
 
 ### Patch Changes

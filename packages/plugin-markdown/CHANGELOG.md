@@ -1,5 +1,11 @@
 # @wangeditor-next/plugin-markdown
 
+## 0.0.5
+
+### Patch Changes
+
+- 08fbf75: upgrade stable version
+
 ## 0.0.4
 
 ### Patch Changes
