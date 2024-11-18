@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.13
+
+### Patch Changes
+
+- 9fb698d: perf: reduce re-rendering
+- Updated dependencies [9fb698d]
+  - @wangeditor-next/core@1.7.23
+  - @wangeditor-next/basic-modules@1.5.22
+  - @wangeditor-next/code-highlight@1.3.20
+  - @wangeditor-next/list-module@1.1.29
+  - @wangeditor-next/table-module@1.6.25
+  - @wangeditor-next/upload-image-module@1.1.25
+  - @wangeditor-next/video-module@1.3.28
+
 ## 5.6.12
 
 ### Patch Changes

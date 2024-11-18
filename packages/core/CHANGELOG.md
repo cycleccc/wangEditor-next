@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.23
+
+### Patch Changes
+
+- 9fb698d: perf: reduce re-rendering
+
 ## 1.7.22
 
 ### Patch Changes
