@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.14
+
+### Patch Changes
+
+- af6b10e: revert diff by selection
+- Updated dependencies [af6b10e]
+  - @wangeditor-next/core@1.7.24
+  - @wangeditor-next/basic-modules@1.5.23
+  - @wangeditor-next/code-highlight@1.3.21
+  - @wangeditor-next/list-module@1.1.30
+  - @wangeditor-next/table-module@1.6.26
+  - @wangeditor-next/upload-image-module@1.1.26
+  - @wangeditor-next/video-module@1.3.29
+
 ## 5.6.13
 
 ### Patch Changes
