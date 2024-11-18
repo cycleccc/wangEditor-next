@@ -1,0 +1,53 @@
+{
+  "name": "@wangeditor-next/editor-for-react",
+  "version": "1.0.8",
+  "description": "wangEditor next editor for react",
+  "author": "cycleccc <2991205548@qq.com>",
+  "type": "module",
+  "homepage": "https://github.com/cycleccc/wangEditor-next#readme",
+  "license": "MIT",
+  "types": "dist/editor-for-react/src/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/editor-for-react/src/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./dist/css/style.css": "./dist/css/style.css"
+  },
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cycleccc/wangEditor-next.git"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js",
+    "dev-watch": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
+    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
+    "dev-size-stats": "cross-env NODE_ENV=development:size_stats rollup -c rollup.config.js",
+    "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
+  },
+  "bugs": {
+    "url": "https://github.com/cycleccc/wangEditor-next/issues"
+  },
+  "devDependencies": {
+    "@wangeditor-next/editor": "^5.6.12",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "peerDependencies": {
+    "@wangeditor-next/editor": ">=5.6.12",
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
+  }
+}
