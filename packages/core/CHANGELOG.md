@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.24
+
+### Patch Changes
+
+- af6b10e: revert diff by selection
+
 ## 1.7.23
 
 ### Patch Changes
