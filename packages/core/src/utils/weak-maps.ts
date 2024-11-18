@@ -4,20 +4,17 @@
  */
 
 import { Emitter } from 'event-emitter'
-import {
-  Ancestor, Editor, Node, Path, Range,
-} from 'slate'
 import { VNode } from 'snabbdom'
-
-import { IEditorConfig } from '../config/interface'
+import { Node, Ancestor, Editor, Path, Range } from 'slate'
 import { IDomEditor } from '../editor/interface'
-import HoverBar from '../menus/bar/HoverBar'
-import Toolbar from '../menus/bar/Toolbar'
-import { IBarItem } from '../menus/bar-item/index'
-import PanelAndModal from '../menus/panel-and-modal/BaseClass'
 import TextArea from '../text-area/TextArea'
-import { PatchFn } from '../utils/vdom'
+import Toolbar from '../menus/bar/Toolbar'
+import HoverBar from '../menus/bar/HoverBar'
+import { IBarItem } from '../menus/bar-item/index'
 import { Key } from './key'
+import { PatchFn } from '../utils/vdom'
+import { IEditorConfig } from '../config/interface'
+import PanelAndModal from '../menus/panel-and-modal/BaseClass'
 
 // textarea - editor
 export const EDITOR_TO_TEXTAREA = new WeakMap<IDomEditor, TextArea>()
@@ -77,7 +74,6 @@ export const CHANGING_NODE_PATH: WeakMap<Editor, Path> = new WeakMap()
 
 // 保存 editor -> selection ，用于还原 editor 选区
 export const EDITOR_TO_SELECTION: WeakMap<Editor, Range> = new WeakMap()
-export const TEXTAREA_TO_SELECTION: WeakMap<TextArea, Range> = new WeakMap()
 
 // editor -> eventEmitter 自定义事件
 export const EDITOR_TO_EMITTER: WeakMap<Editor, Emitter> = new WeakMap()
