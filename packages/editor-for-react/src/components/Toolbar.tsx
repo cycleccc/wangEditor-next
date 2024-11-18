@@ -25,13 +25,19 @@ function ToolbarComponent(props: IProps) {
     if (editor == null) { return }
     if (ref.current?.getAttribute('data-w-e-toolbar')) { return }
 
-    wangEditor.createToolbar({
+    const toolbar = wangEditor.createToolbar({
       editor,
       selector: ref.current,
       config: defaultConfig,
       mode,
     })
-  }, [editor])
+
+    return () => {
+      if (toolbar) {
+        toolbar.destroy()
+      }
+    }
+  }, [editor, defaultConfig, mode])
 
   return <div style={style} ref={ref} className={className}></div>
 }

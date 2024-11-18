@@ -1689,7 +1689,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.16.0":
+"@babel/preset-react@npm:^7.24.0":
   version: 7.25.9
   resolution: "@babel/preset-react@npm:7.25.9"
   dependencies:
@@ -3675,8 +3675,6 @@ __metadata:
   resolution: "@wangeditor-next/editor-for-react@workspace:packages/editor-for-react"
   dependencies:
     "@wangeditor-next/editor": "npm:^5.6.12"
-    dom7: "npm:^3.0.0"
-    nanoid: "npm:^3.2.0"
     react: "npm:^17.0.2"
     react-dom: "npm:^17.0.2"
   peerDependencies:
@@ -3818,7 +3816,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.11.0"
     "@babel/plugin-transform-runtime": "npm:^7.14.5"
     "@babel/preset-env": "npm:^7.14.5"
-    "@babel/preset-react": "npm:^7.16.0"
+    "@babel/preset-react": "npm:^7.24.0"
     "@babel/preset-typescript": "npm:^7.14.5"
     "@babel/runtime": "npm:^7.14.6"
     "@babel/runtime-corejs3": "npm:^7.14.7"

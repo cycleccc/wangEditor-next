@@ -32,22 +32,22 @@ function EditorComponent(props: Partial<IProps>) {
   const [editor, setEditor] = useState<ICustomDomEditor | null>(null)
   const [curValue, setCurValue] = useState('')
 
-  const handleCreated = (editor: IDomEditor) => {
+  const handleCreated = (createdEditor: IDomEditor) => {
     // 组件属性 onCreated
-    if (onCreated) { onCreated(editor) }
+    if (onCreated) { onCreated(createdEditor) }
 
     // 编辑器 配置 onCreated
     const { onCreated: onCreatedFromConfig } = defaultConfig
 
-    if (onCreatedFromConfig) { onCreatedFromConfig(editor) }
+    if (onCreatedFromConfig) { onCreatedFromConfig(createdEditor) }
   }
 
-  const handleDestroyed = (editor: IDomEditor) => {
+  const handleDestroyed = (destroyedEditor: IDomEditor) => {
     const { onDestroyed } = defaultConfig
 
     setEditor(null)
     if (onDestroyed) {
-      onDestroyed(editor)
+      onDestroyed(destroyedEditor)
     }
   }
 
@@ -94,6 +94,7 @@ function EditorComponent(props: Partial<IProps>) {
       config: {
         ...defaultConfig,
         onCreated: handleCreated,
+        // eslint-disable-next-line no-underscore-dangle
         onChange: (e: IDomEditor) => newEditor?.__react_on_change?.(e),
         onDestroyed: handleDestroyed,
       },
