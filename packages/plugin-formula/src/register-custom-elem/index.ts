@@ -9,8 +9,6 @@ import katex from 'katex'
 // @ts-ignore
 import katexStyleContent from 'katex/dist/katex.css'
 
-console.log(katexStyleContent) // CSS 内容作为字符串
-
 class WangEditorFormulaCard extends HTMLElement {
   private span: HTMLElement
 
