@@ -1,5 +1,12 @@
 # @wangeditor-next/plugin-formula
 
+## 0.0.10
+
+### Patch Changes
+
+- e40c0c9: chore: delete static css import
+- e40c0c9: chore(plugin-formula): add esm build plugins
+
 ## 0.0.8
 
 ### Patch Changes
