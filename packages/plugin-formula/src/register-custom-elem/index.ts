@@ -6,8 +6,6 @@
 import './native-shim'
 
 import katex from 'katex'
-// @ts-ignore
-import katexStyleContent from 'katex/dist/katex.css'
 
 class WangEditorFormulaCard extends HTMLElement {
   private span: HTMLElement
@@ -22,10 +20,12 @@ class WangEditorFormulaCard extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' })
     const document = shadow.ownerDocument
 
-    const style = document.createElement('style')
+    // 将样式通过 link 标签引入
+    const styleLink = document.createElement('link')
 
-    style.innerHTML = katexStyleContent // 加载 css 文本
-    shadow.appendChild(style)
+    styleLink.rel = 'stylesheet'
+    styleLink.href = 'https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css' // 或直接引入本地路径
+    shadow.appendChild(styleLink)
 
     const span = document.createElement('span')
 

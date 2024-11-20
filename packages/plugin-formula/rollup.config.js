@@ -1,5 +1,4 @@
 import { createRollupConfig } from '@wangeditor-next-shared/rollup-config'
-import { string } from 'rollup-plugin-string'
 
 import pkg from './package.json' assert { type: 'json' }
 
@@ -14,11 +13,6 @@ const esmConf = createRollupConfig({
     format: 'esm',
     name,
   },
-  plugins: [
-    string({
-      include: '**/*.css',
-    }),
-  ],
 })
 
 configList.push(esmConf)
@@ -30,11 +24,6 @@ const umdConf = createRollupConfig({
     format: 'umd',
     name,
   },
-  plugins: [
-    string({
-      include: '**/*.css',
-    }),
-  ],
 })
 
 configList.push(umdConf)
