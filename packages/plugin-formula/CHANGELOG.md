@@ -1,5 +1,11 @@
 # @wangeditor-next/plugin-formula
 
+## 0.0.8
+
+### Patch Changes
+
+- 7b22f2d: chore(plugin-formula): add esm build plugins
+
 ## 0.0.7
 
 ### Patch Changes
