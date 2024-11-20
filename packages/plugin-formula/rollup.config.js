@@ -13,6 +13,11 @@ const esmConf = createRollupConfig({
     format: 'esm',
     name,
   },
+  plugins: [
+    string({
+      include: '**/*.css',
+    }),
+  ],
 })
 
 configList.push(esmConf)
