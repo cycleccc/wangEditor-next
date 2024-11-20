@@ -24,7 +24,9 @@ class WangEditorFormulaCard extends HTMLElement {
     const styleLink = document.createElement('link')
 
     styleLink.rel = 'stylesheet'
-    styleLink.href = 'https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css' // 或直接引入本地路径
+    styleLink.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'
+    styleLink.integrity = 'sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV'
+    styleLink.crossOrigin = 'anonymous'
     shadow.appendChild(styleLink)
 
     const span = document.createElement('span')
