@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.25
+
+### Patch Changes
+
+- 7b80f5d: fix: revert default font config
+
 ## 1.7.24
 
 ### Patch Changes

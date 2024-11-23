@@ -1,5 +1,13 @@
 # @wangeditor-next/plugin-markdown
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [5bbff78]
+- Updated dependencies [7b80f5d]
+  - @wangeditor-next/editor@5.6.15
+
 ## 0.0.6
 
 ### Patch Changes
