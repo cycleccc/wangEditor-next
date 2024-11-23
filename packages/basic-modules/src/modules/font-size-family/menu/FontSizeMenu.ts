@@ -51,11 +51,17 @@ class FontSizeMenu extends BaseMenu {
         flag = true
         opt.selected = true
       } else {
-        delete opt.selected
+        opt.selected = undefined
       }
     })
     // @ts-ignore
-    if (!flag) { options.push({ text: curValue, value: curValue, selected: true }) }
+    if (!flag && typeof curValue === 'string') {
+      options.push({
+        text: curValue,
+        value: curValue,
+        selected: true,
+      })
+    }
 
     return options
   }

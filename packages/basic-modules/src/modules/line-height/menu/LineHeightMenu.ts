@@ -47,7 +47,7 @@ class LineHeightMenu implements ISelectMenu {
       if (opt.value === curValue) {
         opt.selected = true
       } else {
-        delete opt.selected
+        opt.selected = undefined
       }
     })
 
