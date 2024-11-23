@@ -84,7 +84,7 @@ export default function (option: Partial<ICreateOption>) {
     editor = plugin(editor)
   })
 
-  editor.children = initializeContent(editor, { html, content })
+  editor = initializeContent(editor, { html, content })
   // 兼容了更多格式，normalizeContent 以不在适合于初始化 content
   // Content normalization is disabled to support more formats.
   // Note: This may result in non-normalized content (e.g., adjacent text nodes won't be merged).

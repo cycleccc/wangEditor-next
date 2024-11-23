@@ -104,15 +104,19 @@ export function htmlToContent(editor: IDomEditor, html: string = ''): Descendant
 /**
  * 初始化内容（要在 config 和 plugins 后面）
  */
-export function initializeContent(editor: IDomEditor, options: { html?: string, content?: Descendant[] }) {
-  // 传入 html ，转换为 JSON content
-  if (options.html != null) {
-    return htmlToContent(editor, options.html)
+export function initializeContent(editor: IDomEditor, options: { html?: string, content?: Descendant[] }) : IDomEditor {
+  const { html, content } = options
+  // 初始化内容（要在 config 和 plugins 后面）
+
+  if (html != null) {
+    // 传入 html ，转换为 JSON content
+    editor.children = htmlToContent(editor, html)
   }
-  // 传入 JSON content
-  if (options.content?.length) {
-    return options.content
+  if (content && content.length) {
+    editor.children = content // 传入 JSON content
   }
-  // 默认内容
-  return genDefaultContent()
+  if (editor.children.length === 0) {
+    editor.children = genDefaultContent() // 默认内容
+  }
+  return editor
 }
