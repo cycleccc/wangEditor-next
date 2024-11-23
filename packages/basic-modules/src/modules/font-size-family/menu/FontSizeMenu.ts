@@ -44,14 +44,24 @@ class FontSizeMenu extends BaseMenu {
 
     // 设置 selected
     const curValue = this.getValue(editor)
+    let flag = false
 
     options.forEach(opt => {
       if (opt.value === curValue) {
+        flag = true
         opt.selected = true
       } else {
-        delete opt.selected
+        opt.selected = undefined
       }
     })
+    // @ts-ignore
+    if (!flag && typeof curValue === 'string') {
+      options.push({
+        text: curValue,
+        value: curValue,
+        selected: true,
+      })
+    }
 
     return options
   }
