@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.24
+
+### Patch Changes
+
+- 5bbff78: fix: add more font style
+- Updated dependencies [7b80f5d]
+  - @wangeditor-next/core@1.7.25
+
 ## 1.5.23
 
 ### Patch Changes

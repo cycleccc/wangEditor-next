@@ -1,5 +1,21 @@
 # Change Log
 
+## 5.6.15
+
+### Patch Changes
+
+- 5bbff78: fix: add more font style
+- 7b80f5d: fix: revert default font config
+- Updated dependencies [5bbff78]
+- Updated dependencies [7b80f5d]
+  - @wangeditor-next/basic-modules@1.5.24
+  - @wangeditor-next/core@1.7.25
+  - @wangeditor-next/upload-image-module@1.1.27
+  - @wangeditor-next/code-highlight@1.3.22
+  - @wangeditor-next/list-module@1.1.31
+  - @wangeditor-next/table-module@1.6.27
+  - @wangeditor-next/video-module@1.3.30
+
 ## 5.6.14
 
 ### Patch Changes
