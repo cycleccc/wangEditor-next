@@ -104,7 +104,7 @@ export function htmlToContent(editor: IDomEditor, html: string = ''): Descendant
 /**
  * 初始化内容（要在 config 和 plugins 后面）
  */
-export function initializeContent(editor: IDomEditor, options: { html?: string, content?: Descendant[] }) : IDomEditor {
+export function initializeContent(editor: IDomEditor, options: { html?: string, content?: Descendant[] }) {
   const { html, content } = options
   // 初始化内容（要在 config 和 plugins 后面）
 
@@ -118,5 +118,4 @@ export function initializeContent(editor: IDomEditor, options: { html?: string, 
   if (editor.children.length === 0) {
     editor.children = genDefaultContent() // 默认内容
   }
-  return editor
 }
