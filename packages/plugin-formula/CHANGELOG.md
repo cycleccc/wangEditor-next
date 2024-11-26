@@ -1,5 +1,11 @@
 # @wangeditor-next/plugin-formula
 
+## 0.1.0
+
+### Minor Changes
+
+- 5b24c79: fix(formula): add mathml output config
+
 ## 0.0.11
 
 ### Patch Changes
