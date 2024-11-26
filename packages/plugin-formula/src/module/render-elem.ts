@@ -26,6 +26,7 @@ function renderFormula(elem: SlateElement, children: VNode[] | null, editor: IDo
   const containerVnode = h(
     'div',
     {
+      className: 'w-e-textarea-formula-container',
       props: {
         contentEditable: false, // 不可编辑
       },
