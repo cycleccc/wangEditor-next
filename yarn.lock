@@ -3654,7 +3654,7 @@ __metadata:
     is-url: "npm:^1.2.4"
   peerDependencies:
     "@wangeditor-next/core": 1.7.25
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     lodash.throttle: ^4.1.1
     nanoid: ^5.0.0
     slate: ^0.72.0
@@ -3670,7 +3670,7 @@ __metadata:
     prismjs: "npm:^1.23.0"
   peerDependencies:
     "@wangeditor-next/core": 1.7.25
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
   languageName: unknown
@@ -3690,7 +3690,7 @@ __metadata:
   peerDependencies:
     "@uppy/core": ^2.1.1
     "@uppy/xhr-upload": ^2.0.3
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     is-hotkey: ^0.2.0
     lodash.camelcase: ^4.3.0
     lodash.clonedeep: ^4.5.0
@@ -3732,7 +3732,7 @@ __metadata:
     "@wangeditor-next/table-module": "npm:~1.6.27"
     "@wangeditor-next/upload-image-module": "npm:~1.1.27"
     "@wangeditor-next/video-module": "npm:~1.3.30"
-    dom7: "npm:^3.0.0"
+    dom7: "npm:^4.0.0"
     is-hotkey: "npm:^0.2.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.clonedeep: "npm:^4.5.0"
@@ -3752,7 +3752,7 @@ __metadata:
   resolution: "@wangeditor-next/list-module@workspace:packages/list-module"
   peerDependencies:
     "@wangeditor-next/core": 1.7.25
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
   languageName: unknown
@@ -3763,7 +3763,7 @@ __metadata:
   resolution: "@wangeditor-next/plugin-float-image@workspace:packages/plugin-float-image"
   peerDependencies:
     "@wangeditor-next/editor": 5.6.15
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
   languageName: unknown
@@ -3773,7 +3773,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/plugin-formula@workspace:packages/plugin-formula"
   dependencies:
-    dom7: "npm:^3.0.0"
+    dom7: "npm:^4.0.0"
     katex: "npm:^0.16.0"
     nanoid: "npm:^3.2.0"
   peerDependencies:
@@ -3788,7 +3788,7 @@ __metadata:
   resolution: "@wangeditor-next/plugin-link-card@workspace:packages/plugin-link-card"
   peerDependencies:
     "@wangeditor-next/editor": 5.6.15
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
   languageName: unknown
@@ -3799,7 +3799,7 @@ __metadata:
   resolution: "@wangeditor-next/plugin-markdown@workspace:packages/plugin-markdown"
   peerDependencies:
     "@wangeditor-next/editor": 5.6.15
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
   languageName: unknown
@@ -3810,7 +3810,7 @@ __metadata:
   resolution: "@wangeditor-next/table-module@workspace:packages/table-module"
   peerDependencies:
     "@wangeditor-next/core": 1.7.25
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     lodash.debounce: ^4.0.8
     lodash.isequal: ^4.5.0
     lodash.throttle: ^4.1.1
@@ -3828,7 +3828,7 @@ __metadata:
     "@uppy/xhr-upload": ^2.0.3
     "@wangeditor-next/basic-modules": 1.5.24
     "@wangeditor-next/core": 1.7.25
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     lodash.foreach: ^4.5.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
@@ -3842,7 +3842,7 @@ __metadata:
     "@uppy/core": ^2.1.4
     "@uppy/xhr-upload": ^2.0.7
     "@wangeditor-next/core": 1.7.25
-    dom7: ^3.0.0
+    dom7: ^3.0.0 || ^4.0.0
     nanoid: ^5.0.0
     slate: ^0.72.0
     snabbdom: ^3.1.0
@@ -5856,12 +5856,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom7@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "dom7@npm:3.0.0"
+"dom7@npm:^4.0.0":
+  version: 4.0.6
+  resolution: "dom7@npm:4.0.6"
   dependencies:
-    ssr-window: "npm:^3.0.0-alpha.1"
-  checksum: 10c0/c64c64e8ed99a6e1e9a8754b37c8effa5e5e3f192b275e7853cb06bf3c670fd6595fc61c87e75553773f350a04b9d45e2964c9b7b62b8fec867766c1a3b6df41
+    ssr-window: "npm:^4.0.0"
+  checksum: 10c0/97fdb16e93a1b80ee154a7fa074d3d842e925c003c814da9e938dde270cc4cefa1bfc806718e0a2afd42d6b2359b7e714aab04cb1c7580f3414ebf20686c2d00
   languageName: node
   linkType: hard
 
@@ -12152,10 +12152,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ssr-window@npm:^3.0.0-alpha.1":
-  version: 3.0.0
-  resolution: "ssr-window@npm:3.0.0"
-  checksum: 10c0/d60efa4bf1e8de03c2410ba81976dfec02a084a44a8f952d9cac794e806e87dc7dcd6033f26fdd35430851bd358f39e8d9625404683b8a1792b46711fc1eb382
+"ssr-window@npm:^4.0.0":
+  version: 4.0.2
+  resolution: "ssr-window@npm:4.0.2"
+  checksum: 10c0/e91f690f42ab2d4e36577a631a9d7b9bd20864ab99c1394481f64c5a0ae6922165ac0a06228560c2ccdd4f68338e795f2fd3cc16fbf9bfcc9c561bb89eb237cd
   languageName: node
   linkType: hard
 
