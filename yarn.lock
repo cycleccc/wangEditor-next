@@ -3748,6 +3748,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@wangeditor-next/plugin-link-card@workspace:packages/plugin-link-card":
+  version: 0.0.0-use.local
+  resolution: "@wangeditor-next/plugin-link-card@workspace:packages/plugin-link-card"
+  peerDependencies:
+    "@wangeditor-next/editor": 5.6.15
+    dom7: ^3.0.0
+    slate: ^0.72.0
+    snabbdom: ^3.1.0
+  languageName: unknown
+  linkType: soft
+
 "@wangeditor-next/plugin-markdown@workspace:packages/plugin-markdown":
   version: 0.0.0-use.local
   resolution: "@wangeditor-next/plugin-markdown@workspace:packages/plugin-markdown"
