@@ -1,5 +1,11 @@
 # @wangeditor-next/plugin-formula
 
+## 1.0.0
+
+### Major Changes
+
+- 7b050b7: publish first major version
+
 ## 0.1.0
 
 ### Minor Changes

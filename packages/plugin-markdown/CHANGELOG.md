@@ -1,5 +1,11 @@
 # @wangeditor-next/plugin-markdown
 
+## 1.0.0
+
+### Major Changes
+
+- 7b050b7: publish first major version
+
 ## 0.0.7
 
 ### Patch Changes

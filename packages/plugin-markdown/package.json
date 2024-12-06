@@ -1,6 +1,6 @@
 {
   "name": "@wangeditor-next/plugin-markdown",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "wangEditor markdown plugin",
   "author": "cycleccc <2991205548@qq.com>",
   "type": "module",
