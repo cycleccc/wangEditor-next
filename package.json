@@ -78,7 +78,7 @@
     "eslint-plugin-vue": "^9.27.0",
     "http-server": "^14.0.0",
     "husky": "^9.1.6",
-    "jest-environment-jsdom": "^27.0.0",
+    "jest-environment-jsdom": "^29.0.0",
     "less": "^4.0.0",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
