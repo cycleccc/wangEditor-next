@@ -6,7 +6,7 @@
 
 [wangEditor-next](https://cycleccc.github.io/docs/) 链接卡片 插件。
 
-![](./_img/demo.png)
+![链接卡片演示 (Link Card Demo)](./_img/demo.png)
 
 ## 安装
 

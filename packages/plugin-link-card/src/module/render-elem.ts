@@ -22,7 +22,15 @@ function renderLinkCard(elem: SlateElement, children: VNode[] | null, editor: ID
         className: 'w-e-textarea-link-card-text-container',
       },
     },
-    [h('p', {}, title), h('span', {}, link)],
+    [
+      h('p', { props: { className: 'w-e-link-card-title' } }, title),
+      h('span', {
+        props: {
+          className: 'w-e-link-card-url',
+          title: link,
+        },
+      }, link),
+    ],
   )
 
   // 图片部分
@@ -46,9 +54,15 @@ function renderLinkCard(elem: SlateElement, children: VNode[] | null, editor: ID
       },
       dataset: {
         selected: selected ? 'true' : '', // 标记为 选中
+        href: link,
       },
       on: {
         mousedown: event => event.preventDefault(),
+        click: _event => {
+          if (!selected) {
+            window.open(link, '_blank', 'noopener,noreferrer')
+          }
+        },
       },
     },
     [infoVnode, iconVnode],

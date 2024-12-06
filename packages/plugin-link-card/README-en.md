@@ -6,7 +6,7 @@
 
 [wangEditor-next](https://cycleccc.github.io/docs/) link-card plugin.
 
-![](./_img/demo.png)
+![Link Card Demo](./_img/demo.png)
 
 ## Installation
 
