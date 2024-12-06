@@ -5,7 +5,7 @@
 ![jest badge](https://img.shields.io/badge/unit%20test-jest-yellowgreen)
 
 ## 介绍
-基于[wangEditor](https://www.wangeditor.com/) 封装的React组件。
+基于[wangEditor-next](https://cycleccc.github.io/docs/) 封装的React组件。
 
 ## 安装
 
