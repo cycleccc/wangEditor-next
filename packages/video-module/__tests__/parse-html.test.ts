@@ -76,6 +76,7 @@ describe('video - parse html', () => {
       width: '500',
       height: '300',
       style: {},
+      textAlign: 'center',
       children: [{ text: '' }], // void 元素有一个空 text
     })
   })
@@ -99,6 +100,7 @@ describe('video - parse html', () => {
       width: 'auto',
       height: 'auto',
       style: {},
+      textAlign: 'center',
       children: [{ text: '' }], // void 元素有一个空 text
     })
   })
