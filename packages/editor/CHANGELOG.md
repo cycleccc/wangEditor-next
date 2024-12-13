@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.16
+
+### Patch Changes
+
+- 33d87c9: video module add align prop
+- Updated dependencies [33d87c9]
+  - @wangeditor-next/video-module@1.3.31
+
 ## 5.6.15
 
 ### Patch Changes
