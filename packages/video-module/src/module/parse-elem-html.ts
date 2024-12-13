@@ -16,6 +16,7 @@ function genVideoElem(
   width = 'auto',
   height = 'auto',
   style: videoStyle = {},
+  textAlign = 'center',
 ): VideoElement {
   return {
     type: 'video',
@@ -25,6 +26,7 @@ function genVideoElem(
     height,
     style,
     children: [{ text: '' }], // void 元素有一个空 text
+    textAlign,
   }
 }
 
@@ -35,7 +37,7 @@ function parseHtml(elem: DOMElement, _children: Descendant[], _editor: IDomEdito
   let width = 'auto'
   let height = 'auto'
   let style = {}
-
+  let textAlign = 'center'
   // <iframe> 形式
   const $iframe = $elem.find('iframe')
 
@@ -45,7 +47,8 @@ function parseHtml(elem: DOMElement, _children: Descendant[], _editor: IDomEdito
     style = $iframe.attr('style') || ''
     style = styleStringToObject(style)
     src = $iframe[0].outerHTML
-    return genVideoElem(src, poster, width, height, style)
+    textAlign = styleStringToObject($elem.attr('style') || '')['text-align'] || 'center'
+    return genVideoElem(src, poster, width, height, style, textAlign)
   }
 
   // <video> 形式
@@ -64,7 +67,8 @@ function parseHtml(elem: DOMElement, _children: Descendant[], _editor: IDomEdito
   poster = $video.attr('poster') || ''
   style = $video.attr('style') || ''
   style = styleStringToObject(style)
-  return genVideoElem(src, poster, width, height, style)
+  textAlign = styleStringToObject($elem.attr('style') || '')['text-align'] || 'center'
+  return genVideoElem(src, poster, width, height, style, textAlign)
 }
 
 export const parseHtmlConf = {
