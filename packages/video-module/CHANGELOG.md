@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.31
+
+### Patch Changes
+
+- 33d87c9: video module add align prop
+
 ## 1.3.30
 
 ### Patch Changes
