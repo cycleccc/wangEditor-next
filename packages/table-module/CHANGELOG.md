@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.28
+
+### Patch Changes
+
+- 230e46d: fix table merge row show error
+
 ## 1.6.27
 
 ### Patch Changes
