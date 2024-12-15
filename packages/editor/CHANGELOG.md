@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.17
+
+### Patch Changes
+
+- 230e46d: fix table merge row show error
+- Updated dependencies [230e46d]
+  - @wangeditor-next/table-module@1.6.28
+
 ## 5.6.16
 
 ### Patch Changes
