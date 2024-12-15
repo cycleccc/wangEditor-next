@@ -18,6 +18,17 @@ class MergeCell implements IButtonMenu {
 
   readonly tag = 'button'
 
+  private needKeepCell(editor: Editor, trPath: Path): boolean {
+    // 检查同行是否有其他单元格
+    const [, rowSibling] = Node.children(editor, trPath)
+
+    // 检查同列是否有其他单元格
+    const parentTable = Editor.parent(editor, trPath)
+    const hasOtherRows = parentTable[0].children.length > 1
+
+    return !!rowSibling || hasOtherRows
+  }
+
   getValue(_editor: IDomEditor): string | boolean {
     // 无需获取 val
     return ''
@@ -111,13 +122,7 @@ class MergeCell implements IButtonMenu {
             at: path,
           })
 
-          const [, sibling] = Node.children(editor, trPath)
-
-          if (sibling) {
-            /**
-             * 删除节点调整成隐藏节点
-             * 隐藏节点不会影响 table 布局
-             */
+          if (this.needKeepCell(editor, trPath)) {
             Transforms.setNodes(editor, { hidden: true } as TableCellElement, { at: path })
             continue
           }
