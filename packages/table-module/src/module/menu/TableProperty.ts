@@ -6,7 +6,7 @@
 import {
   DomEditor, IButtonMenu, IDomEditor, t,
 } from '@wangeditor-next/core'
-import { Editor, Range, Transforms } from 'slate'
+import { Editor, Transforms } from 'slate'
 
 import {
   CLEAN_SVG,
@@ -18,6 +18,7 @@ import {
 } from '../../constants/svg'
 import { isOfType } from '../../utils'
 import $ from '../../utils/dom'
+import { EDITOR_TO_SELECTION } from '../weak-maps'
 
 class TableProperty implements IButtonMenu {
   readonly title = t('tableModule.tableProperty')
@@ -29,6 +30,8 @@ class TableProperty implements IButtonMenu {
   readonly showModal = true
 
   readonly modalWidth = 300
+
+  readonly menu: string = 'table'
 
   readonly borderStyle = [
     { value: 'none', label: t('tableModule.borderStyle.none') },
@@ -58,11 +61,6 @@ class TableProperty implements IButtonMenu {
   }
 
   isDisabled(editor: IDomEditor): boolean {
-    const { selection } = editor
-
-    if (selection == null) { return true }
-    if (!Range.isCollapsed(selection)) { return true }
-
     const tableNode = DomEditor.getSelectedNodeByType(editor, 'table')
 
     if (tableNode == null) {
@@ -185,7 +183,17 @@ class TableProperty implements IButtonMenu {
         return obj
       }, {})
 
-      Transforms.setNodes(editor, props, { at: path })
+      const selection = EDITOR_TO_SELECTION.get(editor)
+
+      if (this.menu === 'cell' && !!selection?.length) {
+        selection.forEach(row => {
+          row.forEach(cell => {
+            Transforms.setNodes(editor, props, { at: cell[0][1] })
+          })
+        })
+      } else {
+        Transforms.setNodes(editor, props, { at: path })
+      }
 
       setTimeout(() => {
         editor.focus()
