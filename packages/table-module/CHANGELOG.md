@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.29
+
+### Patch Changes
+
+- d0bb5fc: feat: select table cell to set attributes
+
 ## 1.6.28
 
 ### Patch Changes
