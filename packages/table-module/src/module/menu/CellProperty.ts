@@ -16,6 +16,8 @@ class CellProperty extends TableProperty implements IButtonMenu {
 
   readonly modalWidth = 300
 
+  readonly menu = 'cell'
+
   getModalContentNode(editor: IDomEditor) {
     const [node] = Editor.nodes(editor, {
       match: isOfType(editor, 'td'),
