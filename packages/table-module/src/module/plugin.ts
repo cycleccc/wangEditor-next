@@ -256,9 +256,29 @@ function withTable<T extends IDomEditor>(editor: T): T {
   newEditor.deleteForward = unit => {
     const res = deleteHandler(newEditor)
 
-    if (res) { return } // 命中 table cell ，自己处理删除
+    if (res) { return }
 
-    if (deleteCellBreak(newEditor, unit, 'forward')) { return } // 命中了 cell 内删除换行符，自行处理删除
+    if (deleteCellBreak(newEditor, unit, 'forward')) { return }
+
+    // 防止从 table 前面的 p 删除时，删除第一个 cell
+    const { selection } = newEditor
+
+    if (selection) {
+      const after = Editor.after(newEditor, selection) // 后一个 location
+      const tableCell = Editor.above(newEditor, {
+        at: selection,
+        match: n => DomEditor.checkNodeType(n, 'table-cell'),
+      })
+
+      if (after) {
+        const isTableOnAfterLocation = isTableLocation(newEditor, after) // after 是否是 table
+        // 如果后面是 table, 当前是 paragraph，则不执行删除
+
+        if (!tableCell && isTableOnAfterLocation && DomEditor.getSelectedNodeByType(newEditor, 'paragraph')) {
+          return
+        }
+      }
+    }
 
     // 执行默认的删除
     deleteForward(unit)
