@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.18
+
+### Patch Changes
+
+- ad3d49b: fix(table): If followed by a table deleteforward is disabled
+- Updated dependencies [ad3d49b]
+  - @wangeditor-next/table-module@1.6.30
+
 ## 5.6.17
 
 ### Patch Changes

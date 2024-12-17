@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.30
+
+### Patch Changes
+
+- ad3d49b: fix(table): If followed by a table deleteforward is disabled
+
 ## 1.6.29
 
 ### Patch Changes
