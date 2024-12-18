@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.26
+
+### Patch Changes
+
+- 5fa2a72: fix(upload): delete remove file api
+
 ## 1.7.25
 
 ### Patch Changes
