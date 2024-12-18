@@ -76,7 +76,6 @@ function createUploader(config: IUploadConfig): Uppy {
     } catch (err) {
       console.error('wangEditor upload file - onSuccess error', err)
     }
-    uppy.removeFile(file.id) // 清空文件
   })
 
   uppy.on('progress', progress => {
@@ -96,7 +95,6 @@ function createUploader(config: IUploadConfig): Uppy {
     } catch (err) {
       console.error('wangEditor upload file - onError error', err)
     }
-    uppy.removeFile(file.id) // 清空文件
   })
 
   uppy.on('restriction-failed', (file, error) => {
@@ -107,8 +105,6 @@ function createUploader(config: IUploadConfig): Uppy {
     } catch (err) {
       console.error('wangEditor upload file - onError error', err)
     }
-    // @ts-ignore
-    uppy.removeFile(file.id) // 清空文件
   })
 
   // 返回实例
