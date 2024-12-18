@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.19
+
+### Patch Changes
+
+- 5fa2a72: fix(upload): delete remove file api
+- Updated dependencies [5fa2a72]
+  - @wangeditor-next/core@1.7.26
+  - @wangeditor-next/basic-modules@1.5.25
+  - @wangeditor-next/code-highlight@1.3.23
+  - @wangeditor-next/list-module@1.1.32
+  - @wangeditor-next/table-module@1.6.31
+  - @wangeditor-next/upload-image-module@1.1.28
+  - @wangeditor-next/video-module@1.3.32
+
 ## 5.6.18
 
 ### Patch Changes
