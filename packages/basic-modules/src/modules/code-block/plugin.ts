@@ -26,7 +26,7 @@ function getLastTextLineBeforeSelection(codeNode: SlateNode, editor: IDomEditor)
 
 function withCodeBlock<T extends IDomEditor>(editor: T): T {
   const {
-    insertBreak, normalizeNode, insertData,
+    insertBreak, normalizeNode, insertData, handleTab,
   } = editor
   const newEditor = editor
 
@@ -55,6 +55,56 @@ function withCodeBlock<T extends IDomEditor>(editor: T): T {
 
     // 普通换行
     newEditor.insertText('\n')
+  }
+
+  // 重写 handleTab 方法
+  editor.handleTab = (shift: boolean = false) => {
+    const { selection } = editor
+
+    if (!selection) { return }
+
+    // 检查是否在代码块内
+    const codeNode = DomEditor.getSelectedNodeByType(editor, 'code')
+
+    if (!codeNode) {
+      // 不在代码块内，使用原始的 tab 处理
+      handleTab()
+      return
+    }
+
+    // 获取选中的文本
+    const [start, end] = [selection.anchor, selection.focus].sort((a, b) => a.offset - b.offset)
+    // @ts-ignore
+    const codeText = (codeNode.children[0] as any).text
+    const lines = codeText.split('\n')
+
+    // 计算受影响的行
+    const startLine = codeText.slice(0, start.offset).split('\n').length - 1
+    const endLine = codeText.slice(0, end.offset).split('\n').length - 1
+
+    // 处理每一行的缩进
+    const newLines = lines.map((line, index) => {
+      if (index >= startLine && index <= endLine) {
+        if (shift) {
+          // 减少缩进（移除开头的 2 个空格或 1 个 tab）
+          return line.replace(/^(\t| {2})/, '')
+        }
+        // 增加缩进（添加 2 个空格）
+        return `  ${line}`
+
+      }
+      return line
+    })
+
+    // 更新代码块内容
+    const newText = newLines.join('\n')
+
+    Transforms.insertText(editor, newText, {
+      at: {
+        anchor: { path: start.path, offset: 0 },
+        focus: { path: end.path, offset: codeText.length },
+      },
+    })
   }
 
   // 重写 normalizeNode
