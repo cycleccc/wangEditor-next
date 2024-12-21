@@ -29,7 +29,7 @@ yarn add @wangeditor-next/plugin-markdown
 
 ```js
 import { Boot } from '@wangeditor-next/editor'
-import markdownModule from '@wangeditor-next/plugin-md'
+import markdownModule from '@wangeditor-next/plugin-markdown'
 
 Boot.registerModule(markdownModule)
 
