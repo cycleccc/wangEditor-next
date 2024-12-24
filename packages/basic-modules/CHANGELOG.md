@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.5.26
+
+### Patch Changes
+
+- 8c762a9: feat(code block): add code block handletab
+
 ## 1.5.25
 
 ### Patch Changes
