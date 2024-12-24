@@ -1,5 +1,14 @@
 # Change Log
 
+## 5.6.20
+
+### Patch Changes
+
+- 8c762a9: feat(code block): add code block handletab
+- Updated dependencies [8c762a9]
+  - @wangeditor-next/basic-modules@1.5.26
+  - @wangeditor-next/upload-image-module@1.1.29
+
 ## 5.6.19
 
 ### Patch Changes
