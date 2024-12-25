@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.21
+
+### Patch Changes
+
+- 2099e64: fix(upload): add complete upload callback
+- Updated dependencies [2099e64]
+  - @wangeditor-next/core@1.7.27
+  - @wangeditor-next/basic-modules@1.5.27
+  - @wangeditor-next/code-highlight@1.3.24
+  - @wangeditor-next/list-module@1.1.33
+  - @wangeditor-next/table-module@1.6.32
+  - @wangeditor-next/upload-image-module@1.1.30
+  - @wangeditor-next/video-module@1.3.33
+
 ## 5.6.20
 
 ### Patch Changes

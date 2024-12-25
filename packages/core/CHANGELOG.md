@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.27
+
+### Patch Changes
+
+- 2099e64: fix(upload): add complete upload callback
+
 ## 1.7.26
 
 ### Patch Changes
