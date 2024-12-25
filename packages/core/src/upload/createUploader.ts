@@ -67,11 +67,13 @@ function createUploader(config: IUploadConfig): Uppy {
   })
 
   // 各个 callback
-  uppy.on('upload-success', (file, response) => {
-    const { body = {} } = response
+  // onSuccess 每个 file 上传成功都会触发，改用 complete 便于 files 上传
+  uppy.on('complete', result => {
+    const file = result.successful[0]
+    const { response } = file
+    const { body = {} } = response ?? {}
 
     try {
-      // 有用户传入的第三方代码，得用 try catch 包裹
       onSuccess(file, body)
     } catch (err) {
       console.error('wangEditor upload file - onSuccess error', err)
