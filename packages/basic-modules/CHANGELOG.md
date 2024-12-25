@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.5.26
+
+### Patch Changes
+
+- 8c762a9: feat(code block): add code block handletab
+
+## 1.5.25
+
+### Patch Changes
+
+- Updated dependencies [5fa2a72]
+  - @wangeditor-next/core@1.7.26
+
 ## 1.5.24
 
 ### Patch Changes
