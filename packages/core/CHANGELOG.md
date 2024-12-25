@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.28
+
+### Patch Changes
+
+- 7225111: fix(max length): sync update leftLength
+
 ## 1.7.27
 
 ### Patch Changes

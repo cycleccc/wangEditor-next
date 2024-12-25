@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.22
+
+### Patch Changes
+
+- 7225111: fix(max length): sync update leftLength
+- Updated dependencies [7225111]
+  - @wangeditor-next/core@1.7.28
+  - @wangeditor-next/basic-modules@1.5.28
+  - @wangeditor-next/code-highlight@1.3.25
+  - @wangeditor-next/list-module@1.1.34
+  - @wangeditor-next/table-module@1.6.33
+  - @wangeditor-next/upload-image-module@1.1.31
+  - @wangeditor-next/video-module@1.3.34
+
 ## 5.6.21
 
 ### Patch Changes
