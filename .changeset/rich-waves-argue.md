@@ -3,4 +3,4 @@
 "@wangeditor-next/editor": patch
 ---
 
-fix(upload): delete remove file api
+fix(upload): add complete upload callback
