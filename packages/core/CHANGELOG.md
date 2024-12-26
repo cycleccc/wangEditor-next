@@ -1,5 +1,29 @@
 # Change Log
 
+## 1.7.28
+
+### Patch Changes
+
+- 7225111: fix(max length): sync update leftLength
+
+## 1.7.27
+
+### Patch Changes
+
+- 2099e64: fix(upload): add complete upload callback
+
+## 1.7.26
+
+### Patch Changes
+
+- 5fa2a72: fix(upload): delete remove file api
+
+## 1.7.25
+
+### Patch Changes
+
+- 7b80f5d: fix: revert default font config
+
 ## 1.7.24
 
 ### Patch Changes

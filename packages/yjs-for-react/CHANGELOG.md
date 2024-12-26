@@ -1,5 +1,66 @@
 # @wangeditor-next/yjs-for-react
 
+## 0.1.33
+
+### Patch Changes
+
+- Updated dependencies [7225111]
+  - @wangeditor-next/editor@5.6.22
+  - @wangeditor-next/yjs@0.1.26
+
+## 0.1.32
+
+### Patch Changes
+
+- Updated dependencies [2099e64]
+  - @wangeditor-next/editor@5.6.21
+  - @wangeditor-next/yjs@0.1.25
+
+## 0.1.31
+
+### Patch Changes
+
+- Updated dependencies [8c762a9]
+  - @wangeditor-next/editor@5.6.20
+
+## 0.1.30
+
+### Patch Changes
+
+- Updated dependencies [5fa2a72]
+  - @wangeditor-next/editor@5.6.19
+  - @wangeditor-next/yjs@0.1.24
+
+## 0.1.29
+
+### Patch Changes
+
+- Updated dependencies [ad3d49b]
+  - @wangeditor-next/editor@5.6.18
+
+## 0.1.28
+
+### Patch Changes
+
+- Updated dependencies [230e46d]
+  - @wangeditor-next/editor@5.6.17
+
+## 0.1.27
+
+### Patch Changes
+
+- Updated dependencies [33d87c9]
+  - @wangeditor-next/editor@5.6.16
+
+## 0.1.26
+
+### Patch Changes
+
+- Updated dependencies [5bbff78]
+- Updated dependencies [7b80f5d]
+  - @wangeditor-next/editor@5.6.15
+  - @wangeditor-next/yjs@0.1.23
+
 ## 0.1.25
 
 ### Patch Changes

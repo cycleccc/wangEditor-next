@@ -1,5 +1,51 @@
 # Change Log
 
+## 1.6.33
+
+### Patch Changes
+
+- Updated dependencies [7225111]
+  - @wangeditor-next/core@1.7.28
+
+## 1.6.32
+
+### Patch Changes
+
+- Updated dependencies [2099e64]
+  - @wangeditor-next/core@1.7.27
+
+## 1.6.31
+
+### Patch Changes
+
+- Updated dependencies [5fa2a72]
+  - @wangeditor-next/core@1.7.26
+
+## 1.6.30
+
+### Patch Changes
+
+- ad3d49b: fix(table): If followed by a table deleteforward is disabled
+
+## 1.6.29
+
+### Patch Changes
+
+- d0bb5fc: feat: select table cell to set attributes
+
+## 1.6.28
+
+### Patch Changes
+
+- 230e46d: fix table merge row show error
+
+## 1.6.27
+
+### Patch Changes
+
+- Updated dependencies [7b80f5d]
+  - @wangeditor-next/core@1.7.25
+
 ## 1.6.26
 
 ### Patch Changes

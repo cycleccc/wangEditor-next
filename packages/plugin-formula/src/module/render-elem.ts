@@ -26,6 +26,7 @@ function renderFormula(elem: SlateElement, children: VNode[] | null, editor: IDo
   const containerVnode = h(
     'div',
     {
+      className: 'w-e-textarea-formula-container',
       props: {
         contentEditable: false, // 不可编辑
       },
@@ -34,7 +35,7 @@ function renderFormula(elem: SlateElement, children: VNode[] | null, editor: IDo
         marginLeft: '3px',
         marginRight: '3px',
         border: selected // 选中/不选中，样式不一样
-          ? '2px solid var(--w-e-textarea-selected-border-color)' // wangEditor 提供了 css var https://www.wangeditor.com/v5/theme.html
+          ? '2px solid var(--w-e-textarea-selected-border-color)'
           : '2px solid transparent',
         borderRadius: '3px',
         padding: '3px 3px',

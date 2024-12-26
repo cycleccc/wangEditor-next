@@ -5,7 +5,7 @@
 
 import { DomEditor, IDomEditor } from '@wangeditor-next/core'
 import {
-  Editor, Element as SlateElement, Node as SlateNode, Transforms,
+  Editor, Element as SlateElement, Node as SlateNode, Range, Transforms,
 } from 'slate'
 
 function getLastTextLineBeforeSelection(codeNode: SlateNode, editor: IDomEditor): string {
@@ -26,7 +26,7 @@ function getLastTextLineBeforeSelection(codeNode: SlateNode, editor: IDomEditor)
 
 function withCodeBlock<T extends IDomEditor>(editor: T): T {
   const {
-    insertBreak, normalizeNode, insertData,
+    insertBreak, normalizeNode, insertData, handleTab,
   } = editor
   const newEditor = editor
 
@@ -55,6 +55,60 @@ function withCodeBlock<T extends IDomEditor>(editor: T): T {
 
     // 普通换行
     newEditor.insertText('\n')
+  }
+
+  // 重写 handleTab 方法
+  editor.handleTab = () => {
+    const { selection } = editor
+
+    if (!selection) { return }
+
+    // 检查是否在代码块内
+    const codeNode = DomEditor.getSelectedNodeByType(editor, 'code')
+
+    if (!codeNode || Range.isCollapsed(selection)) {
+      // 不在代码块内或折叠的选区 ，使用原始的 tab 处理
+      handleTab()
+      return
+    }
+
+    // 获取选中的文本
+    const [start, end] = [selection.anchor, selection.focus].sort((a, b) => a.offset - b.offset)
+    // @ts-ignore
+    const codeText = (codeNode.children[0] as any).text
+    const lines = codeText.split('\n')
+
+    // 计算受影响的行
+    const startLine = codeText.slice(0, start.offset).split('\n').length - 1
+    const endLine = codeText.slice(0, end.offset).split('\n').length - 1
+
+    // 处理每一行的缩进
+    const newLines = lines.map((line, index) => {
+      if (index >= startLine && index <= endLine) {
+        // 增加缩进（添加 2 个空格）
+        return `  ${line}`
+      }
+      return line
+    })
+
+    // 更新代码块内容
+    const newText = newLines.join('\n')
+
+    // 计算新的光标位置
+    const newSelection = {
+      anchor: { path: start.path, offset: start.offset + 2 },
+      focus: { path: end.path, offset: end.offset + 2 },
+    }
+
+    Transforms.insertText(editor, newText, {
+      at: {
+        anchor: { path: start.path, offset: 0 },
+        focus: { path: end.path, offset: codeText.length },
+      },
+    })
+
+    // 恢复选区
+    Transforms.select(editor, newSelection)
   }
 
   // 重写 normalizeNode

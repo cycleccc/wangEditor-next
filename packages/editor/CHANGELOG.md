@@ -1,5 +1,96 @@
 # Change Log
 
+## 5.6.22
+
+### Patch Changes
+
+- 7225111: fix(max length): sync update leftLength
+- Updated dependencies [7225111]
+  - @wangeditor-next/core@1.7.28
+  - @wangeditor-next/basic-modules@1.5.28
+  - @wangeditor-next/code-highlight@1.3.25
+  - @wangeditor-next/list-module@1.1.34
+  - @wangeditor-next/table-module@1.6.33
+  - @wangeditor-next/upload-image-module@1.1.31
+  - @wangeditor-next/video-module@1.3.34
+
+## 5.6.21
+
+### Patch Changes
+
+- 2099e64: fix(upload): add complete upload callback
+- Updated dependencies [2099e64]
+  - @wangeditor-next/core@1.7.27
+  - @wangeditor-next/basic-modules@1.5.27
+  - @wangeditor-next/code-highlight@1.3.24
+  - @wangeditor-next/list-module@1.1.33
+  - @wangeditor-next/table-module@1.6.32
+  - @wangeditor-next/upload-image-module@1.1.30
+  - @wangeditor-next/video-module@1.3.33
+
+## 5.6.20
+
+### Patch Changes
+
+- 8c762a9: feat(code block): add code block handletab
+- Updated dependencies [8c762a9]
+  - @wangeditor-next/basic-modules@1.5.26
+  - @wangeditor-next/upload-image-module@1.1.29
+
+## 5.6.19
+
+### Patch Changes
+
+- 5fa2a72: fix(upload): delete remove file api
+- Updated dependencies [5fa2a72]
+  - @wangeditor-next/core@1.7.26
+  - @wangeditor-next/basic-modules@1.5.25
+  - @wangeditor-next/code-highlight@1.3.23
+  - @wangeditor-next/list-module@1.1.32
+  - @wangeditor-next/table-module@1.6.31
+  - @wangeditor-next/upload-image-module@1.1.28
+  - @wangeditor-next/video-module@1.3.32
+
+## 5.6.18
+
+### Patch Changes
+
+- ad3d49b: fix(table): If followed by a table deleteforward is disabled
+- Updated dependencies [ad3d49b]
+  - @wangeditor-next/table-module@1.6.30
+
+## 5.6.17
+
+### Patch Changes
+
+- 230e46d: fix table merge row show error
+- Updated dependencies [230e46d]
+  - @wangeditor-next/table-module@1.6.28
+
+## 5.6.16
+
+### Patch Changes
+
+- 33d87c9: video module add align prop
+- Updated dependencies [33d87c9]
+  - @wangeditor-next/video-module@1.3.31
+
+## 5.6.15
+
+### Patch Changes
+
+- 5bbff78: fix: add more font style
+- 7b80f5d: fix: revert default font config
+- Updated dependencies [5bbff78]
+- Updated dependencies [7b80f5d]
+  - @wangeditor-next/basic-modules@1.5.24
+  - @wangeditor-next/core@1.7.25
+  - @wangeditor-next/upload-image-module@1.1.27
+  - @wangeditor-next/code-highlight@1.3.22
+  - @wangeditor-next/list-module@1.1.31
+  - @wangeditor-next/table-module@1.6.27
+  - @wangeditor-next/video-module@1.3.30
+
 ## 5.6.14
 
 ### Patch Changes

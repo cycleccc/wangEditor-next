@@ -37,7 +37,7 @@ jobs:
 
       # 加载依赖缓存
       - name: Load cached dependencies
-        uses: actions/cache@v4.1.2
+        uses: actions/cache@v4.2.0
         id: cache
         with:
           path: |
@@ -60,7 +60,7 @@ jobs:
 
       # 上传覆盖率报告到 Codecov
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5.0.2
+        uses: codecov/codecov-action@v5.1.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Upload test results to Codecov
