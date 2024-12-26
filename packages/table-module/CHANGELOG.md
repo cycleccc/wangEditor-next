@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.34
+
+### Patch Changes
+
+- f4e759e: 375 复制excel数据到编辑器中格式错乱
+
 ## 1.6.33
 
 ### Patch Changes
