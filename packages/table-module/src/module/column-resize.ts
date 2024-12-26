@@ -133,8 +133,11 @@ const onMouseMove = throttle((event: Event) => {
   // 如果拖动引起的宽度超过容器宽度，则不调整
   const containerElement = document.querySelector('.table-container')
 
-  if (containerElement && remainWidth + newWith > containerElement.clientWidth) {
-    return
+  if (containerElement && newWith > cellWidthWhenMouseDown) {
+    // 允许缩小，但不允许放大
+    if (remainWidth + newWith > containerElement.clientWidth) {
+      newWith = Math.max(30, cellWidthWhenMouseDown) // 确保不小于最小宽度
+    }
   }
 
   const adjustColumnWidths = [...columnWidths].map(width => Math.floor(width))

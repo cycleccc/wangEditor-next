@@ -133,11 +133,12 @@ function parseTableHtml(
 
     Array.from(tdList).forEach(td => {
       const colSpan = parseInt($(td).attr('colSpan') || '1', 10) // 获取 colSpan，默认为 1
-      const width = parseInt(getStyleValue($(td), 'width') || '180', 10) // 获取 width，默认为 180
+      const width = parseInt(getStyleValue($(td), 'width') || '90', 10) // 获取 width，默认为 180
 
       // 根据 colSpan 的值来填充 columnWidths 数组
-      for (let i = 0; i < colSpan; i += 1) {
-        columnWidths.push(width)
+      columnWidths[0] = width
+      for (let i = 1; i < colSpan; i += 1) {
+        columnWidths.push(90)
       }
     })
     tableELement.columnWidths = columnWidths
