@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.35
+
+### Patch Changes
+
+- 76819e1: fix(table): table tdList first column default width
+
 ## 1.6.34
 
 ### Patch Changes

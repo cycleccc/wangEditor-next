@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.24
+
+### Patch Changes
+
+- 76819e1: fix(table): table tdList first column default width
+- Updated dependencies [76819e1]
+  - @wangeditor-next/table-module@1.6.35
+
 ## 5.6.23
 
 ### Patch Changes
