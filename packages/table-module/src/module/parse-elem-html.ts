@@ -136,7 +136,7 @@ function parseTableHtml(
       const width = parseInt(getStyleValue($(td), 'width') || '90', 10) // 获取 width，默认为 180
 
       // 根据 colSpan 的值来填充 columnWidths 数组
-      columnWidths[0] = width
+      columnWidths.push(width)
       for (let i = 1; i < colSpan; i += 1) {
         columnWidths.push(90)
       }
