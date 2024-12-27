@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.23
+
+### Patch Changes
+
+- f4e759e: 375 复制excel数据到编辑器中格式错乱
+- Updated dependencies [f4e759e]
+  - @wangeditor-next/table-module@1.6.34
+
 ## 5.6.22
 
 ### Patch Changes
