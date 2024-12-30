@@ -127,13 +127,19 @@ function parseTableHtml(
   }
   const tdList = $elem.find('tr')[0]?.children || []
   const colgroupElments: HTMLCollection = $elem.find('colgroup')[0]?.children || null
+  // @ts-ignore
+  const colLength = children[children.length - 1].children.length
 
-  if (tdList.length > 0) {
+  if (colgroupElments && colgroupElments.length === colLength) {
+    tableELement.columnWidths = Array.from(colgroupElments).map((col: any) => {
+      return parseInt(col.getAttribute('width'), 10)
+    })
+  } else if (tdList.length > 0) {
     const columnWidths: number[] = []
 
     Array.from(tdList).forEach(td => {
       const colSpan = parseInt($(td).attr('colSpan') || '1', 10) // 获取 colSpan，默认为 1
-      const width = parseInt(getStyleValue($(td), 'width') || '90', 10) // 获取 width，默认为 180
+      const width = parseInt(getStyleValue($(td), 'width') || '90', 10) // 获取 width，默认为 90
 
       // 根据 colSpan 的值来填充 columnWidths 数组
       columnWidths.push(width)
@@ -142,10 +148,6 @@ function parseTableHtml(
       }
     })
     tableELement.columnWidths = columnWidths
-  } else if (colgroupElments) {
-    tableELement.columnWidths = Array.from(colgroupElments).map((col: any) => {
-      return parseInt(col.getAttribute('width'), 10)
-    })
   }
   return tableELement
 }
