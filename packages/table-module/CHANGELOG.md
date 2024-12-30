@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.36
+
+### Patch Changes
+
+- 592c7b6: fix(table): add colLength judge
+
 ## 1.6.35
 
 ### Patch Changes

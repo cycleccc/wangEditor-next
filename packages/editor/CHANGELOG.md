@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.25
+
+### Patch Changes
+
+- 592c7b6: fix(table): add colLength judge
+- Updated dependencies [592c7b6]
+  - @wangeditor-next/table-module@1.6.36
+
 ## 5.6.24
 
 ### Patch Changes
