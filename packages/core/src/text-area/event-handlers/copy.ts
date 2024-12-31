@@ -19,6 +19,12 @@ function handleOnCopy(e: Event, _textarea: TextArea, editor: IDomEditor) {
 
   if (data == null) { return }
   editor.setFragmentData(data)
+
+  const { customCopy } = editor.getConfig()
+
+  if (customCopy) {
+    customCopy(editor, event)
+  }
 }
 
 export default handleOnCopy

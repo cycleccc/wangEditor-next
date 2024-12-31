@@ -214,6 +214,10 @@ export interface IEditorConfig {
    * 自定义粘贴。返回 true 则继续粘贴，返回 false 则自行实现粘贴，阻止默认粘贴
    */
   customPaste?: (editor: IDomEditor, e: ClipboardEvent) => boolean
+    /**
+   * 自定义复制。拦截 event 添加或修改 clipboardData 数据
+   */
+  customCopy?: (editor: IDomEditor, e: ClipboardEvent) => void
 
   // edit state
   scroll: boolean
