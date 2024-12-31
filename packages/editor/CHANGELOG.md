@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.26
+
+### Patch Changes
+
+- d1d8246: feat: add customCopy event handler for copy
+- Updated dependencies [d1d8246]
+  - @wangeditor-next/core@1.7.29
+  - @wangeditor-next/basic-modules@1.5.29
+  - @wangeditor-next/code-highlight@1.3.26
+  - @wangeditor-next/list-module@1.1.35
+  - @wangeditor-next/table-module@1.6.37
+  - @wangeditor-next/upload-image-module@1.1.32
+  - @wangeditor-next/video-module@1.3.35
+
 ## 5.6.25
 
 ### Patch Changes
