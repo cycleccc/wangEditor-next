@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.29
+
+### Patch Changes
+
+- d1d8246: feat: add customCopy event handler for copy
+
 ## 1.7.28
 
 ### Patch Changes
