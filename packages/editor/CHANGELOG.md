@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.27
+
+### Patch Changes
+
+- 31f0207: fix(table): improve type handling for table-cell elements in parseRowHtml function
+- Updated dependencies [31f0207]
+  - @wangeditor-next/table-module@1.6.38
+
 ## 5.6.26
 
 ### Patch Changes
