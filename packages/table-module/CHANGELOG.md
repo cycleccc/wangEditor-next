@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.38
+
+### Patch Changes
+
+- 31f0207: fix(table): improve type handling for table-cell elements in parseRowHtml function
+
 ## 1.6.37
 
 ### Patch Changes
