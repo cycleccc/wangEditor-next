@@ -62,10 +62,10 @@ function parseRowHtml(
 
     // 确保是 table-cell 类型
     if (DomEditor.getNodeType(child) === 'table-cell') {
-      // @ts-ignore
-      const colSpan = child.colSpan || 1
+      const tableCell = child as TableCellElement
+      const colSpan = tableCell.colSpan || 1
 
-      tableCellChildren.push(child as TableCellElement) // 先添加当前单元格
+      tableCellChildren.push(tableCell) // 先添加当前单元格
 
       // 如果 colSpan > 1，检查是否存在足够的隐藏 table-cell
       for (let j = 1; j < colSpan; j += 1) {
@@ -74,8 +74,7 @@ function parseRowHtml(
         if (
           nextChild
           && DomEditor.getNodeType(nextChild) === 'table-cell'
-          // @ts-ignore
-          && nextChild.style?.display === 'none'
+          && (nextChild as TableCellElement).hidden
         ) {
           // 已有隐藏的 table-cell，无需补充
           continue
