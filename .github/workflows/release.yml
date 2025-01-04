@@ -56,7 +56,7 @@ jobs:
             **/node_modules
             **/.turbo
             /home/runner/.cache/Cypress
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json', '**/yarn.lock') }}
 
       # 安装依赖
       - name: Install dependencies
@@ -78,23 +78,42 @@ jobs:
           start: yarn run example
           wait-on: 'http://localhost:8881/examples/default-mode.html'
 
-      # 创建 Release PR 或发布稳定版本到 npm
-      - name: Create Release PR or publish stable version to npm
+      # 创建测试版本或稳定版本的 Release PR
+      - name: Manage Changeset Pre-release Mode
+        if: startsWith(github.ref_name, 'dev') || github.ref_name == 'develop'
+        run: yarn changeset pre enter alpha || true
+
+      - name: Exit Changeset Pre-release Mode
+        if: github.ref_name == 'master'
+        run: yarn changeset pre exit || true
+
+      - name: Create Release PR or publish version to npm
         id: changesets
         uses: changesets/action@v1
         with:
           createGithubReleases: false
           publish: yarn changeset publish --access=public
-          title: ${{ github.ref_name == 'master' && 'Publish a new stable version'  || 'Publish a new pre-release version' }}
+          title: >-
+            ${{ github.ref_name == 'master' && 'Publish a new stable version' || 'Publish a new pre-release version' }}
           commit: >-
-            ${{ github.ref_name == 'master' && 'chore(release): publish a new release version'  || 'chore(release): publish a new pre-release version' }}
+            ${{ github.ref_name == 'master' && 'chore(release): publish a new release version' || 'chore(release): publish a new pre-release version' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # 发布 GitHub Release 仅针对 editor 包
+      # 检查是否有 Git 标签
+      - name: Check for Git tag
+        id: check_tag
+        run: |
+          if [ -z "$(git tag --points-at HEAD)" ]; then
+            echo "tag_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "tag_exists=true" >> $GITHUB_OUTPUT
+          fi
+
+      # 发布 GitHub Release，仅针对 editor 包
       - name: Publish GitHub Release for editor
-        if: ${{ github.ref_name == 'master' }} # 仅在 master 分支发布
+        if: steps.check_tag.outputs.tag_exists == 'true' # 仅在存在标签时发布
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
@@ -102,3 +121,4 @@ jobs:
             packages/editor/dist/** # 仅附加 editor 包的构建产物
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
