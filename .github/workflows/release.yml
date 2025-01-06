@@ -114,7 +114,7 @@ jobs:
       # 发布 GitHub Release，仅针对 editor 包
       - name: Publish GitHub Release for editor
         if: steps.check_tag.outputs.tag_exists == 'true' # 仅在存在标签时发布
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
           files: |
