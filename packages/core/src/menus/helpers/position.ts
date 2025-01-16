@@ -60,12 +60,11 @@ export function getPositionBySelection(editor: IDomEditor): Partial<IPositionSty
 
   // 获取当前选区的 rect
   const range = DomEditor.toDOMRange(editor, selection)
-  const rangeRect = range.getClientRects ? range.getClientRects()[0] : null
+  const rects = range.getClientRects()
+  const rangeRect = rects ? rects[0] : null
 
   if (rangeRect == null) { return defaultStyle } // 默认 position
-  const {
-    height: rangeHeight, top: rangeTop, left: rangeLeft,
-  } = rangeRect
+  const { top: rangeTop, left: rangeLeft } = rangeRect
 
   // 存储计算结构
   const positionStyle: Partial<IPositionStyle> = {}
@@ -93,7 +92,9 @@ export function getPositionBySelection(editor: IDomEditor): Partial<IPositionSty
     positionStyle.bottom = `${b + 5}px` // 5px 间隔
   } else {
     // 否则（选区在 container 的上半部分），则 modal/bar 显示在选区的下面
-    let t = relativeTop + rangeHeight
+    const lastRect = rects[rects.length - 1]
+
+    let t = lastRect.top - containerTop + lastRect.height
 
     if (t < 0) { t = 0 }
     positionStyle.top = `${t + 5}px` // 5px 间隔
