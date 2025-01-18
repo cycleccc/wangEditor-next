@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.30
+
+### Patch Changes
+
+- 53fcee8: Select the toolbar placement below the last row
+
 ## 1.7.29
 
 ### Patch Changes

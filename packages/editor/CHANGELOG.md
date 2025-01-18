@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.28
+
+### Patch Changes
+
+- 53fcee8: Select the toolbar placement below the last row
+- Updated dependencies [53fcee8]
+  - @wangeditor-next/core@1.7.30
+  - @wangeditor-next/basic-modules@1.5.30
+  - @wangeditor-next/code-highlight@1.3.27
+  - @wangeditor-next/list-module@1.1.36
+  - @wangeditor-next/table-module@1.6.39
+  - @wangeditor-next/upload-image-module@1.1.33
+  - @wangeditor-next/video-module@1.3.36
+
 ## 5.6.27
 
 ### Patch Changes
