@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.1.37
+
+### Patch Changes
+
+- Updated dependencies [76fb46e]
+  - @wangeditor-next/core@1.7.31
+
 ## 1.1.36
 
 ### Patch Changes

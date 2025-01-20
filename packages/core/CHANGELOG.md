@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.31
+
+### Patch Changes
+
+- 76fb46e: fix(table): forbidden tabale drag event
+
 ## 1.7.30
 
 ### Patch Changes

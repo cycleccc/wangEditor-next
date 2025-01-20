@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.29
+
+### Patch Changes
+
+- 76fb46e: fix(table): forbidden tabale drag event
+- Updated dependencies [76fb46e]
+  - @wangeditor-next/core@1.7.31
+  - @wangeditor-next/basic-modules@1.5.31
+  - @wangeditor-next/code-highlight@1.3.28
+  - @wangeditor-next/list-module@1.1.37
+  - @wangeditor-next/table-module@1.6.40
+  - @wangeditor-next/upload-image-module@1.1.34
+  - @wangeditor-next/video-module@1.3.37
+
 ## 5.6.28
 
 ### Patch Changes
