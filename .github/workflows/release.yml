@@ -101,24 +101,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # 检查是否有 Git 标签
-      - name: Check for Git tag
-        id: check_tag
-        run: |
-          if [ -z "$(git tag --points-at HEAD)" ]; then
-            echo "tag_exists=false" >> $GITHUB_OUTPUT
-          else
-            echo "tag_exists=true" >> $GITHUB_OUTPUT
-          fi
-
-      # 发布 GitHub Release，仅针对 editor 包
+      # 发布 GitHub Release
       - name: Publish GitHub Release for editor
-        if: steps.check_tag.outputs.tag_exists == 'true' # 仅在存在标签时发布
+        uses: actions/checkout@v4
+      - name: Release
         uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          files: |
-            packages/editor/dist/** # 仅附加 editor 包的构建产物
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: startsWith(github.ref, 'refs/tags/')
 
