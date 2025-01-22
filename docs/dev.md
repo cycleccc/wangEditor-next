@@ -11,7 +11,7 @@
 
 ### 打包
 
-- 下载代码到本地，进入 `wangEditor` 目录
+- 下载代码到本地，进入 `wangEditor-next` 目录
 - 安装 yarn 4.x (node 18.x 以上)
 ~~~ shell
 # 启用 Corepack
