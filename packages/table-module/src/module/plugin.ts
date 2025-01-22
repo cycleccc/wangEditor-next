@@ -173,7 +173,7 @@ function withTable<T extends IDomEditor>(editor: T): T {
 
     if (selectedNode != null) {
       // 选中了 table ，则在 cell 内换行
-      newEditor.insertText('\n\r')
+      newEditor.insertText('\n')
       return
     }
 
