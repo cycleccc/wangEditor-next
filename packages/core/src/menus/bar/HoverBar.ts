@@ -305,6 +305,7 @@ class HoverBar {
     // 获取选中的 node ，以及对应的 menu keys
     const { isShow } = this
     const { node = null, menuKeys = [] } = this.getSelectedNodeAndMenuKeys() || {}
+    const editor = this.getEditorInstance()
 
     if (node != null) {
       this.changeItemsState() // 更新菜单状态
@@ -315,9 +316,10 @@ class HoverBar {
       if (isShow) {
         // hoverbar 当前已显示
         const samePath = this.isSamePath(node, this.prevSelectedNode)
+        const isBlock = Editor.isBlock(editor, node)
 
-        if (samePath) {
-          // 和之前选中的 node path 相同 —— 满足这些条件，即终止
+        if (!isBlock && samePath) {
+          // 不是块元素且和之前选中的 node path 相同 —— 满足这些条件，即终止
           return
         }
       }
