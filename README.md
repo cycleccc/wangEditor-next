@@ -6,7 +6,7 @@
 [![bundle][bundle-src]][bundle-href]
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
-[![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
+[![codecov](https://codecov.io/gh/wangeditor-next/wangeditor-next-next/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/wangeditor-next/wangeditor-next-next)
 
 🌍 [English](./README-en.md) | 中文
 
@@ -16,8 +16,8 @@
 
 开源 Web 富文本编辑器，开箱即用，配置简单。支持 JS Vue React 。
 
-- [文档](https://cycleccc.github.io/docs/)
-- [Demo](https://cycleccc.github.io/demo/)
+- [文档](https://wangeditor-next.github.io/docs/)
+- [Demo](https://wangeditor-next.github.io/demo/)
 
 ![](./docs/images/editor.png)
 
@@ -58,11 +58,11 @@ npm install @wangeditor-next/editor-for-react --save
 
 ## 交流
 
-- [讨论问题和建议](https://github.com/cycleccc/wangEditor-next/issues)
+- [讨论问题和建议](https://github.com/wangeditor-next/wangEditor-next/issues)
 
 ## 贡献
 
-我们欢迎所有贡献！请阅读[贡献指南](https://github.com/cycleccc/wangEditor-next/blob/master/docs/contribution-CN.md)及 [docs](https://github.com/cycleccc/wangEditor-next/tree/master/docs) 文件夹内的开发指南。
+我们欢迎所有贡献！请阅读[贡献指南](https://github.com/wangeditor-next/wangEditor-next/blob/master/docs/contribution-CN.md)及 [docs](https://github.com/wangeditor-next/wangEditor-next/tree/master/docs) 文件夹内的开发指南。
 
 ## 🌟 支持与鼓励
 
@@ -74,8 +74,8 @@ npm install @wangeditor-next/editor-for-react --save
 
 ## 贡献者
 
-<a href="https://github.com/cycleccc/wangEditor-next/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=cycleccc/wangEditor-next" />
+<a href="https://github.com/wangeditor-next/wangEditor-next/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wangeditor-next/wangeditor-next-next" />
 </a>
 
 ## License
@@ -90,7 +90,7 @@ npm install @wangeditor-next/editor-for-react --save
 [npm-downloads-href]: https://npmjs.com/package/@wangeditor-next/editor
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=@wangeditor-next/editor
-[license-src]: https://img.shields.io/github/license/cycleccc/wangeditor-next.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/cycleccc/wangeditor-next/blob/master/LICENSE
+[license-src]: https://img.shields.io/github/license/wangeditor-next/wangeditor-next-next.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/wangeditor-next/wangEditor-next/blob/master/LICENSE
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
 [jsdocs-href]: https://www.jsdocs.io/package/@wangeditor-next/editor

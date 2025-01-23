@@ -4,7 +4,7 @@
 
 ## 介绍
 
-在 [wangEditor-next](https://cycleccc.github.io/docs/) 中使用基本的 markdown 语法。
+在 [wangEditor-next](https://wangeditor-next.github.io/docs/) 中使用基本的 markdown 语法。
 
 - 标题
   - `#`

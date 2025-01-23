@@ -5,7 +5,7 @@
 ![jest badge](https://img.shields.io/badge/unit%20test-jest-yellowgreen)
 
 ## 介绍
-基于[wangEditor-next](https://cycleccc.github.io/docs/) 封装的React组件。
+基于[wangEditor-next](https://wangeditor-next.github.io/docs/) 封装的React组件。
 
 ## 安装
 
@@ -32,7 +32,7 @@ import { Editor, Toolbar } from '@wangeditor-next/editor-for-react'
 
 ## 使用
 
-详情参考[wangEditor react使用文档](https://cycleccc.github.io/docs/guide/for-frame#react)。
+详情参考[wangEditor react使用文档](https://wangeditor-next.github.io/docs/guide/for-frame#react)。
 
 ### 在Next.js下使用
 ```js

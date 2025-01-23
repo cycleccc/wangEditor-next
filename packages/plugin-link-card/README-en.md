@@ -4,7 +4,7 @@
 
 ## Introduction
 
-[wangEditor-next](https://cycleccc.github.io/docs/) link-card plugin.
+[wangEditor-next](https://wangeditor-next.github.io/docs/) link-card plugin.
 
 ![Link Card Demo](./_img/demo.png)
 

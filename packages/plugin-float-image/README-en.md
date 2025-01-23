@@ -1,4 +1,4 @@
-# [wangEditor-next](https://cycleccc.github.io/docs/en/) float-image plugin
+# [wangEditor-next](https://wangeditor-next.github.io/docs/en/) float-image plugin
 
 [中文文档](./README.md)
 
@@ -13,7 +13,7 @@
 
 ## Introduction
 
-[wangEditor-next](https://cycleccc.github.io/docs/en/) float-image plugin.
+[wangEditor-next](https://wangeditor-next.github.io/docs/en/) float-image plugin.
 
 ![](./_img/demo-1.png)
 ![](./_img/demo-2.png)

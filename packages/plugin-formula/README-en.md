@@ -4,7 +4,7 @@
 
 ## Introduction
 
-[wangEditor-next](https://cycleccc.github.io/docs/en/) Formula plugin, use `LateX` syntax.
+[wangEditor-next](https://wangeditor-next.github.io/docs/en/) Formula plugin, use `LateX` syntax.
 
 ![](./_img/demo.png)
 

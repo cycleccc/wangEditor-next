@@ -4,7 +4,7 @@
 
 ## 介绍
 
-[wangEditor-next](https://cycleccc.github.io/docs/) 链接卡片 插件。
+[wangEditor-next](https://wangeditor-next.github.io/docs/) 链接卡片 插件。
 
 ![链接卡片演示 (Link Card Demo)](./_img/demo.png)
 

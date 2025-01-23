@@ -21,7 +21,7 @@ jobs:
         echo "---------- set ssh-key ok ----------"
     - name: download and replace # 下载现有文件，替换
       run: |
-        git clone git@github.com:cycleccc/demo.git
+        git clone git@github.com:wangeditor-next/demo.git
         echo "---------- git clone ok ----------"
         cp -r ./packages/editor/demo/* ./demo ## 用最新构建出来的文件，替换现有的
         echo "---------- replace ok ----------"

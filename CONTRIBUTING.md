@@ -10,7 +10,7 @@
 
 ### 2. 报告问题
 
-如果您发现bug或有新功能的想法，请在[问题跟踪器](https://github.com/cycleccc/wangEditor-next/issues)中创建一个新的问题。在提交之前，请检查是否已经存在类似的问题。
+如果您发现bug或有新功能的想法，请在[问题跟踪器](https://github.com/wangeditor-next/wangEditor-next/issues)中创建一个新的问题。在提交之前，请检查是否已经存在类似的问题。
 
 ### 3. 提交 Pull Request
 
@@ -23,9 +23,9 @@
   - 确保在提交更改之前运行测试和 linter。
   - 如果您要对其中一个包进行更改，请确保**始终**在您的 PR 中包含一个 [changeset](https://github.com/changesets/changesets)，描述**更改的内容**以及更改的**说明**。这些负责创建变更日志
 - **提交更改**：提交您的更改，并确保提交信息清晰明了。
-  
+
    commit 格式
-  
+
    type [feat, fix, refactor, docs, test, perf, chore, ci, style, build, revert]
 
    commit 模版如下
@@ -40,10 +40,10 @@
    样例
    ```
    fix(img link): image incorrectly converted to link
-   
+
    dragging img elements from the page into the editor converts them to links
-   
-   https://github.com/cycleccc/wangEditor-next/issues/52
+
+   https://github.com/wangeditor-next/wangEditor-next/issues/52
    ```
 - **Pull Request**：将您的分支推送到远程仓库，并在GitHub上发起Pull Request。
 

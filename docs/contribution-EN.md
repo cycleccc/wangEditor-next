@@ -10,7 +10,7 @@ We are committed to maintaining an open and friendly environment. Please ensure 
 
 ### 2. Reporting Issues
 
-If you find a bug or have an idea for a new feature, please create a new issue in the [issue tracker](https://github.com/cycleccc/wangEditor-next/issues). Before submitting, check to see if a similar issue already exists.
+If you find a bug or have an idea for a new feature, please create a new issue in the [issue tracker](https://github.com/wangeditor-next/wangEditor-next/issues). Before submitting, check to see if a similar issue already exists.
 
 ### 3. Submitting Pull Requests
 

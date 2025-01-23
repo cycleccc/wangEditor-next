@@ -4,7 +4,7 @@
   "author": "cycleccc <2991205548@qq.com>",
   "type": "module",
   "description": "Yjs binding for wangeditor-next.",
-  "homepage": "https://github.com/cycleccc/wangEditor#readme",
+  "homepage": "https://github.com/wangeditor-next/wangeditor-next#readme",
   "keywords": [
     "slate",
     "wangEditor",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cycleccc/wangEditor-next.git"
+    "url": "git+https://github.com/wangeditor-next/wangEditor-next.git"
   },
   "scripts": {
     "test": "jest",
@@ -53,7 +53,7 @@
     "yjs": "^13.5.29"
   },
   "bugs": {
-    "url": "https://github.com/cycleccc/wangEditor/issues"
+    "url": "https://github.com/wangeditor-next/wangeditor-next/issues"
   },
   "dependencies": {
     "y-protocols": "^1.0.5"

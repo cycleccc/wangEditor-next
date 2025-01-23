@@ -16,7 +16,7 @@ describe('insert link menu', () => {
 
   const linkNode = {
     type: 'link',
-    url: 'https://cycleccc.github.io/docs/',
+    url: 'https://wangeditor-next.github.io/docs/',
     children: [{ text: 'xxx' }],
   }
 
@@ -60,7 +60,7 @@ describe('insert link menu', () => {
     // 模拟用户输入
 
     textInputId.value = 'hello'
-    urlInputId.value = 'https://cycleccc.github.io/docs/'
+    urlInputId.value = 'https://wangeditor-next.github.io/docs/'
     editor.select(startLocation)
     button.click()
 

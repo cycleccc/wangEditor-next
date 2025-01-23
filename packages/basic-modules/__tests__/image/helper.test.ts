@@ -17,9 +17,9 @@ describe('image helper', () => {
   let editor: any
   let startLocation: any
 
-  const baseSrc = 'https://github.com/cycleccc/wangEditor-next'
+  const baseSrc = 'https://github.com/wangeditor-next/wangEditor-next'
   const emptySrc = ''
-  const inValidSrc = 'cycleccc/github.io/docs/'
+  const inValidSrc = 'wangeditor-next.github.io/docs/'
   const baseAlt = 'logo'
   const href = 'https://www.wangeditor.com/'
 

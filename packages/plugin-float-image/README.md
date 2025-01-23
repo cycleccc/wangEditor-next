@@ -1,4 +1,4 @@
-# [wangEditor-next](https://cycleccc.github.io/docs/) 图片浮动 插件
+# [wangEditor-next](https://wangeditor-next.github.io/docs/) 图片浮动 插件
 
 [English Documentation](./README-en.md)
 
@@ -13,7 +13,7 @@
 
 ## 介绍
 
-[wangEditor-next](https://cycleccc.github.io/docs/) 图片浮动 插件。
+[wangEditor-next](https://wangeditor-next.github.io/docs/) 图片浮动 插件。
 
 ![](./_img/demo-1.png)
 ![](./_img/demo-2.png)

@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Use basic markdown syntax in [wangEditor-next](https://cycleccc.github.io/docs/en/).
+Use basic markdown syntax in [wangEditor-next](https://wangeditor-next.github.io/docs/en/).
 
 - Header
   - `#`

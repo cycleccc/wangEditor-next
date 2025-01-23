@@ -24,7 +24,7 @@ about: 请大家一定要按照该模板填写，以方便我们更快复现，�
 
 能/不能
 
-- demo https://cycleccc.github.io/demo/
+- demo https://wangeditor-next.github.io/demo/
 
 ## 在线 demo
 

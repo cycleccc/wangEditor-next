@@ -1,6 +1,6 @@
 # wangEditor core
 
-[wangeditor-next](https://cycleccc.github.io/docs/) core.
+[wangeditor-next](https://wangeditor-next.github.io/docs/) core.
 
 ## Main Functionalities
 - View（ model -> vdom -> DOM ） + Selection

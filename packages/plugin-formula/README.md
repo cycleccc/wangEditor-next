@@ -4,7 +4,7 @@
 
 ## 介绍
 
-[wangEditor-next](https://cycleccc.github.io/docs/) 公式插件，使用 [LateX](https://baike.baidu.com/item/LaTeX/1212106) 语法。
+[wangEditor-next](https://wangeditor-next.github.io/docs/) 公式插件，使用 [LateX](https://baike.baidu.com/item/LaTeX/1212106) 语法。
 
 ![](./_img/demo.png)
 

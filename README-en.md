@@ -1,18 +1,18 @@
 # wangEditor-next 5
 
-[![codecov](https://codecov.io/gh/cycleccc/wangEditor-next/branch/master/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/cycleccc/wangEditor-next)
-[![GitHub stars](https://img.shields.io/github/stars/cycleccc/wangEditor-next)](https://github.com/cycleccc/wangEditor-next/stargazers)
+[![codecov](https://codecov.io/gh/wangeditor-next/wangeditor-next-next/branch/master/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/wangeditor-next/wangeditor-next-next)
+[![GitHub stars](https://img.shields.io/github/stars/wangeditor-next/wangeditor-next-next)](https://github.com/wangeditor-next/wangEditor-next/stargazers)
 
 [Chinese](./README.md)
 
 ## Introduction
 
-The original project [wangeditor-next](https://github.com/cycleccc/wangEditor) is temporarily not maintained due to the author's [personal reasons](https://juejin.cn/post/7272735633458413602). This project is a forked version that will continue to be maintained with minimal breaking changes.
+The original project [wangeditor-next](https://github.com/wangeditor-next/wangeditor-next) is temporarily not maintained due to the author's [personal reasons](https://juejin.cn/post/7272735633458413602). This project is a forked version that will continue to be maintained with minimal breaking changes.
 
 An open-source web rich text editor that is ready to use out of the box with simple configuration. It supports JS, Vue, and React.
 
-- [Documentation](https://cycleccc.github.io/docs/)
-- [Demo](https://cycleccc.github.io/demo/)
+- [Documentation](https://wangeditor-next.github.io/docs/)
+- [Demo](https://wangeditor-next.github.io/demo/)
 
 ![](./docs/images/editor.png)
 
@@ -51,11 +51,11 @@ Try it on StackBlitz: [React Example](https://stackblitz.com/edit/react-4osjqn)
 
 ## Communication
 
-- [Discuss issues and suggestions](https://github.com/cycleccc/wangEditor-next/issues)
+- [Discuss issues and suggestions](https://github.com/wangeditor-next/wangEditor-next/issues)
 
 ## Contribution
 
-We welcome contributions! Please read the [contribution guidelines](https://github.com/cycleccc/wangEditor-next/blob/master/docs/contribution-CN.md) and the development guide in the [docs](https://github.com/cycleccc/wangEditor-next/tree/master/docs) folder.
+We welcome contributions! Please read the [contribution guidelines](https://github.com/wangeditor-next/wangEditor-next/blob/master/docs/contribution-CN.md) and the development guide in the [docs](https://github.com/wangeditor-next/wangEditor-next/tree/master/docs) folder.
 
 ## 🌟 Support and Motivation
 

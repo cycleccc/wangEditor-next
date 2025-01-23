@@ -32,7 +32,7 @@ describe('link plugin', () => {
   })
 
   it('link insert data', () => {
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     const data = new MyDataTransfer()
 
@@ -53,7 +53,7 @@ describe('link plugin', () => {
   })
   it('should insert an image correctly when dragging and dropping an image', () => {
     const imgHtml = '<img src="https://www.wangeditor.com/img.jpg" />'
-    const imgUrl = 'https://cycleccc.github.io/docs/image/logo.png'
+    const imgUrl = 'https://wangeditor-next.github.io/docs/image/logo.png'
 
     const data = new MyDataTransfer()
 

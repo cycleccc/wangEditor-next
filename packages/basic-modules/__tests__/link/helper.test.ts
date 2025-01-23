@@ -81,8 +81,8 @@ describe('link module helper', () => {
   it('insert link with collapsed selection', async () => {
     editor.select(startLocation)
 
-    const url = 'https://cycleccc.github.io/docs/'
-    const inValidUrl = 'cycleccc.github.io/docs'
+    const url = 'https://wangeditor-next.github.io/docs/'
+    const inValidUrl = 'wangeditor-next.github.io/docs'
 
     await insertLink(editor, 'hello', url)
     await insertLink(editor, 'test null', url)
@@ -101,9 +101,9 @@ describe('link module helper', () => {
     editor.insertText('1234456789012')
 
     editor.select(startLocation)
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
-    await insertLink(editor, 'https://cycleccc.github.io/docs/', url)
+    await insertLink(editor, 'https://wangeditor-next.github.io/docs/', url)
     await insertLink(editor, 'hello', url)
     const links = editor.getElemsByTypePrefix('link')
 
@@ -118,7 +118,7 @@ describe('link module helper', () => {
     editor.insertText('123445678901234567890')
 
     editor.select(startLocation)
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     await insertLink(editor, 'hello', url)
     const links = editor.getElemsByTypePrefix('link')
@@ -135,7 +135,7 @@ describe('link module helper', () => {
     })
     editor.select([]) // 全选
 
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     await insertLink(editor, 'hello', url)
 
@@ -156,7 +156,7 @@ describe('link module helper', () => {
     })
     editor.select([]) // 全选
 
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     await insertLink(editor, 'hello', url)
 
@@ -176,7 +176,7 @@ describe('link module helper', () => {
       unit: 'character',
     })
     editor.select([])
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     await insertLink(editor, 'hello', url)
     const links = editor.getElemsByTypePrefix('link')
@@ -191,7 +191,7 @@ describe('link module helper', () => {
     editor.select(startLocation)
     editor.insertText('123445678901234567890')
     editor.select([])
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     await insertLink(editor, 'hello', url)
     const links = editor.getElemsByTypePrefix('link')
@@ -200,7 +200,7 @@ describe('link module helper', () => {
   })
 
   it('parse link', async () => {
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
     const linkEditorConfig = { MENU_CONF: { insertLink: {} } }
 
     linkEditorConfig.MENU_CONF.insertLink = {
@@ -220,7 +220,7 @@ describe('link module helper', () => {
   it('update link', async () => {
     editor.select(startLocation)
 
-    const url = 'https://cycleccc.github.io/docs/'
+    const url = 'https://wangeditor-next.github.io/docs/'
 
     await insertLink(editor, 'hello', url)
 
@@ -231,7 +231,7 @@ describe('link module helper', () => {
     })
 
     // 更新链接
-    const newUrl = 'https://cycleccc.github.io/docs/index.html'
+    const newUrl = 'https://wangeditor-next.github.io/docs/index.html'
 
     await updateLink(editor, '', newUrl)
 

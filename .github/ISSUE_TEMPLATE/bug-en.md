@@ -24,7 +24,7 @@ about: Please fill out this template to help us reproduce the issue faster. Othe
 
 Yes/No
 
-- Demo: https://cycleccc.github.io/demo/
+- Demo: https://wangeditor-next.github.io/demo/
 
 ## Online Demo
 
