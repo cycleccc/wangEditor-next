@@ -6,7 +6,7 @@
 [![bundle][bundle-src]][bundle-href]
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
-[![codecov](https://codecov.io/gh/wangeditor-next/wangeditor-next-next/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/wangeditor-next/wangeditor-next-next)
+[![codecov](https://codecov.io/gh/wangeditor-next/wangeditor-next/graph/badge.svg?token=0ZSXFXJPK3)](https://codecov.io/gh/wangeditor-next/wangeditor-next)
 
 🌍 [English](./README-en.md) | 中文
 
@@ -75,7 +75,7 @@ npm install @wangeditor-next/editor-for-react --save
 ## 贡献者
 
 <a href="https://github.com/wangeditor-next/wangEditor-next/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=wangeditor-next/wangeditor-next-next" />
+  <img src="https://contrib.rocks/image?repo=wangeditor-next/wangeditor-next" />
 </a>
 
 ## License
@@ -90,7 +90,7 @@ npm install @wangeditor-next/editor-for-react --save
 [npm-downloads-href]: https://npmjs.com/package/@wangeditor-next/editor
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/@wangeditor-next/editor?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=@wangeditor-next/editor
-[license-src]: https://img.shields.io/github/license/wangeditor-next/wangeditor-next-next.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-src]: https://img.shields.io/github/license/wangeditor-next/wangeditor-next.svg?style=flat&colorA=080f12&colorB=1fa669
 [license-href]: https://github.com/wangeditor-next/wangEditor-next/blob/master/LICENSE
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
 [jsdocs-href]: https://www.jsdocs.io/package/@wangeditor-next/editor
