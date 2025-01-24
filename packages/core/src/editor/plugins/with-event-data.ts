@@ -9,9 +9,7 @@ import {
 
 import { IDomEditor } from '../..'
 import { getPlainText, isDOMText } from '../../utils/dom'
-import { IS_SAFARI } from '../../utils/ua'
 import { DomEditor } from '../dom-editor'
-import { convertBlobUrlToBase64, extractBlobUrlFromImg } from '../helper'
 
 export const withEventData = <T extends Editor>(editor: T) => {
   const e = editor as T & IDomEditor
@@ -121,22 +119,8 @@ export const withEventData = <T extends Editor>(editor: T) => {
     }
 
     const text = data.getData('text/plain')
-    let html = data.getData('text/html')
+    const html = data.getData('text/html')
     // const rtf = data.getData('text/rtf')
-
-    if (IS_SAFARI) {
-      const blobUrl = extractBlobUrlFromImg(html)
-
-      if (blobUrl) {
-        const base64Data = await convertBlobUrlToBase64(blobUrl)
-
-        if (base64Data) {
-          html = `<img src="${base64Data}" alt="image.png">`
-
-          URL.revokeObjectURL(blobUrl)
-        }
-      }
-    }
 
     if (html) {
       e.dangerouslyInsertHtml(html)
