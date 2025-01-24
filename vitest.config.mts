@@ -31,6 +31,7 @@ export default defineConfig({
         'config.ts',
         'browser-polyfill.ts',
         'node-polyfill.ts',
+       '**/locale/**/*',
       ], // 忽略覆盖率计算的文件
     },
   },
