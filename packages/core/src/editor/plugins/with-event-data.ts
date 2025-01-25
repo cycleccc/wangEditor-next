@@ -106,7 +106,7 @@ export const withEventData = <T extends Editor>(editor: T) => {
     return data
   }
 
-  e.insertData = async (data: DataTransfer) => {
+  e.insertData = (data: DataTransfer) => {
     const fragment = data.getData('application/x-slate-fragment')
     // 只有从编辑器中内复制的内容，才会获取 fragment，从其他地方粘贴到编辑器中，不会获取 fragment
 
