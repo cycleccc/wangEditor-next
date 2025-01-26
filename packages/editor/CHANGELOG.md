@@ -1,5 +1,19 @@
 # Change Log
 
+## 5.6.30
+
+### Patch Changes
+
+- c60e0e2: fix: Safari paste image base64 and blob (#524)
+- Updated dependencies [c60e0e2]
+  - @wangeditor-next/core@1.7.32
+  - @wangeditor-next/basic-modules@1.5.32
+  - @wangeditor-next/code-highlight@1.3.29
+  - @wangeditor-next/list-module@1.1.38
+  - @wangeditor-next/table-module@1.6.41
+  - @wangeditor-next/upload-image-module@1.1.35
+  - @wangeditor-next/video-module@1.3.38
+
 ## 5.6.29
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.32
+
+### Patch Changes
+
+- c60e0e2: fix: Safari paste image base64 and blob (#524)
+
 ## 1.7.31
 
 ### Patch Changes
