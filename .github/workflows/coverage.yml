@@ -9,6 +9,7 @@ on:
       - 'packages/**'
       - 'tests/**'
       - 'build/**'
+      - 'vitest.config.mts'
 
 jobs:
   test:

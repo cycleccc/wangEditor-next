@@ -17,6 +17,7 @@ on:
       - 'packages/**'
       - 'tests/**'
       - 'build/**'
+      - 'vitest.config.mts'
   pull_request:
     branches:
       - master
