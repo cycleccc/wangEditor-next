@@ -27,6 +27,9 @@
         "packages/*/dist"
       ]
     },
+    "types": [
+      "vitest/globals"
+    ]
   },
   "exclude": [
     "node_modules",
@@ -35,6 +38,7 @@
   ],
   "include": [
     "./tests/setup/index.ts",
-    "./packages/custom-types.d.ts"
+    "./packages/custom-types.d.ts",
+    "**/__tests__/**/*",
   ]
 }
