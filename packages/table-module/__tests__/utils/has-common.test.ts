@@ -4,7 +4,6 @@
 
 import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
-import { describe, expect, it } from 'vitest'
 
 import createEditor from '../../../../tests/utils/create-editor'
 import { hasCommon } from '../../src/utils/has-common'
