@@ -158,7 +158,7 @@ describe('table - parse html', () => {
     expect(parseTableHtmlConf.parseElemHtml($table[0], mergeChildren, editor)).toEqual({
       type: 'table',
       width: '100%',
-      mergeChildren,
+      children: mergeChildren,
       height: 0,
     })
   })
