@@ -2,7 +2,7 @@ import * as core from '@wangeditor-next/core'
 import * as slate from 'slate'
 
 import createEditor from '../../../tests/utils/create-editor'
-import { TableCellElement, TableElement } from '../src/module/custom-types'
+import { TableElement } from '../src/module/custom-types'
 import { isCellInFirstRow } from '../src/module/helpers'
 
 function setEditorSelection(
@@ -15,7 +15,7 @@ function setEditorSelection(
   editor.selection = selection
 }
 
-describe('hasCommon', () => {
+describe('isCellInFirstRow', () => {
   const content = [
     {
       type: 'paragraph',
@@ -95,14 +95,19 @@ describe('hasCommon', () => {
 
   setEditorSelection(editor)
 
-  it('should return true if paths have a common ancestor of type table', () => {
+  it('should correctly identify cells in the first row', () => {
     const result = isCellInFirstRow(editor, (editor.children[1] as TableElement).children[0].children[0])
 
     expect(result).toBe(true)
-    // @Todo: test other cases
-    // @ts-ignore
-    const result1 = isCellInFirstRow(editor, editor.children[1].children[0])
+    // Test cell in second row
+    const secondRowCell = (editor.children[1] as TableElement).children[1].children[0]
 
-    expect(result1).toBe(false)
+    expect(isCellInFirstRow(editor, secondRowCell)).toBe(false)
+
+    // Test non-cell element
+    const nonCellElement = editor.children[0]
+
+    expect(isCellInFirstRow(editor, nonCellElement as any)).toBe(false)
+
   })
 })
