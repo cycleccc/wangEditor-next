@@ -97,6 +97,54 @@ describe('table - parse html', () => {
         children: [{ type: 'table-cell', children: [{ text: 'hello world' }] }],
       },
     ]
+    const mergeChildren = [
+      {
+        type: 'table-row',
+        children: [
+          {
+            type: 'table-cell',
+            isHeader: false,
+            colSpan: 2,
+            rowSpan: 1,
+            width: 'auto',
+            children: [
+              {
+                text: '',
+              },
+            ],
+            hidden: false,
+            borderWidth: '1',
+            borderStyle: 'solid',
+            borderColor: '#ccc',
+          },
+          {
+            type: 'table-cell',
+            children: [
+              {
+                text: '',
+              },
+            ],
+            hidden: true,
+          },
+          {
+            type: 'table-cell',
+            isHeader: false,
+            colSpan: 1,
+            rowSpan: 1,
+            width: 'auto',
+            children: [
+              {
+                text: '',
+              },
+            ],
+            hidden: true,
+            borderWidth: '1',
+            borderStyle: 'solid',
+            borderColor: '#ccc',
+          },
+        ],
+      },
+    ]
 
     expect($table[0].matches(parseTableHtmlConf.selector)).toBeTruthy()
 
@@ -104,6 +152,13 @@ describe('table - parse html', () => {
       type: 'table',
       width: '100%',
       children,
+      height: 0,
+    })
+
+    expect(parseTableHtmlConf.parseElemHtml($table[0], mergeChildren, editor)).toEqual({
+      type: 'table',
+      width: '100%',
+      children: mergeChildren,
       height: 0,
     })
   })
