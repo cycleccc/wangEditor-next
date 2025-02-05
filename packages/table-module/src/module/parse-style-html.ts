@@ -14,7 +14,7 @@ const DEFAULT_BORDER_COLOR = window
   ?.getPropertyValue('--w-e-textarea-border-color')
 
 export function parseStyleHtml(elem: DOMElement, node: Descendant, _editor: IDomEditor): Descendant {
-  if (elem.tagName !== 'TABLE' && elem.tagName !== 'TD') { return node }
+  if (!['TABLE', 'TD', 'TH'].includes(elem.tagName)) { return node }
 
   const $elem = $(elem)
 
