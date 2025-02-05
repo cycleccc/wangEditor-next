@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.6.31
+
+### Patch Changes
+
+- 3f6d567: fix(table): allow parsing for TH elements in table module
+- Updated dependencies [3f6d567]
+  - @wangeditor-next/table-module@1.6.42
+
 ## 5.6.30
 
 ### Patch Changes

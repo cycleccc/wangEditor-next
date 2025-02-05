@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.42
+
+### Patch Changes
+
+- 3f6d567: fix(table): allow parsing for TH elements in table module
+
 ## 1.6.41
 
 ### Patch Changes
