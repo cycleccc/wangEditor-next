@@ -1,6 +1,6 @@
 {
   "name": "@wangeditor-next/yjs-for-react",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "description": "React specific components/utils for wangeditor-next-yjs.",
   "author": "cycleccc <2991205548@qq.com>",
   "type": "module",
@@ -56,7 +56,7 @@
     "y-protocols": "^1.0.5"
   },
   "peerDependencies": {
-    "@wangeditor-next/editor": "5.6.30",
+    "@wangeditor-next/editor": "5.6.31",
     "@wangeditor-next/yjs": "^0.1.30",
     "react": ">=16.8.0",
     "slate": "^0.72.0",
