@@ -1,29 +1,24 @@
 {
-  "name": "@wangeditor-next/yjs-for-react",
-  "version": "0.1.42",
-  "description": "React specific components/utils for wangeditor-next-yjs.",
+  "name": "@wangeditor-next/plugin-mention",
+  "version": "1.0.1",
+  "description": "wangEditor mention plugin",
   "author": "cycleccc <2991205548@qq.com>",
   "type": "module",
-  "homepage": "https://github.com/wangeditor-next/wangeditor-next#readme",
+  "homepage": "https://github.com/wangeditor-next/wangEditor-next#readme",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+  "types": "dist/plugin-mention/src/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "unpkg": "dist/index.global.js",
-  "keywords": [
-    "slate",
-    "wangEditor-next",
-    "yjs",
-    "collaborative",
-    "react"
-  ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/plugin-mention/src/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./dist/css/style.css": "./dist/css/style.css"
+  },
+  "directories": {
+    "lib": "dist"
   },
   "files": [
     "dist"
@@ -36,30 +31,17 @@
     "url": "git+https://github.com/wangeditor-next/wangEditor-next.git"
   },
   "scripts": {
-    "test": "jest",
-    "test-c": "jest --coverage",
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js",
     "dev-watch": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
     "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
     "dev-size-stats": "cross-env NODE_ENV=development:size_stats rollup -c rollup.config.js",
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },
-  "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/use-sync-external-store": "^0.0.6"
-  },
   "bugs": {
     "url": "https://github.com/wangeditor-next/wangeditor-next/issues"
   },
-  "dependencies": {
-    "use-sync-external-store": "^1.2.0",
-    "y-protocols": "^1.0.5"
-  },
   "peerDependencies": {
     "@wangeditor-next/editor": "5.6.31",
-    "@wangeditor-next/yjs": "^0.1.30",
-    "react": ">=16.8.0",
-    "slate": "^0.72.0",
-    "yjs": "^13.5.29"
+    "snabbdom": "^3.1.0"
   }
 }
