@@ -47,6 +47,6 @@
     "@wangeditor-next/core": "1.7.32",
     "dom7": "^3.0.0 || ^4.0.0",
     "slate": "^0.72.0",
-    "snabbdom": "^3.1.0"
+    "snabbdom": "^3.6.0"
   }
 }
