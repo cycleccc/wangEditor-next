@@ -105,15 +105,15 @@
       rightContainer.className = 'right-container'
       if (LANG === 'en') {
         rightContainer.innerHTML = `
-        <a href="https://www.wangeditor.com/en/">Document</a>
+        <a href="https://wangeditor-next.github.io/docs/en/">Document</a>
         &nbsp;
-        <a href="https://github.com/cycleccc/wangEditor/tree/master/packages/editor/demo">Source</a>
+        <a href="https://github.com/wangeditor-next/wangeditor-next/tree/master/packages/editor/demo">Source</a>
       `
       } else {
         rightContainer.innerHTML = `
-        <a href="https://www.wangeditor.com/">文档</a>
+        <a href="https://wangeditor-next.github.io/docs/">文档</a>
         &nbsp;
-        <a href="https://github.com/cycleccc/wangEditor/tree/master/packages/editor/demo">源码</a>
+        <a href="https://github.com/wangeditor-next/wangeditor-next/tree/master/packages/editor/demo">源码</a>
       `
       }
 
