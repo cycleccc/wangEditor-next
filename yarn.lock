@@ -11925,9 +11925,9 @@ __metadata:
   linkType: hard
 
 "snabbdom@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "snabbdom@npm:3.1.0"
-  checksum: 10c0/94f14c4d59237bf05dba76af5a137361bafb4f8a00e0c1a0643968e85ffa4e86a46d2f29949fbd176501bd4c1148b0638c300fb99d28663f6ec6750cfeaa1295
+  version: 3.6.2
+  resolution: "snabbdom@npm:3.6.2"
+  checksum: 10c0/5b6763128458fde2ec3c32d3753650db7ab2a66ebc233696e201c65d41e976fdce038857056ccdf12c23540fd3745bbdf48c4819f061878d7546c2a5fcd9b1ca
   languageName: node
   linkType: hard
 
