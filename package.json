@@ -10,7 +10,7 @@
     "cz": "cz",
     "test": "cross-env NODE_OPTIONS=--unhandled-rejections=warn vitest run --passWithNoTests --dangerouslyIgnoreUnhandledErrors",
     "test-c": "cross-env NODE_OPTIONS=--unhandled-rejections=warn vitest run --passWithNoTests --dangerouslyIgnoreUnhandledErrors --coverage",
-    "dev": "cross-env FORCE_COLOR=1 turbo run dev",
+    "dev": "cross-env FORCE_COLOR=1 turbo dev --filter=@wangeditor-next/editor",
     "dev:sh": "sh scripts/build-base.sh dev",
     "build": "cross-env FORCE_COLOR=1 turbo run build",
     "publish": "yarn changeset publish",
