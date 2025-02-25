@@ -3537,7 +3537,7 @@ __metadata:
     "@wangeditor-next/core": 1.7.32
     dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3566,7 +3566,7 @@ __metadata:
     lodash.toarray: ^4.4.0
     nanoid: ^5.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3619,7 +3619,7 @@ __metadata:
     "@wangeditor-next/core": 1.7.32
     dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3630,7 +3630,7 @@ __metadata:
     "@wangeditor-next/editor": 5.6.31
     dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3644,7 +3644,7 @@ __metadata:
   peerDependencies:
     "@wangeditor-next/editor": 5.6.31
     katex: ^0.16.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3655,7 +3655,7 @@ __metadata:
     "@wangeditor-next/editor": 5.6.31
     dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3666,7 +3666,7 @@ __metadata:
     "@wangeditor-next/editor": 5.6.31
     dom7: ^3.0.0 || ^4.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3675,7 +3675,7 @@ __metadata:
   resolution: "@wangeditor-next/plugin-mention@workspace:packages/plugin-mention"
   peerDependencies:
     "@wangeditor-next/editor": 5.6.31
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3690,7 +3690,7 @@ __metadata:
     lodash.throttle: ^4.1.1
     nanoid: ^5.0.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
@@ -3705,7 +3705,7 @@ __metadata:
     dom7: ^3.0.0 || ^4.0.0
     lodash.foreach: ^4.5.0
     slate: ^0.72.0
-    snabbdom: ^3.1.0
+    snabbdom: ^3.6.0
   languageName: unknown
   linkType: soft
 
