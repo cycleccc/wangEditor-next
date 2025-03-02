@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.6.32
+
+### Patch Changes
+
+- aa01136: update snabbdom version
+
 ## 5.6.31
 
 ### Patch Changes
