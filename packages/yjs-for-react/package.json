@@ -6,7 +6,7 @@
   "type": "module",
   "homepage": "https://github.com/wangeditor-next/wangeditor-next#readme",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+  "types": "dist/yjs-for-react/src/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "unpkg": "dist/index.global.js",
@@ -19,7 +19,7 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/yjs-for-react/src/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
@@ -28,6 +28,9 @@
   "files": [
     "dist"
   ],
+  "directories": {
+    "lib": "dist"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -45,7 +48,6 @@
     "size-stats": "cross-env NODE_ENV=production:size_stats rollup -c rollup.config.js"
   },
   "devDependencies": {
-    "@types/react": "^18.0.0",
     "@types/use-sync-external-store": "^0.0.6"
   },
   "bugs": {
@@ -58,7 +60,7 @@
   "peerDependencies": {
     "@wangeditor-next/editor": "5.6.31",
     "@wangeditor-next/yjs": "^0.1.30",
-    "react": ">=16.8.0",
+    "react": ">=17.0.2",
     "slate": "^0.72.0",
     "yjs": "^13.5.29"
   }
