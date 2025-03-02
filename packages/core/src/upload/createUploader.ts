@@ -56,14 +56,16 @@ function createUploader(config: IUploadConfig): Uppy {
       maxNumberOfFiles,
     },
     meta, // 自定义添加到 formData 中的参数
+    ...config.uppyConfig, // 支持传入更多 Uppy 配置项
   }).use(XHRUpload, {
-    endpoint: url, // 服务端 url
-    headers, // 自定义 headers
+    endpoint: url,
+    headers,
     formData: true,
     fieldName,
     bundle: true,
     withCredentials,
     timeout,
+    ...config.xhrConfig, // 支持传入更多 XHRUpload 配置项
   })
 
   // 各个 callback

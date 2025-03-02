@@ -41,4 +41,8 @@ export interface IUploadConfig {
   customUpload?: (files: File, insertFn: InsertFn) => void
   // 自定义选择视频，如图床
   customBrowseAndUpload?: (insertFn: InsertFn) => void
+  // 支持传入更多 Uppy 配置项
+  uppyConfig?: Record<string, any>;
+  // 支持传入更多 XHRUpload 配置项
+  xhrConfig?: Record<string, any>;
 }
